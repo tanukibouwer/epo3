@@ -30,11 +30,13 @@ begin
 
     process (clk, cnt_clk) --storage of the count
     begin
+        -- if cnt_clk = '1' then
+            -- cur_count <= new_count;
         if rising_edge(cnt_clk) then
-            cur_count <= new_count;
-        elsif rising_edge(clk) then
             if reset = '1' then
                 cur_count <= (others => '0');
+            else
+                cur_count <= new_count;
             end if;
         end if;
     end process;

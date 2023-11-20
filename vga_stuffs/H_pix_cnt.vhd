@@ -1,13 +1,10 @@
---module: screen_scan
+--module: H_pix_cnt
 --version: 1.0
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
---module description
---
---
---
---
+--MODULE DESCRIPTION
+-- A 10 bit counter to keep track of which pixel of the lines the display is on
 --
 --
 --------------------------------------------------------------------------------------------------------------------------------
@@ -19,8 +16,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 entity H_pix_cnt is
-    port
-    (
+    port (
         clk   : in std_logic;
         reset : in std_logic;
         count : out std_logic_vector(10 downto 0)
@@ -37,14 +33,14 @@ begin
             if reset = '1' then
                 count <= (others => '0');
             else
-                count <= new_count
-                end if;
+                count <= new_count;
             end if;
-        end process;
+        end if;
+    end process;
 
-        process (count) --count on clock/input
-        begin
-            new_count <= count + 1;
-        end process;
+    process (count) --count on clock/input
+    begin
+        new_count <= count + 1;
+    end process;
 
-    end architecture;
+end architecture;

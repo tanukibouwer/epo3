@@ -3,11 +3,11 @@
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
---module description
---
---
---
---
+--MODULE DESCRIPTION
+-- This module is the hierarchical connection of the module that keeps track of which pixel the VGA screen is at
+-- This module contains 4 components, Hsync_gen, Vsync_gen, V_line_cnt, H_pix_cnt
+-- Vsync_gen and Hsync_gen are the sync signal generators and the controllers of H_pix_cnt and V_line_cnt
+-- V_line_cnt keeps track of which line the screen is on, H_pix_cnt keeps track of which pixel the screen is on
 --
 --
 --------------------------------------------------------------------------------------------------------------------------------
@@ -18,16 +18,16 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-entity scanner is
+entity screen_scan is
     port (
         clk   : in std_logic;
         reset : in std_logic;
         Hsync : out std_logic;
         Vsync : out std_logic
     );
-end entity scanner;
+end entity screen_scan;
 
-architecture rtl of scanner is
+architecture rtl of screen_scan is
 
     component H_pix_cnt is
         port (
@@ -67,24 +67,24 @@ architecture rtl of scanner is
 
     signal vcount, hcount             : std_logic_vector (10 downto 0);
     signal vcount_reset, hcount_reset : std_logic;
-    signal Hsync, Vsync               : std_logic;
+    signal Hsync_int, Vsync_int       : std_logic;
 
 begin
 
     gen1_vgen : Vsync_gen port map(
         clk => clk, reset => reset,
         count => vcount,
-        sync => Vsync, cnt_reset => vcount_reset
+        sync => Vsync_int, cnt_reset => vcount_reset
     );
 
     gen2_hgen : Hsync_gen port map(
         clk => clk, reset => reset,
         count => hcount,
-        sync => Hsync, cnt_reset => hcount_reset
+        sync => Hsync_int, cnt_reset => hcount_reset
     );
 
     cnt1_vcnt : V_line_cnt port map(
-        clk => clk, reset => hcount_reset,
+        clk => hcount_reset, reset => vcount_reset,
         count => vcount
     );
 
@@ -92,5 +92,8 @@ begin
         clk => clk, reset => hcount_reset,
         count => hcount
     );
+
+    Vsync <= Vsync_int;
+    Hsync <= Hsync_int;
 
 end architecture;

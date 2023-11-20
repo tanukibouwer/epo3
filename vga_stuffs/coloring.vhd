@@ -1,4 +1,4 @@
---module: mem_vid
+--module: coloring
 --version: 1.0
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
@@ -18,19 +18,18 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-entity mem_vid is
+entity coloring is
     port (
         clk   : in std_logic;
         reset : in std_logic;
-        ld : in std_logic;
-        --inputs of all data
+        
     );
-end entity mem_vid;
+end entity coloring;
 
-architecture rtl of mem_vid is
+architecture behavioural of coloring is
 
 begin
 
-    --when ld is low then copy all the values that are available at the inputs
+    --bunch of logic to decide what color to draw on what space
 
 end architecture;

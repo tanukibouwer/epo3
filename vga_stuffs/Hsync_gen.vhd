@@ -18,6 +18,9 @@
 -- the outputs:
 -- The sync signal (hsync this case) is active low
 -- The counter reset is active high
+--
+-- TODO:
+-- Fix the line subdivisions
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,8 +30,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 entity Hsync_gen is
-    port
-    (
+    port (
         clk       : in std_logic;
         reset     : in std_logic;
         count     : in std_logic_vector (10 downto 0);

@@ -1,13 +1,10 @@
---module: screen_scan
+--module: V_line_cnt
 --version: 1.0
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
---module description
---
---
---
---
+--MODULE DESCRIPTION
+-- A 10 bit counter to keep track of the lines of the VGA screen. 
 --
 --
 --------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +33,7 @@ begin
             if reset = '1' then
                 count <= (others => '0');
             else
-                count <= new_count
+                count <= new_count;
             end if;
         end if;
     end process;

@@ -33,35 +33,35 @@ entity Hsync_gen is
     port (
         clk       : in std_logic;
         reset     : in std_logic;
-        count     : in std_logic_vector (10 downto 0);
+        count     : in std_logic_vector (9 downto 0);
         sync      : out std_logic;
         cnt_reset : out std_logic
     );
 end entity Hsync_gen;
 
 architecture rtl of Hsync_gen is
-
+    signal uns_count : unsigned(9 downto 0);
 begin
 
-    process (clk)
+    process (clk, uns_count)
     begin
         if rising_edge(clk) then
             if reset = '1' then
                 sync      <= '0';
                 cnt_reset <= '1';
             elsif reset = '0' then
-                if count    <= 639 then --screen
-                    sync        <= '1';
-                    cnt_reset   <= '0';
-                elsif count <= 655 and count > 639 then --front porch
-                    sync        <= '1';
-                    cnt_reset   <= '0';
-                elsif count <= 751 and count > 655 then --sync pulse
-                    sync        <= '0';
-                    cnt_reset   <= '0';
-                elsif count <= 799 and count > 751 then --back porch
-                    sync        <= '1';
-                    cnt_reset   <= '0';
+                if uns_count    <= 639 then --screen
+                    sync            <= '1';
+                    cnt_reset       <= '0';
+                elsif uns_count <= 655 and uns_count > 639 then --front porch
+                    sync            <= '1';
+                    cnt_reset       <= '0';
+                elsif uns_count <= 751 and uns_count > 655 then --sync pulse
+                    sync            <= '0';
+                    cnt_reset       <= '0';
+                elsif uns_count <= 796 and uns_count > 751 then --back porch
+                    sync            <= '1';
+                    cnt_reset       <= '0';
                 else
                     sync      <= '1';
                     cnt_reset <= '1';
@@ -69,5 +69,7 @@ begin
             end if;
         end if;
     end process;
+
+    uns_count <= unsigned(count);
 
 end architecture;

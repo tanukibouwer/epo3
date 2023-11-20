@@ -19,28 +19,29 @@ entity H_pix_cnt is
     port (
         clk   : in std_logic;
         reset : in std_logic;
-        count : out std_logic_vector(10 downto 0)
+        count : out std_logic_vector(9 downto 0)
     );
 end entity;
 
 architecture behavioural of H_pix_cnt is
-    signal count, new_count : unsigned(10 downto 0);
+    signal cur_count, new_count : unsigned(9 downto 0);
 begin
 
     process (clk) --storage of the count
     begin
         if rising_edge(clk) then
             if reset = '1' then
-                count <= (others => '0');
+                cur_count <= (others => '0');
             else
-                count <= new_count;
+                cur_count <= new_count;
             end if;
         end if;
     end process;
 
-    process (count) --count on clock/input
+    process (cur_count, clk) --count on clock/input
     begin
-        new_count <= count + 1;
+        new_count <= cur_count + 1;
     end process;
 
+    count <= std_logic_vector(cur_count);
 end architecture;

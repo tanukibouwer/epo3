@@ -4,8 +4,6 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 entity screen_scan_tb is
-    port (
-    );
 end entity screen_scan_tb;
 
 architecture rtl of screen_scan_tb is

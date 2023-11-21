@@ -4,7 +4,6 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 entity VGA_testbench is
-    port ();
 end entity VGA_testbench;
 
 architecture rtl of VGA_testbench is
@@ -36,5 +35,9 @@ begin
         clk => clk, reset => reset, Hsync => Hsync, Vsync => Vsync,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
+
+    R_data <= '1';
+    G_data <= '1';
+    B_data <= '1';
 
 end architecture;

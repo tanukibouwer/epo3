@@ -52,6 +52,7 @@ architecture rtl of screen_scan is
             clk     : in std_logic;
             reset   : in std_logic;
             cnt_clk : in std_logic;
+            hcount  : in std_logic_vector (9 downto 0);
             count   : out std_logic_vector (9 downto 0)
         );
     end component;
@@ -86,6 +87,7 @@ begin
 
     cnt1_vcnt : V_line_cnt port map(
         clk => clk, reset => vcount_reset,
+        hcount => hcount,
         cnt_clk => hcount_reset, count => vcount
     );
 

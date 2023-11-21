@@ -20,6 +20,7 @@ entity V_line_cnt is
         clk     : in std_logic;
         reset   : in std_logic;
         cnt_clk : in std_logic;
+        hcount  : in std_logic_vector(9 downto 0);
         count   : out std_logic_vector(9 downto 0)
     );
 end entity;
@@ -28,14 +29,14 @@ architecture behavioural of V_line_cnt is
     signal cur_count, new_count : unsigned(9 downto 0);
 begin
 
-    process (clk, cnt_clk) --storage of the count
+    process (clk) --storage of the count
     begin
         -- if cnt_clk = '1' then
-            -- cur_count <= new_count;
-        if rising_edge(cnt_clk) then
+        -- cur_count <= new_count;
+        if rising_edge(clk) then
             if reset = '1' then
                 cur_count <= (others => '0');
-            else
+            elsif unsigned(hcount) = 788 then
                 cur_count <= new_count;
             end if;
         end if;

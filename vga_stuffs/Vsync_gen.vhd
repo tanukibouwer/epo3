@@ -50,16 +50,16 @@ begin
                 sync      <= '0';
                 cnt_reset <= '1';
             elsif reset = '0' then
-                if uns_count    <= 479 then --screen
-                    sync            <= '1';
-                    cnt_reset       <= '0';
-                elsif uns_count <= 489 and uns_count > 479 then --front porch
-                    sync            <= '1';
-                    cnt_reset       <= '0';
-                elsif uns_count <= 491 and uns_count > 489 then --sync pulse
+                if uns_count    <= 1 then --sync pulse
                     sync            <= '0';
                     cnt_reset       <= '0';
-                elsif uns_count <= 524 and uns_count > 491 then --back porch
+                elsif uns_count <= 34 and uns_count > 1 then --back porch
+                    sync            <= '1';
+                    cnt_reset       <= '0';
+                elsif uns_count <= 514 and uns_count > 34 then --screen
+                    sync            <= '1';
+                    cnt_reset       <= '0';
+                elsif uns_count <= 524 and uns_count > 514 then --front porch
                     sync            <= '1';
                     cnt_reset       <= '0';
                 else --reset counter

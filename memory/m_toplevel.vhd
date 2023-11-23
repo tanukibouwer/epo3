@@ -74,14 +74,23 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		data_in10b	: in std_logic_vector(9 downto 0);
 		data_out10b	: out std_logic_vector(9 downto 0);
 		address16b 	: in std_logic_vector(2 downto 0);
-		data_in16b 	: in std_logic_vector(15 downto 0);
-		data_out16b	: out std_logic_vector(15 downto 0);
+		data_in16b1 	: in std_logic_vector(7 downto 0);
+		data_in16b2		: in std_logic_vector(7 downto 0);
+		data_out16b1	: out std_logic_vector(7 downto 0);
+		data_out16b2	: out std_logic_vector(7 downto 0);
 		address18b	: in std_logic_vector(1 downto 0);
-		data_in18b	: in std_logic_vector(17 downto 0);
-		data_out18b	: out std_logic_vector(17 downto 0));
+		data_in18b1		: in std_logic_vector(8 downto 0);
+		data_in18b2		: in std_logic_vector(8 downto 0);
+		data_out18b1	: out std_logic_vector(8 downto 0);
+		data_out18b2	: out std_logic_vector(8 downto 0));
 end memory;
 
 architecture structural of memory is
+
+	signal	split18b :		std_logic_vector(17 downto 0);
+	signal	merge18b :		std_logic_vector(17 downto 0);
+	signal	split16b :		std_logic_vector(15 downto 0);
+	signal	merge16b :		std_logic_vector(15 downto 0);
 
 	component splitter_8b is
 		port(in1  : in  std_logic_vector(15 downto 0);
@@ -277,34 +286,41 @@ begin
 								data_out 	=> data_out4b,
 								write 		=> write4b);
 								
-<<<<<<< HEAD
-	DM01 : ram_10b port map (	clk			=> clk;
-								reset		=> reset;
-								address 	=> address10b;
-								data_in 	=> data_in10b;
-								data_out 	=> data_out10b; 
-=======
-								
 	DM01 : ram_10b port map (	clk			=> clk,
 								reset		=> reset,
 								address 	=> address10b,
 								data_in 	=> data_in10b,
 								data_out 	=> data_out10b,
->>>>>>> f7028592c297f4703ba8c140f93a11adfa570449
 								write 		=> write10b);
 								
 	DM02 : ram_16b port map (	clk			=> clk,
 								reset		=> reset,
 								address 	=> address16b,
-								data_in 	=> data_in16b,
-								data_out 	=> data_out16b,
+								data_in 	=> merge16b,
+								data_out 	=> split16b,
 								write 		=> write16b);
 	
 	DM03 : ram_18b port map (	clk			=> clk,
 								reset		=> reset,
 								address 	=> address18b,
-								data_in 	=> data_in18b,
-								data_out 	=> data_out18b,
+								data_in 	=> merge18b,
+								data_out 	=> split18b,
 								write 		=> write18b);
+								
+	MM00 : splitter_8b port map (	in1		=> split16b,
+									out1	=> data_out16b1,
+									out2	=> data_out16b2);
+									
+	MM01 : merger_8b port map (		in1		=> data_in16b1,
+									in2		=> data_in16b2,
+									out1	=> merge16b);
+									
+	MM10 : splitter_9b port map (	in1		=> split18b,
+									out1	=> data_out18b1,
+									out2	=> data_out18b2);
+									
+	MM11 : merger_9b port map (		in1		=> data_in18b1,
+									in2		=> data_in18b2,
+									out1	=> merge18b);
 								
 end architecture structural;

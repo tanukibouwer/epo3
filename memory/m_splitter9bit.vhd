@@ -15,7 +15,7 @@ architecture structural of splitter_9b is
 begin
 	s18	<= in1;
 
-	s9_1 	<= s16(8 downto 0);
+	s9_1 	<= s18(8 downto 0);
 	s9_2 	<= s18(17 downto 9);
 
 	out1	<= s9_1;

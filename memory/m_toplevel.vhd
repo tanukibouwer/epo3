@@ -83,6 +83,31 @@ end memory;
 
 architecture structural of memory is
 
+	component splitter_8b is
+		port(in1  : in  std_logic_vector(15 downto 0);
+			out1 : out std_logic_vector(7 downto 0);
+			out2 : out std_logic_vector(7 downto 0));
+	end component splitter_8b;
+	
+	component merger_8b is
+		port(in1  : in  std_logic_vector(7 downto 0);
+			in2  : in  std_logic_vector(7 downto 0);
+			out1 : out std_logic_vector(15 downto 0));
+	end component merger_8b;
+	
+	component splitter_9b is
+		port(in1  : in  std_logic_vector(17 downto 0);
+			out1 : out std_logic_vector(8 downto 0);
+			out2 : out std_logic_vector(8 downto 0));
+	end component splitter_9b;
+	
+	component merger_9b is
+		port(in1  : in  std_logic_vector(8 downto 0);
+			in2  : in  std_logic_vector(8 downto 0);
+			out1 : out std_logic_vector(17 downto 0));
+	end component merger_9b;
+
+
 	component ram_4b is
 	port(
 		clk			: in std_logic;
@@ -251,7 +276,6 @@ begin
 								data_in 	=> data_in4b;
 								data_out 	=> data_out4b; 
 								write 		=> write4b);
-								
 								
 	DM01 : ram_10b port map (	clk			=> clk;
 								reset		=> reset;

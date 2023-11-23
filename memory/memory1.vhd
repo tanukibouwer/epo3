@@ -148,70 +148,19 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		num03		: out std_logic_vector(4 downto 0);
 		num04		: out std_logic_vector(4 downto 0);
 		num05		: out std_logic_vector(4 downto 0);
-		num06		: out std_logic_vector(4 downto 0);
-		num07		: out std_logic_vector(4 downto 0);
 		num11		: out std_logic_vector(4 downto 0);
 		num12		: out std_logic_vector(4 downto 0);
-		num13		: out std_logic_vector(4 downto 0);
-		num14		: out std_logic_vector(4 downto 0);
-		num15		: out std_logic_vector(4 downto 0);
-		num16		: out std_logic_vector(4 downto 0);
-		num17		: out std_logic_vector(4 downto 0);
-		num21		: out std_logic_vector(4 downto 0);
-		num22		: out std_logic_vector(4 downto 0);
 		num23		: out std_logic_vector(4 downto 0);
 		num24		: out std_logic_vector(4 downto 0);
 		num25		: out std_logic_vector(4 downto 0);
 		num26		: out std_logic_vector(4 downto 0);
 		num27		: out std_logic_vector(4 downto 0);
-		num31		: out std_logic_vector(4 downto 0);
-		num32		: out std_logic_vector(4 downto 0);
-		num33		: out std_logic_vector(4 downto 0);
-		num34		: out std_logic_vector(4 downto 0);
-		num35		: out std_logic_vector(4 downto 0);
-		num36		: out std_logic_vector(4 downto 0);
-		num37		: out std_logic_vector(4 downto 0);
 		num41		: out std_logic_vector(4 downto 0);
 		num42		: out std_logic_vector(4 downto 0);
 		num43		: out std_logic_vector(4 downto 0);
-		num44		: out std_logic_vector(4 downto 0);
-		num45		: out std_logic_vector(4 downto 0);
-		num46		: out std_logic_vector(4 downto 0);
-		num47		: out std_logic_vector(4 downto 0);
-		num51		: out std_logic_vector(4 downto 0);
-		num52		: out std_logic_vector(4 downto 0);
 		num53		: out std_logic_vector(4 downto 0);
-		num54		: out std_logic_vector(4 downto 0);
-		num55		: out std_logic_vector(4 downto 0);
-		num56		: out std_logic_vector(4 downto 0);
-		num57		: out std_logic_vector(4 downto 0);
-		num61		: out std_logic_vector(4 downto 0);
-		num62		: out std_logic_vector(4 downto 0);
-		num63		: out std_logic_vector(4 downto 0);
-		num64		: out std_logic_vector(4 downto 0);
-		num65		: out std_logic_vector(4 downto 0);
-		num66		: out std_logic_vector(4 downto 0);
-		num67		: out std_logic_vector(4 downto 0);
-		num71		: out std_logic_vector(4 downto 0);
-		num72		: out std_logic_vector(4 downto 0);
-		num73		: out std_logic_vector(4 downto 0);
 		num74		: out std_logic_vector(4 downto 0);
-		num75		: out std_logic_vector(4 downto 0);
-		num76		: out std_logic_vector(4 downto 0);
-		num77		: out std_logic_vector(4 downto 0);
-		num81		: out std_logic_vector(4 downto 0);
-		num82		: out std_logic_vector(4 downto 0);
-		num83		: out std_logic_vector(4 downto 0);
-		num84		: out std_logic_vector(4 downto 0);
-		num85		: out std_logic_vector(4 downto 0);
-		num86		: out std_logic_vector(4 downto 0);
-		num87		: out std_logic_vector(4 downto 0);
-		num91		: out std_logic_vector(4 downto 0);
-		num92		: out std_logic_vector(4 downto 0);
-		num93		: out std_logic_vector(4 downto 0);
 		num94		: out std_logic_vector(4 downto 0);
-		num95		: out std_logic_vector(4 downto 0);
-		num96		: out std_logic_vector(4 downto 0);
 		num97		: out std_logic_vector(4 downto 0));
 end staticmem;
 
@@ -256,76 +205,76 @@ begin
 		kilznx1		<= "00000000";
 		kilznx2		<= "10110000";
 		kilzny1		<= "00000000";
-		num01		<= "00000";
-		num02		<= "00000";
-		num03		<= "00000";
-		num04		<= "00000";
-		num05		<= "00000";
-		num06		<= "00000";
-		num07		<= "00000";
-		num11		<= "00000";
-		num12		<= "00000";
-		num13		<= "00000";
-		num14		<= "00000";
-		num15		<= "00000";
-		num16		<= "00000";
-		num17		<= "00000";
-		num21		<= "00000";
-		num22		<= "00000";
-		num23		<= "00000";
-		num24		<= "00000";
-		num25		<= "00000";
-		num26		<= "00000";
-		num27		<= "00000";
-		num31		<= "00000";
-		num32		<= "00000";
-		num33		<= "00000";
-		num34		<= "00000";
-		num35		<= "00000";
-		num36		<= "00000";
-		num37		<= "00000";
-		num41		<= "00000";
-		num42		<= "00000";
-		num43		<= "00000";
-		num44		<= "00000";
-		num45		<= "00000";
-		num46		<= "00000";
-		num47		<= "00000";
-		num51		<= "00000";
-		num52		<= "00000";
-		num53		<= "00000";
-		num54		<= "00000";
-		num55		<= "00000";
-		num56		<= "00000";
-		num57		<= "00000";
-		num61		<= "00000";
-		num62		<= "00000";
-		num63		<= "00000";
-		num64		<= "00000";
-		num65		<= "00000";
-		num66		<= "00000";
-		num67		<= "00000";
-		num71		<= "00000";
-		num72		<= "00000";
-		num73		<= "00000";
-		num74		<= "00000";
-		num75		<= "00000";
-		num76		<= "00000";
-		num77		<= "00000";
-		num81		<= "00000";
-		num82		<= "00000";
-		num83		<= "00000";
-		num84		<= "00000";
-		num85		<= "00000";
-		num86		<= "00000";
-		num87		<= "00000";
-		num91		<= "00000";
-		num92		<= "00000";
-		num93		<= "00000";
-		num94		<= "00000";
-		num95		<= "00000";
-		num96		<= "00000";
-		num97		<= "00000");
+		num01		<= "01110";
+		num02		<= "10001";
+		num03		<= "10011";
+		num04		<= "10101";
+		num05		<= "11001";
+		-- 06 same as 02
+		-- 07 same as 01
+		num11		<= "00100";
+		num12		<= "01100";
+		-- 13 same as 11
+		-- 14 same as 11
+		-- 15 same as 11
+		-- 16 same as 11
+		-- 17 same as 01
+		-- 21 same as 01
+		-- 22 same as 02
+		num23		<= "00001";
+		num24		<= "00110";
+		num25		<= "01000";
+		num26		<= "10000";
+		num27		<= "11111";
+		-- 31 same as 01
+		-- 32 same as 02
+		-- 33 same as 23 
+		-- 34 same as 24
+		-- 35 same as 23
+		-- 36 same as 02
+		-- 37 same as 01
+		num41		<= "00011";
+		num42		<= "00101";
+		num43		<= "01001";
+		-- 44 same as 02
+		-- 45 same as 27
+		-- 46 same as 23
+		-- 47 same as 23
+		-- 48 same as 27
+		-- 52 same as 26
+		num53		<= "11110";
+		-- 54 same as 23
+		-- 55 same as 23
+		-- 56 same as 02
+		-- 57 same as 01
+		-- 61 same as 24
+		-- 62 same as 25
+		-- 63 same as 52
+		-- 64 same as 53
+		-- 65 same as 02
+		-- 66 same as 02
+		-- 67 same as 01
+		-- 71 same as 27
+		-- 72 same as 02
+		-- 73 same as 23
+		num74		<= "00010"; 
+		-- 75 same as 11
+		-- 76 same as 11
+		-- 77 same as 11
+		-- 81 same as 01
+		-- 82 same as 02
+		-- 83 same as 02
+		-- 84 same as 01
+		-- 85 same as 02
+		-- 86 same as 02
+		-- 87 same as 01
+		-- 91 same as 01
+		-- 92 same as 02
+		-- 93 same as 02
+		num94		<= "01111"; 
+		-- 95 same as 23
+		-- 96 same as 74
+		num97		<= "11100");
 end architecture structural;
 
 
@@ -378,70 +327,19 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		num03		: out std_logic_vector(4 downto 0);
 		num04		: out std_logic_vector(4 downto 0);
 		num05		: out std_logic_vector(4 downto 0);
-		num06		: out std_logic_vector(4 downto 0);
-		num07		: out std_logic_vector(4 downto 0);
 		num11		: out std_logic_vector(4 downto 0);
 		num12		: out std_logic_vector(4 downto 0);
-		num13		: out std_logic_vector(4 downto 0);
-		num14		: out std_logic_vector(4 downto 0);
-		num15		: out std_logic_vector(4 downto 0);
-		num16		: out std_logic_vector(4 downto 0);
-		num17		: out std_logic_vector(4 downto 0);
-		num21		: out std_logic_vector(4 downto 0);
-		num22		: out std_logic_vector(4 downto 0);
 		num23		: out std_logic_vector(4 downto 0);
 		num24		: out std_logic_vector(4 downto 0);
 		num25		: out std_logic_vector(4 downto 0);
 		num26		: out std_logic_vector(4 downto 0);
 		num27		: out std_logic_vector(4 downto 0);
-		num31		: out std_logic_vector(4 downto 0);
-		num32		: out std_logic_vector(4 downto 0);
-		num33		: out std_logic_vector(4 downto 0);
-		num34		: out std_logic_vector(4 downto 0);
-		num35		: out std_logic_vector(4 downto 0);
-		num36		: out std_logic_vector(4 downto 0);
-		num37		: out std_logic_vector(4 downto 0);
 		num41		: out std_logic_vector(4 downto 0);
 		num42		: out std_logic_vector(4 downto 0);
 		num43		: out std_logic_vector(4 downto 0);
-		num44		: out std_logic_vector(4 downto 0);
-		num45		: out std_logic_vector(4 downto 0);
-		num46		: out std_logic_vector(4 downto 0);
-		num47		: out std_logic_vector(4 downto 0);
-		num51		: out std_logic_vector(4 downto 0);
-		num52		: out std_logic_vector(4 downto 0);
 		num53		: out std_logic_vector(4 downto 0);
-		num54		: out std_logic_vector(4 downto 0);
-		num55		: out std_logic_vector(4 downto 0);
-		num56		: out std_logic_vector(4 downto 0);
-		num57		: out std_logic_vector(4 downto 0);
-		num61		: out std_logic_vector(4 downto 0);
-		num62		: out std_logic_vector(4 downto 0);
-		num63		: out std_logic_vector(4 downto 0);
-		num64		: out std_logic_vector(4 downto 0);
-		num65		: out std_logic_vector(4 downto 0);
-		num66		: out std_logic_vector(4 downto 0);
-		num67		: out std_logic_vector(4 downto 0);
-		num71		: out std_logic_vector(4 downto 0);
-		num72		: out std_logic_vector(4 downto 0);
-		num73		: out std_logic_vector(4 downto 0);
 		num74		: out std_logic_vector(4 downto 0);
-		num75		: out std_logic_vector(4 downto 0);
-		num76		: out std_logic_vector(4 downto 0);
-		num77		: out std_logic_vector(4 downto 0);
-		num81		: out std_logic_vector(4 downto 0);
-		num82		: out std_logic_vector(4 downto 0);
-		num83		: out std_logic_vector(4 downto 0);
-		num84		: out std_logic_vector(4 downto 0);
-		num85		: out std_logic_vector(4 downto 0);
-		num86		: out std_logic_vector(4 downto 0);
-		num87		: out std_logic_vector(4 downto 0);
-		num91		: out std_logic_vector(4 downto 0);
-		num92		: out std_logic_vector(4 downto 0);
-		num93		: out std_logic_vector(4 downto 0);
 		num94		: out std_logic_vector(4 downto 0);
-		num95		: out std_logic_vector(4 downto 0);
-		num96		: out std_logic_vector(4 downto 0);
 		num97		: out std_logic_vector(4 downto 0);
 		clk			: in std_logic;
 		reset		: in std_logic;
@@ -544,70 +442,19 @@ architecture structural of memory is
 			num03		: out std_logic_vector(4 downto 0);
 			num04		: out std_logic_vector(4 downto 0);
 			num05		: out std_logic_vector(4 downto 0);
-			num06		: out std_logic_vector(4 downto 0);
-			num07		: out std_logic_vector(4 downto 0);
 			num11		: out std_logic_vector(4 downto 0);
 			num12		: out std_logic_vector(4 downto 0);
-			num13		: out std_logic_vector(4 downto 0);
-			num14		: out std_logic_vector(4 downto 0);
-			num15		: out std_logic_vector(4 downto 0);
-			num16		: out std_logic_vector(4 downto 0);
-			num17		: out std_logic_vector(4 downto 0);
-			num21		: out std_logic_vector(4 downto 0);
-			num22		: out std_logic_vector(4 downto 0);
 			num23		: out std_logic_vector(4 downto 0);
 			num24		: out std_logic_vector(4 downto 0);
 			num25		: out std_logic_vector(4 downto 0);
 			num26		: out std_logic_vector(4 downto 0);
 			num27		: out std_logic_vector(4 downto 0);
-			num31		: out std_logic_vector(4 downto 0);
-			num32		: out std_logic_vector(4 downto 0);
-			num33		: out std_logic_vector(4 downto 0);
-			num34		: out std_logic_vector(4 downto 0);
-			num35		: out std_logic_vector(4 downto 0);
-			num36		: out std_logic_vector(4 downto 0);
-			num37		: out std_logic_vector(4 downto 0);
 			num41		: out std_logic_vector(4 downto 0);
 			num42		: out std_logic_vector(4 downto 0);
 			num43		: out std_logic_vector(4 downto 0);
-			num44		: out std_logic_vector(4 downto 0);
-			num45		: out std_logic_vector(4 downto 0);
-			num46		: out std_logic_vector(4 downto 0);
-			num47		: out std_logic_vector(4 downto 0);
-			num51		: out std_logic_vector(4 downto 0);
-			num52		: out std_logic_vector(4 downto 0);
 			num53		: out std_logic_vector(4 downto 0);
-			num54		: out std_logic_vector(4 downto 0);
-			num55		: out std_logic_vector(4 downto 0);
-			num56		: out std_logic_vector(4 downto 0);
-			num57		: out std_logic_vector(4 downto 0);
-			num61		: out std_logic_vector(4 downto 0);
-			num62		: out std_logic_vector(4 downto 0);
-			num63		: out std_logic_vector(4 downto 0);
-			num64		: out std_logic_vector(4 downto 0);
-			num65		: out std_logic_vector(4 downto 0);
-			num66		: out std_logic_vector(4 downto 0);
-			num67		: out std_logic_vector(4 downto 0);
-			num71		: out std_logic_vector(4 downto 0);
-			num72		: out std_logic_vector(4 downto 0);
-			num73		: out std_logic_vector(4 downto 0);
 			num74		: out std_logic_vector(4 downto 0);
-			num75		: out std_logic_vector(4 downto 0);
-			num76		: out std_logic_vector(4 downto 0);
-			num77		: out std_logic_vector(4 downto 0);
-			num81		: out std_logic_vector(4 downto 0);
-			num82		: out std_logic_vector(4 downto 0);
-			num83		: out std_logic_vector(4 downto 0);
-			num84		: out std_logic_vector(4 downto 0);
-			num85		: out std_logic_vector(4 downto 0);
-			num86		: out std_logic_vector(4 downto 0);
-			num87		: out std_logic_vector(4 downto 0);
-			num91		: out std_logic_vector(4 downto 0);
-			num92		: out std_logic_vector(4 downto 0);
-			num93		: out std_logic_vector(4 downto 0);
 			num94		: out std_logic_vector(4 downto 0);
-			num95		: out std_logic_vector(4 downto 0);
-			num96		: out std_logic_vector(4 downto 0);
 			num97		: out std_logic_vector(4 downto 0));
 	end component staticmem;
 		
@@ -657,70 +504,19 @@ begin
 								num03		=> num03;
 								num04		=> num04;
 								num05		=> num05;
-								num06		=> num06;
-								num07		=> num07;
 								num11		=> num11;
 								num12		=> num12;
-								num13		=> num13;
-								num14		=> num14;
-								num15		=> num15;
-								num16		=> num16;
-								num17		=> num17;
-								num21		=> num21;
-								num22		=> num22;
 								num23		=> num23;
 								num24		=> num24;
 								num25		=> num25;
 								num26		=> num26;
 								num27		=> num27;
-								num31		=> num31;
-								num32		=> num32;
-								num33		=> num33;
-								num34		=> num34;
-								num35		=> num35;
-								num36		=> num36;
-								num37		=> num37;
 								num41		=> num41;
 								num42		=> num42;
 								num43		=> num43;
-								num44		=> num44;
-								num45		=> num45;
-								num46		=> num46;
-								num47		=> num47;
-								num51		=> num51;
-								num52		=> num52;
 								num53		=> num53;
-								num54		=> num54;
-								num55		=> num55;
-								num56		=> num56;
-								num57		=> num57;
-								num61		=> num61;
-								num62		=> num62;
-								num63		=> num63;
-								num64		=> num64;
-								num65		=> num65;
-								num66		=> num66;
-								num67		=> num67;
-								num71		=> num71;
-								num72		=> num72;
-								num73		=> num73;
 								num74		=> num74;
-								num75		=> num75;
-								num76		=> num76;
-								num77		=> num77;
-								num81		=> num81;
-								num82		=> num82;
-								num83		=> num83;
-								num84		=> num84;
-								num85		=> num85;
-								num86		=> num86;
-								num87		=> num87;
-								num91		=> num91;
-								num92		=> num92;
-								num93		=> num93;
 								num94		=> num94;
-								num95		=> num95;
-								num96		=> num96;
 								num97		=> num97);
 								
 	DM01 : ram_10b port map (	clk			=> clk;

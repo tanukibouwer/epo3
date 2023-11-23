@@ -71,7 +71,7 @@ begin
 		char1sy		<= "00000000";
 		char2sx		<= "00000000";
 		char2sy		<= "00000000";
-		char1vx		<= "00000000";
+		char1vx		<= "000000000";
 		char1vy		<= "000000000";
 		char2vx		<= "000000000";
 		char2vy		<= "000000000";
@@ -82,7 +82,7 @@ begin
 		att2dx		<= "0000";
 		att2dy		<= "0000";
 		att1dm		<= "0000";
-		att2dm		<= "0000";;
+		att2dm		<= "0000";
 		att1kb		<= "000000";
 		att2kb		<= "000000";
 		plat1x		<= "01011000";
@@ -173,5 +173,5 @@ begin
 		num94		<= "01111"; 
 		-- 95 same as 23
 		-- 96 same as 74
-		num97		<= "11100");
+		num97		<= "11100";
 end architecture structural;

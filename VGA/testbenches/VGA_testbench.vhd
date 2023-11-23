@@ -11,6 +11,8 @@ architecture rtl of VGA_testbench is
         port (
             clk    : in std_logic;
             reset  : in std_logic;
+
+            vcount : out std_logic_vector(9 downto 0);
             Hsync  : out std_logic;
             Vsync  : out std_logic;
             R_data : out std_logic;
@@ -21,6 +23,7 @@ architecture rtl of VGA_testbench is
     signal clk, reset : std_logic;
     signal Hsync, Vsync : std_logic;
     signal R_data, G_data, B_data : std_logic;
+    signal vcount : std_logic_vector(9 downto 0);
 
 begin
 
@@ -32,12 +35,10 @@ begin
         '0' after 80 ns;
 
     GC1: graphics_card port map (
-        clk => clk, reset => reset, Hsync => Hsync, Vsync => Vsync,
+        clk => clk, reset => reset, 
+        vcount => vcount, Hsync => Hsync, Vsync => Vsync,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
-    R_data <= '1';
-    G_data <= '1';
-    B_data <= '1';
 
 end architecture;

@@ -7,7 +7,7 @@
 -- This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros
 -- This component consists of 3 subcomponents, screen_scan, mem_vid and coloring
 -- screen_scan to scan the screen, mem_vid as a frame buffer, coloring as logic to find the color at a pixel
---
+-- offset adder to coordinates from frame buffer to pixel bounds
 --
 --
 --------------------------------------------------------------------------------------------------------------------------------
@@ -22,6 +22,10 @@ entity graphics_card is
     port (
         clk    : in std_logic;
         reset  : in std_logic;
+        -- inputs from memory -> relevant data to be displayed on screen
+
+        -- outputs to screen (and other components)
+        vcount : out std_logic_vector(9 downto 0);
         Hsync  : out std_logic;
         Vsync  : out std_logic;
         R_data : out std_logic;
@@ -50,6 +54,15 @@ architecture rtl of graphics_card is
 
     --     );
     -- end component;
+
+    -- component offset_adder is
+    --     port (
+    --         clk   : in std_logic;
+    --         reset : in std_logic;
+            
+    --     );
+    -- end component;
+
     component coloring is
         port (
             clk    : in std_logic;
@@ -74,6 +87,6 @@ begin
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
-
+    vcount <= vcount_int;
 
 end architecture;

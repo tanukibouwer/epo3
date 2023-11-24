@@ -103,7 +103,6 @@ architecture structural of memory is
 	component ram_4b is
 	port(
 		clk			: in std_logic;
-		reset		: in std_logic;
 		data_in 	: in std_logic_vector(3 downto 0);
 		data_out 	: out std_logic_vector(3 downto 0);
 		write 		: in std_logic);
@@ -112,7 +111,6 @@ architecture structural of memory is
 	component ram_10b is
 	port(
 		clk			: in std_logic;
-		reset		: in std_logic;
 		data_in 	: in std_logic_vector(9 downto 0);
 		data_out 	: out std_logic_vector(9 downto 0);
 		write 		: in std_logic);
@@ -121,7 +119,6 @@ architecture structural of memory is
 	component ram_8b is
 	port(
 		clk			: in std_logic;
-		reset		: in std_logic;
 		data_in 	: in std_logic_vector(7 downto 0);
 		data_out 	: out std_logic_vector(7 downto 0);
 		write 		: in std_logic);
@@ -130,7 +127,6 @@ architecture structural of memory is
 	component ram_9b is
 	port(
 		clk			: in std_logic;
-		reset		: in std_logic;
 		data_in 	: in std_logic_vector(8 downto 0);
 		data_out 	: out std_logic_vector(8 downto 0);
 		write 		: in std_logic);
@@ -259,97 +255,81 @@ begin
 								num97		=> num97);
 								
 	DM00 : ram_4b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in4b1,
 								data_out 	=> data_out4b1,
 								write 		=> write);
 								
 	DM01 : ram_4b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in4b2,
 								data_out 	=> data_out4b2,
 								write 		=> write);
 								
 	DM10 : ram_10b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in10b1,
 								data_out 	=> data_out10b1,
 								write 		=> write);
 								
 	DM11 : ram_10b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in10b2,
 								data_out 	=> data_out10b2,
 								write 		=> write);
 								
 	DM20 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b1,
 								data_out 	=> data_out8b1,
 								write 		=> write);
 								
 	DM21 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b2,
 								data_out 	=> data_out8b2,
 								write 		=> write);
 								
 	DM22 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b3,
 								data_out 	=> data_out8b3,
 								write 		=> write);
 								
 	DM23 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b4,
 								data_out 	=> data_out8b4,
 								write 		=> write);
 								
 	DM24 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b5,
 								data_out 	=> data_out8b5,
 								write 		=> write);
 								
 	DM25 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b6,
 								data_out 	=> data_out8b6,
 								write 		=> write);
 								
 	DM26 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b7,
 								data_out 	=> data_out8b7,
 								write 		=> write);
 								
 	DM27 : ram_8b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in8b8,
 								data_out 	=> data_out8b8,
 								write 		=> write);
 	
 	DM30 : ram_9b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in9b1,
 								data_out 	=> data_out9b1,
 								write 		=> write);
 								
 	DM31 : ram_9b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in9b2,
 								data_out 	=> data_out9b2,
 								write 		=> write);
 								
 	DM32 : ram_9b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in9b3,
 								data_out 	=> data_out9b3,
 								write 		=> write);
 								
 	DM33 : ram_9b port map (	clk			=> clk,
-								reset		=> reset,
 								data_in 	=> data_in9b4,
 								data_out 	=> data_out9b4,
 								write 		=> write);

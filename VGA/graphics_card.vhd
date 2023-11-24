@@ -20,12 +20,17 @@ use ieee.math_real.all;
 
 entity graphics_card is
     port (
-        clk    : in std_logic;
-        reset  : in std_logic;
+        clk   : in std_logic;
+        reset : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-
+        char_xsize : in std_logic_vector(3 downto 0);
+        char_ysize : in std_logic_vector(3 downto 0);
+        char1_x    : in std_logic_vector(7 downto 0);
+        char1_y    : in std_logic_vector(7 downto 0);
+        char2_x    : in std_logic_vector(7 downto 0);
+        char2_y    : in std_logic_vector(7 downto 0);
         -- outputs to screen (and other components)
-        vcount : out std_logic_vector(9 downto 0);
+        -- vcount : out std_logic_vector(9 downto 0);
         Hsync  : out std_logic;
         Vsync  : out std_logic;
         R_data : out std_logic;
@@ -55,13 +60,20 @@ architecture rtl of graphics_card is
     --     );
     -- end component;
 
-    -- component offset_adder is
-    --     port (
-    --         clk   : in std_logic;
-    --         reset : in std_logic;
-            
-    --     );
-    -- end component;
+    component char_offset_adder is
+        port (
+            -- clk       : in std_logic;
+            -- reset     : in std_logic;
+            xpos      : in std_logic_vector(7 downto 0);
+            ypos      : in std_logic_vector(7 downto 0);
+            xsize     : in std_logic_vector(7 downto 0);
+            ysize     : in std_logic_vector(7 downto 0);
+            xpos_scl1 : out std_logic_vector(7 downto 0);
+            xpos_scl2 : out std_logic_vector(7 downto 0);
+            ypos_scl1 : out std_logic_vector(7 downto 0);
+            ypos_scl2 : out std_logic_vector(7 downto 0)
+        );
+    end component;
 
     component coloring is
         port (
@@ -75,7 +87,10 @@ architecture rtl of graphics_card is
         );
     end component;
     signal vcount_int, hcount_int : std_logic_vector (9 downto 0);
+    signal c1x1, c1x2, c1y1, c1y2 : std_logic_vector(7 downto 0);
+    signal c2x1, c2x2, c2y1, c2y1 : std_logic_vector(7 downto 0);
     
+
 begin
 
     SCNR1 : screen_scan port map(
@@ -87,6 +102,16 @@ begin
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
-    vcount <= vcount_int;
+    O_P1 : char_offset_adder port map(
+        xpos => char1_x, ypos => char1_y, xsize => char_xsize, ysize => char_ysize,
+        xpos_scl1 => c1x1, xpos_scl2 => c1x2, ypos_scl1 => c1y1, ypos_scl2 => c1y2
+    );
+
+    O_P2 : char_offset_adder port map(
+        xpos => char2_x, ypos => char2_y, xsize => char_xsize, ysize => char_ysize,
+        xpos_scl1 => c2x1, xpos_scl2 => c2x2, ypos_scl1 => c2y1, ypos_scl2 => c2y2
+    );
+
+    -- vcount <= vcount_int;
 
 end architecture;

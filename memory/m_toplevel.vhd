@@ -72,18 +72,18 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		data_in10b2	: in std_logic_vector(9 downto 0);
 		data_out10b1	: out std_logic_vector(9 downto 0);
 		data_out10b2	: out std_logic_vector(9 downto 0);
-		data_in8b1 		: in std_logic_vector(7 downto 0);--attack x char1
-		data_in8b2		: in std_logic_vector(7 downto 0);--attack y char1
-		data_in8b3		: in std_logic_vector(7 downto 0);--attack x char2
-		data_in8b4		: in std_logic_vector(7 downto 0);--attack y char2
+		data_in8b1 		: in std_logic_vector(7 downto 0);
+		data_in8b2		: in std_logic_vector(7 downto 0);
+		data_in8b3		: in std_logic_vector(7 downto 0);
+		data_in8b4		: in std_logic_vector(7 downto 0);
 		data_in8b5		: in std_logic_vector(7 downto 0);
 		data_in8b6		: in std_logic_vector(7 downto 0);
 		data_in8b7		: in std_logic_vector(7 downto 0);
 		data_in8b8		: in std_logic_vector(7 downto 0);
-		data_out8b1		: out std_logic_vector(7 downto 0);--attack x char1
-		data_out8b2		: out std_logic_vector(7 downto 0);--attack y char1
-		data_out8b3		: out std_logic_vector(7 downto 0);--attack x char2
-		data_out8b4		: out std_logic_vector(7 downto 0);--attack y char2
+		data_out8b1		: out std_logic_vector(7 downto 0);
+		data_out8b2		: out std_logic_vector(7 downto 0);
+		data_out8b3		: out std_logic_vector(7 downto 0);
+		data_out8b4		: out std_logic_vector(7 downto 0);
 		data_out8b5		: out std_logic_vector(7 downto 0);
 		data_out8b6		: out std_logic_vector(7 downto 0);
 		data_out8b7		: out std_logic_vector(7 downto 0);

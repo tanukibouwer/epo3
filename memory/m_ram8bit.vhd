@@ -19,10 +19,10 @@ begin
 	ram_ff: process(clk) is
 	begin
 		if (rising_edge (clk)) and write = '1' then
-			mem(1) <= data_in;
+			mem(0) <= data_in;
 		end if;
 	end process;
-	data_out <= mem(1);
+	data_out <= mem(0);
 end behaviour;
 
 configuration ram_8b_behaviour_cfg of ram_8b is

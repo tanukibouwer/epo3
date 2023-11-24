@@ -1,2 +1,2 @@
 #!/bin/bash
-sh link.sh main "../../physics/* ../../memory/* ../../input/* ../../VGA/* ../../graphics/*"
+sh link.sh main "../../physics/* ../../memory/* ../../input/* ../../attack/* ../../VGA/*"

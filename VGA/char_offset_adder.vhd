@@ -38,10 +38,10 @@ architecture behaviour of char_offset_adder is
 begin
     process (xpos, ypos)
     begin
-        xpos_scl1 <= std_logic_vector((xpos_int * 4) - (6 * 4) + 108);
-        xpos_scl2 <= std_logic_vector((xpos_int * 4) + (6 * 4) + 108);
-        ypos_scl1 <= std_logic_vector((ypos_int * 4) - (6 * 4));
-        ypos_scl2 <= std_logic_vector((ypos_int * 4) + (6 * 4));
+        xpos_scl1 <= std_logic_vector((xpos_int * 4) - (4 * 4) + 108);
+        xpos_scl2 <= std_logic_vector((xpos_int * 4) + (4 * 4) + 108);
+        ypos_scl1 <= std_logic_vector((ypos_int * 4) - (4 * 4));
+        ypos_scl2 <= std_logic_vector((ypos_int * 4) + (4 * 4));
 
     end process;
 

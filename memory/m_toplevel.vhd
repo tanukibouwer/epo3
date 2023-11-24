@@ -63,7 +63,7 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		num97		: out std_logic_vector(4 downto 0);
 		clk			: in std_logic;
 		reset		: in std_logic;
-		write	 	: in std_logic;
+		vsync	 	: in std_logic;
 		data_in4b1	: in std_logic_vector(3 downto 0);
 		data_in4b2	: in std_logic_vector(3 downto 0);
 		data_out4b1	: out std_logic_vector(3 downto 0);
@@ -99,6 +99,15 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 end memory;
 
 architecture structural of memory is
+
+	component writelogic is 
+	port(
+		clk			: in std_logic;
+		vsync		: in std_logic;
+		write 		: out std_logic);
+	end component writelogic;
+	
+	signal writeint : std_logic;
 
 	component ram_4b is
 	port(
@@ -194,6 +203,10 @@ architecture structural of memory is
 	end component staticmem;
 		
 begin
+
+	WL00: writelogic port map (	clk			=> clk,
+								vsync		=> vsync,
+								write		=> writeint);
 	
 	SM00: staticmem port map (	charhp		=> charhp,
 								chardc		=> chardc,
@@ -257,97 +270,100 @@ begin
 	DM00 : ram_4b port map (	clk			=> clk,
 								data_in 	=> data_in4b1,
 								data_out 	=> data_out4b1,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM01 : ram_4b port map (	clk			=> clk,
 								data_in 	=> data_in4b2,
 								data_out 	=> data_out4b2,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM10 : ram_10b port map (	clk			=> clk,
 								data_in 	=> data_in10b1,
 								data_out 	=> data_out10b1,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM11 : ram_10b port map (	clk			=> clk,
 								data_in 	=> data_in10b2,
 								data_out 	=> data_out10b2,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM20 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b1,
 								data_out 	=> data_out8b1,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM21 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b2,
 								data_out 	=> data_out8b2,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM22 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b3,
 								data_out 	=> data_out8b3,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM23 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b4,
 								data_out 	=> data_out8b4,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM24 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b5,
 								data_out 	=> data_out8b5,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM25 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b6,
 								data_out 	=> data_out8b6,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM26 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b7,
 								data_out 	=> data_out8b7,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM27 : ram_8b port map (	clk			=> clk,
 								data_in 	=> data_in8b8,
 								data_out 	=> data_out8b8,
-								write 		=> write);
+								write 		=> writeint);
 	
 	DM30 : ram_9b port map (	clk			=> clk,
 								data_in 	=> data_in9b1,
 								data_out 	=> data_out9b1,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM31 : ram_9b port map (	clk			=> clk,
 								data_in 	=> data_in9b2,
 								data_out 	=> data_out9b2,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM32 : ram_9b port map (	clk			=> clk,
 								data_in 	=> data_in9b3,
 								data_out 	=> data_out9b3,
-								write 		=> write);
+								write 		=> writeint);
 								
 	DM33 : ram_9b port map (	clk			=> clk,
 								data_in 	=> data_in9b4,
 								data_out 	=> data_out9b4,
-								write 		=> write);
+								write 		=> writeint);
 								
 								
 end architecture structural;
 
 configuration memory_structural_cfg of memory is
-	for structural
-		for all: ram_4b use configuration work.ram_4b_behaviour_cfg;
-		end for;
-		for all: ram_10b use configuration work.ram_10b_behaviour_cfg;
-		end for;
-		for all: ram_8b use configuration work.ram_8b_behaviour_cfg;
-		end for;
-		for all: ram_9b use configuration work.ram_9b_behaviour_cfg;
-		end for;
-		for all: staticmem use configuration work.staticmem_structural_cfg;
-		end for;
-	end for;
+   for structural
+      for all: writelogic use configuration work.writelogic_behaviour_cfg;
+      end for;
+      for all: staticmem use configuration work.staticmem_structural_cfg;
+      end for;
+      for all: ram_4b use configuration work.ram_4b_behaviour_cfg;
+      end for;
+      for all: ram_10b use configuration work.ram_10b_behaviour_cfg;
+      end for;
+      for all: ram_8b use configuration work.ram_8b_behaviour_cfg;
+      end for;
+      for all: ram_9b use configuration work.ram_9b_behaviour_cfg;
+      end for;
+   end for;
 end memory_structural_cfg;
+

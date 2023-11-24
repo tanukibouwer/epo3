@@ -14,7 +14,7 @@ architecture behaviour of writelogic is
 begin
 	process(clk) is
 	begin
-		if (rising_edge (clk)) and vsync = '1' then
+		if (rising_edge (clk)) and vsync = '0' then
 			writeint <= '1';
 		else
 			writeint <= '0';

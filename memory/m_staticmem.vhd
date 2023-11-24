@@ -75,8 +75,8 @@ begin
 		char1vy		<= "000000000";
 		char2vx		<= "000000000";
 		char2vy		<= "000000000";
-		chardx		<= "0000";
-		chardy		<= "0000";
+		chardx		<= "0100";
+		chardy		<= "0100";
 		att1dx		<= "0000";
 		att1dy		<= "0000";
 		att2dx		<= "0000";

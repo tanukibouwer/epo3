@@ -5,7 +5,6 @@ use IEEE.numeric_std.all;
 entity ram_10b is -- 2 of these
 port(
 	clk			: in std_logic;
-	reset		: in std_logic;
 	data_in 	: in std_logic_vector(9 downto 0);
 	data_out 	: out std_logic_vector(9 downto 0);
 	write 		: in std_logic);

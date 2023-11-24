@@ -1,4 +1,6 @@
-
-**/main/*
-!main/VHDL/
+graphics_proj/
+attack_proj/
+input_proj/
+physics_proj/
+memory_proj/
 **/*_

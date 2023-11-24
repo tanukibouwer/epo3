@@ -10,22 +10,18 @@
 # sh link.sh
 
 # To add your project to the main project, add to the line below.
-PROJECTS="../../physics/*
-../../memory/*
-../../input/*
-../../VGA/*
-../../graphics/*"
+PROJECTS=$2
 
-cd main/VHDL
+rm -rf $1 
+cp -r template $1
 
-# Delete old symlinks
-find . -type l | xargs rm;
+cd $1/VHDL
 
 # Create new symlinks
 for directory in $PROJECTS; do
 for file in `ls -d $directory -1`
 do
 	ln -s -r $file
-	echo "Linked $file to main."
+	echo "Linked $file to $1."
 done
 done

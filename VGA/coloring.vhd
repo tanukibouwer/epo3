@@ -67,7 +67,7 @@ begin
                 B_data <= '0';
             elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 34 and uns_vcount <= 514) then -- active screen time
                 -- priority -> highest priority is first, lowest is last
-                if(uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 492 and uns_vcount <= 495) then --platform
+                if(uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 492 and uns_vcount <= 505) then --platform 12 pixels thick 
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';

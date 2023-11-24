@@ -63,65 +63,47 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		num97		: out std_logic_vector(4 downto 0);
 		clk			: in std_logic;
 		reset		: in std_logic;
-		write4b 	: in std_logic;
-		write10b 	: in std_logic;
-		write16b 	: in std_logic;
-		write18b 	: in std_logic;
-		address4b	: in std_logic_vector(0 downto 0);
-		data_in4b	: in std_logic_vector(3 downto 0);
-		data_out4b	: out std_logic_vector(3 downto 0);
-		address10b	: in std_logic_vector(1 downto 0);
-		data_in10b	: in std_logic_vector(9 downto 0);
-		data_out10b	: out std_logic_vector(9 downto 0);
-		address16b 	: in std_logic_vector(2 downto 0);
-		data_in16b1 	: in std_logic_vector(7 downto 0);
-		data_in16b2		: in std_logic_vector(7 downto 0);
-		data_out16b1	: out std_logic_vector(7 downto 0);
-		data_out16b2	: out std_logic_vector(7 downto 0);
-		address18b	: in std_logic_vector(1 downto 0);
-		data_in18b1		: in std_logic_vector(8 downto 0);
-		data_in18b2		: in std_logic_vector(8 downto 0);
-		data_out18b1	: out std_logic_vector(8 downto 0);
-		data_out18b2	: out std_logic_vector(8 downto 0));
+		write	 	: in std_logic;
+		data_in4b1	: in std_logic_vector(3 downto 0);
+		data_in4b2	: in std_logic_vector(3 downto 0);
+		data_out4b1	: out std_logic_vector(3 downto 0);
+		data_out4b2	: out std_logic_vector(3 downto 0);
+		data_in10b1	: in std_logic_vector(9 downto 0);
+		data_in10b2	: in std_logic_vector(9 downto 0);
+		data_out10b1	: out std_logic_vector(9 downto 0);
+		data_out10b2	: out std_logic_vector(9 downto 0);
+		data_in8b1 		: in std_logic_vector(7 downto 0);
+		data_in8b2		: in std_logic_vector(7 downto 0);
+		data_in8b3		: in std_logic_vector(7 downto 0);
+		data_in8b4		: in std_logic_vector(7 downto 0);
+		data_in8b5		: in std_logic_vector(7 downto 0);
+		data_in8b6		: in std_logic_vector(7 downto 0);
+		data_in8b7		: in std_logic_vector(7 downto 0);
+		data_in8b8		: in std_logic_vector(7 downto 0);
+		data_out8b1		: out std_logic_vector(7 downto 0);
+		data_out8b2		: out std_logic_vector(7 downto 0);
+		data_out8b3		: out std_logic_vector(7 downto 0);
+		data_out8b4		: out std_logic_vector(7 downto 0);
+		data_out8b5		: out std_logic_vector(7 downto 0);
+		data_out8b6		: out std_logic_vector(7 downto 0);
+		data_out8b7		: out std_logic_vector(7 downto 0);
+		data_out8b8		: out std_logic_vector(7 downto 0);
+		data_in9b1		: in std_logic_vector(8 downto 0);
+		data_in9b2		: in std_logic_vector(8 downto 0);
+		data_in9b3		: in std_logic_vector(8 downto 0);
+		data_in9b4		: in std_logic_vector(8 downto 0);
+		data_out9b1		: out std_logic_vector(8 downto 0);
+		data_out9b2		: out std_logic_vector(8 downto 0));
+		data_out9b3		: out std_logic_vector(8 downto 0));
+		data_out9b4		: out std_logic_vector(8 downto 0));
 end memory;
 
 architecture structural of memory is
-
-	signal	split18b :		std_logic_vector(17 downto 0);
-	signal	merge18b :		std_logic_vector(17 downto 0);
-	signal	split16b :		std_logic_vector(15 downto 0);
-	signal	merge16b :		std_logic_vector(15 downto 0);
-
-	component splitter_8b is
-		port(in1  : in  std_logic_vector(15 downto 0);
-			out1 : out std_logic_vector(7 downto 0);
-			out2 : out std_logic_vector(7 downto 0));
-	end component splitter_8b;
-	
-	component merger_8b is
-		port(in1  : in  std_logic_vector(7 downto 0);
-			in2  : in  std_logic_vector(7 downto 0);
-			out1 : out std_logic_vector(15 downto 0));
-	end component merger_8b;
-	
-	component splitter_9b is
-		port(in1  : in  std_logic_vector(17 downto 0);
-			out1 : out std_logic_vector(8 downto 0);
-			out2 : out std_logic_vector(8 downto 0));
-	end component splitter_9b;
-	
-	component merger_9b is
-		port(in1  : in  std_logic_vector(8 downto 0);
-			in2  : in  std_logic_vector(8 downto 0);
-			out1 : out std_logic_vector(17 downto 0));
-	end component merger_9b;
-
 
 	component ram_4b is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
-		address 	: in std_logic_vector(0 downto 0);
 		data_in 	: in std_logic_vector(3 downto 0);
 		data_out 	: out std_logic_vector(3 downto 0);
 		write 		: in std_logic);
@@ -131,31 +113,28 @@ architecture structural of memory is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
-		address 	: in std_logic_vector(1 downto 0);
 		data_in 	: in std_logic_vector(9 downto 0);
 		data_out 	: out std_logic_vector(9 downto 0);
 		write 		: in std_logic);
 	end component ram_10b;
 	
-	component ram_16b is
+	component ram_8b is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
-		address 	: in std_logic_vector(2 downto 0);
-		data_in 	: in std_logic_vector(15 downto 0);
-		data_out 	: out std_logic_vector(15 downto 0);
+		data_in 	: in std_logic_vector(7 downto 0);
+		data_out 	: out std_logic_vector(7 downto 0);
 		write 		: in std_logic);
-	end component ram_16b;
+	end component ram_8b;
 	
-	component ram_18b is
+	component ram_9b is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
-		address 	: in std_logic_vector(1 downto 0);
-		data_in 	: in std_logic_vector(17 downto 0);
-		data_out 	: out std_logic_vector(17 downto 0);
+		data_in 	: in std_logic_vector(8 downto 0);
+		data_out 	: out std_logic_vector(8 downto 0);
 		write 		: in std_logic);
-	end component ram_18b;
+	end component ram_9b;
 	
 	component staticmem is
 	port(	charhp		: out std_logic_vector(9 downto 0);
@@ -281,47 +260,100 @@ begin
 								
 	DM00 : ram_4b port map (	clk			=> clk,
 								reset		=> reset,
-								address 	=> address4b,
-								data_in 	=> data_in4b,
-								data_out 	=> data_out4b,
-								write 		=> write4b);
+								data_in 	=> data_in4b1,
+								data_out 	=> data_out4b1,
+								write 		=> write);
 								
-	DM01 : ram_10b port map (	clk			=> clk,
+	DM01 : ram_4b port map (	clk			=> clk,
 								reset		=> reset,
-								address 	=> address10b,
-								data_in 	=> data_in10b,
-								data_out 	=> data_out10b,
-								write 		=> write10b);
+								data_in 	=> data_in4b2,
+								data_out 	=> data_out4b2,
+								write 		=> write);
 								
-	DM02 : ram_16b port map (	clk			=> clk,
+	DM10 : ram_10b port map (	clk			=> clk,
 								reset		=> reset,
-								address 	=> address16b,
-								data_in 	=> merge16b,
-								data_out 	=> split16b,
-								write 		=> write16b);
+								data_in 	=> data_in10b1,
+								data_out 	=> data_out10b1,
+								write 		=> write);
+								
+	DM11 : ram_10b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in10b2,
+								data_out 	=> data_out10b2,
+								write 		=> write);
+								
+	DM20 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b1,
+								data_out 	=> data_out8b1,
+								write 		=> write);
+								
+	DM21 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b2,
+								data_out 	=> data_out8b2,
+								write 		=> write);
+								
+	DM22 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b3,
+								data_out 	=> data_out8b3,
+								write 		=> write);
+								
+	DM23 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b4,
+								data_out 	=> data_out8b4,
+								write 		=> write);
+								
+	DM24 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b5,
+								data_out 	=> data_out8b5,
+								write 		=> write);
+								
+	DM25 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b6,
+								data_out 	=> data_out8b6,
+								write 		=> write);
+								
+	DM26 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b7,
+								data_out 	=> data_out8b7,
+								write 		=> write);
+								
+	DM27 : ram_8b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in8b8,
+								data_out 	=> data_out8b8,
+								write 		=> write);
 	
-	DM03 : ram_18b port map (	clk			=> clk,
+	DM30 : ram_9b port map (	clk			=> clk,
 								reset		=> reset,
-								address 	=> address18b,
-								data_in 	=> merge18b,
-								data_out 	=> split18b,
-								write 		=> write18b);
+								data_in 	=> data_in9b1,
+								data_out 	=> data_out9b1,
+								write 		=> write);
 								
-	MM00 : splitter_8b port map (	in1		=> split16b,
-									out1	=> data_out16b1,
-									out2	=> data_out16b2);
-									
-	MM01 : merger_8b port map (		in1		=> data_in16b1,
-									in2		=> data_in16b2,
-									out1	=> merge16b);
-									
-	MM10 : splitter_9b port map (	in1		=> split18b,
-									out1	=> data_out18b1,
-									out2	=> data_out18b2);
-									
-	MM11 : merger_9b port map (		in1		=> data_in18b1,
-									in2		=> data_in18b2,
-									out1	=> merge18b);
+	DM31 : ram_9b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in9b2,
+								data_out 	=> data_out9b2,
+								write 		=> write);
+								
+	DM32 : ram_9b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in9b3,
+								data_out 	=> data_out9b3,
+								write 		=> write);
+								
+	DM33 : ram_9b port map (	clk			=> clk,
+								reset		=> reset,
+								data_in 	=> data_in9b4,
+								data_out 	=> data_out9b4,
+								write 		=> write);
+								
 								
 end architecture structural;
 
@@ -331,20 +363,11 @@ configuration memory_structural_cfg of memory is
 		end for;
 		for all: ram_10b use configuration work.ram_10b_behaviour_cfg;
 		end for;
-		for all: ram_16b use configuration work.ram_16b_behaviour_cfg;
+		for all: ram_8b use configuration work.ram_8b_behaviour_cfg;
 		end for;
-		for all: ram_18b use configuration work.ram_18b_behaviour_cfg;
+		for all: ram_9b use configuration work.ram_9b_behaviour_cfg;
 		end for;
 		for all: staticmem use configuration work.staticmem_structural_cfg;
-		end for;
-		
-		for all: splitter_8b use configuration work.splitter_8b_structural_cfg;
-		end for;
-		for all: splitter_9b use configuration work.splitter_9b_structural_cfg;
-		end for;
-		for all: merger_8b use configuration work.merger_8b_structural_cfg;
-		end for;
-		for all: merger_9b use configuration work.merger_9b_structural_cfg;
 		end for;
 	end for;
 end memory_structural_cfg;

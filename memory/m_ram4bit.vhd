@@ -26,10 +26,10 @@ begin
 	data_out <= mem(to_integer(unsigned(address)));
 end behaviour;
 
-
-
-
-
+configuration ram_4b_behaviour_cfg of ram_4b is
+   for behaviour
+   end for;
+end ram_4b_behaviour_cfg;
 
 
 

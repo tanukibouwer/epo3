@@ -23,10 +23,7 @@ begin
 
 end structural;
 
-
-
-
-
-
-
-
+configuration splitter_9b_structural_cfg of splitter_9b is
+   for structural
+   end for;
+end splitter_9b_structural_cfg;

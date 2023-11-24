@@ -324,3 +324,27 @@ begin
 									out1	=> merge18b);
 								
 end architecture structural;
+
+configuration memory_structural_cfg of memory is
+	for structural
+		for all: ram_4b use configuration work.ram_4b_behaviour_cfg;
+		end for;
+		for all: ram_10b use configuration work.ram_10b_behaviour_cfg;
+		end for;
+		for all: ram_16b use configuration work.ram_16b_behaviour_cfg;
+		end for;
+		for all: ram_18b use configuration work.ram_18b_behaviour_cfg;
+		end for;
+		for all: staticmem use configuration work.staticmem_structural_cfg;
+		end for;
+		
+		for all: splitter_8b use configuration work.splitter_8b_structural_cfg;
+		end for;
+		for all: splitter_9b use configuration work.splitter_9b_structural_cfg;
+		end for;
+		for all: merger_8b use configuration work.merger_8b_structural_cfg;
+		end for;
+		for all: merger_9b use configuration work.merger_9b_structural_cfg;
+		end for;
+	end for;
+end memory_structural_cfg;

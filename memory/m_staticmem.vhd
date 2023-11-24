@@ -175,3 +175,8 @@ begin
 		-- 96 same as 74
 		num97		<= "11100";
 end architecture structural;
+
+configuration staticmem_structural_cfg of staticmem is
+   for structural
+   end for;
+end staticmem_structural_cfg;

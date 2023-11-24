@@ -25,3 +25,8 @@ begin
 	end process;
 	data_out <= mem(to_integer(unsigned(address)));
 end behaviour;
+
+configuration ram_16b_behaviour_cfg of ram_16b is
+   for behaviour
+   end for;
+end ram_16b_behaviour_cfg;

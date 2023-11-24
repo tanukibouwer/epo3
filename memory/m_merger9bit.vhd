@@ -24,10 +24,7 @@ begin
 
 end structural;
 
-
-
-
-
-
-
-
+configuration merger_9b_structural_cfg of merger_9b is
+   for structural
+   end for;
+end merger_9b_structural_cfg;

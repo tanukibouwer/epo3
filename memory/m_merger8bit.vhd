@@ -24,8 +24,10 @@ begin
 
 end structural;
 
-
-
+configuration merger_8b_structural_cfg of merger_8b is
+   for structural
+   end for;
+end merger_8b_structural_cfg;
 
 
 

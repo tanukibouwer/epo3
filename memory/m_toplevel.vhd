@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity memory is
-port(	charhp		: out std_logic_vector(9 downto 0);
+port(	charhp		: out std_logic_vector(9 downto 0); --initial knockback percentage so NOT character health!
 		chardc		: out std_logic_vector(7 downto 0);
 		char1sx		: out std_logic_vector(7 downto 0);
 		char1sy		: out std_logic_vector(7 downto 0);
@@ -68,10 +68,10 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		data_in4b2	: in std_logic_vector(3 downto 0);
 		data_out4b1	: out std_logic_vector(3 downto 0);
 		data_out4b2	: out std_logic_vector(3 downto 0);
-		data_in10b1	: in std_logic_vector(9 downto 0);
-		data_in10b2	: in std_logic_vector(9 downto 0);
-		data_out10b1	: out std_logic_vector(9 downto 0);
-		data_out10b2	: out std_logic_vector(9 downto 0);
+		data_in10b1	: in std_logic_vector(9 downto 0);  --knockback percentage
+		data_in10b2	: in std_logic_vector(9 downto 0);  --knockback percentage
+		data_out10b1	: out std_logic_vector(9 downto 0); --knockback percentage
+		data_out10b2	: out std_logic_vector(9 downto 0); --knockback percentage
 		data_in8b1 		: in std_logic_vector(7 downto 0);
 		data_in8b2		: in std_logic_vector(7 downto 0);
 		data_in8b3		: in std_logic_vector(7 downto 0);

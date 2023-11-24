@@ -12,7 +12,7 @@ port(
 end ram_10b;
 
 architecture behaviour of ram_10b is
-	type mem_type is array(0 to (2**1)-1)
+	type mem_type is array(0 to 0)
 	of std_logic_vector(data_in'range);
 	signal mem : mem_type;
 begin

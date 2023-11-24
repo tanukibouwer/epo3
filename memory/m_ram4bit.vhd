@@ -7,8 +7,8 @@ port(
 	clk			: in std_logic;
 	reset		: in std_logic;
 	address 	: in std_logic_vector(0 downto 0);
-	data_in 	: in std_logic_vector(4 downto 0);
-	data_out 	: out std_logic_vector(4 downto 0);
+	data_in 	: in std_logic_vector(3 downto 0);
+	data_out 	: out std_logic_vector(3 downto 0);
 	write 		: in std_logic);
 end ram_4b;
 

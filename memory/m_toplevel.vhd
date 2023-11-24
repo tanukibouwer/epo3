@@ -68,8 +68,8 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		write16b 	: in std_logic;
 		write18b 	: in std_logic;
 		address4b	: in std_logic_vector(0 downto 0);
-		data_in4b	: in std_logic_vector(4 downto 0);
-		data_out4b	: out std_logic_vector(4 downto 0);
+		data_in4b	: in std_logic_vector(3 downto 0);
+		data_out4b	: out std_logic_vector(3 downto 0);
 		address10b	: in std_logic_vector(1 downto 0);
 		data_in10b	: in std_logic_vector(9 downto 0);
 		data_out10b	: out std_logic_vector(9 downto 0);
@@ -122,8 +122,8 @@ architecture structural of memory is
 		clk			: in std_logic;
 		reset		: in std_logic;
 		address 	: in std_logic_vector(0 downto 0);
-		data_in 	: in std_logic_vector(4 downto 0);
-		data_out 	: out std_logic_vector(4 downto 0);
+		data_in 	: in std_logic_vector(3 downto 0);
+		data_out 	: out std_logic_vector(3 downto 0);
 		write 		: in std_logic);
 	end component ram_4b;
 	

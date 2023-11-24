@@ -33,7 +33,7 @@ end entity char_offset_adder;
 
 --shouldnt rtl be behaviour?
 architecture behaviour of char_offset_adder is
-    signal xpos_int, ypos_int : ;unsigned(7 downto 0);
+    signal xpos_int, ypos_int : unsigned(7 downto 0);
 
 begin
     process (xpos, ypos)

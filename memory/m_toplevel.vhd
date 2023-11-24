@@ -93,8 +93,8 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		data_in9b3		: in std_logic_vector(8 downto 0);
 		data_in9b4		: in std_logic_vector(8 downto 0);
 		data_out9b1		: out std_logic_vector(8 downto 0);
-		data_out9b2		: out std_logic_vector(8 downto 0));
-		data_out9b3		: out std_logic_vector(8 downto 0));
+		data_out9b2		: out std_logic_vector(8 downto 0);
+		data_out9b3		: out std_logic_vector(8 downto 0);
 		data_out9b4		: out std_logic_vector(8 downto 0));
 end memory;
 

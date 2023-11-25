@@ -37,7 +37,7 @@ begin
     begin
         case state is 
             when zero =>
-            line1 <= "11111";
+            line1 <= "11111"; --dit is dus niet te lezen door de coloring module, of we moeten dit dus inbouwen of we moeten hier if statements van maken
             line2 <= "10001";
             line3 <= "10001";
             line4 <= "10001";

@@ -16,7 +16,7 @@ entity input_driver is
 end entity input_driver;
 
 architecture behavioural of input_driver is
-  type driver_state is (latch_high, latch_low, clk_high, clk_low);
+  type driver_state is (reset_state, latch_high, latch_low, clk_high, clk_low);
   signal state, new_state : driver_state;
 
   signal period_count, period_new_count : unsigned (8 downto 0);
@@ -30,7 +30,7 @@ begin
       if (reset = '1') then
         period_count <= (others => '0');
         pulse_count <= (others => '0');
-        state <= latch_high;
+        state <= reset_state;
       else
         period_count <= period_new_count;
         pulse_count <= pulse_new_count;
@@ -42,6 +42,13 @@ begin
   process (state, p1_controller, period_count, pulse_count)
   begin
     case state is
+      when reset_state =>
+        controller_latch <= '0';
+        controller_clk <= '0';
+        p1_input <= "00000000";
+
+        new_state <= latch_high;
+
       when latch_high =>
         period_new_count <= period_count + 1;
         pulse_new_count <= pulse_count;

@@ -67,16 +67,16 @@ architecture structural of staticmem is
 begin
 		charhp		<= "0000000000";
 		chardc		<= "00000000";
-		char1sx		<= "00000000";
-		char1sy		<= "00000000";
-		char2sx		<= "00000000";
-		char2sy		<= "00000000";
+		char1sx		<= "00000000";--char start point
+		char1sy		<= "00000000";--
+		char2sx		<= "00000000";--
+		char2sy		<= "00000000";--char start point
 		char1vx		<= "000000000";
 		char1vy		<= "000000000";
 		char2vx		<= "000000000";
 		char2vy		<= "000000000";
-		chardx		<= "0100";
-		chardy		<= "0100";
+		chardx		<= "0100";--char dimension
+		chardy		<= "0100";--char dimension
 		att1dx		<= "0000";
 		att1dy		<= "0000";
 		att2dx		<= "0000";

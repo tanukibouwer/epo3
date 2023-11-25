@@ -43,6 +43,9 @@ begin
   begin
     case state is
       when reset_state =>
+        period_new_count <= period_count;
+        pulse_new_count <= pulse_count;
+
         controller_latch <= '0';
         controller_clk <= '0';
         p1_input <= "00000000";

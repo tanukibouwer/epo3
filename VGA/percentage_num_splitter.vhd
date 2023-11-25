@@ -357,6 +357,38 @@ begin
             num1 <= "1001"; --9
             num2 <= "0000"; --0
 
+        when ninenty1 => 
+            num1 <= "1001"; --9
+            num2 <= "0001"; --1
+        when ninenty2 => 
+            num1 <= "1001"; --9
+            num2 <= "0010"; --2
+        when ninenty3 =>
+            num1 <= "1001"; --9
+            num2 <= "0011"; --3
+        when ninenty4 => 
+            num1 <= "1001"; --9
+            num2 <= "0100"; --4
+        when ninenty5 => 
+            num1 <= "1001"; --9
+            num2 <= "0101"; --5
+        when ninenty6 => 
+            num1 <= "1001"; --9
+            num2 <= "0110"; --6
+        when ninenty7 => 
+            num1 <= "1001"; --9
+            num2 <= "0111"; --7
+        when ninenty8 => 
+            num1 <= "1001"; --9
+            num2 <= "1000"; --8
+        when ninenty9 => 
+            num1 <= "1001"; --9
+            num2 <= "1001"; --9
+        end case;
+    end process;
+
+
+
 
 
 

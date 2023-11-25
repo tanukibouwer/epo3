@@ -18,10 +18,25 @@ architecture structural of input_driver_tb is
     );
   end component input_driver;
 
-  signal clk, reset      : std_logic;
-  signal p1_controller   : std_logic;
+  signal clk, reset       : std_logic;
+
+  signal controller_latch : std_logic;
+  signal controller_clk   : std_logic;
+
+  signal p1_controller    : std_logic;
+  signal p1_input         : std_logic_vector(7 downto 0);
 
 begin
+  test: input_driver
+  port map(
+    clk => clk,
+    reset => reset,
+    controller_latch => controller_latch,
+    controller_clk => controller_clk,
+    p1_controller => p1_controller,
+    p1_input => p1_input
+  );
+
   clk   <= '1' after 0 ns,
            '0' after 20 ns when clk /= '0' else '1' after 20 ns;
 
@@ -33,12 +48,5 @@ begin
 
 
 
-
-  driver: input_driver
-  port map(
-    clk => clk,
-    reset => reset,
-    p1_controller => p1_controller
-  );
 
 end architecture structural;

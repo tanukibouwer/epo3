@@ -97,7 +97,7 @@ begin
         controller_latch <= '0';
         controller_clk <= '0';
 
-        p1_input(to_integer(pulse_count)) <= not p1_controller;
+        p1_input(to_integer(pulse_count)) <= p1_controller;
 
         if (period_count >= to_unsigned(300, 9)) then
           period_new_count <= (others => '0');

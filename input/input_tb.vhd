@@ -1,11 +1,11 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity input_driver_tb is
-end entity input_driver_tb;
+entity input_tb is
+end entity input_tb;
 
-architecture structural of input_driver_tb is
-  component input_driver is
+architecture behavioural of input_tb is
+  component input is
     port (
       clk       : in    std_logic;
       reset     : in    std_logic;
@@ -16,7 +16,7 @@ architecture structural of input_driver_tb is
       p1_controller : in    std_logic;                    -- player 1 controller serial data in
       p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
     );
-  end component input_driver;
+  end component input;
 
   signal clk, reset       : std_logic;
 
@@ -27,7 +27,7 @@ architecture structural of input_driver_tb is
   signal p1_input         : std_logic_vector(7 downto 0);
 
 begin
-  test: input_driver
+  test: input
   port map(
     clk => clk,
     reset => reset,
@@ -46,7 +46,4 @@ begin
   p1_controller <= '1' after 0 ns,
                    '0' after 185 us;
 
-
-
-
-end architecture structural;
+end architecture behavioural;

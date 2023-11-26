@@ -1,3 +1,18 @@
+--module: dig2_num_splitter
+--version: 1.1
+--author: Parama Fawwaz
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--MODULE DESCRIPTION
+--
+--
+--
+--
+--
+--
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -348,44 +363,5 @@ begin
         num2 <= "1001"; --9
     end if;
 end process;
-
-end architecture;
-
-
--- dit is nog een proof of concept, ik weet niet precies hoe we het echt gaan doen maar daar komen we wel achter haha
-architecture behavioural of percentage_num_splitter is
-    signal num1, num2, num3 : integer; -- num1 is least significant --> 123 would be num3 = 1, num2 = 2, num1 = 3
-    signal num_in           : integer;
-
-begin
-
-    process (num2dig)
-    begin
-        if num_in = 0 then
-            num1 <= 0;
-            num2 <= 0;
-            num3 <= 0;
-        else
-            if (num_in mod 10) /= 0 then
-                num3   <= (num_in mod 10);
-                num_in <= (num_in/10);
-                if (num_in mod 10) /= 0 then
-                    num2   <= (num_in mod 10);
-                    num_in <= (num_in/10);
-                    if (num_in mod 10) /= 0 then
-                        num1 <= (num_in mod 10);
-                    else
-                        num1 <= 0;
-                    end if;
-                else
-                    num2 <= 0;
-                end if;
-            else
-                num3 <= 0;
-            end if;
-        end if;
-    end process;
-
-    num_in <= to_integer(unsigned(num2dig));
 
 end architecture;

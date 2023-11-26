@@ -3,8 +3,8 @@
 --author: Kevin Vermaat & Parama Fawwaz
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
--- this module takes the player centerpoint data from the game loop and the memory and scales it to the right size to
--- accomodate the pixelcount and then shifts it so it is on the active screen time
+-- this module takes the player centerpoint data from the game loop and the memory and scales it to the right size to make sure 
+-- the resolution scaling is done correctly and then shifts the locations so the characters appear on the active screen time
 --
 --
 --
@@ -20,8 +20,6 @@ use ieee.math_real.all;
 
 entity char_offset_adder is
     port (
-        -- clk       : in std_logic;
-        -- reset     : in std_logic;
         xpos      : in std_logic_vector(7 downto 0);
         ypos      : in std_logic_vector(7 downto 0);
         xpos_scl1 : out std_logic_vector(7 downto 0);
@@ -31,7 +29,6 @@ entity char_offset_adder is
     );
 end entity char_offset_adder;
 
---shouldnt rtl be behaviour?
 architecture behaviour of char_offset_adder is
     signal xpos_int, ypos_int : unsigned(7 downto 0);
 

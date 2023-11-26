@@ -20,8 +20,8 @@
 -- The sync signal (vsync this case) is active low
 -- The counter reset is active high
 --
--- TODO:
--- Fix the fame subdivisions
+-- NOTE:
+-- this component can be asynchronous, but quartus disagrees and infers latches when the component is async
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ begin
 
     process (clk, uns_count)
     begin
-        -- if rising_edge(clk) then
+        if rising_edge(clk) then
             if reset = '1' then
                 sync      <= '1';
                 cnt_reset <= '1';
@@ -68,7 +68,7 @@ begin
                     cnt_reset <= '1';
                 end if;
             end if;
-        -- end if;
+        end if;
     end process;
 
     uns_count <= unsigned(count);

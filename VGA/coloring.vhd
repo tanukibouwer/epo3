@@ -50,16 +50,16 @@ architecture behavioural of coloring is
 
 begin
 
+    uns_hcount <= unsigned(hcount);
+    uns_vcount <= unsigned(vcount);
+
+    ch1x1 <= unsigned(x_lowerbound_ch1);
+    ch1x2 <= unsigned(x_upperbound_ch1);
+    ch2x1 <= unsigned(y_lowerbound_ch2);
+    ch2x2 <= unsigned(y_upperbound_ch2);
+
     process (clk, hcount, vcount)
     begin
-        uns_hcount <= unsigned(hcount);
-        uns_vcount <= unsigned(vcount);
-
-        ch1x1 <= unsigned(x_lowerbound_ch1);
-        ch1x2 <= unsigned(x_upperbound_ch1);
-        ch2x1 <= unsigned(y_lowerbound_ch2);
-        ch2x2 <= unsigned(y_upperbound_ch2);
-
         if rising_edge(clk) then
             if reset = '1' then
                 R_data <= '0';

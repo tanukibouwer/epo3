@@ -8,13 +8,13 @@ port(
     number  	: in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
     reset  	: in std_logic;
 
-	line1 	: out std_logic_vector(4 downto 0);
-    line2	: out std_logic_vector(4 downto 0);
-    line3 	: out std_logic_vector(4 downto 0);
-    line4 	: out std_logic_vector(4 downto 0);
-    line5  	: out std_logic_vector(4 downto 0);
-    line6  	: out std_logic_vector(4 downto 0);
-    line7  	: out std_logic_vector(4 downto 0)); 
+	line1 	: out std_logic_vector(3 downto 0);
+    line2	: out std_logic_vector(3 downto 0);
+    line3 	: out std_logic_vector(3 downto 0);
+    line4 	: out std_logic_vector(3 downto 0);
+    line5  	: out std_logic_vector(3 downto 0);
+    line6  	: out std_logic_vector(3 downto 0);
+    line7  	: out std_logic_vector(3 downto 0)); 
 
 
 end number_fsm;
@@ -33,17 +33,17 @@ begin
             end if;
         end if;
     end process;
-    lbl2: process(state, number)
+    lbl2: process(state, number) --inverted colored numbers! 
     begin
         case state is 
             when zero =>
-            line1 <= "11111"; --dit is dus niet te lezen door de coloring module, of we moeten dit dus inbouwen of we moeten hier if statements van maken
-            line2 <= "10001";
-            line3 <= "10001";
-            line4 <= "10001";
-            line5 <= "10001";
-            line6 <= "10001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "0110";
+            line3 <= "0110";
+            line4 <= "0110";
+            line5 <= "0110";
+            line6 <= "0110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -68,13 +68,13 @@ begin
             end if;
 
             when one =>
-            line1 <= "00001";
-            line2 <= "00001";
-            line3 <= "00001";
-            line4 <= "00001";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "00001";
+            line1 <= "1110";
+            line2 <= "1110";
+            line3 <= "1110";
+            line4 <= "1110";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "1110";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -99,13 +99,13 @@ begin
             end if;
             
             when two =>
-            line1 <= "11111";
-            line2 <= "00001";
-            line3 <= "00001";
-            line4 <= "11111";
-            line5 <= "10000";
-            line6 <= "10000";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "1110";
+            line3 <= "1110";
+            line4 <= "0000";
+            line5 <= "0111";
+            line6 <= "0111";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -130,13 +130,13 @@ begin
             end if;
 
             when three =>
-            line1 <= "11111";
-            line2 <= "00001";
-            line3 <= "00001";
-            line4 <= "11111";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "1110";
+            line3 <= "1110";
+            line4 <= "0000";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -161,13 +161,13 @@ begin
             end if;
 
             when four =>
-            line1 <= "10001";
-            line2 <= "10001";
-            line3 <= "10001";
-            line4 <= "11111";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "00001";
+            line1 <= "0110";
+            line2 <= "0110";
+            line3 <= "0110";
+            line4 <= "0000";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "1110";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -192,13 +192,13 @@ begin
             end if;
 
             when five =>
-            line1 <= "11111";
-            line2 <= "10000";
-            line3 <= "10000";
-            line4 <= "11111";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "0111";
+            line3 <= "0111";
+            line4 <= "0000";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -223,13 +223,13 @@ begin
             end if;
 
             when six =>
-            line1 <= "11111";
-            line2 <= "10000";
-            line3 <= "10000";
-            line4 <= "11111";
-            line5 <= "10001";
-            line6 <= "10001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "0111";
+            line3 <= "0111";
+            line4 <= "0000";
+            line5 <= "0110";
+            line6 <= "0110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -254,13 +254,13 @@ begin
             end if;
 
             when seven =>
-            line1 <= "11111";
-            line2 <= "00001";
-            line3 <= "00001";
-            line4 <= "00001";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "00001";
+            line1 <= "0000";
+            line2 <= "1110";
+            line3 <= "1110";
+            line4 <= "1110";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "1110";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -285,13 +285,13 @@ begin
             end if;
 
             when eight =>
-            line1 <= "11111";
-            line2 <= "10001";
-            line3 <= "10001";
-            line4 <= "11111";
-            line5 <= "10001";
-            line6 <= "10001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "0110";
+            line3 <= "0110";
+            line4 <= "0000";
+            line5 <= "0110";
+            line6 <= "0110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;
@@ -316,13 +316,13 @@ begin
             end if;
 
             when nine =>
-            line1 <= "11111";
-            line2 <= "10001";
-            line3 <= "10001";
-            line4 <= "11111";
-            line5 <= "00001";
-            line6 <= "00001";
-            line7 <= "11111";
+            line1 <= "0000";
+            line2 <= "0110";
+            line3 <= "0110";
+            line4 <= "0000";
+            line5 <= "1110";
+            line6 <= "1110";
+            line7 <= "0000";
 
             if (number = "0000") then --0
                 new_state <= zero;

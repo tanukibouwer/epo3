@@ -6,168 +6,138 @@ entity percentage_num_splitter is
     port (
         -- clk       : in std_logic;
         -- reset     : in std_logic;
-        num2dig : in std_logic_vector(9 downto 0); -- we weten nog niet wat deze lengte is, maar wrs is 2^8 genoeg
+        num2dig : in std_logic_vector(15 downto 0); 
         num1    : out std_logic_vector(3 downto 0);
         num2    : out std_logic_vector(3 downto 0);
     );
-end entity num_splitter;
+end entity percentage_num_splitter;
 architecture behaviour of percentage_num_splitter is
-    type perc_num_state is (zero, five, one, two, three, four, five, six, seven, eight, nine, ten,
-        ten1, ten2, ten3, ten4, ten5, ten6, ten7, ten8, ten9, twenty
-        twenty1, twenty2, twenty3, twenty4, twenty5, twenty6, twenty7, twenty8, twenty9, thirty
-        thirty1, thirty2, thirty3, thirty4, thirty5, thirty6, thirty7, thirty8, thirty9, forty
-        forty1, forty2, forty3, forty4, forty5, forty6, forty7, forty8, forty9, fifty,
-        fifty1, fifty2, fifty3, fifty4, fifty5, fifty6, fifty7, fifty8, fifty9, sixty,
-        sixty1, sixty2, sixty3, sixty4, sixty5, sixty6, sixty7, sixty8, sixty9, zeventy,
-        zeventy1, zeventy2, zeventy3, zeventy4, zeventy5, zeventy6, zeventy7, zeventy8, zeventy9, eighty,
-        eighty1, eighty2, eighty3, eighty4, eighty5, eighty6, eighty7, eighty8, eighty9, zeventy,
-        ninety1, ninety2, ninety3, ninety4, ninety5, ninety6, ninety7, ninety8, ninety9);
-    signal state, new_state : number_state;
+    signal number                                 : unsigned(15 downto 0);
+    -- type perc_num_state is (zero, five, one, two, three, four, five, six, seven, eight, nine, ten,
+    --     ten1, ten2, ten3, ten4, ten5, ten6, ten7, ten8, ten9, twenty
+    --     twenty1, twenty2, twenty3, twenty4, twenty5, twenty6, twenty7, twenty8, twenty9, thirty
+    --     thirty1, thirty2, thirty3, thirty4, thirty5, thirty6, thirty7, thirty8, thirty9, forty
+    --     forty1, forty2, forty3, forty4, forty5, forty6, forty7, forty8, forty9, fifty,
+    --     fifty1, fifty2, fifty3, fifty4, fifty5, fifty6, fifty7, fifty8, fifty9, sixty,
+    --     sixty1, sixty2, sixty3, sixty4, sixty5, sixty6, sixty7, sixty8, sixty9, zeventy,
+    --     zeventy1, zeventy2, zeventy3, zeventy4, zeventy5, zeventy6, zeventy7, zeventy8, zeventy9, eighty,
+    --     eighty1, eighty2, eighty3, eighty4, eighty5, eighty6, eighty7, eighty8, eighty9, zeventy,
+    --     ninety1, ninety2, ninety3, ninety4, ninety5, ninety6, ninety7, ninety8, ninety9);
+    -- signal state, new_state : number_state;
 
 begin
-
-    lbl1 : process (clk)
+    number <= unsigned(num2dig)
+    -- lbl2 : process (clk)
+    -- begin
+    --     if (clk'event and clk = '1') then
+    --         if reset = '1' then
+    --             state <= zero;
+    --         else
+    --             state <= new_state;
+    --         end if;
+    --     end if;
+    -- end process;
+    lbl1 : process (number)
     begin
-        if (clk'event and clk = '1') then
-            if reset = '1' then
-                state <= zero;
-            else
-                state <= new_state;
-            end if;
-        end if;
-    end process;
-    lbl2 : process (state, number)
-    begin
-        when zero =>
+        if(number = 1) then
         num1 <= "0000"; --0
         num2 <= "0000"; --0
-        when one =>
+        elsif (number = 2) then
         num1 <= "0000"; --0
         num2 <= "0001"; --1
-        when two =>
+        elsif (number = 3) then
         num1 <= "0000"; --0
         num2 <= "0010"; --2
-        when three =>
+        elsif (number = 4) then
         num1 <= "0000"; --0
         num2 <= "0011"; --3
-        when four =>
+        elsif (number = 5) then
         num1 <= "0000"; --0
         num2 <= "0100"; --4
-        when five =>
+        elsif (number = 6) then
         num1 <= "0000"; --0
         num2 <= "0101"; --5
-        when six =>
+        elsif (number = 7) then
         num1 <= "0000"; --0
         num2 <= "0110"; --6
-        when seven =>
+        elsif (number = 8) then
         num1 <= "0000"; --0
         num2 <= "0111"; --7
-        when eight =>
+        elsif (number = 9) then
         num1 <= "0000"; --0
         num2 <= "1000"; --8
-        when nine =>
+        elsif (number = 10) then
         num1 <= "0000"; --0
         num2 <= "1001"; --9
-        when ten =>
+        elsif (number = 11) then
         num1 <= "0001"; --1
         num2 <= "0000"; --0
-        when ten1 =>
+        elsif (number = 12) then
         num1 <= "0001"; --1
         num2 <= "0001"; --1
-        when ten2 =>
+        elsif (number = 13) then
         num1 <= "0001"; --1
         num2 <= "0010"; --2
-        when ten3 =>
+        elsif (number = 14) then
         num1 <= "0001"; --1
         num2 <= "0011"; --3
-        when ten4 =>
+        elsif (number = 15) then
         num1 <= "0001"; --1
         num2 <= "0100"; --4
-        when ten5 =>
+        elsif (number = 16) then
         num1 <= "0001"; --1
         num2 <= "0101"; --5
-        when ten6 =>
+        elsif (number = 17) then
         num1 <= "0001"; --1
         num2 <= "0110"; --6
-        when ten7 =>
+        elsif (number = 18) then
         num1 <= "0001"; --1
         num2 <= "0111"; --7
-        when ten8 =>
+        elsif (number = 19) then
         num1 <= "0001"; --1
         num2 <= "1000"; --8
-        when ten9 =>
+        elsif (number = 20) then
         num1 <= "0001"; --1
         num2 <= "1001"; --9
-        when twenty =>
+        elsif (number = 21) then
         num1 <= "0010"; --2
         num2 <= "0000"; --0
 
-        when ten1 =>
-        num1 <= "0001"; --1
-        num2 <= "0001"; --1
-        when ten2 =>
-        num1 <= "0001"; --1
-        num2 <= "0010"; --2
-        when ten3 =>
-        num1 <= "0001"; --1
-        num2 <= "0011"; --3
-        when ten4 =>
-        num1 <= "0001"; --1
-        num2 <= "0100"; --4
-        when ten5 =>
-        num1 <= "0001"; --1
-        num2 <= "0101"; --5
-        when ten6 =>
-        num1 <= "0001"; --1
-        num2 <= "0110"; --6
-        when ten7 =>
-        num1 <= "0001"; --1
-        num2 <= "0111"; --7
-        when ten8 =>
-        num1 <= "0001"; --1
-        num2 <= "1000"; --8
-        when ten9 =>
-        num1 <= "0001"; --1
-        num2 <= "1001"; --9
-        when twenty =>
-        num1 <= "0010"; --2
-        num2 <= "0000"; --0
-
-        when twenty1 =>
+        elsif (number = 22) then
         num1 <= "0010"; --2
         num2 <= "0001"; --1
-        when twenty2 =>
+        elsif (number = 23) then
         num1 <= "0010"; --2
         num2 <= "0010"; --2
-        when twenty3 =>
+        elsif (number = 24) then
         num1 <= "0010"; --2
         num2 <= "0011"; --3
-        when twenty4 =>
+        elsif (number = 25) then
         num1 <= "0010"; --2
         num2 <= "0100"; --4
-        when twenty5 =>
+        elsif (number = 26) then
         num1 <= "0010"; --2
         num2 <= "0101"; --5
-        when twenty6 =>
+        elsif (number = 27) then
         num1 <= "0010"; --2
         num2 <= "0110"; --6
-        when twenty7 =>
+        elsif (number = 28) then
         num1 <= "0010"; --2
         num2 <= "0111"; --7
-        when twenty8 =>
+        elsif (number = 29) then
         num1 <= "0010"; --2
         num2 <= "1000"; --8
-        when twenty9 =>
+        elsif (number = 30) then
         num1 <= "0010"; --2
         num2 <= "1001"; --9
-        when twenty =>
+        elsif (number = 31) then
         num1 <= "0011"; --3
         num2 <= "0000"; --0
 
-        when thirty1 =>
+        elsif (number = 32) then
         num1 <= "0011"; --3
         num2 <= "0001"; --1
-        when thirty2 =>
+        elsif (number = 33) then
         num1 <= "0011"; --3
         num2 <= "0010"; --2
         when thirty3 =>

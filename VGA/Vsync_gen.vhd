@@ -4,24 +4,24 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
--- This module is the control module for the vertical sync signal and vertical line counter
--- The full vertical vga frame is described in pixels
--- screen = 0 to 479
--- front porch = 480 to 489
--- sync pulse = 490 to 491
--- back porch = 492 to 524
+--! This module is the control module for the vertical sync signal and vertical line counter
+--! The full vertical vga frame is described in pixels
+--! screen = 0 to 479
+--! front porch = 480 to 489
+--! sync pulse = 490 to 491
+--! back porch = 492 to 524
 -- -- the above needs updating
---
--- the inputs:
--- The device is clocked, so has clk and reset
--- count is the count out from V_line_cnt
---
--- the outputs:
--- The sync signal (vsync this case) is active low
--- The counter reset is active high
---
--- NOTE:
--- this component can be asynchronous, but quartus disagrees and infers latches when the component is async
+--!
+--! the inputs:
+--! The device is clocked, so has clk and reset
+--! count is the count out from V_line_cnt
+--!
+--! the outputs:
+--! The sync signal (vsync this case) is active low
+--! The counter reset is active high
+--!
+--! NOTE:
+--! this component can be asynchronous, but quartus disagrees and infers latches when the component is async
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ entity Vsync_gen is
         clk       : in std_logic;
         reset     : in std_logic;
         count     : in std_logic_vector (9 downto 0);
-        sync      : out std_logic;
+        sync      : out std_logic; 
         cnt_reset : out std_logic
     );
 end entity Vsync_gen;

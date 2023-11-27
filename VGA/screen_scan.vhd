@@ -4,12 +4,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
--- This module is the hierarchical connection of the module that keeps track of which pixel the VGA screen is at
--- This module contains 4 components, Hsync_gen, Vsync_gen, V_line_cnt, H_pix_cnt
--- Vsync_gen and Hsync_gen are the sync signal generators and the controllers of H_pix_cnt and V_line_cnt
--- V_line_cnt keeps track of which line the screen is on, H_pix_cnt keeps track of which pixel the screen is on
---
---
+--! This module is the hierarchical connection of the module that keeps track of which pixel the VGA screen is at
+--! This module contains 4 components, Hsync_gen, Vsync_gen, V_line_cnt, H_pix_cnt
+--! Vsync_gen and Hsync_gen are the sync signal generators and the controllers of H_pix_cnt and V_line_cnt
+--! V_line_cnt keeps track of which line the screen is on, H_pix_cnt keeps track of which pixel the screen is on
+--!
+--!
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -20,10 +20,10 @@ use ieee.math_real.all;
 
 entity screen_scan is
     port (
-        clk   : in std_logic;
-        reset : in std_logic;
-        Hsync : out std_logic;
-        Vsync : out std_logic;
+        clk        : in std_logic;
+        reset      : in std_logic;
+        Hsync      : out std_logic;
+        Vsync      : out std_logic;
         hcount_out : out std_logic_vector(9 downto 0);
         vcount_out : out std_logic_vector(9 downto 0)
     );
@@ -51,10 +51,10 @@ architecture rtl of screen_scan is
 
     component V_line_cnt is
         port (
-            clk     : in std_logic;
-            reset   : in std_logic;
-            hcount  : in std_logic_vector (9 downto 0);
-            count   : out std_logic_vector (9 downto 0)
+            clk    : in std_logic;
+            reset  : in std_logic;
+            hcount : in std_logic_vector (9 downto 0);
+            count  : out std_logic_vector (9 downto 0)
         );
     end component;
 
@@ -96,8 +96,8 @@ begin
         count => hcount
     );
 
-    Vsync <= Vsync_int;
-    Hsync <= Hsync_int;
+    Vsync      <= Vsync_int;
+    Hsync      <= Hsync_int;
     hcount_out <= hcount;
     vcount_out <= vcount;
 

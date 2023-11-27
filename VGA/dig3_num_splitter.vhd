@@ -24,7 +24,7 @@ entity dig3_num_splitter is
         num3dig : in std_logic_vector(23 downto 0);
         num1    : out std_logic_vector(3 downto 0);
         num2    : out std_logic_vector(3 downto 0);
-        num3    : out std_logic_vector(3 downto 0);
+        num3    : out std_logic_vector(3 downto 0)
 
     );
 end entity dig3_num_splitter;

@@ -23,8 +23,8 @@ entity graphics_card is
         clk        : in std_logic;
         reset      : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-        char_xsize : in std_logic_vector(3 downto 0); --char sizes
-        char_ysize : in std_logic_vector(3 downto 0); --char sizes
+        -- char_xsize : in std_logic_vector(3 downto 0); --char sizes
+        -- char_ysize : in std_logic_vector(3 downto 0); --char sizes
         char1_x    : in std_logic_vector(7 downto 0); --char1 xloc
         char1_y    : in std_logic_vector(7 downto 0); --char1 yloc
         char2_x    : in std_logic_vector(7 downto 0); --char2 xloc
@@ -56,8 +56,8 @@ architecture rtl of graphics_card is
         port (
             xpos      : in std_logic_vector(7 downto 0);
             ypos      : in std_logic_vector(7 downto 0);
-            xsize     : in std_logic_vector(7 downto 0);
-            ysize     : in std_logic_vector(7 downto 0);
+            -- xsize     : in std_logic_vector(3 downto 0);
+            -- ysize     : in std_logic_vector(3 downto 0);
             xpos_scl1 : out std_logic_vector(7 downto 0);
             xpos_scl2 : out std_logic_vector(7 downto 0);
             ypos_scl1 : out std_logic_vector(7 downto 0);
@@ -101,7 +101,8 @@ begin
 
     --scale and place char1 on active screen
     O_P2 : char_offset_adder port map(
-        xpos => char2_x, ypos => char2_y, xsize => char_xsize, ysize => char_ysize,
+        xpos => char2_x, ypos => char2_y, 
+        -- xsize => char_xsize, ysize => char_ysize,
         xpos_scl1 => c2x1, xpos_scl2 => c2x2, ypos_scl1 => c2y1, ypos_scl2 => c2y2
     );
 

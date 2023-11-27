@@ -20,22 +20,22 @@ use ieee.math_real.all;
 
 entity graphics_card is
     port (
-        clk        : in std_logic;
-        reset      : in std_logic;
+        clk   : in std_logic;
+        reset : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
         -- char_xsize : in std_logic_vector(3 downto 0); --char sizes
         -- char_ysize : in std_logic_vector(3 downto 0); --char sizes
-        char1_x    : in std_logic_vector(7 downto 0); --char1 xloc
-        char1_y    : in std_logic_vector(7 downto 0); --char1 yloc
-        char2_x    : in std_logic_vector(7 downto 0); --char2 xloc
-        char2_y    : in std_logic_vector(7 downto 0); --char2 yloc
+        char1_x : in std_logic_vector(7 downto 0); --char1 xloc
+        char1_y : in std_logic_vector(7 downto 0); --char1 yloc
+        char2_x : in std_logic_vector(7 downto 0); --char2 xloc
+        char2_y : in std_logic_vector(7 downto 0); --char2 yloc
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
-        Hsync      : out std_logic;
-        Vsync      : out std_logic;
-        R_data     : out std_logic;
-        G_data     : out std_logic;
-        B_data     : out std_logic
+        Hsync  : out std_logic;
+        Vsync  : out std_logic;
+        R_data : out std_logic;
+        G_data : out std_logic;
+        B_data : out std_logic
     );
 end entity graphics_card;
 
@@ -47,15 +47,15 @@ architecture rtl of graphics_card is
             reset      : in std_logic;
             Hsync      : out std_logic;
             Vsync      : out std_logic;
-            hcount_out : out std_logic;
-            vcount_out : out std_logic
+            hcount_out : out std_logic_vector(9 downto 0);
+            vcount_out : out std_logic_vector(9 downto 0)
         );
     end component;
 
     component char_offset_adder is
         port (
-            xpos      : in std_logic_vector(7 downto 0);
-            ypos      : in std_logic_vector(7 downto 0);
+            xpos : in std_logic_vector(7 downto 0);
+            ypos : in std_logic_vector(7 downto 0);
             -- xsize     : in std_logic_vector(3 downto 0);
             -- ysize     : in std_logic_vector(3 downto 0);
             xpos_scl1 : out std_logic_vector(7 downto 0);
@@ -67,19 +67,29 @@ architecture rtl of graphics_card is
 
     component coloring is
         port (
-            clk    : in std_logic;
-            reset  : in std_logic;
-            hcount : in std_logic_vector(9 downto 0);
-            vcount : in std_logic_vector(9 downto 0);
-            R_data : out std_logic;
-            G_data : out std_logic;
-            B_data : out std_logic
+            clk              : in std_logic;
+            reset            : in std_logic;
+            hcount           : in std_logic_vector(9 downto 0);
+            vcount           : in std_logic_vector(9 downto 0);
+            x_lowerbound_ch1 : in std_logic_vector(7 downto 0);
+            x_upperbound_ch1 : in std_logic_vector(7 downto 0);
+            y_lowerbound_ch1 : in std_logic_vector(7 downto 0);
+            y_upperbound_ch1 : in std_logic_vector(7 downto 0);
+
+            x_lowerbound_ch2 : in std_logic_vector(7 downto 0);
+            x_upperbound_ch2 : in std_logic_vector(7 downto 0);
+            y_lowerbound_ch2 : in std_logic_vector(7 downto 0);
+            y_upperbound_ch2 : in std_logic_vector(7 downto 0);
+            R_data           : out std_logic;
+            G_data           : out std_logic;
+            B_data           : out std_logic
         );
     end component;
 
     signal vcount_int, hcount_int : std_logic_vector (9 downto 0);
     signal c1x1, c1x2, c1y1, c1y2 : std_logic_vector(7 downto 0); --char1 bounds
-    signal c2x1, c2x2, c2y1, c2y1 : std_logic_vector(7 downto 0); --char2 bounds
+    signal c2x1, c2x2, c2y1, c2y2 : std_logic_vector(7 downto 0); --char2 bounds
+
 begin
 
     --keep count of what pixel the screen should be on and send the synchronisation signals
@@ -90,18 +100,21 @@ begin
     --
     CLR1 : coloring port map(
         clk => clk, reset => reset, vcount => vcount_int, hcount => hcount_int,
+        x_lowerbound_ch1 => c1x1, x_upperbound_ch1 => c1x2, y_lowerbound_ch1 => c1y1, y_upperbound_ch1 => c1y2,
+        x_lowerbound_ch2 => c2x1, x_upperbound_ch2 => c2x2, y_lowerbound_ch2 => c2y1, y_upperbound_ch2 => c2y2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
     --scale and place char1 on active screen
     O_P1 : char_offset_adder port map(
-        xpos => char1_x, ypos => char1_y, xsize => char_xsize, ysize => char_ysize,
+        xpos => char1_x, ypos => char1_y, 
+        --xsize => char_xsize, ysize => char_ysize,
         xpos_scl1 => c1x1, xpos_scl2 => c1x2, ypos_scl1 => c1y1, ypos_scl2 => c1y2
     );
 
     --scale and place char1 on active screen
     O_P2 : char_offset_adder port map(
-        xpos => char2_x, ypos => char2_y, 
+        xpos => char2_x, ypos => char2_y,
         -- xsize => char_xsize, ysize => char_ysize,
         xpos_scl1 => c2x1, xpos_scl2 => c2x2, ypos_scl1 => c2y1, ypos_scl2 => c2y2
     );

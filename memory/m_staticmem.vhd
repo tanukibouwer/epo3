@@ -41,26 +41,27 @@ port(	charhp		: out std_logic_vector(9 downto 0);
 		plat4dy		: out std_logic_vector(7 downto 0);
 		kilznx1		: out std_logic_vector(7 downto 0);
 		kilznx2		: out std_logic_vector(7 downto 0);
-		kilzny1		: out std_logic_vector(7 downto 0);
-		num01		: out std_logic_vector(4 downto 0);
-		num02		: out std_logic_vector(4 downto 0);
-		num03		: out std_logic_vector(4 downto 0);
-		num04		: out std_logic_vector(4 downto 0);
-		num05		: out std_logic_vector(4 downto 0);
-		num11		: out std_logic_vector(4 downto 0);
-		num12		: out std_logic_vector(4 downto 0);
-		num23		: out std_logic_vector(4 downto 0);
-		num24		: out std_logic_vector(4 downto 0);
-		num25		: out std_logic_vector(4 downto 0);
-		num26		: out std_logic_vector(4 downto 0);
-		num27		: out std_logic_vector(4 downto 0);
-		num41		: out std_logic_vector(4 downto 0);
-		num42		: out std_logic_vector(4 downto 0);
-		num43		: out std_logic_vector(4 downto 0);
-		num53		: out std_logic_vector(4 downto 0);
-		num74		: out std_logic_vector(4 downto 0);
-		num94		: out std_logic_vector(4 downto 0);
-		num97		: out std_logic_vector(4 downto 0));
+		kilzny1		: out std_logic_vector(7 downto 0));
+		-- numbers commented out for now, will be linked to vga module eventually
+		-- num01		: out std_logic_vector(4 downto 0);
+		-- num02		: out std_logic_vector(4 downto 0);
+		-- num03		: out std_logic_vector(4 downto 0);
+		-- num04		: out std_logic_vector(4 downto 0);
+		-- num05		: out std_logic_vector(4 downto 0);
+		-- num11		: out std_logic_vector(4 downto 0);
+		-- num12		: out std_logic_vector(4 downto 0);
+		-- num23		: out std_logic_vector(4 downto 0);
+		-- num24		: out std_logic_vector(4 downto 0);
+		-- num25		: out std_logic_vector(4 downto 0);
+		-- num26		: out std_logic_vector(4 downto 0);
+		-- num27		: out std_logic_vector(4 downto 0);
+		-- num41		: out std_logic_vector(4 downto 0);
+		-- num42		: out std_logic_vector(4 downto 0);
+		-- num43		: out std_logic_vector(4 downto 0);
+		-- num53		: out std_logic_vector(4 downto 0);
+		-- num74		: out std_logic_vector(4 downto 0);
+		-- num94		: out std_logic_vector(4 downto 0);
+		-- num97		: out std_logic_vector(4 downto 0));
 end staticmem;
 
 architecture structural of staticmem is
@@ -104,15 +105,16 @@ begin
 		kilznx1		<= "00000000";
 		kilznx2		<= "10110000";
 		kilzny1		<= "00000000";
-		num01		<= "01110";
-		num02		<= "10001";
-		num03		<= "10011";
-		num04		<= "10101";
-		num05		<= "11001";
+		-- numbers commented out for now, will be linked to vga module eventually
+		-- num01		<= "01110";
+		-- num02		<= "10001";
+		-- num03		<= "10011";
+		-- num04		<= "10101";
+		-- num05		<= "11001";
 		-- 06 same as 02
 		-- 07 same as 01
-		num11		<= "00100";
-		num12		<= "01100";
+		-- num11		<= "00100";
+		-- num12		<= "01100";
 		-- 13 same as 11
 		-- 14 same as 11
 		-- 15 same as 11
@@ -120,11 +122,11 @@ begin
 		-- 17 same as 01
 		-- 21 same as 01
 		-- 22 same as 02
-		num23		<= "00001";
-		num24		<= "00110";
-		num25		<= "01000";
-		num26		<= "10000";
-		num27		<= "11111";
+		-- num23		<= "00001";
+		-- num24		<= "00110";
+		-- num25		<= "01000";
+		-- num26		<= "10000";
+		-- num27		<= "11111";
 		-- 31 same as 01
 		-- 32 same as 02
 		-- 33 same as 23 
@@ -132,16 +134,16 @@ begin
 		-- 35 same as 23
 		-- 36 same as 02
 		-- 37 same as 01
-		num41		<= "00011";
-		num42		<= "00101";
-		num43		<= "01001";
+		-- num41		<= "00011";
+		-- num42		<= "00101";
+		-- num43		<= "01001";
 		-- 44 same as 02
 		-- 45 same as 27
 		-- 46 same as 23
 		-- 47 same as 23
 		-- 48 same as 27
 		-- 52 same as 26
-		num53		<= "11110";
+		-- num53		<= "11110";
 		-- 54 same as 23
 		-- 55 same as 23
 		-- 56 same as 02
@@ -156,7 +158,7 @@ begin
 		-- 71 same as 27
 		-- 72 same as 02
 		-- 73 same as 23
-		num74		<= "00010"; 
+		-- num74		<= "00010"; 
 		-- 75 same as 11
 		-- 76 same as 11
 		-- 77 same as 11
@@ -170,10 +172,10 @@ begin
 		-- 91 same as 01
 		-- 92 same as 02
 		-- 93 same as 02
-		num94		<= "01111"; 
+		-- num94		<= "01111"; 
 		-- 95 same as 23
 		-- 96 same as 74
-		num97		<= "11100";
+		-- num97		<= "11100";
 end architecture structural;
 
 configuration staticmem_structural_cfg of staticmem is

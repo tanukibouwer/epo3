@@ -42,25 +42,26 @@ port(	charhp		: out std_logic_vector(9 downto 0); --initial knockback percentage
 		kilznx1		: out std_logic_vector(7 downto 0);
 		kilznx2		: out std_logic_vector(7 downto 0);
 		kilzny1		: out std_logic_vector(7 downto 0);
-		num01		: out std_logic_vector(4 downto 0);
-		num02		: out std_logic_vector(4 downto 0);
-		num03		: out std_logic_vector(4 downto 0);
-		num04		: out std_logic_vector(4 downto 0);
-		num05		: out std_logic_vector(4 downto 0);
-		num11		: out std_logic_vector(4 downto 0);
-		num12		: out std_logic_vector(4 downto 0);
-		num23		: out std_logic_vector(4 downto 0);
-		num24		: out std_logic_vector(4 downto 0);
-		num25		: out std_logic_vector(4 downto 0);
-		num26		: out std_logic_vector(4 downto 0);
-		num27		: out std_logic_vector(4 downto 0);
-		num41		: out std_logic_vector(4 downto 0);
-		num42		: out std_logic_vector(4 downto 0);
-		num43		: out std_logic_vector(4 downto 0);
-		num53		: out std_logic_vector(4 downto 0);
-		num74		: out std_logic_vector(4 downto 0);
-		num94		: out std_logic_vector(4 downto 0);
-		num97		: out std_logic_vector(4 downto 0);
+		-- numbers commented out for now, will be linked to vga module eventually
+		-- num01		: out std_logic_vector(4 downto 0);
+		-- num02		: out std_logic_vector(4 downto 0);
+		-- num03		: out std_logic_vector(4 downto 0);
+		-- num04		: out std_logic_vector(4 downto 0);
+		-- num05		: out std_logic_vector(4 downto 0);
+		-- num11		: out std_logic_vector(4 downto 0);
+		-- num12		: out std_logic_vector(4 downto 0);
+		-- num23		: out std_logic_vector(4 downto 0);
+		-- num24		: out std_logic_vector(4 downto 0);
+		-- num25		: out std_logic_vector(4 downto 0);
+		-- num26		: out std_logic_vector(4 downto 0);
+		-- num27		: out std_logic_vector(4 downto 0);
+		-- num41		: out std_logic_vector(4 downto 0);
+		-- num42		: out std_logic_vector(4 downto 0);
+		-- num43		: out std_logic_vector(4 downto 0);
+		-- num53		: out std_logic_vector(4 downto 0);
+		-- num74		: out std_logic_vector(4 downto 0);
+		-- num94		: out std_logic_vector(4 downto 0);
+		-- num97		: out std_logic_vector(4 downto 0);
 		clk			: in std_logic;
 		reset		: in std_logic;
 		vsync	 	: in std_logic;
@@ -181,25 +182,26 @@ architecture structural of memory is
 			kilznx1		: out std_logic_vector(7 downto 0);
 			kilznx2		: out std_logic_vector(7 downto 0);
 			kilzny1		: out std_logic_vector(7 downto 0);
-			num01		: out std_logic_vector(4 downto 0);
-			num02		: out std_logic_vector(4 downto 0);
-			num03		: out std_logic_vector(4 downto 0);
-			num04		: out std_logic_vector(4 downto 0);
-			num05		: out std_logic_vector(4 downto 0);
-			num11		: out std_logic_vector(4 downto 0);
-			num12		: out std_logic_vector(4 downto 0);
-			num23		: out std_logic_vector(4 downto 0);
-			num24		: out std_logic_vector(4 downto 0);
-			num25		: out std_logic_vector(4 downto 0);
-			num26		: out std_logic_vector(4 downto 0);
-			num27		: out std_logic_vector(4 downto 0);
-			num41		: out std_logic_vector(4 downto 0);
-			num42		: out std_logic_vector(4 downto 0);
-			num43		: out std_logic_vector(4 downto 0);
-			num53		: out std_logic_vector(4 downto 0);
-			num74		: out std_logic_vector(4 downto 0);
-			num94		: out std_logic_vector(4 downto 0);
-			num97		: out std_logic_vector(4 downto 0));
+			-- numbers commented out for now, will be linked to vga module eventually-- 
+			-- num01		: out std_logic_vector(4 downto 0);
+			-- num02		: out std_logic_vector(4 downto 0);
+			-- num03		: out std_logic_vector(4 downto 0);
+			-- num04		: out std_logic_vector(4 downto 0);
+			-- num05		: out std_logic_vector(4 downto 0);
+			-- num11		: out std_logic_vector(4 downto 0);
+			-- num12		: out std_logic_vector(4 downto 0);
+			-- num23		: out std_logic_vector(4 downto 0);
+			-- num24		: out std_logic_vector(4 downto 0);
+			-- num25		: out std_logic_vector(4 downto 0);
+			-- num26		: out std_logic_vector(4 downto 0);
+			-- num27		: out std_logic_vector(4 downto 0);
+			-- num41		: out std_logic_vector(4 downto 0);
+			-- num42		: out std_logic_vector(4 downto 0);
+			-- num43		: out std_logic_vector(4 downto 0);
+			-- num53		: out std_logic_vector(4 downto 0);
+			-- num74		: out std_logic_vector(4 downto 0);
+			-- num94		: out std_logic_vector(4 downto 0);
+			-- num97		: out std_logic_vector(4 downto 0));
 	end component staticmem;
 		
 begin
@@ -246,26 +248,27 @@ WL00: writelogic port map (	clk			=> clk,
 								plat4dy		=> plat4dy,
 								kilznx1		=> kilznx1,
 								kilznx2		=> kilznx2,
-								kilzny1		=> kilzny1,
-								num01		=> num01,
-								num02		=> num02,
-								num03		=> num03,
-								num04		=> num04,
-								num05		=> num05,
-								num11		=> num11,
-								num12		=> num12,
-								num23		=> num23,
-								num24		=> num24,
-								num25		=> num25,
-								num26		=> num26,
-								num27		=> num27,
-								num41		=> num41,
-								num42		=> num42,
-								num43		=> num43,
-								num53		=> num53,
-								num74		=> num74,
-								num94		=> num94,
-								num97		=> num97);
+								kilzny1		=> kilzny1);
+								-- numbers commented out for now, will be linked to vga module eventually
+								-- num01		=> num01,
+								-- num02		=> num02,
+								-- num03		=> num03,
+								-- num04		=> num04,
+								-- num05		=> num05,
+								-- num11		=> num11,
+								-- num12		=> num12,
+								-- num23		=> num23,
+								-- num24		=> num24,
+								-- num25		=> num25,
+								-- num26		=> num26,
+								-- num27		=> num27,
+								-- num41		=> num41,
+								-- num42		=> num42,
+								-- num43		=> num43,
+								-- num53		=> num53,
+								-- num74		=> num74,
+								-- num94		=> num94,
+								-- num97		=> num97);
 								
 	DM00 : ram_4b port map (	clk			=> clk,
 																data_in 	=> data_in4b1,

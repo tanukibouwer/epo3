@@ -11,10 +11,7 @@ entity input_driver is
     period_count_reset  : out   std_logic;
 
     controller_latch    : out   std_logic;
-    controller_clk      : out   std_logic;
-
-    p1_controller : in    std_logic;                    -- player 1 controller serial data in
-    p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
+    controller_clk      : out   std_logic
   );
 end entity input_driver;
 
@@ -50,7 +47,6 @@ begin
 
         controller_latch <= '0';
         controller_clk <= '0';
-        p1_input <= "00000000";
 
         new_state <= latch_high;
 
@@ -64,6 +60,8 @@ begin
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
           new_state <= latch_low;
+        else
+          new_state <= latch_high;
         end if;
 
       when latch_low =>
@@ -73,11 +71,11 @@ begin
         controller_latch <= '0';
         controller_clk <= '0';
 
-        p1_input(to_integer(pulse_count)) <= p1_controller;
-
         if (per_count > to_unsigned(300, 9)) then
           period_count_reset <= '1';
           new_state <= clk_high;
+        else
+          new_state <= latch_low;
         end if;
 
       when clk_high =>
@@ -91,15 +89,16 @@ begin
           period_count_reset <= '1';
           pulse_new_count <= pulse_count + 1;
           new_state <= clk_low;
+        else
+          new_state <= clk_high;
         end if;
+
       when clk_low =>
         period_count_reset <= '0';
         pulse_new_count <= pulse_count;
 
         controller_latch <= '0';
         controller_clk <= '0';
-
-        p1_input(to_integer(pulse_count)) <= p1_controller;
 
         if (per_count > to_unsigned(300, 9)) then
           period_count_reset <= '1';
@@ -109,7 +108,10 @@ begin
           else
             new_state <= clk_high;
           end if;
+        else
+          new_state <= clk_low;
         end if;
+
     end case;
   end process;
 end architecture behavioural;

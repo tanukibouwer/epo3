@@ -5,7 +5,7 @@ entity input_tb is
 end entity input_tb;
 
 architecture behavioural of input_tb is
-  component input is
+  component input_toplevel is
     port (
       clk       : in    std_logic;
       reset     : in    std_logic;
@@ -16,7 +16,7 @@ architecture behavioural of input_tb is
       p1_controller : in    std_logic;                    -- player 1 controller serial data in
       p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
     );
-  end component input;
+  end component input_toplevel;
 
   signal clk, reset       : std_logic;
 
@@ -27,7 +27,7 @@ architecture behavioural of input_tb is
   signal p1_input         : std_logic_vector(7 downto 0);
 
 begin
-  test: input
+  test: input_toplevel
   port map(
     clk => clk,
     reset => reset,

@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity input is
+entity input_toplevel is
   port (
     clk   : in std_logic;
     reset : in std_logic;
@@ -12,9 +12,9 @@ entity input is
     p1_controller : in    std_logic;                    -- player 1 controller serial data in
     p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
  );
-end entity;
+end entity input_toplevel;
 
-architecture structural of input is
+architecture structural of input_toplevel is
 
   component input_driver is
     port (
@@ -25,10 +25,7 @@ architecture structural of input is
       period_count_reset  : out   std_logic;
 
       controller_latch    : out   std_logic;
-      controller_clk      : out   std_logic;
-
-      p1_controller : in    std_logic;                    -- player 1 controller serial data in
-      p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
+      controller_clk      : out   std_logic
     );
   end component input_driver;
 
@@ -45,6 +42,7 @@ architecture structural of input is
   signal count_reset : std_logic;
 
 begin
+  p1_input <= "00000000";
 
   driver: input_driver port map (
     clk => clk,
@@ -54,10 +52,7 @@ begin
     period_count_reset => count_reset,
 
     controller_latch => controller_latch,
-    controller_clk => controller_clk,
-
-    p1_controller => p1_controller,
-    p1_input => p1_input
+    controller_clk => controller_clk
   );
 
   counter: input_period_counter port map (

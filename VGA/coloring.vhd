@@ -94,7 +94,7 @@ end entity coloring;
 
 architecture behavioural of coloring is
     signal uns_hcount, uns_vcount                                 : unsigned(9 downto 0);
-    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(7 downto 0);
+    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
 
 begin
 

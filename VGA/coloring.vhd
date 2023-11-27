@@ -118,11 +118,11 @@ begin
                 B_data <= '0';
             elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 34 and uns_vcount <= 514) then -- active screen time
                 -- priority -> highest priority is first, lowest is last
-                if(uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 492 and uns_vcount <= 505) then --platform 12 pixels thick 
+                if(uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 429 and uns_vcount <= 434) then --platform horizon (4) pixels thick y = 21 (in coords from below) 
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
-                elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --characer 1
+                elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
@@ -130,6 +130,370 @@ begin
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
+                elsif (uns_hcount > 143 and uns_hcount <= 183) and (uns_vcount > 434 and uns_vcount <= 514 ) then --percentage box1 player 1: this displays a constant image
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount > 183 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2 player 1
+
+                    if(uns_hcount > 183 and uns_hcount <= 187) and (uns_vcount > 434 and uns_vcount <= 514 ) then -- horizontal separation
+                        R_data <= '1';
+                        G_data <= '1';
+                        B_data <= '1';
+
+                    elsif(uns_hcount > 187 and uns_hcount <= 219) and (uns_vcount > 434 and uns_vcount <= 446 ) then -- vertical separation
+                        R_data <= '1';
+                        G_data <= '1';
+                        B_data <= '1';
+
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line1(0)
+                            if(p1_dig1_line1(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line1(1)
+                            if(p1_dig1_line1(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line1(2)
+                            if(p1_dig1_line1(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line1(3)
+                            if(p1_dig1_line1(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(0)
+                            if(p1_dig1_line2(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(1)
+                            if(p1_dig1_line2(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(2)
+                            if(p1_dig1_line2(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(3)
+                            if(p1_dig1_line2(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(0)
+                            if(p1_dig1_line3(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(1)
+                            if(p1_dig1_line3(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(2)
+                            if(p1_dig1_line3(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(3)
+                            if(p1_dig1_line3(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(0)
+                            if(p1_dig1_line4(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(1)
+                            if(p1_dig1_line4(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(2)
+                            if(p1_dig1_line4(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(3)
+                            if(p1_dig1_line4(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(0)
+                            if(p1_dig1_line5(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(1)
+                            if(p1_dig1_line5(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(2)
+                            if(p1_dig1_line1(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(3)
+                            if(p1_dig1_line5(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(0)
+                            if(p1_dig1_line6(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(1)
+                            if(p1_dig1_line6(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(2)
+                            if(p1_dig1_line6(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(3)
+                            if(p1_dig1_line6(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+
+
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(0)
+                            if(p1_dig1_line7(0) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(1)
+                            if(p1_dig1_line7(1) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(2)
+                            if(p1_dig1_line7(2) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(3)
+                            if(p1_dig1_line7(3) = 1) then
+                                R_data <= '1';
+                                G_data <= '1';
+                                B_data <= '1';
+                            else
+                                R_data <= '0';
+                                G_data <= '0';
+                                B_data <= '0';
+                            end if;
+
+                        
+                    elsif(uns_hcount > 187 and uns_hcount <= 219) and (uns_vcount > 502  and uns_vcount <= 514) then -- vertical separation
+                        R_data <= '1';
+                        G_data <= '1';
+                        B_data <= '1';
+
+                    elsif(uns_hcount > 219 and uns_hcount <= 223) and (uns_vcount > 434  and uns_vcount <= 514) then -- horizontal separation
+                        R_data <= '1';
+                        G_data <= '1';
+                        B_data <= '1';
+                    end if;
+
+                    
+
+                elsif (uns_hcount > 223 and uns_hcount <=263) and (uns_vcount >=  and uns_vcount <= ) then --percentage box3 player 1
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount > 263 and uns_hcount <= 303) and (uns_vcount >=  and uns_vcount <= 514) then --percentage box4 player 1
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                
+            
+
+                elsif (uns_hcount >= 624 and uns_hcount <= 663) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box1 player 2
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount >= 664 and uns_hcount <= 703) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box2 player 2 
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount >= 704 and uns_hcount <= 743) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box3 player 2
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount >= 744 and uns_hcount <= 783) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box4 player 2
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+
                 else
                     R_data <= '0';
                     G_data <= '0';

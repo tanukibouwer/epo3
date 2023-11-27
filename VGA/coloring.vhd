@@ -187,7 +187,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 454  and uns_vcount <= 462) then --line2(0)
                             if(p1_dig1_line2(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -198,7 +198,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 454  and uns_vcount <= 462) then --line2(1)
                             if(p1_dig1_line2(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -209,7 +209,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 454  and uns_vcount <= 462) then --line2(2)
                             if(p1_dig1_line2(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -219,7 +219,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line2(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 454  and uns_vcount <= 462) then --line2(3)
                             if(p1_dig1_line2(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -232,7 +232,7 @@ begin
 
 
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 462  and uns_vcount <= 470) then --line3(0)
                             if(p1_dig1_line3(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -243,7 +243,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 462  and uns_vcount <= 470) then --line3(1)
                             if(p1_dig1_line3(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -254,7 +254,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 462  and uns_vcount <= 470) then --line3(2)
                             if(p1_dig1_line3(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -264,7 +264,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line3(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 462  and uns_vcount <= 470) then --line3(3)
                             if(p1_dig1_line3(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -275,7 +275,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 470  and uns_vcount <= 478) then --line4(0)
                             if(p1_dig1_line4(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -286,7 +286,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 470  and uns_vcount <= 478) then --line4(1)
                             if(p1_dig1_line4(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -297,7 +297,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 470  and uns_vcount <= 478) then --line4(2)
                             if(p1_dig1_line4(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -307,7 +307,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line4(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 470  and uns_vcount <= 478) then --line4(3)
                             if(p1_dig1_line4(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -318,7 +318,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 478  and uns_vcount <= 486) then --line5(0)
                             if(p1_dig1_line5(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -329,7 +329,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 478  and uns_vcount <= 486) then --line5(1)
                             if(p1_dig1_line5(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -340,7 +340,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 478  and uns_vcount <= 486) then --line5(2)
                             if(p1_dig1_line1(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -350,7 +350,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line5(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 478  and uns_vcount <= 486) then --line5(3)
                             if(p1_dig1_line5(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -361,7 +361,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 486  and uns_vcount <= 494) then --line6(0)
                             if(p1_dig1_line6(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -372,7 +372,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 486  and uns_vcount <= 494) then --line6(1)
                             if(p1_dig1_line6(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -383,7 +383,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 486  and uns_vcount <= 494) then --line6(2)
                             if(p1_dig1_line6(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -393,7 +393,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line6(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 486  and uns_vcount <= 494) then --line6(3)
                             if(p1_dig1_line6(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -406,7 +406,7 @@ begin
 
 
 
-                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(0)
+                        elsif(uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 494  and uns_vcount <= 502) then --line7(0)
                             if(p1_dig1_line7(0) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -417,7 +417,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(1)
+                        elsif(uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 494  and uns_vcount <= 502) then --line7(1)
                             if(p1_dig1_line7(1) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -428,7 +428,7 @@ begin
                                 B_data <= '0';
                             end if;
 
-                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(2)
+                        elsif(uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 494  and uns_vcount <= 502) then --line7(2)
                             if(p1_dig1_line7(2) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -438,7 +438,7 @@ begin
                                 G_data <= '0';
                                 B_data <= '0';
                             end if;
-                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446  and uns_vcount <= 454) then --line7(3)
+                        elsif(uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 494  and uns_vcount <= 502) then --line7(3)
                             if(p1_dig1_line7(3) = 1) then
                                 R_data <= '1';
                                 G_data <= '1';
@@ -463,15 +463,15 @@ begin
 
                     
 
-                elsif (uns_hcount > 223 and uns_hcount <=263) and (uns_vcount >=  and uns_vcount <= ) then --percentage box3 player 1
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
+                elsif (uns_hcount > 223 and uns_hcount <= 263) and (uns_vcount >=  and uns_vcount <= ) then --percentage box3 player 1
+
+                --idem (ik wil nu even aan lindiff werken haha)
+                    
+                        
+            
                 elsif (uns_hcount > 263 and uns_hcount <= 303) and (uns_vcount >=  and uns_vcount <= 514) then --percentage box4 player 1
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
-                
+  
+                --idem
             
 
                 elsif (uns_hcount >= 624 and uns_hcount <= 663) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box1 player 2

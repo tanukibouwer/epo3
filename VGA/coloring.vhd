@@ -27,66 +27,63 @@ entity coloring is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
-        x_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-        x_upperbound_ch1 : in std_logic_vector(7 downto 0);
-        y_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-        y_upperbound_ch1 : in std_logic_vector(7 downto 0);
+        x_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+        x_upperbound_ch1 : in std_logic_vector(9 downto 0);
+        y_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+        y_upperbound_ch1 : in std_logic_vector(9 downto 0);
 
-        x_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-        x_upperbound_ch2 : in std_logic_vector(7 downto 0);
-        y_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-        y_upperbound_ch2 : in std_logic_vector(7 downto 0);
+        x_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+        x_upperbound_ch2 : in std_logic_vector(9 downto 0);
+        y_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+        y_upperbound_ch2 : in std_logic_vector(9 downto 0);
         -- percentage sprites
-        p1_dig1_line1    : in std_logic_vector(3 downto 0);
-        p1_dig1_line2    : in std_logic_vector(3 downto 0);   
-        p1_dig1_line3    : in std_logic_vector(3 downto 0);   
-        p1_dig1_line4    : in std_logic_vector(3 downto 0);
-        p1_dig1_line5    : in std_logic_vector(3 downto 0);   
-        p1_dig1_line6    : in std_logic_vector(3 downto 0);   
-        p1_dig1_line7    : in std_logic_vector(3 downto 0);
+        -- p1_dig1_line1    : in std_logic_vector(3 downto 0);
+        -- p1_dig1_line2    : in std_logic_vector(3 downto 0);   
+        -- p1_dig1_line3    : in std_logic_vector(3 downto 0);   
+        -- p1_dig1_line4    : in std_logic_vector(3 downto 0);
+        -- p1_dig1_line5    : in std_logic_vector(3 downto 0);   
+        -- p1_dig1_line6    : in std_logic_vector(3 downto 0);   
+        -- p1_dig1_line7    : in std_logic_vector(3 downto 0);
 
-        p1_dig2_line1    : in std_logic_vector(3 downto 0);
-        p1_dig2_line2    : in std_logic_vector(3 downto 0);   
-        p1_dig2_line3    : in std_logic_vector(3 downto 0);   
-        p1_dig2_line4    : in std_logic_vector(3 downto 0);
-        p1_dig2_line5    : in std_logic_vector(3 downto 0);   
-        p1_dig2_line6    : in std_logic_vector(3 downto 0);   
-        p1_dig2_line7    : in std_logic_vector(3 downto 0);
+        -- p1_dig2_line1    : in std_logic_vector(3 downto 0);
+        -- p1_dig2_line2    : in std_logic_vector(3 downto 0);   
+        -- p1_dig2_line3    : in std_logic_vector(3 downto 0);   
+        -- p1_dig2_line4    : in std_logic_vector(3 downto 0);
+        -- p1_dig2_line5    : in std_logic_vector(3 downto 0);   
+        -- p1_dig2_line6    : in std_logic_vector(3 downto 0);   
+        -- p1_dig2_line7    : in std_logic_vector(3 downto 0);
 
-        p1_dig3_line1    : in std_logic_vector(3 downto 0);
-        p1_dig3_line2    : in std_logic_vector(3 downto 0);   
-        p1_dig3_line3    : in std_logic_vector(3 downto 0);   
-        p1_dig3_line4    : in std_logic_vector(3 downto 0);
-        p1_dig3_line5    : in std_logic_vector(3 downto 0);   
-        p1_dig3_line6    : in std_logic_vector(3 downto 0);   
-        p1_dig3_line7    : in std_logic_vector(3 downto 0);
+        -- p1_dig3_line1    : in std_logic_vector(3 downto 0);
+        -- p1_dig3_line2    : in std_logic_vector(3 downto 0);   
+        -- p1_dig3_line3    : in std_logic_vector(3 downto 0);   
+        -- p1_dig3_line4    : in std_logic_vector(3 downto 0);
+        -- p1_dig3_line5    : in std_logic_vector(3 downto 0);   
+        -- p1_dig3_line6    : in std_logic_vector(3 downto 0);   
+        -- p1_dig3_line7    : in std_logic_vector(3 downto 0);
 
-        p2_dig1_line1    : in std_logic_vector(3 downto 0);
-        p2_dig1_line2    : in std_logic_vector(3 downto 0);   
-        p2_dig1_line3    : in std_logic_vector(3 downto 0);   
-        p2_dig1_line4    : in std_logic_vector(3 downto 0);
-        p2_dig1_line5    : in std_logic_vector(3 downto 0);   
-        p2_dig1_line6    : in std_logic_vector(3 downto 0);   
-        p2_dig1_line7    : in std_logic_vector(3 downto 0);
+        -- p2_dig1_line1    : in std_logic_vector(3 downto 0);
+        -- p2_dig1_line2    : in std_logic_vector(3 downto 0);   
+        -- p2_dig1_line3    : in std_logic_vector(3 downto 0);   
+        -- p2_dig1_line4    : in std_logic_vector(3 downto 0);
+        -- p2_dig1_line5    : in std_logic_vector(3 downto 0);   
+        -- p2_dig1_line6    : in std_logic_vector(3 downto 0);   
+        -- p2_dig1_line7    : in std_logic_vector(3 downto 0);
 
-        p2_dig2_line1    : in std_logic_vector(3 downto 0);
-        p2_dig2_line2    : in std_logic_vector(3 downto 0);   
-        p2_dig2_line3    : in std_logic_vector(3 downto 0);   
-        p2_dig2_line4    : in std_logic_vector(3 downto 0);
-        p2_dig2_line5    : in std_logic_vector(3 downto 0);   
-        p2_dig2_line6    : in std_logic_vector(3 downto 0);   
-        p2_dig2_line7    : in std_logic_vector(3 downto 0);
+        -- p2_dig2_line1    : in std_logic_vector(3 downto 0);
+        -- p2_dig2_line2    : in std_logic_vector(3 downto 0);   
+        -- p2_dig2_line3    : in std_logic_vector(3 downto 0);   
+        -- p2_dig2_line4    : in std_logic_vector(3 downto 0);
+        -- p2_dig2_line5    : in std_logic_vector(3 downto 0);   
+        -- p2_dig2_line6    : in std_logic_vector(3 downto 0);   
+        -- p2_dig2_line7    : in std_logic_vector(3 downto 0);
 
-        p2_dig3_line1    : in std_logic_vector(3 downto 0);
-        p2_dig3_line2    : in std_logic_vector(3 downto 0);   
-        p2_dig3_line3    : in std_logic_vector(3 downto 0);   
-        p2_dig3_line4    : in std_logic_vector(3 downto 0);
-        p2_dig3_line5    : in std_logic_vector(3 downto 0);   
-        p2_dig3_line6    : in std_logic_vector(3 downto 0);   
-        p2_dig3_line7    : in std_logic_vector(3 downto 0);
-
-        
-
+        -- p2_dig3_line1    : in std_logic_vector(3 downto 0);
+        -- p2_dig3_line2    : in std_logic_vector(3 downto 0);   
+        -- p2_dig3_line3    : in std_logic_vector(3 downto 0);   
+        -- p2_dig3_line4    : in std_logic_vector(3 downto 0);
+        -- p2_dig3_line5    : in std_logic_vector(3 downto 0);   
+        -- p2_dig3_line6    : in std_logic_vector(3 downto 0);   
+        -- p2_dig3_line7    : in std_logic_vector(3 downto 0);
         -- RGB data outputs
         R_data : out std_logic;
         G_data : out std_logic;
@@ -97,7 +94,7 @@ end entity coloring;
 
 architecture behavioural of coloring is
     signal uns_hcount, uns_vcount                                 : unsigned(9 downto 0);
-    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(7 downto 0);
+    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
 
 begin
 

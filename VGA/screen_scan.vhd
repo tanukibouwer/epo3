@@ -24,8 +24,8 @@ entity screen_scan is
         reset : in std_logic;
         Hsync : out std_logic;
         Vsync : out std_logic;
-        hcount_out : out std_logic;
-        vcount_out : out std_logic
+        hcount_out : out std_logic_vector(9 downto 0);
+        vcount_out : out std_logic_vector(9 downto 0)
     );
 end entity screen_scan;
 

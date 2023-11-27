@@ -39,7 +39,7 @@ begin
         end if;
     end process;
 
-    process (cur_count, cnt_clk) --count on clock/input
+    process (cur_count) --count on clock/input
     begin
         new_count <= cur_count + 1;
     end process;

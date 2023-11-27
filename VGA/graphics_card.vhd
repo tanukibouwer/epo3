@@ -58,10 +58,10 @@ architecture rtl of graphics_card is
             ypos : in std_logic_vector(7 downto 0);
             -- xsize     : in std_logic_vector(3 downto 0);
             -- ysize     : in std_logic_vector(3 downto 0);
-            xpos_scl1 : out std_logic_vector(7 downto 0);
-            xpos_scl2 : out std_logic_vector(7 downto 0);
-            ypos_scl1 : out std_logic_vector(7 downto 0);
-            ypos_scl2 : out std_logic_vector(7 downto 0)
+            xpos_scl1 : out std_logic_vector(9 downto 0);
+            xpos_scl2 : out std_logic_vector(9 downto 0);
+            ypos_scl1 : out std_logic_vector(9 downto 0);
+            ypos_scl2 : out std_logic_vector(9 downto 0)
         );
     end component;
 
@@ -71,15 +71,17 @@ architecture rtl of graphics_card is
             reset            : in std_logic;
             hcount           : in std_logic_vector(9 downto 0);
             vcount           : in std_logic_vector(9 downto 0);
-            x_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-            x_upperbound_ch1 : in std_logic_vector(7 downto 0);
-            y_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-            y_upperbound_ch1 : in std_logic_vector(7 downto 0);
 
-            x_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-            x_upperbound_ch2 : in std_logic_vector(7 downto 0);
-            y_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-            y_upperbound_ch2 : in std_logic_vector(7 downto 0);
+            x_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+            x_upperbound_ch1 : in std_logic_vector(9 downto 0);
+            y_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+            y_upperbound_ch1 : in std_logic_vector(9 downto 0);
+
+            x_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+            x_upperbound_ch2 : in std_logic_vector(9 downto 0);
+            y_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+            y_upperbound_ch2 : in std_logic_vector(9 downto 0);
+
             R_data           : out std_logic;
             G_data           : out std_logic;
             B_data           : out std_logic
@@ -87,8 +89,8 @@ architecture rtl of graphics_card is
     end component;
 
     signal vcount_int, hcount_int : std_logic_vector (9 downto 0);
-    signal c1x1, c1x2, c1y1, c1y2 : std_logic_vector(7 downto 0); --char1 bounds
-    signal c2x1, c2x2, c2y1, c2y2 : std_logic_vector(7 downto 0); --char2 bounds
+    signal c1x1, c1x2, c1y1, c1y2 : std_logic_vector(9 downto 0); --char1 bounds
+    signal c2x1, c2x2, c2y1, c2y2 : std_logic_vector(9 downto 0); --char2 bounds
 
 begin
 

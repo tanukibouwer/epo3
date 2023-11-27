@@ -27,15 +27,15 @@ entity coloring is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
-        x_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-        x_upperbound_ch1 : in std_logic_vector(7 downto 0);
-        y_lowerbound_ch1 : in std_logic_vector(7 downto 0);
-        y_upperbound_ch1 : in std_logic_vector(7 downto 0);
+        x_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+        x_upperbound_ch1 : in std_logic_vector(9 downto 0);
+        y_lowerbound_ch1 : in std_logic_vector(9 downto 0);
+        y_upperbound_ch1 : in std_logic_vector(9 downto 0);
 
-        x_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-        x_upperbound_ch2 : in std_logic_vector(7 downto 0);
-        y_lowerbound_ch2 : in std_logic_vector(7 downto 0);
-        y_upperbound_ch2 : in std_logic_vector(7 downto 0);
+        x_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+        x_upperbound_ch2 : in std_logic_vector(9 downto 0);
+        y_lowerbound_ch2 : in std_logic_vector(9 downto 0);
+        y_upperbound_ch2 : in std_logic_vector(9 downto 0);
         -- percentage sprites
         -- p1_dig1_line1    : in std_logic_vector(3 downto 0);
         -- p1_dig1_line2    : in std_logic_vector(3 downto 0);   

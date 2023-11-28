@@ -12,8 +12,7 @@ architecture structural of p_knockback_calculator_tb is
    	     knockback_x : in std_logic_vector(4 downto 0);
    	     knockback_y : in std_logic_vector(4 downto 0);
            vout_x : out std_logic_vector(8 downto 0);
-           vout_y : out std_logic_vector(8 downto 0);
-           dbg_bitshift : out std_logic_vector(16 downto 0));
+           vout_y : out std_logic_vector(8 downto 0));
    end component;
    
    signal vin_x : std_logic_vector(8 downto 0);
@@ -23,9 +22,8 @@ architecture structural of p_knockback_calculator_tb is
    signal knockback_y : std_logic_vector(4 downto 0);
    signal vout_x : std_logic_vector(8 downto 0);
    signal vout_y : std_logic_vector(8 downto 0);
-   signal dbg_bitshift : std_logic_vector(16 downto 0);
 begin
-   calculator: p_knockback_calculator port map (vin_x, vin_y, knockback_percentage, knockback_x, knockback_y, vout_x, vout_y, dbg_bitshift);
+   calculator: p_knockback_calculator port map (vin_x, vin_y, knockback_percentage, knockback_x, knockback_y, vout_x, vout_y);
    
    vin_x <= "000000000" after 0 ns,
         "000000000" after 10 ns,

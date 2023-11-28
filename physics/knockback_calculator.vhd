@@ -9,8 +9,7 @@ entity p_knockback_calculator is
 	knockback_x : in std_logic_vector(4 downto 0);
 	knockback_y : in std_logic_vector(4 downto 0);
         vout_x : out std_logic_vector(8 downto 0);
-        vout_y : out std_logic_vector(8 downto 0);
-        dbg_bitshift : out std_logic_vector(16 downto 0));
+        vout_y : out std_logic_vector(8 downto 0));
 end p_knockback_calculator;
 
 architecture behaviour of p_knockback_calculator is
@@ -39,7 +38,6 @@ begin
    bitshifted_multiplied_bitshifted_vector_x <= multiplied_bitshifted_vector_x(18 downto 6);
    x_adder : physics_9bit_adder port map (vin_x, bitshifted_multiplied_bitshifted_vector_x(8 downto 0), vout_x);
    y_adder : physics_9bit_adder port map (vin_y, bitshifted_multiplied_bitshifted_vector_y(8 downto 0), vout_y);
-   dbg_bitshift <= multiplied_vector_x;
 end behaviour;
 
 configuration p_knockback_calculator_cfg of p_knockback_calculator is

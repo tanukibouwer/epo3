@@ -21,8 +21,8 @@ port(	charhp		: out std_logic_vector(9 downto 0); --initial knockback percentage
 		att2dy		: out std_logic_vector(3 downto 0);
 		att1dm		: out std_logic_vector(3 downto 0);
 		att2dm		: out std_logic_vector(3 downto 0);
-		att1kb		: out std_logic_vector(5 downto 0);
-		att2kb		: out std_logic_vector(5 downto 0);
+		-- att1kb		: out std_logic_vector(5 downto 0);
+		-- att2kb		: out std_logic_vector(5 downto 0);
 		plat1x		: out std_logic_vector(7 downto 0);
 		plat1y		: out std_logic_vector(7 downto 0);
 		plat2x		: out std_logic_vector(7 downto 0);
@@ -161,8 +161,8 @@ architecture structural of memory is
 			att2dy		: out std_logic_vector(3 downto 0);
 			att1dm		: out std_logic_vector(3 downto 0);
 			att2dm		: out std_logic_vector(3 downto 0);
-			att1kb		: out std_logic_vector(5 downto 0);
-			att2kb		: out std_logic_vector(5 downto 0);
+			-- att1kb		: out std_logic_vector(5 downto 0);
+			-- att2kb		: out std_logic_vector(5 downto 0);
 			plat1x		: out std_logic_vector(7 downto 0);
 			plat1y		: out std_logic_vector(7 downto 0);
 			plat2x		: out std_logic_vector(7 downto 0);
@@ -228,8 +228,8 @@ WL00: writelogic port map (	clk			=> clk,
 								att2dy		=> att2dy,
 								att1dm		=> att1dm,
 								att2dm		=> att2dm,
-								att1kb		=> att1kb,
-								att2kb		=> att2kb,
+								-- att1kb		=> att1kb,
+								-- att2kb		=> att2kb,
 								plat1x		=> plat1x,
 								plat1y		=> plat1y,
 								plat2x		=> plat2x,

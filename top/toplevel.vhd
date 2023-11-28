@@ -21,10 +21,10 @@ end chip_toplevel;
 architecture structural of chip_toplevel is
 
     -- signals for communication between memory and graphics+physics
-    signal char1posx : std_logic_vector(7 downto 0); -- output from memory, into graphics
-    signal char1posy : std_logic_vector(7 downto 0); -- output from memory, into graphics
-    signal char2posx : std_logic_vector(7 downto 0); -- output from memory, into graphics
-    signal char2posy : std_logic_vector(7 downto 0); -- output from memory, into graphics
+    signal char1posx : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char1posy : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char2posx : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char2posy : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
 
     -- between memory and graphics
     signal vsyncintern : std_logic; -- input into memory, out from graphics
@@ -167,10 +167,27 @@ begin
         clk         => clk,
         reset       => reset,
         vsync       => vsyncintern,
+		
+		--location
+		data_in8b1	=> char1posxin,
+		data_in8b2	=> char1posyin,
+		data_in8b3	=> char2posxin,
+		data_in8b4	=> char2posyin,
         data_out8b1 => char1posx,
         data_out8b2 => char1posy,
         data_out8b3 => char2posx,
         data_out8b4 => char2posy,
+		
+		--velocity
+		data_in9b1	=> char1velxin,
+		data_in9b2	=> char1velyin,
+		data_in9b3	=> char2velxin,
+		data_in9b4	=> char2velyin,
+		data_out9b1	=> char1velx,
+		data_out9b2	=> char1vely,
+		data_out9b3	=> char2velx,
+		data_out9b4	=> char2vely,
+		
     );
 
     TL01 : graphics_card port map(

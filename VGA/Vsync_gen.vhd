@@ -75,7 +75,7 @@ begin
 
 end architecture;
 
-configuration vsync_gen_rtl_cfg of vsyn_gen is
+configuration vsync_gen_rtl_cfg of vsync_gen is
     for rtl
     end for;
 end configuration vsync_gen_rtl_cfg;

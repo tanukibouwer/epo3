@@ -43,7 +43,9 @@ begin
   reset <= '1' after 0 ns,
            '0' after 70 ns;
 
-  p1_controller <= '1' after 0 ns,
-                   '0' after 185 us;
+  p1_controller <= '0' after 0 ns,
+                   '1' after 30 us,
+                   '0' after 55 us,
+                   '1' after 185 us;
 
 end architecture behavioural;

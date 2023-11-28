@@ -11,106 +11,62 @@ entity orientation is
 end entity orientation;
 
 architecture behavioural of orientation is
-	type orientation_state is (left1left2, left1right2, right1right2, right1left2);
-	signal state, new_state: orientation_state;
+	type c1_state is (left1, right1); 
+	signal state1, new_state1: c1_state;
+
+	type c2_state is (left2, right2); 
+	signal state2, new_state2: c2_state;
 begin
-	lbl1: process (clk)
+	lbl0: process (clk)
 	begin
 		if (clk'event and clk = '1') then
 			if res = '1' then
-				state <= right1left2;
+				state1 <= right1;
+				state2 <= left2;
 			else
-				state <= new_state;
+				state1 <= new_state1;
+				state2 <= new_state2;
 			end if;
 		end if;
 	end process;
-	lbl2: process(state, input1, input2)
+
+	lbl1: process(state1, input1)
 	begin
-		case state is
-			when left1left2 =>
+		case state1 is
+			when left1 =>
 				output1 <= '0';
-				output2 <= '0';
-				if (input1(0 downto 0) = "0") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "1") then
-					new_state <= right1left2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
+				if (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") then
+					new_state1 <= right1;
 				else
-					new_state <= left1left2;
+					new_state1 <= left1;
 				end if;
-
-			when left1right2 =>
-				output1 <= '0';
-				output2 <= '1';
-				if (input1(0 downto 0) = "0") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "0") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
-				else
-					new_state <= left1right2;
-				end if;
-
-			when right1right2 =>
+			when right1 =>
 				output1 <= '1';
-				output2 <= '1';
-				if (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "0") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= right1left2;
+				if (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") then
+					new_state1 <= left1;
 				else
-					new_state <= right1right2;
+					new_state1 <= right1;
 				end if;
+		end case;
+	end process;
 
-			when right1left2 =>
-				output1 <= '1';
+	lbl2: process(state2, input2)
+	begin
+		case state2 is
+			when left2 =>
 				output2 <= '0';
-				if (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "1") and (input2(1 downto 1) = "1") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "0") then
-					new_state <= left1left2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= left1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "0") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "1") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
-				elsif (input1(0 downto 0) = "0") and (input1(1 downto 1) = "1") and (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
-					new_state <= right1right2;
+				if (input2(0 downto 0) = "0") and (input2(1 downto 1) = "1") then
+					new_state2 <= right2;
 				else
-					new_state <= right1left2;
+					new_state2 <= left2;
+				end if;
+			when right2 =>
+				output2 <= '1';
+				if (input2(0 downto 0) = "1") and (input2(1 downto 1) = "0") then
+					new_state2 <= left2;
+				else
+					new_state2 <= right2;
 				end if;
 		end case;
 	end process;
 end architecture behavioural;
-

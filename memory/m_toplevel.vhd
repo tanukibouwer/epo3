@@ -77,18 +77,18 @@ port(	charhp		: out std_logic_vector(9 downto 0); --initial knockback percentage
 		data_in8b2		: in std_logic_vector(7 downto 0);
 		data_in8b3		: in std_logic_vector(7 downto 0);
 		data_in8b4		: in std_logic_vector(7 downto 0);
-		data_in8b5		: in std_logic_vector(7 downto 0);
-		data_in8b6		: in std_logic_vector(7 downto 0);
-		data_in8b7		: in std_logic_vector(7 downto 0);
-		data_in8b8		: in std_logic_vector(7 downto 0);
+		-- data_in8b5		: in std_logic_vector(7 downto 0);
+		-- data_in8b6		: in std_logic_vector(7 downto 0);
+		-- data_in8b7		: in std_logic_vector(7 downto 0);
+		-- data_in8b8		: in std_logic_vector(7 downto 0);
 		data_out8b1		: out std_logic_vector(7 downto 0);
 		data_out8b2		: out std_logic_vector(7 downto 0);
 		data_out8b3		: out std_logic_vector(7 downto 0);
 		data_out8b4		: out std_logic_vector(7 downto 0);
-		data_out8b5		: out std_logic_vector(7 downto 0);
-		data_out8b6		: out std_logic_vector(7 downto 0);
-		data_out8b7		: out std_logic_vector(7 downto 0);
-		data_out8b8		: out std_logic_vector(7 downto 0);
+		-- data_out8b5		: out std_logic_vector(7 downto 0);
+		-- data_out8b6		: out std_logic_vector(7 downto 0);
+		-- data_out8b7		: out std_logic_vector(7 downto 0);
+		-- data_out8b8		: out std_logic_vector(7 downto 0);
 		data_in9b1		: in std_logic_vector(8 downto 0);
 		data_in9b2		: in std_logic_vector(8 downto 0);
 		data_in9b3		: in std_logic_vector(8 downto 0);
@@ -206,7 +206,7 @@ architecture structural of memory is
 		
 begin
 	
-WL00: writelogic port map (	clk			=> clk,
+	WL00: writelogic port map (	clk			=> clk,
 								vsync		=> vsync,
 								write		=> writeint);
 	
@@ -310,25 +310,25 @@ WL00: writelogic port map (	clk			=> clk,
 								data_out 	=> data_out8b4,
 								write 		=> writeint);
 								
-	DM24 : ram_8b port map (	clk			=> clk,
-																data_in 	=> data_in8b5,
-								data_out 	=> data_out8b5,
-								write 		=> writeint);
-								
-	DM25 : ram_8b port map (	clk			=> clk,
-																data_in 	=> data_in8b6,
-								data_out 	=> data_out8b6,
-								write 		=> writeint);
-								
-	DM26 : ram_8b port map (	clk			=> clk,
-																data_in 	=> data_in8b7,
-								data_out 	=> data_out8b7,
-								write 		=> writeint);
-								
-	DM27 : ram_8b port map (	clk			=> clk,
-																data_in 	=> data_in8b8,
-								data_out 	=> data_out8b8,
-								write 		=> writeint);
+--	DM24 : ram_8b port map (	clk			=> clk,
+--																data_in 	=> data_in8b5,
+--								data_out 	=> data_out8b5,
+--								write 		=> writeint);
+--								
+--	DM25 : ram_8b port map (	clk			=> clk,
+--																data_in 	=> data_in8b6,
+--								data_out 	=> data_out8b6,
+--								write 		=> writeint);
+--								
+--	DM26 : ram_8b port map (	clk			=> clk,
+--																data_in 	=> data_in8b7,
+--								data_out 	=> data_out8b7,
+--								write 		=> writeint);
+--								
+--	DM27 : ram_8b port map (	clk			=> clk,
+--																data_in 	=> data_in8b8,
+--								data_out 	=> data_out8b8,
+--								write 		=> writeint);
 	
 	DM30 : ram_9b port map (	clk			=> clk,
 																data_in 	=> data_in9b1,

@@ -123,3 +123,17 @@ begin
     -- vcount <= vcount_int;
 
 end architecture;
+
+configuration graphics_card_rtl_cfg of graphics_card is
+    for rtl
+        for all : screen_scan
+            use configuration work.screen_scan_rtl_cfg;
+        end for;
+        for all : char_offset_adder
+            use configuration work.char_offset_adder_behavioural_cfg;
+        end for;
+        for all : coloring_
+            use configuration work.coloring_cfg;
+        end for;
+    end for;
+end configuration graphics_card_rtl_cfg;

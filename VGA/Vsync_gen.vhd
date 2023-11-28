@@ -74,3 +74,8 @@ begin
     uns_count <= unsigned(count);
 
 end architecture;
+
+configuration vsync_gen_rtl_cfg of vsyn_gen is
+    for rtl
+    end for;
+end configuration vsync_gen_rtl_cfg;

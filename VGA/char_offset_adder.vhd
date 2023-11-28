@@ -54,3 +54,8 @@ begin
     
 
 end architecture;
+
+configuration char_offset_adder_behaviour_cfg of char_offset_adder is
+    for behavioural
+    end for;
+end configuration char_offset_adder_behaviour_cfg;

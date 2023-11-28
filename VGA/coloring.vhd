@@ -498,3 +498,8 @@ begin
     end process;
 
 end architecture;
+
+configuration coloring_behavioural_cfg of coloring is
+    for behavioural
+    end for;
+end configuration coloring_behavioural_cfg;

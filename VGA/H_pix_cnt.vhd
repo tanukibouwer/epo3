@@ -46,3 +46,8 @@ begin
     count <= std_logic_vector(cur_count);
     
 end architecture;
+
+configuration h_pix_cnt_behavioural_cfg of h_pix_cnt is
+    for behavioural
+    end for;
+end configuration h_pix_cnt_behavioural_cfg;

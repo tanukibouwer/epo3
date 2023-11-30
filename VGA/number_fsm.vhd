@@ -1,15 +1,16 @@
---module: number_fsm
---version: 1.0
---author: Parama Fawwaz
+--module: number_sprite
+--version: a2.0
+--author: Parama Fawwaz & Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---
--- deprecated
---
---
---
---
+--! This module is the static ROM for the sprites regarding the numbers that can be shown on screen
+--! 
+--! The resolution of the sprites is 9 x 20 which will be scaled up by 4 on the actual screen. 
+--! This will be done by the coloring module
+--! 
+--! 
+--! 
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -17,352 +18,255 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity number_fsm is
-port(
-	clk         : in std_logic;
-    number  	: in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
-    reset  	: in std_logic;
+entity number_sprite is
+    port (
+        -- clk         : in std_logic;
+        number : in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
 
-	line1 	: out std_logic_vector(3 downto 0);
-    line2	: out std_logic_vector(3 downto 0);
-    line3 	: out std_logic_vector(3 downto 0);
-    line4 	: out std_logic_vector(3 downto 0);
-    line5  	: out std_logic_vector(3 downto 0);
-    line6  	: out std_logic_vector(3 downto 0);
-    line7  	: out std_logic_vector(3 downto 0)); 
+        line1  : out std_logic_vector(8 downto 0);
+        line2  : out std_logic_vector(8 downto 0);
+        line3  : out std_logic_vector(8 downto 0);
+        line4  : out std_logic_vector(8 downto 0);
+        line5  : out std_logic_vector(8 downto 0);
+        line6  : out std_logic_vector(8 downto 0);
+        line7  : out std_logic_vector(8 downto 0);
+        line8  : out std_logic_vector(8 downto 0);
+        line9  : out std_logic_vector(8 downto 0);
+        line10 : out std_logic_vector(8 downto 0);
+        line11 : out std_logic_vector(8 downto 0);
+        line12 : out std_logic_vector(8 downto 0);
+        line13 : out std_logic_vector(8 downto 0);
+        line14 : out std_logic_vector(8 downto 0);
+        line15 : out std_logic_vector(8 downto 0);
+        line16 : out std_logic_vector(8 downto 0);
+        line17 : out std_logic_vector(8 downto 0);
+        line18 : out std_logic_vector(8 downto 0);
+        line19 : out std_logic_vector(8 downto 0);
+        line20 : out std_logic_vector(8 downto 0)
 
+    );
+end number_sprite;
 
-end number_fsm;
-
-architecture behaviour of number_fsm is
-    type number_state is (one, two, three, four, five, six, seven, eight, nine, zero);
-    signal state, new_state: number_state;
+architecture behavioural of number_sprite is
 begin
-    lbl1:process(clk)
+    process (number) --inverted colored numbers! 
     begin
-        if(clk'event and clk = '1') then
-            if reset = '1' then
-                state <= zero;
-            else 
-                state <= new_state;
-            end if;
-        end if;
-    end process;
-    lbl2: process(state, number) --inverted colored numbers! 
-    begin
-        case state is 
-            when zero =>
-            line1 <= "0000";
-            line2 <= "0110";
-            line3 <= "0110";
-            line4 <= "0110";
-            line5 <= "0110";
-            line6 <= "0110";
-            line7 <= "0000";
 
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when one =>
-            line1 <= "1110";
-            line2 <= "1110";
-            line3 <= "1110";
-            line4 <= "1110";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "1110";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-            
-            when two =>
-            line1 <= "0000";
-            line2 <= "1110";
-            line3 <= "1110";
-            line4 <= "0000";
-            line5 <= "0111";
-            line6 <= "0111";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when three =>
-            line1 <= "0000";
-            line2 <= "1110";
-            line3 <= "1110";
-            line4 <= "0000";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when four =>
-            line1 <= "0110";
-            line2 <= "0110";
-            line3 <= "0110";
-            line4 <= "0000";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "1110";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when five =>
-            line1 <= "0000";
-            line2 <= "0111";
-            line3 <= "0111";
-            line4 <= "0000";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when six =>
-            line1 <= "0000";
-            line2 <= "0111";
-            line3 <= "0111";
-            line4 <= "0000";
-            line5 <= "0110";
-            line6 <= "0110";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when seven =>
-            line1 <= "0000";
-            line2 <= "1110";
-            line3 <= "1110";
-            line4 <= "1110";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "1110";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when eight =>
-            line1 <= "0000";
-            line2 <= "0110";
-            line3 <= "0110";
-            line4 <= "0000";
-            line5 <= "0110";
-            line6 <= "0110";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
-
-            when nine =>
-            line1 <= "0000";
-            line2 <= "0110";
-            line3 <= "0110";
-            line4 <= "0000";
-            line5 <= "1110";
-            line6 <= "1110";
-            line7 <= "0000";
-
-            if (number = "0000") then --0
-                new_state <= zero;
-            elsif (number = "0001") then --1
-                new_state <= one;
-            elsif (number = "0010") then --2
-                new_state <= two;
-            elsif (number = "0011") then --3
-                new_state <= three;
-            elsif (number = "0100") then --4
-                new_state <= four;
-            elsif (number = "0101") then --5
-                new_state <= five;
-            elsif (number = "0110") then --6
-                new_state <= six;
-            elsif (number = "0111") then --7
-                new_state <= seven;
-            elsif (number = "1000") then --8
-                new_state <= eight;
-            else  --9
-                new_state <= nine;
-            end if;
+        case number is
+            when "0000" => -- zero
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "010000110";
+                line4  <= "010000110";
+                line5  <= "010000110";
+                line6  <= "010001010";
+                line7  <= "010001010";
+                line8  <= "010001010";
+                line9  <= "010010010";
+                line10 <= "010010010";
+                line11 <= "010010010";
+                line12 <= "010010010";
+                line13 <= "010100010";
+                line14 <= "010100010";
+                line15 <= "010100010";
+                line16 <= "011000010";
+                line17 <= "011000010";
+                line18 <= "011000010";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "0001" => -- one
+                line1  <= "000000000";
+                line2  <= "000000110";
+                line3  <= "000011110";
+                line4  <= "011111110";
+                line5  <= "011111110";
+                line6  <= "000000110";
+                line7  <= "000000110";
+                line8  <= "000000110";
+                line9  <= "000000110";
+                line10 <= "000000110";
+                line11 <= "000000110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "000000110";
+                line19 <= "000000110";
+                line20 <= "000000000";
+            when "0010" => -- two
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "000000110";
+                line5  <= "000000110";
+                line6  <= "000000110";
+                line7  <= "000000110";
+                line8  <= "000000110";
+                line9  <= "000000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "011000000";
+                line13 <= "011000000";
+                line14 <= "011000000";
+                line15 <= "011000000";
+                line16 <= "011000000";
+                line17 <= "011000000";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "0011" => -- three
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "000000110";
+                line5  <= "000000110";
+                line6  <= "000000110";
+                line7  <= "000000110";
+                line8  <= "000000110";
+                line9  <= "000000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "0100" => -- four
+                line1  <= "000000000";
+                line2  <= "011000110";
+                line3  <= "011000110";
+                line4  <= "011000110";
+                line5  <= "011000110";
+                line6  <= "011000110";
+                line7  <= "011000110";
+                line8  <= "011000110";
+                line9  <= "011000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "000000110";
+                line19 <= "000000110";
+                line20 <= "000000000";
+            when "0101" => -- five
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "011000000";
+                line5  <= "011000000";
+                line6  <= "011000000";
+                line7  <= "011000000";
+                line8  <= "011000000";
+                line9  <= "011000000";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "0110" => -- six
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "000000110";
+                line5  <= "000000110";
+                line6  <= "000000110";
+                line7  <= "000000110";
+                line8  <= "000000110";
+                line9  <= "000000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "011000110";
+                line13 <= "011000110";
+                line14 <= "011000110";
+                line15 <= "011000110";
+                line16 <= "011000110";
+                line17 <= "011000110";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "0111" => -- seven
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "000000110";
+                line5  <= "000000110";
+                line6  <= "000000110";
+                line7  <= "000000110";
+                line8  <= "000000110";
+                line9  <= "000011110";
+                line10 <= "000011110";
+                line11 <= "000000110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "000000110";
+                line19 <= "000000110";
+                line20 <= "000000000";
+            when "1000" => -- eight
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "011000110";
+                line5  <= "011000110";
+                line6  <= "011000110";
+                line7  <= "011000110";
+                line8  <= "011000110";
+                line9  <= "011000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "011000110";
+                line13 <= "011000110";
+                line14 <= "011000110";
+                line15 <= "011000110";
+                line16 <= "011000110";
+                line17 <= "011000110";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when "1001" => -- nine
+                line1  <= "000000000";
+                line2  <= "011111110";
+                line3  <= "011111110";
+                line4  <= "011000110";
+                line5  <= "011000110";
+                line6  <= "011000110";
+                line7  <= "011000110";
+                line8  <= "011000110";
+                line9  <= "011000110";
+                line10 <= "011111110";
+                line11 <= "011111110";
+                line12 <= "000000110";
+                line13 <= "000000110";
+                line14 <= "000000110";
+                line15 <= "000000110";
+                line16 <= "000000110";
+                line17 <= "000000110";
+                line18 <= "011111110";
+                line19 <= "011111110";
+                line20 <= "000000000";
+            when others =>
+                null;
         end case;
 
     end process;
 
-end behaviour;
-
+end behavioural;

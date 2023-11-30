@@ -21,14 +21,14 @@ entity dig2_num_splitter is
     port (
         -- clk       : in std_logic;
         -- reset     : in std_logic;
-        num2dig : in std_logic_vector(15 downto 0);
+        num2dig : in std_logic_vector(9 downto 0);
         num1    : out std_logic_vector(3 downto 0);
         num2    : out std_logic_vector(3 downto 0)
 
     );
 end entity dig2_num_splitter;
 architecture behaviour of dig2_num_splitter is
-    signal number : unsigned(15 downto 0);
+    signal number : unsigned(9 downto 0);
 begin
     number <= unsigned(num2dig);
     lbl1 : process (number)

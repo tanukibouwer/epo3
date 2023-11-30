@@ -104,6 +104,7 @@ architecture structural of memory is
 	component writelogic is 
 	port(
 		clk			: in std_logic;
+		reset		: in std_logic;
 		vsync		: in std_logic;
 		write 		: out std_logic);
 	end component writelogic;
@@ -146,6 +147,7 @@ architecture structural of memory is
 begin
 	
 	WL00: writelogic port map (	clk			=> clk,
+								reset		=> reset,
 								vsync		=> vsync,
 								write		=> writeint);
 	

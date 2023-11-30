@@ -4,13 +4,15 @@ use IEEE.numeric_std.all;
 
 entity chip_toplevel is
     port (
-        -- general inputs
+        -- general i/o
         clk   : in std_logic;
         reset : in std_logic;
-        -- input inputs
-        p1_controller : in std_logic_vector(7 downto 0);
-		p2_controller : in std_logic_vector(7 downto 0);
-        -- graphics outputs
+        -- input i/o
+        p1_controller : in std_logic;
+		p2_controller : in std_logic;
+		controller_latch    : out   std_logic;
+		controller_clk      : out   std_logic;
+        -- graphics i/o
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
         R_data : out std_logic; --! RGB data to screen
@@ -52,6 +54,20 @@ architecture structural of chip_toplevel is
 	signal readyphysicsin 	: std_logic;
 	signal readyphysicsout 	: std_logic;
 	
+	component input_toplevel is
+		port (
+			clk   : in std_logic;
+			reset : in std_logic;
+
+			controller_latch    : out   std_logic;
+			controller_clk      : out   std_logic;
+
+			p1_controller : in    std_logic;                    -- player 1 controller serial data in
+			p1_input      : out   std_logic_vector(7 downto 0); -- player 1 parallel out
+			p2_controller : in    std_logic;                    -- player 2 controller serial data in
+			p2_input      : out   std_logic_vector(7 downto 0)  -- player 2 parallel out
+		);
+	end component input_toplevel;
 	
 	component physics_fsm is
 		port(
@@ -266,6 +282,18 @@ begin
 		vout_y		=> char2velyin,
 		pout_x		=> char2posxin,
 		pout_y		=> char2posyin);
+		
+	TL04 : input_toplevel port map (
+		clk         => clk,
+        reset       => reset,
+		
+		controller_latch	=> controller_latch,
+		controller_clk		=> controller_clk,
+		
+		p1_controller 	=> p1_controller,
+		p1_input      	=> inputsp1,
+		p2_controller 	=> p2_controller,
+		p2_input      	=> inputsp2);
 		
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 

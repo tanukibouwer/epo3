@@ -18,11 +18,13 @@ architecture behaviour of ram_10b is
 begin
 	ram_ff: process(clk) is
 	begin
-		if (rising_edge (clk)) and write = '1' then
+		if (rising_edge (clk)) then
 			if (reset = '1') then
 				mem(0) <= "0000000000";
 			else
-				mem(0) <= data_in;
+				if (write = '1') then 
+					mem(0) <= data_in;
+				end if;
 			end if;
 		end if;
 	end process;

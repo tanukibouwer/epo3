@@ -9,6 +9,7 @@ entity chip_toplevel is
         reset : in std_logic;
         -- input inputs
         p1_controller : in std_logic_vector(7 downto 0);
+		p2_controller : in std_logic_vector(7 downto 0);
         -- graphics outputs
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
@@ -44,7 +45,29 @@ architecture structural of chip_toplevel is
     signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
 
     -- between input and physics
-    signal inputs : std_logic_vector(7 downto 0) -- input from input, into 
+    signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics
+	signal inputsp2 : std_logic_vector(7 downto 0); -- inputs from input, into physics
+	
+	-- dummy signal that should be linked to the counter through an fsm or something like that
+	signal readyphysicsin 	: std_logic;
+	signal readyphysicsout 	: std_logic;
+	
+	component physics_fsm is
+		port(
+			clk : in std_logic;
+			reset : in std_logic;
+			ready_in : in std_logic;
+			vin_x : in std_logic_vector(8 downto 0);
+			vin_y : in std_logic_vector(8 downto 0);
+			pin_x : in std_logic_vector(7 downto 0);
+			pin_y : in std_logic_vector(7 downto 0);
+			player_input : in std_logic_Vector(7 downto 0);
+			vout_x : out std_logic_vector(8 downto 0);
+			vout_y : out std_logic_vector(8 downto 0);
+			pout_x : out std_logic_vector(7 downto 0);
+			pout_y : out std_logic_vector(7 downto 0);
+			ready_out : out std_logic);
+	end component physics_fsm;
 
     component graphics_card is
         port (
@@ -66,16 +89,16 @@ architecture structural of chip_toplevel is
 
     component memory is
         port (
-            charhp  : out std_logic_vector(9 downto 0); -- initial knockback percentage so NOT character health!
-            chardc  : out std_logic_vector(7 downto 0); -- initial character death count, may not be necessary
+            --charhp  : out std_logic_vector(9 downto 0); -- initial knockback percentage so NOT character health!
+            --chardc  : out std_logic_vector(7 downto 0); -- initial character death count, may not be necessary
             char1sx : out std_logic_vector(7 downto 0); -- char(acter)1 starting position x
             char1sy : out std_logic_vector(7 downto 0); -- char1 starting position y
-            char2sx : out std_logic_vector(7 downto 0); -- char2 starting position x
-            char2sy : out std_logic_vector(7 downto 0); -- char2 starting position y
+			--char2sx : out std_logic_vector(7 downto 0); -- char2 starting position x
+            --char2sy : out std_logic_vector(7 downto 0); -- char2 starting position y
             char1vx : out std_logic_vector(8 downto 0); -- char1 starting velocity x
             char1vy : out std_logic_vector(8 downto 0); -- char1 starting velocity y
-            char2vx : out std_logic_vector(8 downto 0); -- char2 starting velocity x
-            char2vy : out std_logic_vector(8 downto 0); -- char2 starting velocity y
+            --char2vx : out std_logic_vector(8 downto 0); -- char2 starting velocity x
+            --char2vy : out std_logic_vector(8 downto 0); -- char2 starting velocity y
             chardx  : out std_logic_vector(3 downto 0); -- char size x (from center to edge)
             chardy  : out std_logic_vector(3 downto 0); -- char size y (from center to edge)
             att1dx  : out std_logic_vector(3 downto 0); -- attack1 size x (from center to edge)
@@ -128,14 +151,14 @@ architecture structural of chip_toplevel is
             clk          : in std_logic;
             reset        : in std_logic;
             vsync        : in std_logic;
-            data_in4b1   : in std_logic_vector(3 downto 0); -- death count p1
-            data_in4b2   : in std_logic_vector(3 downto 0); -- death count p2
-            data_out4b1  : out std_logic_vector(3 downto 0); -- death count p1
-            data_out4b2  : out std_logic_vector(3 downto 0); -- death count p2
-            data_in10b1  : in std_logic_vector(9 downto 0); --knockback percentage p1
-            data_in10b2  : in std_logic_vector(9 downto 0); --knockback percentage p2
-            data_out10b1 : out std_logic_vector(9 downto 0); --knockback percentage p1
-            data_out10b2 : out std_logic_vector(9 downto 0); --knockback percentage p2
+            --data_in4b1   : in std_logic_vector(3 downto 0); -- death count p1
+            --data_in4b2   : in std_logic_vector(3 downto 0); -- death count p2
+            --data_out4b1  : out std_logic_vector(3 downto 0); -- death count p1
+            --data_out4b2  : out std_logic_vector(3 downto 0); -- death count p2
+            --data_in10b1  : in std_logic_vector(9 downto 0); --knockback percentage p1
+            --data_in10b2  : in std_logic_vector(9 downto 0); --knockback percentage p2
+            --data_out10b1 : out std_logic_vector(9 downto 0); --knockback percentage p1
+            --data_out10b2 : out std_logic_vector(9 downto 0); --knockback percentage p2
             data_in8b1   : in std_logic_vector(7 downto 0); -- x pos p1
             data_in8b2   : in std_logic_vector(7 downto 0); -- y pos p1
             data_in8b3   : in std_logic_vector(7 downto 0); -- x pos p2
@@ -205,6 +228,44 @@ begin
         G_data => G_data,
         B_data => B_data);
 
+	TL02 : physics_fsm port map (
+		clk         => clk,
+        reset       => reset,
+		
+		ready_in	=> readyphysicsin, --idk how these work exactly
+		ready_out	=> readyphysicsout,
+		
+		vin_x		=> char1velx,
+		vin_y		=> char1vely,
+		pin_x		=> char1posx,
+		pin_y		=> char1posy,
+		
+		player_input => inputsp1,
+		
+		vout_x		=> char1velxin,
+		vout_y		=> char1velyin,
+		pout_x		=> char1posxin,
+		pout_y		=> char1posyin);
+		
+	TL03 : physics_fsm port map (
+		clk         => clk,
+        reset       => reset,
+		
+		ready_in	=> readyphysicsin, --idk how these work exactly
+		ready_out	=> readyphysicsout,
+		
+		vin_x		=> char2velx,
+		vin_y		=> char2vely,
+		pin_x		=> char2posx,
+		pin_y		=> char2posy,
+		
+		player_input => inputsp2,
+		
+		vout_x		=> char2velxin,
+		vout_y		=> char2velyin,
+		pout_x		=> char2posxin,
+		pout_y		=> char2posyin);
+		
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 
 end architecture structural;

@@ -44,7 +44,7 @@ architecture structural of chip_toplevel is
     signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
 
     -- between input and physics
-    signal inputs : std_logic_vector(7 downto 0) -- input from input, into 
+    signal inputs : std_logic_vector(7 downto 0); -- input from input, into 
 
     component graphics_card is
         port (

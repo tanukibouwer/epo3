@@ -20,7 +20,7 @@ begin
 	begin
 		if (rising_edge (clk)) and write = '1' then
 			if (reset = '1') then
-				mem(0) <= "00000000";
+				mem(0) <= std_logic_vector(to_unsigned(50, mem(0)'length));
 			else
 				mem(0) <= data_in;
 			end if;

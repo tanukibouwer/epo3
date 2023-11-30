@@ -226,7 +226,7 @@ begin
 		data_out9b1	=> char1velx,
 		data_out9b2	=> char1vely,
 		data_out9b3	=> char2velx,
-		data_out9b4	=> char2vely,
+		data_out9b4	=> char2vely
 		
     );
 

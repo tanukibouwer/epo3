@@ -1,5 +1,5 @@
 #!/bin/bash
-rm -rf main
+rm -rf main_proj
 rm -rf physics_proj
 rm -rf attack_proj
 rm -rf input_proj

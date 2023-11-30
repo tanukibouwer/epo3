@@ -1,26 +1,51 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-
 entity writelogic is 
 port(
-	clk			: in std_logic;
-	vsync		: in std_logic;
-	write 		: out std_logic);
+	clk		: in std_logic;
+	reset	: in std_logic;
+	vsync	: in std_logic;
+	write	: out std_logic);
 end writelogic;
 
 architecture behaviour of writelogic is
-	signal writeint : std_logic;
+	type writestate is	(	off,
+							on1,
+							on2);
+	signal state, new_state :	writestate;
 begin
 	process(clk) is
 	begin
-		if (rising_edge (clk)) and vsync = '0' then
-			writeint <= '1';
+		if (reset = '1') then
+			state <= off;
 		else
-			writeint <= '0';
+			state <= new_state;
 		end if;
 	end process;
-	write <= writeint;
+	process(vsync, state) is
+	begin
+		case state is
+			when off =>
+				write <= '0';
+				if (vsync = '0') then	
+					new_state <= on1;
+				else
+					new_state <= off;
+				end if;
+			when on1 =>
+				write <= '1';
+				if (vsync = '0') then
+					new_state <= on2;
+				else
+					new_state <= off;
+				end if;
+			when on2 =>
+				write <= '0';
+				if (vsync = '0') then
+					new_state <= on2;	
+				else
+					new_state <= off;
+				end if;
+		end case;
+	end process;
 end behaviour;
 
 configuration writelogic_behaviour_cfg of writelogic is

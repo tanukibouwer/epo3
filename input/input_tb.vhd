@@ -14,7 +14,9 @@ architecture behavioural of input_tb is
       controller_clk      : out   std_logic;
 
       p1_controller : in    std_logic;                    -- player 1 controller serial data in
-      p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
+      p1_input      : out   std_logic_vector(7 downto 0); -- player 1 parallel out
+      p2_controller : in    std_logic;                    -- player 2 controller serial data in
+      p2_input      : out   std_logic_vector(7 downto 0)  -- player 2 parallel out
     );
   end component input_toplevel;
 
@@ -25,6 +27,8 @@ architecture behavioural of input_tb is
 
   signal p1_controller    : std_logic;
   signal p1_input         : std_logic_vector(7 downto 0);
+  signal p2_controller    : std_logic;
+  signal p2_input         : std_logic_vector(7 downto 0);
 
 begin
   test: input_toplevel
@@ -34,7 +38,9 @@ begin
     controller_latch => controller_latch,
     controller_clk => controller_clk,
     p1_controller => p1_controller,
-    p1_input => p1_input
+    p1_input => p1_input,
+    p2_controller => p2_controller,
+    p2_input => p2_input
   );
 
   clk   <= '1' after 0 ns,
@@ -47,5 +53,9 @@ begin
                    '1' after 30 us,
                    '0' after 55 us,
                    '1' after 185 us;
+
+  p2_controller <= '1' after 0 ns,
+                   '0' after 55 us,
+                   '1' after 70 us;
 
 end architecture behavioural;

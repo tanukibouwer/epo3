@@ -12,7 +12,9 @@ architecture behavioural of input_buffer_tb is
 
       read      : in    std_logic;
       input_in_p1    : in    std_logic_vector(7 downto 0);
-      input_out_p1   : out   std_logic_vector(7 downto 0)
+      input_out_p1   : out   std_logic_vector(7 downto 0);
+      input_in_p2    : in    std_logic_vector(7 downto 0);
+      input_out_p2   : out   std_logic_vector(7 downto 0)
     );
   end component input_buffer;
 
@@ -22,6 +24,8 @@ architecture behavioural of input_buffer_tb is
 
   signal input_in_p1         : std_logic_vector(7 downto 0);
   signal input_out_p1        : std_logic_vector(7 downto 0);
+  signal input_in_p2         : std_logic_vector(7 downto 0);
+  signal input_out_p2        : std_logic_vector(7 downto 0);
 
 begin
   test: input_buffer
@@ -30,7 +34,9 @@ begin
     reset => reset,
     read => read,
     input_in_p1 => input_in_p1,
-    input_out_p1 => input_out_p1
+    input_out_p1 => input_out_p1,
+    input_in_p2 => input_in_p2,
+    input_out_p2 => input_out_p2
   );
 
   clk   <= '1' after 0 ns,
@@ -46,6 +52,9 @@ begin
           '0' after 240 ns;
 
   input_in_p1 <= "00000000" after 0 ns,
+                 "10110100" after 180 ns;
+
+  input_in_p2 <= "00000000" after 0 ns,
                  "10110100" after 180 ns;
 
 end architecture behavioural;

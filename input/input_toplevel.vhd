@@ -10,7 +10,9 @@ entity input_toplevel is
     controller_clk      : out   std_logic;
 
     p1_controller : in    std_logic;                    -- player 1 controller serial data in
-    p1_input      : out   std_logic_vector(7 downto 0)  -- player 1 parallel out
+    p1_input      : out   std_logic_vector(7 downto 0); -- player 1 parallel out
+    p2_controller : in    std_logic;                    -- player 2 controller serial data in
+    p2_input      : out   std_logic_vector(7 downto 0)  -- player 2 parallel out
  );
 end entity input_toplevel;
 
@@ -48,7 +50,10 @@ architecture structural of input_toplevel is
       reset     : in    std_logic;
 
       controller_p1     : in    std_logic;
-      input_p1          : out   std_logic_vector(7 downto 0)
+      input_p1          : out   std_logic_vector(7 downto 0);
+
+      controller_p2     : in    std_logic;
+      input_p2          : out   std_logic_vector(7 downto 0)
     );
   end component deserializer;
 
@@ -59,7 +64,9 @@ architecture structural of input_toplevel is
 
       read      : in    std_logic;
       input_in_p1    : in    std_logic_vector(7 downto 0);
-      input_out_p1   : out   std_logic_vector(7 downto 0)
+      input_out_p1   : out   std_logic_vector(7 downto 0);
+      input_in_p2    : in    std_logic_vector(7 downto 0);
+      input_out_p2   : out   std_logic_vector(7 downto 0)
     );
   end component input_buffer;
 
@@ -69,6 +76,7 @@ architecture structural of input_toplevel is
   signal deserializer_reset   : std_logic;
   signal deserializer_clk     : std_logic;
   signal deserializer_out_p1  : std_logic_vector(7 downto 0);
+  signal deserializer_out_p2  : std_logic_vector(7 downto 0);
 
   signal buffer_read  : std_logic;
 
@@ -99,8 +107,10 @@ begin
     reset => deserializer_reset,
 
     controller_p1 => p1_controller,
+    controller_p2 => p2_controller,
 
-    input_p1 => deserializer_out_p1
+    input_p1 => deserializer_out_p1,
+    input_p2 => deserializer_out_p2
   );
 
   bffr: input_buffer port map (
@@ -109,7 +119,10 @@ begin
     read => buffer_read,
 
     input_in_p1 => deserializer_out_p1,
-    input_out_p1 => p1_input
+    input_out_p1 => p1_input,
+
+    input_in_p2 => deserializer_out_p2,
+    input_out_p2 => p2_input
   );
 
 end architecture;

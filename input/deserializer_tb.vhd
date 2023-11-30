@@ -11,7 +11,9 @@ architecture behavioural of deserializer_tb is
       reset     : in    std_logic;
 
       controller_p1     : in    std_logic;
-      input_p1          : out   std_logic_vector(7 downto 0)
+      input_p1          : out   std_logic_vector(7 downto 0);
+      controller_p2     : in    std_logic;
+      input_p2          : out   std_logic_vector(7 downto 0)
     );
   end component deserializer;
 
@@ -19,6 +21,8 @@ architecture behavioural of deserializer_tb is
 
   signal controller_p1    : std_logic;
   signal input_p1         : std_logic_vector(7 downto 0);
+  signal controller_p2    : std_logic;
+  signal input_p2         : std_logic_vector(7 downto 0);
 
 begin
   test: deserializer
@@ -26,7 +30,9 @@ begin
     clk => clk,
     reset => reset,
     controller_p1 => controller_p1,
-    input_p1 => input_p1
+    input_p1 => input_p1,
+    controller_p2 => controller_p2,
+    input_p2 => input_p2
   );
 
   clk   <= '1' after 0 ns,
@@ -39,4 +45,7 @@ begin
                    '0' after 84 ns,
                    '1' after 132 ns;
 
+  controller_p2 <= '1' after 0 ns,
+                   '0' after 84 ns,
+                   '1' after 132 ns;
 end architecture behavioural;

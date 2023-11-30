@@ -52,6 +52,7 @@ architecture structural of chip_toplevel is
 	signal readyphysicsin 	: std_logic;
 	signal readyphysicsout 	: std_logic;
 	
+	
 	component physics_fsm is
 		port(
 			clk : in std_logic;
@@ -91,43 +92,43 @@ architecture structural of chip_toplevel is
         port (
             --charhp  : out std_logic_vector(9 downto 0); -- initial knockback percentage so NOT character health!
             --chardc  : out std_logic_vector(7 downto 0); -- initial character death count, may not be necessary
-            char1sx : out std_logic_vector(7 downto 0); -- char(acter)1 starting position x
-            char1sy : out std_logic_vector(7 downto 0); -- char1 starting position y
+            --char1sx : out std_logic_vector(7 downto 0); -- char(acter)1 starting position x
+            --char1sy : out std_logic_vector(7 downto 0); -- char1 starting position y
 			--char2sx : out std_logic_vector(7 downto 0); -- char2 starting position x
             --char2sy : out std_logic_vector(7 downto 0); -- char2 starting position y
-            char1vx : out std_logic_vector(8 downto 0); -- char1 starting velocity x
-            char1vy : out std_logic_vector(8 downto 0); -- char1 starting velocity y
+            --char1vx : out std_logic_vector(8 downto 0); -- char1 starting velocity x
+            --char1vy : out std_logic_vector(8 downto 0); -- char1 starting velocity y
             --char2vx : out std_logic_vector(8 downto 0); -- char2 starting velocity x
             --char2vy : out std_logic_vector(8 downto 0); -- char2 starting velocity y
-            chardx  : out std_logic_vector(3 downto 0); -- char size x (from center to edge)
-            chardy  : out std_logic_vector(3 downto 0); -- char size y (from center to edge)
-            att1dx  : out std_logic_vector(3 downto 0); -- attack1 size x (from center to edge)
-            att1dy  : out std_logic_vector(3 downto 0); -- attack1 size y (from center to edge)
-            att2dx  : out std_logic_vector(3 downto 0); -- attack2 size x (from center to edge)
-            att2dy  : out std_logic_vector(3 downto 0); -- attack2 size y (from center to edge)
-            att1dm  : out std_logic_vector(3 downto 0); -- attack1 damage
-            att2dm  : out std_logic_vector(3 downto 0); -- attack2 damage
+            --chardx  : out std_logic_vector(3 downto 0); -- char size x (from center to edge)
+            --chardy  : out std_logic_vector(3 downto 0); -- char size y (from center to edge)
+            --att1dx  : out std_logic_vector(3 downto 0); -- attack1 size x (from center to edge)
+            --att1dy  : out std_logic_vector(3 downto 0); -- attack1 size y (from center to edge)
+            --att2dx  : out std_logic_vector(3 downto 0); -- attack2 size x (from center to edge)
+            --att2dy  : out std_logic_vector(3 downto 0); -- attack2 size y (from center to edge)
+            --att1dm  : out std_logic_vector(3 downto 0); -- attack1 damage
+            --att2dm  : out std_logic_vector(3 downto 0); -- attack2 damage
             -- att1kb		: out std_logic_vector(5 downto 0); -- attack1 knockback, currently unused
             -- att2kb		: out std_logic_vector(5 downto 0); -- attack2 knockback, currently unused
-            plat1x  : out std_logic_vector(7 downto 0); -- plat(form)1 x position 
-            plat1y  : out std_logic_vector(7 downto 0); -- plat1 y position
-            plat2x  : out std_logic_vector(7 downto 0); -- plat2 x position
-            plat2y  : out std_logic_vector(7 downto 0); -- plat2 y position
-            plat3x  : out std_logic_vector(7 downto 0); -- plat3 x position
-            plat3y  : out std_logic_vector(7 downto 0); -- plat3 y position
-            plat4x  : out std_logic_vector(7 downto 0); -- plat4 x position
-            plat4y  : out std_logic_vector(7 downto 0); -- plat4 y position
-            plat1dx : out std_logic_vector(7 downto 0); -- plat1 x size (center to edge)
-            plat1dy : out std_logic_vector(7 downto 0); -- plat1 y size (center to edge)
-            plat2dx : out std_logic_vector(7 downto 0); -- plat2 x size (center to edge)
-            plat2dy : out std_logic_vector(7 downto 0); -- plat2 y size (center to edge)
-            plat3dx : out std_logic_vector(7 downto 0); -- plat3 x size (center to edge)
-            plat3dy : out std_logic_vector(7 downto 0); -- plat3 y size (center to edge)
-            plat4dx : out std_logic_vector(7 downto 0); -- plat4 x size (center to edge)
-            plat4dy : out std_logic_vector(7 downto 0); -- plat4 y size (center to edge)
-            kilznx1 : out std_logic_vector(7 downto 0); -- killzone location (left side)
-            kilznx2 : out std_logic_vector(7 downto 0); -- killzone location (right side)
-            kilzny1 : out std_logic_vector(7 downto 0); -- killzone location (top side)
+            --plat1x  : out std_logic_vector(7 downto 0); -- plat(form)1 x position 
+            --plat1y  : out std_logic_vector(7 downto 0); -- plat1 y position
+            --plat2x  : out std_logic_vector(7 downto 0); -- plat2 x position
+            --plat2y  : out std_logic_vector(7 downto 0); -- plat2 y position
+            --plat3x  : out std_logic_vector(7 downto 0); -- plat3 x position
+            --plat3y  : out std_logic_vector(7 downto 0); -- plat3 y position
+            --plat4x  : out std_logic_vector(7 downto 0); -- plat4 x position
+            --plat4y  : out std_logic_vector(7 downto 0); -- plat4 y position
+            --plat1dx : out std_logic_vector(7 downto 0); -- plat1 x size (center to edge)
+            --plat1dy : out std_logic_vector(7 downto 0); -- plat1 y size (center to edge)
+            --plat2dx : out std_logic_vector(7 downto 0); -- plat2 x size (center to edge)
+            --plat2dy : out std_logic_vector(7 downto 0); -- plat2 y size (center to edge)
+            --plat3dx : out std_logic_vector(7 downto 0); -- plat3 x size (center to edge)
+            --plat3dy : out std_logic_vector(7 downto 0); -- plat3 y size (center to edge)
+            --plat4dx : out std_logic_vector(7 downto 0); -- plat4 x size (center to edge)
+            --plat4dy : out std_logic_vector(7 downto 0); -- plat4 y size (center to edge)
+            --kilznx1 : out std_logic_vector(7 downto 0); -- killzone location (left side)
+            --kilznx2 : out std_logic_vector(7 downto 0); -- killzone location (right side)
+            --kilzny1 : out std_logic_vector(7 downto 0); -- killzone location (top side)
             -- numbers commented out for now, will be linked to vga module eventually
             -- num01		: out std_logic_vector(4 downto 0);
             -- num02		: out std_logic_vector(4 downto 0);

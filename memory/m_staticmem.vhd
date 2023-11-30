@@ -3,24 +3,24 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity staticmem is
-port(	charhp		: out std_logic_vector(9 downto 0);
-		chardc		: out std_logic_vector(7 downto 0);
-		char1sx		: out std_logic_vector(7 downto 0);
-		char1sy		: out std_logic_vector(7 downto 0);
-		char2sx		: out std_logic_vector(7 downto 0);
-		char2sy		: out std_logic_vector(7 downto 0);
-		char1vx		: out std_logic_vector(8 downto 0);
-		char1vy		: out std_logic_vector(8 downto 0);
-		char2vx		: out std_logic_vector(8 downto 0);
-		char2vy		: out std_logic_vector(8 downto 0);
-		chardx		: out std_logic_vector(3 downto 0);
-		chardy		: out std_logic_vector(3 downto 0);
-		att1dx		: out std_logic_vector(3 downto 0);
-		att1dy		: out std_logic_vector(3 downto 0);
-		att2dx		: out std_logic_vector(3 downto 0);
-		att2dy		: out std_logic_vector(3 downto 0);
-		att1dm		: out std_logic_vector(3 downto 0);
-		att2dm		: out std_logic_vector(3 downto 0);
+port(	--charhp		: out std_logic_vector(9 downto 0);
+		--chardc		: out std_logic_vector(7 downto 0);
+		-char1sx		: out std_logic_vector(7 downto 0);
+		-char1sy		: out std_logic_vector(7 downto 0);
+		-char2sx		: out std_logic_vector(7 downto 0);
+		-char2sy		: out std_logic_vector(7 downto 0);
+		-char1vx		: out std_logic_vector(8 downto 0);
+		-char1vy		: out std_logic_vector(8 downto 0);
+		-char2vx		: out std_logic_vector(8 downto 0);
+		-char2vy		: out std_logic_vector(8 downto 0);
+		-chardx		: out std_logic_vector(3 downto 0);
+		-chardy		: out std_logic_vector(3 downto 0);
+		-att1dx		: out std_logic_vector(3 downto 0);
+		-att1dy		: out std_logic_vector(3 downto 0);
+		-att2dx		: out std_logic_vector(3 downto 0);
+		-att2dy		: out std_logic_vector(3 downto 0);
+		-att1dm		: out std_logic_vector(3 downto 0);
+		-att2dm		: out std_logic_vector(3 downto 0);
 		-- att1kb		: out std_logic_vector(5 downto 0);
 		-- att2kb		: out std_logic_vector(5 downto 0);
 		plat1x		: out std_logic_vector(7 downto 0);
@@ -66,8 +66,8 @@ end staticmem;
 
 architecture structural of staticmem is
 begin
-		charhp		<= "0000000000";
-		chardc		<= "00000000";
+		--charhp		<= "0000000000";
+		--chardc		<= "00000000";
 		char1sx		<= "00000000";--char start point
 		char1sy		<= "00000000";--
 		char2sx		<= "00000000";--

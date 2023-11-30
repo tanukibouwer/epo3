@@ -10,13 +10,30 @@ end velocity_interpolator;
 
 architecture behaviour of velocity_interpolator is
 constant accel : signed(3 downto 0) := "0101";
+constant neg_accel : signed(3 downto 0) := "1011";
 begin
 
 calculate : process (vin_x, movement_target) is
    variable difference : signed(8 downto 0) := (others => '0');
+   variable small_difference : std_logic;
 begin
    difference := signed(vin_x) - signed(movement_target);
-   if abs(difference) < accel then
+   
+   if difference < 0 then
+      if difference > neg_accel then
+         small_difference := '1';
+      else
+         small_difference := '0';
+      end if;
+   else
+      if difference < accel then
+         small_difference := '1';
+      else
+         small_difference := '0';
+      end if;
+   end if;
+   
+   if small_difference = '1' then
       vout_x <= std_logic_vector(resize(signed(movement_target), vout_x'length));
    elsif signed(vin_x) > signed(movement_target) then
       vout_x <= std_logic_vector(signed(vin_x) - accel);

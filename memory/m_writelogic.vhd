@@ -19,10 +19,12 @@ architecture behaviour of writelogic is
 begin
 	process(clk) is
 	begin
+		if (rising_edge (clk)) then
 		if (reset = '1') then
 			state <= off;
 		else
 			state <= new_state;
+		end if;
 		end if;
 	end process;
 	process(vsync, state) is

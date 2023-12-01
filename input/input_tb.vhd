@@ -47,12 +47,16 @@ begin
            '0' after 20 ns when clk /= '0' else '1' after 20 ns;
 
   reset <= '1' after 0 ns,
-           '0' after 70 ns;
+           '0' after 70 ns,
+           '1' after 200 us,
+           '0' after 201 us;
 
   p1_controller <= '0' after 0 ns,
                    '1' after 30 us,
                    '0' after 55 us,
-                   '1' after 185 us;
+                   '1' after 185 us,
+                   '0' after 290 us,
+                   '1' after 330 us;
 
   p2_controller <= '1' after 0 ns,
                    '0' after 55 us,

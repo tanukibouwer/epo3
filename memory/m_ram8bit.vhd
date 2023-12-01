@@ -6,6 +6,7 @@ entity ram_8b is -- 8 of these
 port(
 	clk			: in std_logic;
 	reset		: in std_logic;
+	initial		: in std_logic_vector(7 downto 0);
 	data_in 	: in std_logic_vector(7 downto 0);
 	data_out 	: out std_logic_vector(7 downto 0);
 	write 		: in std_logic);
@@ -20,7 +21,7 @@ begin
 	begin
 		if (rising_edge (clk)) then
 			if (reset = '1') then
-				mem(0) <= std_logic_vector(to_unsigned(50, mem(0)'length));
+				mem(0) <= initial;
 			else
 				if (write = '1') then 
 					mem(0) <= data_in;

@@ -133,6 +133,7 @@ architecture structural of memory is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
+		initial		: in std_logic;
 				data_in 	: in std_logic_vector(7 downto 0);
 		data_out 	: out std_logic_vector(7 downto 0);
 		write 		: in std_logic);
@@ -182,24 +183,28 @@ begin
 --								
 	DM20 : ram_8b port map (	clk			=> clk,
 								reset		=> reset,
+								initial		=> "00011010",
 																data_in 	=> data_in8b1,
 								data_out 	=> data_out8b1,
 								write 		=> writeint);
 								
 	DM21 : ram_8b port map (	clk			=> clk,
 								reset		=> reset,
+								initial		=> "00011010",
 																data_in 	=> data_in8b2,
 								data_out 	=> data_out8b2,
 								write 		=> writeint);
 								
 	DM22 : ram_8b port map (	clk			=> clk,
 								reset		=> reset,
+								initial		=> "01111110",
 																data_in 	=> data_in8b3,
 								data_out 	=> data_out8b3,
 								write 		=> writeint);
 								
 	DM23 : ram_8b port map (	clk			=> clk,
 								reset		=> reset,
+								initial		=> "00011010",
 																data_in 	=> data_in8b4,
 								data_out 	=> data_out8b4,
 								write 		=> writeint);

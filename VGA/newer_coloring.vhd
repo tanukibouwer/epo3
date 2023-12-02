@@ -1,5 +1,5 @@
 --module: coloring
---version: 1.1
+--version: a2.0.5
 --author: Kevin Vermaat & Parama Fawwaz
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
@@ -347,41 +347,55 @@ begin
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
+
+                    --------------------------------------------------------------------------------
+                    -- dynamic assignment of pixel colors due to character location
                     --------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
-                    -----------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) then --character 2
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
                     --------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------
                     -- p1 percentage markings
+                    --------------------------------------------------------------------------------
                 elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data
+
                     -- margins
                     if (uns_hcount > 143 and uns_hcount <= 151) and (uns_vcount > 434 and uns_vcount <= 514) then -- left margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-
-                    elsif (uns_hcount > 189 and uns_hcount <= 219) and (uns_vcount > 434 and uns_vcount <= 446) then -- margin
+                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 446) then -- top margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-
-                    elsif (uns_hcount > 187 and uns_hcount <= 219) and (uns_vcount > 502 and uns_vcount <= 514) then -- margin
+                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 502 and uns_vcount <= 514) then -- bottom margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-
                     elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- right margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-                        
-                    else -- fall back for when nothing works -> draw background color
+                    elsif (uns_hcount > 151 and uns_hcount <= 219) and (uns_vcount > 446 and uns_vcount <= 502) then -- inside the margins
+                        if (uns_hcount > 219 and uns_hcount <= 256) and (uns_vcount > 434 and uns_vcount <= 514) then -- constant P1 image
+                            R_data <= '1';
+                            G_data <= '1';
+                            B_data <= '1';
+                        elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- first digit
+                            -- TODO make the first digit logic
+                            R_data <= '1';
+                            G_data <= '1';
+                            B_data <= '1';
+                        end if;
+
+                    else -- fall back for when nothing works -> draw background color ------ !SHOULD NOT HAPPEN!
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';

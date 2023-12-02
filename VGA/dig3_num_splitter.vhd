@@ -28,7 +28,7 @@ entity dig3_num_splitter is
 
     );
 end entity dig3_num_splitter;
-architecture behaviour of dig3_num_splitter is
+architecture behavioural of dig3_num_splitter is
     signal number : unsigned(9 downto 0);
 begin
     number <= unsigned(num3dig);

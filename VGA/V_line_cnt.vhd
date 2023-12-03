@@ -47,8 +47,3 @@ begin
     count <= std_logic_vector(cur_count);
 
 end architecture;
-
-configuration v_line_cnt_behavioural_cfg of v_line_cnt is
-    for behavioural
-    end for;
-end configuration v_line_cnt_behavioural_cfg;

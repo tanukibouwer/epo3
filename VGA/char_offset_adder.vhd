@@ -31,7 +31,7 @@ entity char_offset_adder is
     );
 end entity char_offset_adder;
 
-architecture behavioural of char_offset_adder is
+architecture computational of char_offset_adder is
     -- signal xpos_int, ypos_int : unsigned(7 downto 0);
     signal xpos_int                                   : integer; 
     signal ypos_int                                   : integer; 
@@ -54,8 +54,3 @@ begin
     
 
 end architecture;
-
-configuration char_offset_adder_behavioural_cfg of char_offset_adder is
-    for behavioural
-    end for;
-end configuration char_offset_adder_behavioural_cfg;

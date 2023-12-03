@@ -19,4 +19,11 @@ Structure
             -> the game data will be processed by subblocks of coloring so the desired RELATIVE pixel locations and colors will be known
                 -char_offset_adder
                 -number_sprite with the dig3_num_splitter
+    -design of the submodules and their components
+        -? information on how the module should look and how much combinatorial logic compared to registers/latches will be included
+    -testbenches/simulation and synthesis 
+        -> TODO make testbenches for all the components/submodules
+    
  -->
+
+

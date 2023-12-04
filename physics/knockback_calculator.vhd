@@ -46,4 +46,3 @@ configuration p_knockback_calculator_cfg of p_knockback_calculator is
       end for;
    end for;
 end p_knockback_calculator_cfg;
-

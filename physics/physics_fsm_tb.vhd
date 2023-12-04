@@ -18,6 +18,9 @@ architecture behaviour of physics_fsm_tb is
            pin_x : in std_logic_vector(7 downto 0);
            pin_y : in std_logic_vector(7 downto 0);
            player_input : in std_logic_Vector(7 downto 0);
+           knockback_percentage : in std_logic_vector(7 downto 0);
+           knockback_x : in std_logic_vector(4 downto 0);
+           knockback_y : in std_logic_vector(4 downto 0);
            vout_x : out std_logic_vector(8 downto 0);
            vout_y : out std_logic_vector(8 downto 0);
            pout_x : out std_logic_vector(7 downto 0);
@@ -32,13 +35,17 @@ architecture behaviour of physics_fsm_tb is
    signal pin_x : std_logic_vector(7 downto 0);
    signal pin_y : std_logic_vector(7 downto 0);
    signal player_input : std_logic_Vector(7 downto 0);
+   signal knockback_percentage : std_logic_vector(7 downto 0);
+   signal knockback_x : std_logic_vector(4 downto 0);
+   signal knockback_y : std_logic_vector(4 downto 0);
    signal vout_x : std_logic_vector(8 downto 0);
    signal vout_y : std_logic_vector(8 downto 0);
    signal pout_x : std_logic_vector(7 downto 0);
    signal pout_y : std_logic_vector(7 downto 0);
    signal ready_out : std_logic;
 begin
-   test: physics_fsm port map (clk, reset, ready_in, vin_x, vin_y, pin_x, pin_y, player_input, vout_x, vout_y, pout_x, pout_y, ready_out);
+   test: physics_fsm port map (clk, reset, ready_in, vin_x, vin_y, pin_x, pin_y, player_input, knockback_percentage, knockback_x, knockback_y,
+         vout_x, vout_y, pout_x, pout_y, ready_out);
    clk <= '0' after 0 ns,
           '1' after 20 ns when clk /= '1' else '0' after 20 ns;
    reset <= '1' after 0 ns,
@@ -56,6 +63,9 @@ begin
    vin_y <= (others => '0');
    pin_x <= (others => '0');
    pin_y <= (others => '0');
+   knockback_percentage <= (others => '0');
+   knockback_x <= (others => '0');
+   knockback_y <= (others => '0');
 end behaviour;
 
 configuration physics_fsm_tb_behaviour_cfg of physics_fsm_tb is

@@ -17,7 +17,7 @@ architecture behaviour of h_player_movement is
    end component;
 begin
    with left_right_pressed select
-      out_h_target <= max_left_speed when "10", max_right_speed when "01", (others => '0') when others;   
+      out_h_target <= max_left_speed when "01", max_right_speed when "10", (others => '0') when others;   
 end behaviour;
 
 configuration h_player_movement_cfg of h_player_movement is

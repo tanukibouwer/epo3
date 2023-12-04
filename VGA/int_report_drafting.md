@@ -1,4 +1,16 @@
-# VGA module design
+---
+# title: "VGA Module Design yes"
+output: pdf_document
+---
+
+# 1. VGA module design
+
+- [1. VGA module design](#1-vga-module-design)
+  - [1.1. Introduction](#11-introduction)
+  - [1.2. Specifications and boundary conditions](#12-specifications-and-boundary-conditions)
+  - [1.3. Subdivision of the VGA module into Submodules](#13-subdivision-of-the-vga-module-into-submodules)
+  - [1.4. Design of Submodules](#14-design-of-submodules)
+  - [1.5. Simulation and Synthesis of Submodules](#15-simulation-and-synthesis-of-submodules)
 
 <!-- 
 Structure
@@ -26,4 +38,26 @@ Structure
     
  -->
 
+## 1.1. Introduction
 
+As is known, any video game has to have a video output. Without one the game would be impossible to play. For this reason a VGA module will be designed to be able to show the internal data to the player for interpretation. The VGA module can be seen as a application specific graphics card, as it will be designed specifically for the Super Smash Bros chip.
+
+## 1.2. Specifications and boundary conditions
+
+To begin the design of the VGA module, one has to first define the required specifications and the boundary conditions the module has to be able to deal with. To begin with the specifications, a broad description would be: "A module that accepts game data from memory and then represents that data accordingly on screen". Although this description is too broad to fully grasp how the module will look like, it does suffice as a stepping stone towards a more detailed specification list.
+
+The application specific specifications for this module are then as follows:
+
+    - Drive a 640x480@60Hz VGA capable monitor
+    - Send out a 4-bit color depth RGB signal
+    - Interpret and display the game data on screen
+
+Again, these specifications are quite broad, but lets expand on them.
+For the first one, the resolution that has been set is the standard VGA resolution. This resolution is also a colloquiary from the frame refresh rate and pixel clock. The latter being 25.175MHz for exactly a 60 frame refresh rate. Given that the chip this VGA module will be situated on will have a clock frequency of 25MHz, this resolution is the easiest to achieve and display. Given the VGA frame specifications, a 800 pixel long line and a frame of 525 lines, there will be 
+Then for the color depth
+
+## 1.3. Subdivision of the VGA module into Submodules
+
+## 1.4. Design of Submodules
+
+## 1.5. Simulation and Synthesis of Submodules

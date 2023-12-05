@@ -14,18 +14,24 @@ end collision_resolver;
 
 architecture behaviour of collision_resolver is
 
-constant player_half_size : unsigned(7 downto 0) := to_unsigned(4, 8);
+constant player_half_size_x : unsigned(7 downto 0) := to_unsigned(4, 8);
+constant player_half_size_y : unsigned(7 downto 0) := to_unsigned(6, 8);
 
-constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(20, 8);
-constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(60, 8);
-constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(40, 8);
-constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(36, 8); -- -4;
-constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(50, 8);
-constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(0, 8);
-constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(0, 8);
-constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(0, 8);
-constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(0, 8); -- -4;
-constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(0, 8);
+constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(10, 8);
+constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(59, 8);
+constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(69, 8);
+constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(63, 8); -- -6;
+constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(70, 8);
+constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(100, 8);
+constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(149, 8);
+constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(69, 8);
+constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(63, 8); -- -6;
+constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(70, 8);
+constant platform3_left_x : unsigned(7 downto 0) := to_unsigned(55, 8);
+constant platform3_right_x : unsigned(7 downto 0) := to_unsigned(104, 8);
+constant platform3_up_y : unsigned(7 downto 0) := to_unsigned(36, 8);
+constant platform3_placement_y : unsigned(7 downto 0) := to_unsigned(30, 8); -- -6;
+constant platform3_down_y : unsigned(7 downto 0) := to_unsigned(37, 8);
 constant floor_y : unsigned(7 downto 0) := to_unsigned(103, 8); -- 107 - player_half_size.
 
 begin
@@ -37,10 +43,10 @@ variable player_down_y : unsigned(7 downto 0) := to_unsigned(0, 8);
 variable going_down : std_logic := '0';
 begin
 
-player_left_x := unsigned(pin_x) - player_half_size;
-player_right_x := unsigned(pin_x) + player_half_size;
-player_up_y := unsigned(pin_y) - player_half_size;
-player_down_y := unsigned(pin_y) + player_half_size;
+player_left_x := unsigned(pin_x) - player_half_size_x;
+player_right_x := unsigned(pin_x) + player_half_size_x;
+player_up_y := unsigned(pin_y) - player_half_size_y;
+player_down_y := unsigned(pin_y) + player_half_size_y;
 
 if signed(vin_y) > to_signed(0, 8) then
    going_down := '1';
@@ -48,18 +54,25 @@ else
    going_down := '0';
 end if;
 
-if ((player_up_y > platform1_up_y and player_up_y < platform1_down_y) and 
+if ((player_down_y > platform1_up_y and player_down_y < platform1_down_y) and 
    (player_left_x > platform1_left_x and player_right_x < platform1_right_x)) and 
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform1_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
-elsif ((player_up_y > platform2_up_y and player_up_y < platform2_down_y) and 
+elsif ((player_down_y > platform2_up_y and player_down_y < platform2_down_y) and 
    (player_left_x > platform2_left_x and player_right_x < platform2_right_x)) and
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform2_placement_y);
+   vout_y <= (others => '0');
+   on_floor <= '1';
+elsif ((player_down_y > platform3_up_y and player_down_y < platform3_down_y) and 
+   (player_left_x > platform3_left_x and player_right_x < platform3_right_x)) and
+   going_down = '1' and
+   input_down = '0' then
+   pout_y <= std_logic_vector(platform3_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
 elsif player_up_y > floor_y and unsigned(pin_y) > to_unsigned(3, 2) then -- Prevent integer underflow

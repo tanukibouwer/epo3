@@ -1,26 +1,22 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 
-entity physics_fsm is
-   port(clk : in std_logic;
-        reset : in std_logic;
-        ready_in : in std_logic;
-        vin_x : in std_logic_vector(8 downto 0);
+entity physics_system is
+   port(vin_x : in std_logic_vector(8 downto 0);
         vin_y : in std_logic_vector(8 downto 0);
         pin_x : in std_logic_vector(7 downto 0);
         pin_y : in std_logic_vector(7 downto 0);
         player_input : in std_logic_Vector(7 downto 0);
         knockback_percentage : in std_logic_vector(7 downto 0);
-        knockback_x : in std_logic_vector(4 downto 0);
-        knockback_y : in std_logic_vector(4 downto 0);
+        knockback_x : in std_logic_vector(7 downto 0);
+        knockback_y : in std_logic_vector(7 downto 0);
         vout_x : out std_logic_vector(8 downto 0);
         vout_y : out std_logic_vector(8 downto 0);
         pout_x : out std_logic_vector(7 downto 0);
-        pout_y : out std_logic_vector(7 downto 0);
-        ready_out : out std_logic);
-end physics_fsm;
+        pout_y : out std_logic_vector(7 downto 0));
+end physics_system;
 
-architecture behaviour of physics_fsm is
+architecture behaviour of physics_system is
    component gravity
    	port(	velocity_in 	: in std_logic_vector (8 downto 0);
    			velocity_out	: out std_logic_vector (8 downto 0));
@@ -30,8 +26,8 @@ architecture behaviour of physics_fsm is
       port(vin_x  : in  std_logic_vector(8 downto 0);
            vin_y  : in  std_logic_vector(8 downto 0);
    	knockback_percentage : in std_logic_vector(7 downto 0);
-   	knockback_x : in std_logic_vector(4 downto 0);
-   	knockback_y : in std_logic_vector(4 downto 0);
+   	knockback_x : in std_logic_vector(7 downto 0);
+   	knockback_y : in std_logic_vector(7 downto 0);
            vout_x : out std_logic_vector(8 downto 0);
            vout_y : out std_logic_vector(8 downto 0));
    end component;
@@ -100,7 +96,7 @@ begin
    pout_x <= adder_pout_x;
 end behaviour;
 
-configuration physics_fsm_behaviour_cfg of physics_fsm is
+configuration physics_system_behaviour_cfg of physics_system is
    for behaviour
       for all: p_knockback_calculator use configuration work.p_knockback_calculator_cfg;
       end for;
@@ -117,4 +113,4 @@ configuration physics_fsm_behaviour_cfg of physics_fsm is
       for all: jump_calculator use configuration work.jump_calculator_behaviour_cfg;
       end for;
    end for;
-end physics_fsm_behaviour_cfg;
+end physics_system_behaviour_cfg;

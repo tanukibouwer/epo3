@@ -9,8 +9,8 @@ architecture structural of p_knockback_calculator_tb is
       port(vin_x  : in  std_logic_vector(8 downto 0);
            vin_y  : in  std_logic_vector(8 downto 0);
    	     knockback_percentage : in std_logic_vector(7 downto 0);
-   	     knockback_x : in std_logic_vector(4 downto 0);
-   	     knockback_y : in std_logic_vector(4 downto 0);
+   	     knockback_x : in std_logic_vector(7 downto 0);
+   	     knockback_y : in std_logic_vector(7 downto 0);
            vout_x : out std_logic_vector(8 downto 0);
            vout_y : out std_logic_vector(8 downto 0));
    end component;
@@ -18,8 +18,8 @@ architecture structural of p_knockback_calculator_tb is
    signal vin_x : std_logic_vector(8 downto 0);
    signal vin_y : std_logic_vector(8 downto 0);
    signal knockback_percentage : std_logic_vector(7 downto 0);
-   signal knockback_x : std_logic_vector(4 downto 0);
-   signal knockback_y : std_logic_vector(4 downto 0);
+   signal knockback_x : std_logic_vector(7 downto 0);
+   signal knockback_y : std_logic_vector(7 downto 0);
    signal vout_x : std_logic_vector(8 downto 0);
    signal vout_y : std_logic_vector(8 downto 0);
 begin
@@ -31,19 +31,27 @@ begin
         "000000100" after 30 ns,
         "000100100" after 40 ns,
         "100011000" after 50 ns,
-        "001000111" after 60 ns,
+        "000001010" after 60 ns,
         "111111111" after 70 ns,
         "111111110" after 80 ns;
    vin_y <= "000000000" after 0 ns;
-   knockback_x <= "00000" after 0 ns,
-                  "01000" after 15 ns,
-                  "11000" after 25 ns,
-                  "00110" after 35 ns,
-                  "11010" after 45 ns,
-                  "11000" after 70 ns,
-                  "11010" after 75 ns,
-                  "11000" after 85 ns;
-   knockback_y <= "00000" after 0 ns;
+   knockback_x <= "00000000" after 0 ns,
+                  "01000000" after 15 ns,
+                  "11000000" after 25 ns,
+                  "00110000" after 35 ns,
+                  "11010000" after 45 ns,
+                  "11110000" after 45 ns,
+                  "11000000" after 70 ns,
+                  "11010000" after 75 ns,
+                  "11000000" after 85 ns;
+   knockback_y <= "00000000" after 0 ns,
+                  "01000000" after 15 ns,
+                  "11000000" after 25 ns,
+                  "00110000" after 35 ns,
+                  "11010000" after 45 ns,
+                  "11000000" after 70 ns,
+                  "11010000" after 75 ns,
+                  "11000000" after 85 ns;
    knockback_percentage <= "00000001" after 0 ns,
                            "00000011" after 50 ns,
                            "01101101" after 55 ns,

@@ -17,22 +17,22 @@ architecture behaviour of collision_resolver is
 constant player_half_size_x : unsigned(7 downto 0) := to_unsigned(4, 8);
 constant player_half_size_y : unsigned(7 downto 0) := to_unsigned(6, 8);
 
-constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(10, 8);
-constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(59, 8);
-constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(69, 8);
-constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(63, 8); -- -6;
-constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(70, 8);
-constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(100, 8);
-constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(149, 8);
-constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(69, 8);
-constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(63, 8); -- -6;
-constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(70, 8);
-constant platform3_left_x : unsigned(7 downto 0) := to_unsigned(55, 8);
-constant platform3_right_x : unsigned(7 downto 0) := to_unsigned(104, 8);
-constant platform3_up_y : unsigned(7 downto 0) := to_unsigned(36, 8);
-constant platform3_placement_y : unsigned(7 downto 0) := to_unsigned(30, 8); -- -6;
-constant platform3_down_y : unsigned(7 downto 0) := to_unsigned(37, 8);
-constant floor_y : unsigned(7 downto 0) := to_unsigned(103, 8); -- 107 - player_half_size.
+constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(9, 8); -- 10
+constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(60, 8); -- 59
+constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(73, 8); -- 74
+constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(68, 8); -- -6;
+constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(80, 8); -- 79
+constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(99, 8); -- 100
+constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(150, 8); -- 149
+constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(73, 8); -- 74
+constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(68, 8); -- -6;
+constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(80, 8); -- 79
+constant platform3_left_x : unsigned(7 downto 0) := to_unsigned(54, 8); -- 55
+constant platform3_right_x : unsigned(7 downto 0) := to_unsigned(105, 8); -- 104
+constant platform3_up_y : unsigned(7 downto 0) := to_unsigned(42, 8); -- 43
+constant platform3_placement_y : unsigned(7 downto 0) := to_unsigned(37, 8); -- -6;
+constant platform3_down_y : unsigned(7 downto 0) := to_unsigned(49, 8); -- 48
+constant floor_y : unsigned(7 downto 0) := to_unsigned(101, 8); -- 107 - player_half_size.
 
 begin
 resolver : process (vin_y, pin_x, pin_y, input_down) is
@@ -55,21 +55,24 @@ else
 end if;
 
 if ((player_down_y > platform1_up_y and player_down_y < platform1_down_y) and 
-   (player_left_x > platform1_left_x and player_right_x < platform1_right_x)) and 
+   ((player_left_x > platform1_left_x and player_left_x < platform1_right_x) or
+    (player_right_x > platform1_left_x and player_right_x < platform1_right_x)) and 
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform1_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
 elsif ((player_down_y > platform2_up_y and player_down_y < platform2_down_y) and 
-   (player_left_x > platform2_left_x and player_right_x < platform2_right_x)) and
+   (player_left_x > platform2_left_x and player_left_x < platform2_right_x) or
+   (player_right_x > platform2_left_x and player_right_x < platform2_right_x)) and
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform2_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
 elsif ((player_down_y > platform3_up_y and player_down_y < platform3_down_y) and 
-   (player_left_x > platform3_left_x and player_right_x < platform3_right_x)) and
+   (player_left_x > platform3_left_x and player_left_x < platform3_right_x) or
+   (player_right_x > platform3_left_x and player_right_x < platform3_right_x)) and
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform3_placement_y);

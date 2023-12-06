@@ -9,8 +9,8 @@ entity velocity_interpolator is
 end velocity_interpolator;
 
 architecture behaviour of velocity_interpolator is
-constant accel : signed(3 downto 0) := "0101";
-constant neg_accel : signed(3 downto 0) := "1011";
+constant accel : signed(3 downto 0) := "0001";
+constant neg_accel : signed(3 downto 0) := "1110";
 begin
 
 calculate : process (vin_x, movement_target) is

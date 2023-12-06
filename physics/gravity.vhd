@@ -9,7 +9,7 @@ end gravity;
 
 architecture behaviour of gravity is
 
-	constant gravity_constant : std_logic_vector (8 downto 0)	:= "000000101";
+	constant gravity_constant : std_logic_vector (8 downto 0)	:= "000000001";
 
 begin
 

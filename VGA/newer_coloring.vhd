@@ -38,134 +38,136 @@ entity coloring_new is
         x_upperbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
         y_lowerbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
         y_upperbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
+        -- percentage from attack module
+        percentage_p1 : in std_logic_vector(9 downto 0);
         --------------------------------------------------------------------------------
         -- percentage sprites
         -- char1 dig1
-        c1d1l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        c1d1l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- char1 dig2
-        c1d2l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        c1d2l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- char1 dig 3
-        c1d3l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        c1d3l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- char2 dig1
-        c2d1l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        c2d1l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- char2 dig2
-        c2d2l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        c2d2l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- char2 dig 3
-        c2d3l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        c2d3l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c1d1l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- c1d1l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+        -- -- char1 dig2
+        -- c1d2l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- c1d2l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+        -- -- char1 dig 3
+        -- c1d3l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- c1d3l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+        -- -- char2 dig1
+        -- c2d1l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- c2d1l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
+        -- -- char2 dig2
+        -- c2d2l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- c2d2l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
+        -- -- char2 dig 3
+        -- c2d3l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+        -- c2d3l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
         -- RGB data outputs
         R_data : out std_logic; --! RGB data output
         G_data : out std_logic; --! RGB data output
@@ -177,6 +179,49 @@ end entity coloring_new;
 architecture behavioural of coloring_new is
     signal uns_hcount, uns_vcount                                 : unsigned(9 downto 0);
     signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
+
+    component dig3_num_splitter is
+        port (
+            -- clk       : in std_logic;
+            -- reset     : in std_logic;
+            num3dig : in std_logic_vector(9 downto 0);
+            num1    : out std_logic_vector(3 downto 0);
+            num2    : out std_logic_vector(3 downto 0);
+            num3    : out std_logic_vector(3 downto 0)
+    
+        );
+    end component;
+
+    component number_sprite is
+        port (
+        -- clk         : in std_logic;
+        number : in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
+
+        line1  : out std_logic_vector(8 downto 0);
+        line2  : out std_logic_vector(8 downto 0);
+        line3  : out std_logic_vector(8 downto 0);
+        line4  : out std_logic_vector(8 downto 0);
+        line5  : out std_logic_vector(8 downto 0);
+        line6  : out std_logic_vector(8 downto 0);
+        line7  : out std_logic_vector(8 downto 0);
+        line8  : out std_logic_vector(8 downto 0);
+        line9  : out std_logic_vector(8 downto 0);
+        line10 : out std_logic_vector(8 downto 0);
+        line11 : out std_logic_vector(8 downto 0);
+        line12 : out std_logic_vector(8 downto 0);
+        line13 : out std_logic_vector(8 downto 0);
+        line14 : out std_logic_vector(8 downto 0);
+        line15 : out std_logic_vector(8 downto 0);
+        line16 : out std_logic_vector(8 downto 0);
+        line17 : out std_logic_vector(8 downto 0);
+        line18 : out std_logic_vector(8 downto 0);
+        line19 : out std_logic_vector(8 downto 0);
+        line20 : out std_logic_vector(8 downto 0)
+
+    );
+    end component;
+
+
 
     -- type declaration of the digit array
     type digit_array is array (0 to 19) of std_logic_vector(8 downto 0);
@@ -193,7 +238,153 @@ architecture behavioural of coloring_new is
     -- char 2 digit 3 array
     signal char2_dig3 : digit_array;
 
+
+    --digit signals for the number splitter
+    signal digit1 : std_logic_vector(3 downto 0);
+    signal digit2 : std_logic_vector(3 downto 0);
+    signal digit3 : std_logic_vector(3 downto 0);
+
+
+    -- number sprites player 1 digit1
+    signal c1d1l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+    signal c1d1l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
+
+    -- number sprites player 1 digit 2
+    signal c1d2l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+    signal c1d2l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
+
+        -- number sprites player 1 digit 3
+    signal c1d3l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+    signal c1d3l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
+
+    
+
 begin
+    --player 1
+    percentage_p1_to_digits: dig3_num_splitter port map (num3dig => percentage_p1, num1 => digit1, num2 => digit2, num3 => digit3);
+    digit1_p1_to_sprites: number_sprite port map (number => num1, 
+    line1 => char1_dig1(0), 
+    line2 => char1_dig1(1),
+    line3 => char1_dig1(2),
+    line4 => char1_dig1(3),
+    line5 => char1_dig1(4),
+    line6 => char1_dig1(5),
+    line7 => char1_dig1(6),
+    line8 => char1_dig1(7),
+    line9 => char1_dig1(8),
+    line10 => char1_dig1(9),
+    line11 => char1_dig1(10),
+    line12 => char1_dig1(11),
+    line13 => char1_dig1(12),
+    line14 => char1_dig1(13),
+    line15 => char1_dig1(14),
+    line16 => char1_dig1(15),
+    line17 => char1_dig1(16),
+    line18 => char1_dig1(17),
+    line19 => char1_dig1(18),
+    line20 => char1_dig1(19));
+
+    digit2_p1_to_sprites: number_sprite port map (number => num2, 
+    line1 => char1_dig2(0), 
+    line2 => char1_dig2(1),
+    line3 => char1_dig2(2),
+    line4 => char1_dig2(3),
+    line5 => char1_dig2(4),
+    line6 => char1_dig2(5),
+    line7 => char1_dig2(6),
+    line8 => char1_dig2(7),
+    line9 => char1_dig2(8),
+    line10 => char1_dig2(9),
+    line11 => char1_dig2(10),
+    line12 => char1_dig2(11),
+    line13 => char1_dig2(12),
+    line14 => char1_dig2(13),
+    line15 => char1_dig2(14),
+    line16 => char1_dig2(15),
+    line17 => char1_dig2(16),
+    line18 => char1_dig2(17),
+    line19 => char1_dig2(18),
+    line20 => char1_dig2(19));
+
+    digit3_p1_to_sprites: number_sprite port map (number => num3, 
+    line1 => char1_dig3(0), 
+    line2 => char1_dig3(1),
+    line3 => char1_dig3(2),
+    line4 => char1_dig3(3),
+    line5 => char1_dig3(4),
+    line6 => char1_dig3(5),
+    line7 => char1_dig3(6),
+    line8 => char1_dig3(7),
+    line9 => char1_dig3(8),
+    line10 => char1_dig3(9),
+    line11 => char1_dig3(10),
+    line12 => char1_dig3(11),
+    line13 => char1_dig3(12),
+    line14 => char1_dig3(13),
+    line15 => char1_dig3(14),
+    line16 => char1_dig3(15),
+    line17 => char1_dig3(16),
+    line18 => char1_dig3(17),
+    line19 => char1_dig3(18),
+    line20 => char1_dig3(19));
+    
+
+   
+
 
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
@@ -207,132 +398,8 @@ begin
     ch2x2 <= unsigned(x_upperbound_ch2);
     ch2y1 <= unsigned(y_lowerbound_ch2);
     ch2y2 <= unsigned(y_upperbound_ch2);
-    -- char 1 digit 1 array assignments
-    char1_dig1(0)  <= c1d1l1;
-    char1_dig1(1)  <= c1d1l2;
-    char1_dig1(2)  <= c1d1l3;
-    char1_dig1(3)  <= c1d1l4;
-    char1_dig1(4)  <= c1d1l5;
-    char1_dig1(5)  <= c1d1l6;
-    char1_dig1(6)  <= c1d1l7;
-    char1_dig1(7)  <= c1d1l8;
-    char1_dig1(8)  <= c1d1l9;
-    char1_dig1(9)  <= c1d1l10;
-    char1_dig1(10) <= c1d1l11;
-    char1_dig1(11) <= c1d1l12;
-    char1_dig1(12) <= c1d1l13;
-    char1_dig1(13) <= c1d1l14;
-    char1_dig1(14) <= c1d1l15;
-    char1_dig1(15) <= c1d1l16;
-    char1_dig1(16) <= c1d1l17;
-    char1_dig1(17) <= c1d1l18;
-    char1_dig1(18) <= c1d1l19;
-    char1_dig1(19) <= c1d1l20;
-    -- char 1 digit 2 array assignments
-    char1_dig2(0)  <= c1d2l1;
-    char1_dig2(1)  <= c1d2l2;
-    char1_dig2(2)  <= c1d2l3;
-    char1_dig2(3)  <= c1d2l4;
-    char1_dig2(4)  <= c1d2l5;
-    char1_dig2(5)  <= c1d2l6;
-    char1_dig2(6)  <= c1d2l7;
-    char1_dig2(7)  <= c1d2l8;
-    char1_dig2(8)  <= c1d2l9;
-    char1_dig2(9)  <= c1d2l10;
-    char1_dig2(10) <= c1d2l11;
-    char1_dig2(11) <= c1d2l12;
-    char1_dig2(12) <= c1d2l13;
-    char1_dig2(13) <= c1d2l14;
-    char1_dig2(14) <= c1d2l15;
-    char1_dig2(15) <= c1d2l16;
-    char1_dig2(16) <= c1d2l17;
-    char1_dig2(17) <= c1d2l18;
-    char1_dig2(18) <= c1d2l19;
-    char1_dig2(19) <= c1d2l20;
-    -- char 1 digit 3 array assignments
-    char1_dig3(0)  <= c1d3l1;
-    char1_dig3(1)  <= c1d3l2;
-    char1_dig3(2)  <= c1d3l3;
-    char1_dig3(3)  <= c1d3l4;
-    char1_dig3(4)  <= c1d3l5;
-    char1_dig3(5)  <= c1d3l6;
-    char1_dig3(6)  <= c1d3l7;
-    char1_dig3(7)  <= c1d3l8;
-    char1_dig3(8)  <= c1d3l9;
-    char1_dig3(9)  <= c1d3l10;
-    char1_dig3(10) <= c1d3l11;
-    char1_dig3(11) <= c1d3l12;
-    char1_dig3(12) <= c1d3l13;
-    char1_dig3(13) <= c1d3l14;
-    char1_dig3(14) <= c1d3l15;
-    char1_dig3(15) <= c1d3l16;
-    char1_dig3(16) <= c1d3l17;
-    char1_dig3(17) <= c1d3l18;
-    char1_dig3(18) <= c1d3l19;
-    char1_dig3(19) <= c1d3l20;
-    -- char 2 digit 1 array assignments
-    char2_dig1(0)  <= c2d1l1;
-    char2_dig1(1)  <= c2d1l2;
-    char2_dig1(2)  <= c2d1l3;
-    char2_dig1(3)  <= c2d1l4;
-    char2_dig1(4)  <= c2d1l5;
-    char2_dig1(5)  <= c2d1l6;
-    char2_dig1(6)  <= c2d1l7;
-    char2_dig1(7)  <= c2d1l8;
-    char2_dig1(8)  <= c2d1l9;
-    char2_dig1(9)  <= c2d1l10;
-    char2_dig1(10) <= c2d1l11;
-    char2_dig1(11) <= c2d1l12;
-    char2_dig1(12) <= c2d1l13;
-    char2_dig1(13) <= c2d1l14;
-    char2_dig1(14) <= c2d1l15;
-    char2_dig1(15) <= c2d1l16;
-    char2_dig1(16) <= c2d1l17;
-    char2_dig1(17) <= c2d1l18;
-    char2_dig1(18) <= c2d1l19;
-    char2_dig1(19) <= c2d1l20;
-    -- char 2 digit 2 array assignments
-    char2_dig2(0)  <= c2d2l1;
-    char2_dig2(1)  <= c2d2l2;
-    char2_dig2(2)  <= c2d2l3;
-    char2_dig2(3)  <= c2d2l4;
-    char2_dig2(4)  <= c2d2l5;
-    char2_dig2(5)  <= c2d2l6;
-    char2_dig2(6)  <= c2d2l7;
-    char2_dig2(7)  <= c2d2l8;
-    char2_dig2(8)  <= c2d2l9;
-    char2_dig2(9)  <= c2d2l10;
-    char2_dig2(10) <= c2d2l11;
-    char2_dig2(11) <= c2d2l12;
-    char2_dig2(12) <= c2d2l13;
-    char2_dig2(13) <= c2d2l14;
-    char2_dig2(14) <= c2d2l15;
-    char2_dig2(15) <= c2d2l16;
-    char2_dig2(16) <= c2d2l17;
-    char2_dig2(17) <= c2d2l18;
-    char2_dig2(18) <= c2d2l19;
-    char2_dig2(19) <= c2d2l20;
-    -- char 2 digit 3 array assignments
-    char2_dig3(0)  <= c2d3l1;
-    char2_dig3(1)  <= c2d3l2;
-    char2_dig3(2)  <= c2d3l3;
-    char2_dig3(3)  <= c2d3l4;
-    char2_dig3(4)  <= c2d3l5;
-    char2_dig3(5)  <= c2d3l6;
-    char2_dig3(6)  <= c2d3l7;
-    char2_dig3(7)  <= c2d3l8;
-    char2_dig3(8)  <= c2d3l9;
-    char2_dig3(9)  <= c2d3l10;
-    char2_dig3(10) <= c2d3l11;
-    char2_dig3(11) <= c2d3l12;
-    char2_dig3(12) <= c2d3l13;
-    char2_dig3(13) <= c2d3l14;
-    char2_dig3(14) <= c2d3l15;
-    char2_dig3(15) <= c2d3l16;
-    char2_dig3(16) <= c2d3l17;
-    char2_dig3(17) <= c2d3l18;
-    char2_dig3(18) <= c2d3l19;
-    char2_dig3(19) <= c2d3l20;
+   
+   
 
     process (clk, hcount, vcount)
     begin
@@ -367,32 +434,43 @@ begin
                 elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data
 
                     -- margins
-                    if (uns_hcount > 143 and uns_hcount <= 151) and (uns_vcount > 434 and uns_vcount <= 514) then -- left margin
+                    -- if (uns_hcount > 143 and uns_hcount <= 151) and (uns_vcount > 434 and uns_vcount <= 514) then -- left margin
+                    --     R_data <= '1';
+                    --     G_data <= '1';
+                    --     B_data <= '1';
+                    if (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 442) then -- top margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 446) then -- top margin
+                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 506 and uns_vcount <= 514) then -- bottom margin
                         R_data <= '1';
                         G_data <= '1';
                         B_data <= '1';
-                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 502 and uns_vcount <= 514) then -- bottom margin
-                        R_data <= '1';
-                        G_data <= '1';
-                        B_data <= '1';
-                    elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- right margin
-                        R_data <= '1';
-                        G_data <= '1';
-                        B_data <= '1';
-                    elsif (uns_hcount > 151 and uns_hcount <= 219) and (uns_vcount > 446 and uns_vcount <= 502) then -- inside the margins
-                        if (uns_hcount > 219 and uns_hcount <= 256) and (uns_vcount > 434 and uns_vcount <= 514) then -- constant P1 image
+                    -- elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- right margin
+                    --     R_data <= '1';
+                    --     G_data <= '1';
+                    --     B_data <= '1';
+                    elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 442 and uns_vcount <= 506) then -- inside the margins
+                        if (uns_hcount > 143 and uns_hcount <= 183) and (uns_vcount > 442 and uns_vcount <= 506) then -- constant P1 image
                             R_data <= '1';
                             G_data <= '1';
                             B_data <= '1';
-                        elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- first digit
-                            -- TODO make the first digit logic
-                            R_data <= '1';
-                            G_data <= '1';
-                            B_data <= '1';
+                        elsif (uns_hcount > 185 and uns_hcount <= 226) and (uns_vcount > 434 and uns_vcount <= 514) then -- first digit
+
+                            if(uns_hcount > 185 and uns_hcount <= 189)
+                                R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
+                                G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
+                                B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
+                            if(uns_hcount >  and uns_hcount <= 194)
+                                R_data <= char1_dig1(uns_vcount)(uns_hcount);
+                                G_data <= char1_dig1(uns_vcount)(uns_hcount);
+                                B_data <= char1_dig1(uns_vcount)(uns_hcount);
+
+
+
+
+
+
                         end if;
 
                     else -- fall back for when nothing works -> draw background color ------ !SHOULD NOT HAPPEN!

@@ -53,8 +53,3 @@ begin
 		end case;
 	end process;
 end behaviour;
-
-configuration writelogic_behaviour_cfg of writelogic is
-   for behaviour
-   end for;
-end writelogic_behaviour_cfg;

@@ -39,10 +39,3 @@ begin
                       "111011" after 120 ns;
                                                           
 end structural;
-
-configuration velocity_interpolator_tb_cfg of velocity_interpolator_tb is
-   for structural
-      for all: velocity_interpolator use configuration work.velocity_interpolator_cfg;
-      end for;
-   end for;
-end velocity_interpolator_tb_cfg;

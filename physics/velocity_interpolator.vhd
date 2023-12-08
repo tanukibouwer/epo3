@@ -45,8 +45,3 @@ begin
 end process calculate;
 
 end behaviour;
-
-configuration velocity_interpolator_cfg of velocity_interpolator is
-   for behaviour
-   end for;
-end velocity_interpolator_cfg;

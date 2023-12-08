@@ -17,18 +17,4 @@ begin
 
 vout_y <= std_logic_vector(signed(vin_y) + signed(jump_velocity)) when c_input = '1' and collision_in = '1' else vin_y;
 
---adder: process(c_input, collision_in)
---begin
---	if (c_input = '1' and collision_in = '1') then
---			vout_y <= std_logic_vector(signed(vin_y) + signed(jump_velocity));
---		else
---			vout_y <= vin_y;
---	end if;
---end process;
 end architecture behaviour;
-
-configuration jump_calculator_behaviour_cfg of jump_calculator is
-   for behaviour
-   end for;
-end jump_calculator_behaviour_cfg;
-

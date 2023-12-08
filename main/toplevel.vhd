@@ -8,10 +8,10 @@ entity chip_toplevel is
         clk   : in std_logic;
         reset : in std_logic;
         -- input i/o
-        p1_controller : in std_logic;
-		p2_controller : in std_logic;
-		controller_latch    : out   std_logic;
-		controller_clk      : out   std_logic;
+        p1_controller    : in std_logic;
+        p2_controller    : in std_logic;
+        controller_latch : out std_logic;
+        controller_clk   : out std_logic;
         -- graphics i/o
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
@@ -48,43 +48,42 @@ architecture structural of chip_toplevel is
 
     -- between input and physics
     signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics
-	signal inputsp2 : std_logic_vector(7 downto 0); -- inputs from input, into physics
-	
-	-- dummy signal that should be linked to the counter through an fsm or something like that
-	signal readyphysicsin 	: std_logic;
-	signal readyphysicsout 	: std_logic;
-	
-	component input_toplevel is
-		port (
-			clk   : in std_logic;
-			reset : in std_logic;
+    signal inputsp2 : std_logic_vector(7 downto 0); -- inputs from input, into physics
 
-			controller_latch    : out   std_logic;
-			controller_clk      : out   std_logic;
+    -- dummy signal that should be linked to the counter through an fsm or something like that
+    signal readyphysicsin  : std_logic;
+    signal readyphysicsout : std_logic;
 
-			p1_controller : in    std_logic;                    -- player 1 controller serial data in
-			p1_input      : out   std_logic_vector(7 downto 0); -- player 1 parallel out
-			p2_controller : in    std_logic;                    -- player 2 controller serial data in
-			p2_input      : out   std_logic_vector(7 downto 0)  -- player 2 parallel out
-		);
-	end component input_toplevel;
-	
-	component physics_fsm is
-		port(
-			clk : in std_logic;
-			reset : in std_logic;
-			ready_in : in std_logic;
-			vin_x : in std_logic_vector(8 downto 0);
-			vin_y : in std_logic_vector(8 downto 0);
-			pin_x : in std_logic_vector(7 downto 0);
-			pin_y : in std_logic_vector(7 downto 0);
-			player_input : in std_logic_Vector(7 downto 0);
-			vout_x : out std_logic_vector(8 downto 0);
-			vout_y : out std_logic_vector(8 downto 0);
-			pout_x : out std_logic_vector(7 downto 0);
-			pout_y : out std_logic_vector(7 downto 0);
-			ready_out : out std_logic);
-	end component physics_fsm;
+    component input_toplevel is
+        port (
+            clk   : in std_logic;
+            reset : in std_logic;
+
+            controller_latch : out std_logic;
+            controller_clk   : out std_logic;
+
+            p1_controller : in std_logic; -- player 1 controller serial data in
+            p1_input      : out std_logic_vector(7 downto 0); -- player 1 parallel out
+            p2_controller : in std_logic; -- player 2 controller serial data in
+            p2_input      : out std_logic_vector(7 downto 0) -- player 2 parallel out
+        );
+    end component input_toplevel;
+
+    component physics_system is
+        port (
+            vin_x                : in std_logic_vector(8 downto 0);
+            vin_y                : in std_logic_vector(8 downto 0);
+            pin_x                : in std_logic_vector(7 downto 0);
+            pin_y                : in std_logic_vector(7 downto 0);
+            player_input         : in std_logic_vector(7 downto 0);
+            knockback_percentage : in std_logic_vector(7 downto 0);
+            knockback_x          : in std_logic_vector(7 downto 0);
+            knockback_y          : in std_logic_vector(7 downto 0);
+            vout_x               : out std_logic_vector(8 downto 0);
+            vout_y               : out std_logic_vector(8 downto 0);
+            pout_x               : out std_logic_vector(7 downto 0);
+            pout_y               : out std_logic_vector(7 downto 0));
+    end component physics_system;
 
     component graphics_card is
         port (
@@ -110,7 +109,7 @@ architecture structural of chip_toplevel is
             --chardc  : out std_logic_vector(7 downto 0); -- initial character death count, may not be necessary
             --char1sx : out std_logic_vector(7 downto 0); -- char(acter)1 starting position x
             --char1sy : out std_logic_vector(7 downto 0); -- char1 starting position y
-			--char2sx : out std_logic_vector(7 downto 0); -- char2 starting position x
+            --char2sx : out std_logic_vector(7 downto 0); -- char2 starting position x
             --char2sy : out std_logic_vector(7 downto 0); -- char2 starting position y
             --char1vx : out std_logic_vector(8 downto 0); -- char1 starting velocity x
             --char1vy : out std_logic_vector(8 downto 0); -- char1 starting velocity y
@@ -165,9 +164,9 @@ architecture structural of chip_toplevel is
             -- num74		: out std_logic_vector(4 downto 0);
             -- num94		: out std_logic_vector(4 downto 0);
             -- num97		: out std_logic_vector(4 downto 0);
-            clk          : in std_logic;
-            reset        : in std_logic;
-            vsync        : in std_logic;
+            clk   : in std_logic;
+            reset : in std_logic;
+            vsync : in std_logic;
             --data_in4b1   : in std_logic_vector(3 downto 0); -- death count p1
             --data_in4b2   : in std_logic_vector(3 downto 0); -- death count p2
             --data_out4b1  : out std_logic_vector(3 downto 0); -- death count p1
@@ -176,10 +175,10 @@ architecture structural of chip_toplevel is
             --data_in10b2  : in std_logic_vector(9 downto 0); --knockback percentage p2
             --data_out10b1 : out std_logic_vector(9 downto 0); --knockback percentage p1
             --data_out10b2 : out std_logic_vector(9 downto 0); --knockback percentage p2
-            data_in8b1   : in std_logic_vector(7 downto 0); -- x pos p1
-            data_in8b2   : in std_logic_vector(7 downto 0); -- y pos p1
-            data_in8b3   : in std_logic_vector(7 downto 0); -- x pos p2
-            data_in8b4   : in std_logic_vector(7 downto 0); -- y pos p2
+            data_in8b1 : in std_logic_vector(7 downto 0); -- x pos p1
+            data_in8b2 : in std_logic_vector(7 downto 0); -- y pos p1
+            data_in8b3 : in std_logic_vector(7 downto 0); -- x pos p2
+            data_in8b4 : in std_logic_vector(7 downto 0); -- y pos p2
             -- data_in8b5		: in std_logic_vector(7 downto 0); -- x pos attack p1
             -- data_in8b6		: in std_logic_vector(7 downto 0); -- y pos attack p1
             -- data_in8b7		: in std_logic_vector(7 downto 0); -- x pos attack p2
@@ -204,30 +203,30 @@ architecture structural of chip_toplevel is
 begin
 
     TL00 : memory port map(
-        clk         => clk,
-        reset       => reset,
-        vsync       => vsyncintern,
-		
-		--location
-		data_in8b1	=> char1posxin,
-		data_in8b2	=> char1posyin,
-		data_in8b3	=> char2posxin,
-		data_in8b4	=> char2posyin,
+        clk   => clk,
+        reset => reset,
+        vsync => vsyncintern,
+
+        --location
+        data_in8b1  => char1posxin,
+        data_in8b2  => char1posyin,
+        data_in8b3  => char2posxin,
+        data_in8b4  => char2posyin,
         data_out8b1 => char1posx,
         data_out8b2 => char1posy,
         data_out8b3 => char2posx,
         data_out8b4 => char2posy,
-		
-		--velocity
-		data_in9b1	=> char1velxin,
-		data_in9b2	=> char1velyin,
-		data_in9b3	=> char2velxin,
-		data_in9b4	=> char2velyin,
-		data_out9b1	=> char1velx,
-		data_out9b2	=> char1vely,
-		data_out9b3	=> char2velx,
-		data_out9b4	=> char2vely
-		
+
+        --velocity
+        data_in9b1  => char1velxin,
+        data_in9b2  => char1velyin,
+        data_in9b3  => char2velxin,
+        data_in9b4  => char2velyin,
+        data_out9b1 => char1velx,
+        data_out9b2 => char1vely,
+        data_out9b3 => char2velx,
+        data_out9b4 => char2vely
+
     );
 
     TL01 : graphics_card port map(
@@ -245,56 +244,50 @@ begin
         G_data => G_data,
         B_data => B_data);
 
-	TL02 : physics_fsm port map (
-		clk         => clk,
-        reset       => reset,
-		
-		ready_in	=> readyphysicsin, --idk how these work exactly
-		ready_out	=> readyphysicsout,
-		
-		vin_x		=> char1velx,
-		vin_y		=> char1vely,
-		pin_x		=> char1posx,
-		pin_y		=> char1posy,
-		
-		player_input => inputsp1,
-		
-		vout_x		=> char1velxin,
-		vout_y		=> char1velyin,
-		pout_x		=> char1posxin,
-		pout_y		=> char1posyin);
-		
-	TL03 : physics_fsm port map (
-		clk         => clk,
-        reset       => reset,
-		
-		ready_in	=> readyphysicsin, --idk how these work exactly
-		ready_out	=> readyphysicsout,
-		
-		vin_x		=> char2velx,
-		vin_y		=> char2vely,
-		pin_x		=> char2posx,
-		pin_y		=> char2posy,
-		
-		player_input => inputsp2,
-		
-		vout_x		=> char2velxin,
-		vout_y		=> char2velyin,
-		pout_x		=> char2posxin,
-		pout_y		=> char2posyin);
-		
-	TL04 : input_toplevel port map (
-		clk         => clk,
-        reset       => reset,
-		
-		controller_latch	=> controller_latch,
-		controller_clk		=> controller_clk,
-		
-		p1_controller 	=> p1_controller,
-		p1_input      	=> inputsp1,
-		p2_controller 	=> p2_controller,
-		p2_input      	=> inputsp2);
-		
+    TL02 : physics_system port map(
+        vin_x => char1velx,
+        vin_y => char1vely,
+        pin_x => char1posx,
+        pin_y => char1posy,
+
+        player_input => inputsp1,
+        knockback_percentage => "00000000",
+        knockback_x => "00000000",
+        knockback_y => "00000000",
+
+        vout_x => char1velxin,
+        vout_y => char1velyin,
+        pout_x => char1posxin,
+        pout_y => char1posyin);
+
+    TL03 : physics_system port map(
+        vin_x => char2velx,
+        vin_y => char2vely,
+        pin_x => char2posx,
+        pin_y => char2posy,
+
+        player_input => inputsp2,
+        knockback_percentage => "00000000",
+        knockback_x => "00000000",
+        knockback_y => "00000000",
+
+        vout_x => char2velxin,
+        vout_y => char2velyin,
+        pout_x => char2posxin,
+        pout_y => char2posyin);
+
+    TL04 : input_toplevel port map(
+        clk   => clk,
+        reset => reset,
+
+        controller_latch => controller_latch,
+        controller_clk   => controller_clk,
+
+        p1_controller => p1_controller,
+        p1_input      => inputsp1,
+        p2_controller => p2_controller,
+        p2_input      => inputsp2);
+
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 
 end architecture structural;

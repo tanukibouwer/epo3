@@ -83,7 +83,7 @@ architecture structural of chip_toplevel is
             vout_y               : out std_logic_vector(8 downto 0);
             pout_x               : out std_logic_vector(7 downto 0);
             pout_y               : out std_logic_vector(7 downto 0));
-    end component physics_fsm;
+    end component physics_system;
 
     component graphics_card is
         port (
@@ -260,7 +260,7 @@ begin
         pout_x => char1posxin,
         pout_y => char1posyin);
 
-    TL03 : physics_fsm port map(
+    TL03 : physics_system port map(
         vin_x => char2velx,
         vin_y => char2vely,
         pin_x => char2posx,

@@ -78,7 +78,7 @@ elsif (player_down_y > platform3_up_y and player_down_y < platform3_down_y) and
    pout_y <= std_logic_vector(platform3_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
-elsif player_up_y > floor_y and unsigned(pin_y) > to_unsigned(3, 2) then -- Prevent integer underflow
+elsif signed(pin_y > floor_y) and unsigned(pin_y) > to_unsigned(3, 2) then -- Prevent integer underflow
    pout_y <= std_logic_vector(floor_y);
    vout_y <= (others => '0');
    on_floor <= '1';

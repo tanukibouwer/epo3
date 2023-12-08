@@ -1,16 +1,16 @@
 configuration screen_scan_cfg of screen_scan is
     for structural
-        for all : vsync_gen
-            use configuration work.vsync_gen_rtl_cfg;
+        for all : Vsync_gen
+            use configuration work.Vsync_gen_cfg;
         end for;
-        for all : hsync_gen
-            use configuration work.hsync_gen_rtl_cfg;
+        for all : Hsync_gen
+            use configuration work.Hsync_gen_cfg;
         end for;
-        for all : v_line_cnt
-            use configuration work.v_line_cnt_behavioural_cfg;
+        for all : V_line_cnt
+            use configuration work.V_line_cnt_cfg;
         end for;
-        for all : h_pix_cnt
-            use configuration work.h_pix_cnt_behavioural_cfg;
+        for all : H_pix_cnt
+            use configuration work.H_pix_cnt_cfg;
         end for;
     end for;
 end configuration screen_scan_cfg;

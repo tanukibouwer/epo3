@@ -1,4 +1,4 @@
-configuration hsync_gen_cfg of hsync_gen is
+configuration Hsync_gen_cfg of Hsync_gen is
     for rtl
     end for;
-end configuration hsync_gen_cfg;
+end configuration Hsync_gen_cfg;

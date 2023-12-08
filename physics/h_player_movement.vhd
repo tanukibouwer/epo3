@@ -20,7 +20,3 @@ begin
       out_h_target <= max_left_speed when "01", max_right_speed when "10", (others => '0') when others;   
 end behaviour;
 
-configuration h_player_movement_cfg of h_player_movement is
-   for behaviour
-   end for;
-end h_player_movement_cfg;

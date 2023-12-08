@@ -14,11 +14,6 @@ end p_knockback_calculator;
 
 architecture behaviour of p_knockback_calculator is
    constant balance_factor : std_logic_vector(4 downto 0) := "00100"; -- Signed
-   component physics_9bit_adder
-      port(a      : in  std_logic_vector(8 downto 0);
-           b      : in  std_logic_vector(8 downto 0);
-           result : out std_logic_vector(8 downto 0));
-   end component;
    -- sorry :(
    signal shifted_percentage : std_logic_vector(14 downto 0) := (others => '0');
    signal multiplied_vector_x : std_logic_vector(22 downto 0) := (others => '0');
@@ -40,13 +35,6 @@ begin
    multiplied_bitshifted_vector_y <= std_logic_vector(signed(bitshifted_vector_y) * signed(balance_factor));
    bitshifted_multiplied_bitshifted_vector_x <= multiplied_bitshifted_vector_x(18 downto 6);
    bitshifted_multiplied_bitshifted_vector_y <= multiplied_bitshifted_vector_y(18 downto 6);
-   x_adder : physics_9bit_adder port map (vin_x, bitshifted_multiplied_bitshifted_vector_x(8 downto 0), vout_x);
-   y_adder : physics_9bit_adder port map (vin_y, bitshifted_multiplied_bitshifted_vector_y(8 downto 0), vout_y);
+   vout_x <= std_logic_vector(signed(vin_x) + signed(bitshifted_multiplied_bitshifted_vector_x(8 downto 0)));
+   vout_y <= std_logic_vector(signed(vin_y) + signed(bitshifted_multiplied_bitshifted_vector_y(8 downto 0)));
 end behaviour;
-
-configuration p_knockback_calculator_cfg of p_knockback_calculator is
-   for behaviour
-      for all: physics_9bit_adder use configuration work.physics_9bit_adder_behaviour_cfg;
-      end for;
-   end for;
-end p_knockback_calculator_cfg;

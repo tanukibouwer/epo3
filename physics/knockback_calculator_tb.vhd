@@ -40,7 +40,7 @@ begin
                   "11000000" after 25 ns,
                   "00110000" after 35 ns,
                   "11010000" after 45 ns,
-                  "11110000" after 45 ns,
+                  "11110000" after 50 ns,
                   "11000000" after 70 ns,
                   "11010000" after 75 ns,
                   "11000000" after 85 ns;
@@ -58,10 +58,3 @@ begin
                            "00000001" after 72 ns;
    
 end structural;
-
-configuration p_knockback_calculator_tb_structural_cfg of p_knockback_calculator_tb is
-   for structural
-      for all: p_knockback_calculator use configuration work.p_knockback_calculator_cfg;
-      end for;
-   end for;
-end p_knockback_calculator_tb_structural_cfg;

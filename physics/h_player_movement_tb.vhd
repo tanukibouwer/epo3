@@ -18,10 +18,3 @@ begin
                          "10" after 20 ns,
                          "11" after 30 ns;
 end structural;
-
-configuration h_player_movement_tb_cfg of h_player_movement_tb is
-   for structural
-      for all: h_player_movement use configuration work.h_player_movement_cfg;
-      end for;
-   end for;
-end h_player_movement_tb_cfg;

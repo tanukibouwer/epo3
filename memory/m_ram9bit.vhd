@@ -30,8 +30,3 @@ begin
 	end process;
 	data_out <= mem(0);
 end behaviour;
-
-configuration ram_9b_behaviour_cfg of ram_9b is
-   for behaviour
-   end for;
-end ram_9b_behaviour_cfg;

@@ -31,8 +31,3 @@ begin
 	end process;
 	data_out <= mem(0);
 end behaviour;
-
-configuration ram_8b_behaviour_cfg of ram_8b is
-   for behaviour
-   end for;
-end ram_8b_behaviour_cfg;

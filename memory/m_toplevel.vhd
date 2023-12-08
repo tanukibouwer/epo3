@@ -260,18 +260,4 @@ begin
 								
 end architecture structural;
 
-configuration memory_structural_cfg of memory is
-	for structural
-for all: writelogic use configuration work.writelogic_behaviour_cfg;
-      end for;
-		--for all: ram_4b use configuration work.ram_4b_behaviour_cfg;
-		--end for;
-		--for all: ram_10b use configuration work.ram_10b_behaviour_cfg;
-		--end for;
-		for all: ram_8b use configuration work.ram_8b_behaviour_cfg;
-		end for;
-		for all: ram_9b use configuration work.ram_9b_behaviour_cfg;
-		end for;
-			end for;
-end memory_structural_cfg;
 

@@ -30,13 +30,3 @@ begin
 	end process;
 	data_out <= mem(0);
 end behaviour;
-
-configuration ram_10b_behaviour_cfg of ram_10b is
-   for behaviour
-   end for;
-end ram_10b_behaviour_cfg;
-
-
-
-
-

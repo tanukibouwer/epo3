@@ -54,7 +54,7 @@ else
    going_down := '0';
 end if;
 
-if ((player_down_y > platform1_up_y and player_down_y < platform1_down_y) and 
+if (player_down_y > platform1_up_y and player_down_y < platform1_down_y) and 
    ((player_left_x > platform1_left_x and player_left_x < platform1_right_x) or
     (player_right_x > platform1_left_x and player_right_x < platform1_right_x)) and 
    going_down = '1' and
@@ -62,16 +62,16 @@ if ((player_down_y > platform1_up_y and player_down_y < platform1_down_y) and
    pout_y <= std_logic_vector(platform1_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
-elsif ((player_down_y > platform2_up_y and player_down_y < platform2_down_y) and 
-   (player_left_x > platform2_left_x and player_left_x < platform2_right_x) or
+elsif (player_down_y > platform2_up_y and player_down_y < platform2_down_y) and 
+   ((player_left_x > platform2_left_x and player_left_x < platform2_right_x) or
    (player_right_x > platform2_left_x and player_right_x < platform2_right_x)) and
    going_down = '1' and
    input_down = '0' then
    pout_y <= std_logic_vector(platform2_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
-elsif ((player_down_y > platform3_up_y and player_down_y < platform3_down_y) and 
-   (player_left_x > platform3_left_x and player_left_x < platform3_right_x) or
+elsif (player_down_y > platform3_up_y and player_down_y < platform3_down_y) and 
+   ((player_left_x > platform3_left_x and player_left_x < platform3_right_x) or
    (player_right_x > platform3_left_x and player_right_x < platform3_right_x)) and
    going_down = '1' and
    input_down = '0' then

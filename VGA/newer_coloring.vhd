@@ -320,7 +320,7 @@ architecture behavioural of coloring_new is
 begin
     --player 1
     percentage_p1_to_digits: dig3_num_splitter port map (num3dig => percentage_p1, num1 => digit1, num2 => digit2, num3 => digit3);
-    digit1_p1_to_sprites: number_sprite port map (number => num1, 
+    digit1_p1_to_sprites: number_sprite port map (number => digit1, 
     line1 => char1_dig1(0), 
     line2 => char1_dig1(1),
     line3 => char1_dig1(2),
@@ -346,7 +346,7 @@ begin
     line23 => char1_dig1(22),
     line24 => char1_dig1(23));
 
-    digit2_p1_to_sprites: number_sprite port map (number => num2, 
+    digit2_p1_to_sprites: number_sprite port map (number => digit2, 
     line1 => char1_dig2(0), 
     line2 => char1_dig2(1),
     line3 => char1_dig2(2),
@@ -372,7 +372,7 @@ begin
     line23 => char1_dig2(22),
     line24 => char1_dig2(23));
 
-    digit3_p1_to_sprites: number_sprite port map (number => num3, 
+    digit3_p1_to_sprites: number_sprite port map (number => digit3, 
     line1 => char1_dig3(0), 
     line2 => char1_dig3(1),
     line3 => char1_dig3(2),
@@ -495,7 +495,6 @@ begin
                         B_data <= '0';
                     end if;
                 elsif (uns_hcount > 184 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2-4 -> displaying the numbers
-
                     -- elsif (uns_hcount > 189 and uns_hcount <= 195) and (uns_vcount > 446 and uns_vcount <= 454) then --line1(0)
                     --     if (p1_dig1_line1(0) = 1) then
                     --         R_data <= '1';

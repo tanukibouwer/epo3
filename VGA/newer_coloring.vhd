@@ -40,134 +40,7 @@ entity coloring_new is
         y_upperbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
         -- percentage from attack module
         percentage_p1 : in std_logic_vector(9 downto 0);
-        --------------------------------------------------------------------------------
-        -- percentage sprites
-        -- char1 dig1
-        -- c1d1l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- c1d1l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-        -- -- char1 dig2
-        -- c1d2l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- c1d2l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-        -- -- char1 dig 3
-        -- c1d3l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- c1d3l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-        -- -- char2 dig1
-        -- c2d1l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- c2d1l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 1
-        -- -- char2 dig2
-        -- c2d2l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- c2d2l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 2
-        -- -- char2 dig 3
-        -- c2d3l1  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l2  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l3  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l4  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l5  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l6  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l7  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l8  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l9  : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l10 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l11 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l12 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l13 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l14 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l15 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l16 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l17 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l18 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l19 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
-        -- c2d3l20 : in std_logic_vector(8 downto 0); --! character 2 percentage digit 3
+
         -- RGB data outputs
         R_data : out std_logic; --! RGB data output
         G_data : out std_logic; --! RGB data output
@@ -229,6 +102,8 @@ architecture behavioural of coloring_new is
 
     -- type declaration of the digit array
     type digit_array is array (0 to 23) of std_logic_vector(15 downto 0);
+    --char 1 constant digit array
+    signal char1_digc : digit_array;
     -- char 1 digit 1 array
     signal char1_dig1 : digit_array;
     -- char 1 digit 2 array
@@ -248,74 +123,6 @@ architecture behavioural of coloring_new is
     signal digit2 : std_logic_vector(3 downto 0);
     signal digit3 : std_logic_vector(3 downto 0);
 
-
-    -- number sprites player 1 digit1
-    -- signal c1d1l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-    -- signal c1d1l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 1
-
-    -- -- number sprites player 1 digit 2
-    -- signal c1d2l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-    -- signal c1d2l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 2
-
-    --     -- number sprites player 1 digit 3
-    -- signal c1d3l1  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l2  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l3  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l4  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l5  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l6  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l7  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l8  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l9  : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l10 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l11 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l12 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l13 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l14 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l15 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l16 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l17 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l18 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l19 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-    -- signal c1d3l20 : in std_logic_vector(8 downto 0); --! character 1 percentage digit 3
-
-    
 
 begin
     --player 1
@@ -398,6 +205,37 @@ begin
     line23 => char1_dig3(22),
     line24 => char1_dig3(23));
 
+    --constant image p1 
+
+    char1_digc(0) <=  "0000000000000000";
+    char1_digc(1) <=  "0111111111111110";
+    char1_digc(2) <=  "0111111111111110";
+    char1_digc(3) <=  "0111111111111110";
+    char1_digc(4) <=  "0111111111111110";
+    char1_digc(5) <=  "0111111111111110";
+    char1_digc(6) <=  "0111111111111110";
+    char1_digc(7) <=  "0111111111111110";
+    char1_digc(8) <=  "0111111111111110";
+    char1_digc(9) <=  "0111111111111110";
+    char1_digc(10) <= "0111111111111110";
+    char1_digc(11) <= "0111000000000000";
+    char1_digc(12) <= "0111000000000000";
+    char1_digc(13) <= "0111000000000000";
+    char1_digc(14) <= "0111000000000000";
+    char1_digc(15) <= "0111000000000000";
+    char1_digc(16) <= "0111000000111100";
+    char1_digc(17) <= "0111000000111100";
+    char1_digc(18) <= "0111000000111100";
+    char1_digc(19) <= "0111000000111100";
+    char1_digc(20) <= "0111000000111100";
+    char1_digc(21) <= "0111000000111100";
+    char1_digc(22) <= "0111000000111100";
+    char1_digc(23) <= "0000000000000000";
+
+
+     
+    
+
     
 
    
@@ -444,381 +282,43 @@ begin
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
-                    --------------------------------------------------------------------------------
+                    
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
                 elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data
 
-                    -- margins we dont need margins right? coz the numbers overwrite the background color (last else statement)  -Parama 
-                    -- if (uns_hcount > 143 and uns_hcount <= 151) and (uns_vcount > 434 and uns_vcount <= 514) then -- left margin
-                    --     R_data <= '1';
-                    --     G_data <= '1';
-                    --     B_data <= '1';
-                    -- if (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 442) then -- top margin
-                    --     R_data <= '1';
-                    --     G_data <= '1';
-                    --     B_data <= '1';
-                    -- elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 506 and uns_vcount <= 514) then -- bottom margin
-                    --     R_data <= '1';
-                    --     G_data <= '1';
-                    --     B_data <= '1';
-                    -- elsif (uns_hcount > 219 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then -- right margin
-                    --     R_data <= '1';
-                    --     G_data <= '1';
-                    --     B_data <= '1';
-                    -- elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 442 and uns_vcount <= 506) then -- inside the margins
-                    elsif (uns_hcount > 143 and uns_hcount <= 183) and (uns_vcount > 442 and uns_vcount <= 506) then -- constant P1 image -> entirely white for now
-                            R_data <= '1';
-                            G_data <= '1';
-                            B_data <= '1';
-                    elsif (uns_hcount > something and uns_hcount <= something) and (uns_vcount > something and uns_vcount <= something) then -- first digit
+                   
+                    if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then  --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                            R_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
+                            G_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
+                            B_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
+                    elsif (uns_hcount > 195 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 486)then -- first digit --183 to 223 idem
                             R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
                             G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
                             B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                    elsif (uns_hcount > something and uns_hcount <= something) and (uns_vcount > something and uns_vcount <= something) then -- second digit
+                    elsif (uns_hcount > 235 and uns_hcount <= 251) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --223 to 263 idem
+                            R_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
+                            G_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
+                            B_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
+                    elsif (uns_hcount > 275 and uns_hcount <= 291) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --263 to 303 idem
                             R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
                             G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
                             B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                    elsif (uns_hcount > something and uns_hcount <= something) and (uns_vcount > something and uns_vcount <= something) then -- second digit
-                            R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-             
-             
-             
-
-
-                    else -- fall back for when nothing works -> draw background color: black I wanna test the size of the numbers first -Parama
+                    
+                    --------------------------------------------------------------------------------
+                    -- p2 percentage markings [under construction]
+                    --------------------------------------------------------------------------------
+    
+                    else -- fall back for when nothing works -> 
                         R_data <= '0';
                         G_data <= '0';
                         B_data <= '0';
                     end if;
                 elsif (uns_hcount > 184 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2-4 -> displaying the numbers
-                    -- elsif (uns_hcount > 189 and uns_hcount <= 195) and (uns_vcount > 446 and uns_vcount <= 454) then --line1(0)
-                    --     if (p1_dig1_line1(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 446 and uns_vcount <= 454) then --line1(1)
-                    --     if (p1_dig1_line1(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 446 and uns_vcount <= 454) then --line1(2)
-                    --     if (p1_dig1_line1(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 446 and uns_vcount <= 454) then --line1(3)
-                    --     if (p1_dig1_line1(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 454 and uns_vcount <= 462) then --line2(0)
-                    --     if (p1_dig1_line2(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 454 and uns_vcount <= 462) then --line2(1)
-                    --     if (p1_dig1_line2(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 454 and uns_vcount <= 462) then --line2(2)
-                    --     if (p1_dig1_line2(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 454 and uns_vcount <= 462) then --line2(3)
-                    --     if (p1_dig1_line2(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 462 and uns_vcount <= 470) then --line3(0)
-                    --     if (p1_dig1_line3(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 462 and uns_vcount <= 470) then --line3(1)
-                    --     if (p1_dig1_line3(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 470) then --line3(2)
-                    --     if (p1_dig1_line3(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 462 and uns_vcount <= 470) then --line3(3)
-                    --     if (p1_dig1_line3(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 470 and uns_vcount <= 478) then --line4(0)
-                    --     if (p1_dig1_line4(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 470 and uns_vcount <= 478) then --line4(1)
-                    --     if (p1_dig1_line4(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 470 and uns_vcount <= 478) then --line4(2)
-                    --     if (p1_dig1_line4(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 470 and uns_vcount <= 478) then --line4(3)
-                    --     if (p1_dig1_line4(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 478 and uns_vcount <= 486) then --line5(0)
-                    --     if (p1_dig1_line5(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 478 and uns_vcount <= 486) then --line5(1)
-                    --     if (p1_dig1_line5(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 478 and uns_vcount <= 486) then --line5(2)
-                    --     if (p1_dig1_line1(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 478 and uns_vcount <= 486) then --line5(3)
-                    --     if (p1_dig1_line5(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 486 and uns_vcount <= 494) then --line6(0)
-                    --     if (p1_dig1_line6(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 486 and uns_vcount <= 494) then --line6(1)
-                    --     if (p1_dig1_line6(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 486 and uns_vcount <= 494) then --line6(2)
-                    --     if (p1_dig1_line6(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 486 and uns_vcount <= 494) then --line6(3)
-                    --     if (p1_dig1_line6(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 187 and uns_hcount <= 195) and (uns_vcount > 494 and uns_vcount <= 502) then --line7(0)
-                    --     if (p1_dig1_line7(0) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 195 and uns_hcount <= 203) and (uns_vcount > 494 and uns_vcount <= 502) then --line7(1)
-                    --     if (p1_dig1_line7(1) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                    -- elsif (uns_hcount > 203 and uns_hcount <= 211) and (uns_vcount > 494 and uns_vcount <= 502) then --line7(2)
-                    --     if (p1_dig1_line7(2) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-                    -- elsif (uns_hcount > 211 and uns_hcount <= 219) and (uns_vcount > 494 and uns_vcount <= 502) then --line7(3)
-                    --     if (p1_dig1_line7(3) = 1) then
-                    --         R_data <= '1';
-                    --         G_data <= '1';
-                    --         B_data <= '1';
-                    --     else
-                    --         R_data <= '0';
-                    --         G_data <= '0';
-                    --         B_data <= '0';
-                    --     end if;
-
-                elsif (uns_hcount > 223 and uns_hcount <= 263) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box3 player 1
-
-                    --idem (ik wil nu even aan lindiff werken haha)
-
-                elsif (uns_hcount > 263 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box4 player 1
-
-                    --idem
-                elsif (uns_hcount >= 624 and uns_hcount <= 663) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box1 player 2
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
-                elsif (uns_hcount >= 664 and uns_hcount <= 703) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box2 player 2 
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
-                elsif (uns_hcount >= 704 and uns_hcount <= 743) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box3 player 2
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
-                elsif (uns_hcount >= 744 and uns_hcount <= 783) and (uns_vcount >= 497 and uns_vcount <= 514) then --percentage box4 player 2
-                    R_data <= '1';
-                    G_data <= '1';
-                    B_data <= '1';
+                    R_data <= '0';
+                    G_data <= '0';
+                    B_data <= '0';
 
                 else -- when not on active screen time send low signal
                     R_data <= '0';

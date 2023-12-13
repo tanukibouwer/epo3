@@ -231,11 +231,6 @@ begin
     char1_digc(21) <= "0111000000111100";
     char1_digc(22) <= "0111000000111100";
     char1_digc(23) <= "0000000000000000";
-
-
-     
-    
-
     
 
    
@@ -265,10 +260,24 @@ begin
                 B_data <= '0';
             elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 34 and uns_vcount <= 514) then -- active screen time
                 -- priority -> highest priority is first, lowest is last
-                if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 429 and uns_vcount <= 434) then --platform horizon (4) pixels thick y = 21 (in coords from below) 
+                if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 429 and uns_vcount <= 434) then --platform horizon 4 pixels thick y = 21 (in coords from below) 
                     R_data <= '1';
                     G_data <= '1';
                     B_data <= '1';
+
+                elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 310 and uns_vcount <= 314) then --platform 1, (10,69) --> (59,70)
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount > 543 and uns_hcount <= 739) and (uns_vcount > 310 and uns_vcount <= 314) then --platform 2, (100,69) --> (149,70)
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 178 and uns_vcount <= 182) then --platform 3, (55,36) --> (104,37)
+                    R_data <= '1';
+                    G_data <= '1';
+                    B_data <= '1';
+
 
                     --------------------------------------------------------------------------------
                     -- dynamic assignment of pixel colors due to character location
@@ -286,31 +295,53 @@ begin
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
-                elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data
+                elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data: 143 to 303 horizontal
 
                    
                     if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then  --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                            R_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
-                            G_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
-                            B_data <= char1_digc(uns_vcount - something)(uns_hcount - something);
+                            R_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 155));
+                            G_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 155));
+                            B_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 155));
                     elsif (uns_hcount > 195 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 486)then -- first digit --183 to 223 idem
-                            R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
+                            R_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 195));
+                            G_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 195));
+                            B_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 195));
                     elsif (uns_hcount > 235 and uns_hcount <= 251) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --223 to 263 idem
-                            R_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
-                            G_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
-                            B_data <= char1_dig2(uns_vcount - something)(uns_hcount - something);
+                            R_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 251));
+                            G_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 251));
+                            B_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 251));
                     elsif (uns_hcount > 275 and uns_hcount <= 291) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --263 to 303 idem
-                            R_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            G_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
-                            B_data <= char1_dig1(uns_vcount - something)(uns_hcount - something);
+                            R_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 275));
+                            G_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 275));
+                            B_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 275));
+                    else -- background "canvas" -> also functions as a fall back
+                        R_data <= '0';
+                        G_data <= '0';
+                        B_data <= '0';
+                    end if;
                     
                     --------------------------------------------------------------------------------
-                    -- p2 percentage markings [under construction]
+                    -- p2 percentage markings [Player 1 data for now, as I wanna see the measurements on the screen]
                     --------------------------------------------------------------------------------
+                elsif (uns_hcount > 623 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then --player 2 data: 623 to 783
+                    if (uns_hcount > 635 and uns_hcount <= 651) and (uns_vcount > 462 and uns_vcount <= 486) then  --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                            R_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 635));
+                            G_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 635));
+                            B_data <= char1_digc(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 635));
+                    elsif (uns_hcount > 675 and uns_hcount <= 691) and (uns_vcount > 462 and uns_vcount <= 486)then -- first digit -- 663 to 703 idem
+                            R_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 675));
+                            G_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 675));
+                            B_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 675));
+                    elsif (uns_hcount > 715 and uns_hcount <= 731) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --703 to 743 idem
+                            R_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 715));
+                            G_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 715));
+                            B_data <= char1_dig2(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 715));
+                    elsif (uns_hcount > 755 and uns_hcount <= 771) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --743 to 783 idem
+                            R_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 755));
+                            G_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 755));
+                            B_data <= char1_dig1(to_integer(uns_vcount - 462))(to_integer(uns_hcount - 755));
     
-                    else -- fall back for when nothing works -> 
+                    else -- background "canvas" -> also functions as a fall back
                         R_data <= '0';
                         G_data <= '0';
                         B_data <= '0';

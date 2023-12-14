@@ -1,5 +1,5 @@
 --module: coloring
---version: a2.5.5
+--version: b2.9.5.cri
 --author: Kevin Vermaat & Parama Fawwaz
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
@@ -10,8 +10,6 @@
 --! this module also requires the different x (horizontal) and y (vertical) locations of what needs to be drawn and the colours
 --!
 --! This module also draw the GUI of the game, including the text
---! 
---! the current version 1.1 is ready for the first integration 'moving block'
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 

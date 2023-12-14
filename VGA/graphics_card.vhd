@@ -60,8 +60,6 @@ architecture structural of graphics_card is
         port (
             xpos : in std_logic_vector(7 downto 0);
             ypos : in std_logic_vector(7 downto 0);
-            -- xsize     : in std_logic_vector(3 downto 0);
-            -- ysize     : in std_logic_vector(3 downto 0);
             xpos_scl1 : out std_logic_vector(9 downto 0);
             xpos_scl2 : out std_logic_vector(9 downto 0);
             ypos_scl1 : out std_logic_vector(9 downto 0);

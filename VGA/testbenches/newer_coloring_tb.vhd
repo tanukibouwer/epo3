@@ -24,9 +24,9 @@ architecture bench of coloring_new_tb is
             percentage_p1 : in std_logic_vector(9 downto 0);
 
             -- RGB data outputs
-            R_data : out std_logic; --! RGB data output
-            G_data : out std_logic; --! RGB data output
-            B_data : out std_logic  --! RGB data output
+            R_data : out std_logic_vector(3 downto 0); --! RGB data output
+            G_data : out std_logic_vector(3 downto 0); --! RGB data output
+            B_data : out std_logic_vector(3 downto 0)  --! RGB data output
         );
     end component;
     component screen_scan is
@@ -49,9 +49,9 @@ architecture bench of coloring_new_tb is
     signal char2x                 : std_logic_vector(7 downto 0);
     signal char2y                 : std_logic_vector(7 downto 0);
     signal percentage_p1          : std_logic_vector(9 downto 0);
-    signal R_data                 : std_logic;
-    signal G_data                 : std_logic;
-    signal B_data                 : std_logic;
+    signal R_data                 : std_logic_vector(3 downto 0);
+    signal G_data                 : std_logic_vector(3 downto 0);
+    signal B_data                 : std_logic_vector(3 downto 0);
     signal Hsync, Vsync           : std_logic;
 
 begin

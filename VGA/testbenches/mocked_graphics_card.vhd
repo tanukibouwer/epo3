@@ -93,11 +93,11 @@ begin
     );
 
     --gib color to pixel
-    CLR1 : coloring port map(
+    CLR1 : coloring_new port map(
         clk => clk, reset => reset,
         hcount => hcount_int, vcount => vcount_int,
         char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
-        percentage_p1 => percentage_p1,
+        percentage_p1 => percentagep1,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 

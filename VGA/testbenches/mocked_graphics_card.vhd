@@ -37,9 +37,9 @@ entity graphics_card is
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
-        R_data : out std_logic(3 downto 0); --! RGB data to screen
-        G_data : out std_logic(3 downto 0); --! RGB data to screen
-        B_data : out std_logic(3 downto 0) --! RGB data to screen
+        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        B_data : out std_logic_vector(3 downto 0) --! RGB data to screen
     );
 end entity graphics_card;
 

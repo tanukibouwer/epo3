@@ -1,6 +1,5 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
 
 entity input_deserializer is
   port (
@@ -8,10 +7,10 @@ entity input_deserializer is
     reset     : in    std_logic;
 
     data_p1     : in    std_logic;
-    buttons_p1          : out   std_logic_vector(7 downto 0);
+    buttons_p1  : out   std_logic_vector(7 downto 0);
 
     data_p2     : in    std_logic;
-    buttons_p2          : out   std_logic_vector(7 downto 0)
+    buttons_p2  : out   std_logic_vector(7 downto 0)
   );
 end entity input_deserializer;
 
@@ -29,6 +28,7 @@ begin
         buttons_signal_p1 <= "00000000";
         buttons_signal_p2 <= "00000000";
       else
+        -- read !data to bit 0 and shift all other bits to the left
         buttons_signal_p1(0) <= not data_p1;
         buttons_signal_p1(1) <= buttons_signal_p1(0);
         buttons_signal_p1(2) <= buttons_signal_p1(1);

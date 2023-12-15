@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity input_des_clk_buffer is
+entity input_buffer is
   port (
     clk       : in    std_logic;
     reset     : in    std_logic;
@@ -11,14 +11,14 @@ entity input_des_clk_buffer is
   );
 end entity;
 
-architecture behavioural of input_des_clk_buffer is
+architecture behavioural of input_buffer is
   signal tmp : std_logic;
 begin
   process(clk)
   begin
     if (clk'event and clk = '1') then
       if (reset = '1') then
-        tmp <= '1';
+        tmp <= '0';
       else
         tmp <= input;
       end if;
@@ -27,4 +27,3 @@ begin
 
   output <= tmp;
 end architecture behavioural;
-

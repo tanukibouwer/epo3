@@ -24,6 +24,8 @@ architecture behavioural of input_driver is
   signal state, new_state : driver_state;
 
   signal per_count : unsigned (8 downto 0);
+
+  -- counts the amount of controller clock pulses
   signal pulse_count, pulse_new_count : unsigned (2 downto 0);
 
 begin
@@ -46,11 +48,14 @@ begin
   begin
     case state is
       when reset_state =>
+        -- reset count
         period_count_reset <= '1';
         pulse_new_count <= pulse_count;
 
         controller_latch <= '0';
         controller_clk <= '0';
+
+        -- reset the deserializer
         deserializer_clk <= '1';
         deserializer_reset <= '1';
 
@@ -126,6 +131,7 @@ begin
 
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
+          -- if seven clock pulses have been given it should go to pause
           if (pulse_count >= to_unsigned(7, 3)) then
             pulse_new_count <= (others => '0');
             new_state <= pause;
@@ -145,9 +151,11 @@ begin
         deserializer_clk <= '0';
         deserializer_reset <= '0';
 
+        -- write the new button values to the output register
         reg_write <= '1';
 
         if (per_count = to_unsigned(300, 9)) then
+          -- loop back to latch_high
           period_count_reset <= '1';
           new_state <= latch_high;
         else

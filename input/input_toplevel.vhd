@@ -45,7 +45,7 @@ architecture structural of input_toplevel is
     );
   end component input_period_counter;
 
-  component input_des_clk_buffer is
+  component input_buffer is
     port (
       clk       : in    std_logic;
       reset     : in    std_logic;
@@ -109,7 +109,8 @@ begin
     reg_write => reg_write
   );
 
-  des_clk_buffer: input_des_clk_buffer port map (
+  -- does not work without this buffer
+  des_buffer: input_buffer port map (
     clk => clk,
     reset => reset,
     input => deserializer_clk,

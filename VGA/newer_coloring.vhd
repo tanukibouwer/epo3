@@ -31,16 +31,6 @@ entity coloring_new is
         char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
         char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
         char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
-
-        -- x_lowerbound_ch1 : in std_logic_vector(9 downto 0); --! character 1 bounds
-        -- x_upperbound_ch1 : in std_logic_vector(9 downto 0); --! character 1 bounds
-        -- y_lowerbound_ch1 : in std_logic_vector(9 downto 0); --! character 1 bounds
-        -- y_upperbound_ch1 : in std_logic_vector(9 downto 0); --! character 1 bounds
-
-        -- x_lowerbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
-        -- x_upperbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
-        -- y_lowerbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
-        -- y_upperbound_ch2 : in std_logic_vector(9 downto 0); --! character 2 bounds
         -- percentage from attack module
         percentage_p1 : in std_logic_vector(9 downto 0);
 

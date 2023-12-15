@@ -57,19 +57,26 @@ architecture structural of graphics_card is
     end component;
 
     component coloring_new is
-        port map(
-            clk           => clk,
-            reset         => reset,
-            hcount        => hcount,
-            vcount        => vcount,
-            char1x        => char1x,
-            char1y        => char1y,
-            char2x        => char2x,
-            char2y        => char2y,
-            percentage_p1 => percentage_p1,
-            R_data        => R_data,
-            G_data        => G_data,
-            B_data        => B_data
+        port (
+            --! global inputs
+            clk   : in std_logic;
+            reset : in std_logic;
+            --! counter data
+            hcount : in std_logic_vector(9 downto 0);
+            vcount : in std_logic_vector(9 downto 0);
+            -- relevant data for x-y locations
+            char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
+            char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
+            char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            -- percentage from attack module
+            percentage_p1 : in std_logic_vector(9 downto 0);
+    
+            -- RGB data outputs
+            R_data : out std_logic_vector(3 downto 0); --! RGB data output
+            G_data : out std_logic_vector(3 downto 0); --! RGB data output
+            B_data : out std_logic_vector(3 downto 0)  --! RGB data output
+    
         );
     end component;
 

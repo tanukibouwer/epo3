@@ -45,6 +45,16 @@ architecture structural of input_toplevel is
     );
   end component input_period_counter;
 
+  component input_des_clk_buffer is
+    port (
+      clk       : in    std_logic;
+      reset     : in    std_logic;
+
+      input    : in    std_logic;
+      output   : out   std_logic
+    );
+  end component;
+
   component input_deserializer is
     port (
       clk       : in    std_logic;
@@ -77,6 +87,7 @@ architecture structural of input_toplevel is
 
   signal deserializer_reset   : std_logic;
   signal deserializer_clk     : std_logic;
+  signal des_clk_buffered     : std_logic;
   signal deserializer_out_p1  : std_logic_vector(7 downto 0);
   signal deserializer_out_p2  : std_logic_vector(7 downto 0);
 
@@ -98,6 +109,13 @@ begin
     reg_write => reg_write
   );
 
+  des_clk_buffer: input_des_clk_buffer port map (
+    clk => clk,
+    reset => reset,
+    input => deserializer_clk,
+    output => des_clk_buffered
+  );
+
   counter: input_period_counter port map (
     clk => clk,
     reset => count_reset,
@@ -105,7 +123,7 @@ begin
   );
 
   desrlzr: input_deserializer port map (
-    clk => deserializer_clk,
+    clk => des_clk_buffered,
     reset => deserializer_reset,
 
     data_p1 => data_p1,

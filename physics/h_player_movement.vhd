@@ -10,11 +10,6 @@ end h_player_movement;
 architecture behaviour of h_player_movement is
    constant max_left_speed : std_logic_vector(5 downto 0) := "111110";
    constant max_right_speed : std_logic_vector(5 downto 0) := "000010";
-   component physics_9bit_adder
-      port(a      : in  std_logic_vector(8 downto 0);
-           b      : in  std_logic_vector(8 downto 0);
-           result : out std_logic_vector(8 downto 0));
-   end component;
 begin
    with left_right_pressed select
       out_h_target <= max_left_speed when "01", max_right_speed when "10", (others => '0') when others;   

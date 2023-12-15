@@ -15,7 +15,7 @@ entity input_driver is
     deserializer_reset  : out   std_logic;
     deserializer_clk    : out   std_logic;
 
-    buffer_read         : out   std_logic
+    reg_write         : out   std_logic
   );
 end entity input_driver;
 
@@ -54,7 +54,7 @@ begin
         deserializer_clk <= '1';
         deserializer_reset <= '1';
 
-        buffer_read <= '0';
+        reg_write <= '0';
 
         new_state <= latch_high;
 
@@ -67,7 +67,7 @@ begin
         deserializer_clk <= '0';
         deserializer_reset <= '0';
 
-        buffer_read <= '0';
+        reg_write <= '0';
 
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
@@ -85,7 +85,7 @@ begin
         deserializer_clk <= '1';
         deserializer_reset <= '0';
 
-        buffer_read <= '0';
+        reg_write <= '0';
 
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
@@ -103,7 +103,7 @@ begin
         deserializer_clk <= '0';
         deserializer_reset <= '0';
 
-        buffer_read <= '0';
+        reg_write <= '0';
 
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
@@ -121,7 +121,7 @@ begin
         controller_clk <= '0';
         deserializer_clk <= '1';
         deserializer_reset <= '0';
-        buffer_read <= '0';
+        reg_write <= '0';
 
 
         if (per_count = to_unsigned(300, 9)) then
@@ -145,7 +145,7 @@ begin
         deserializer_clk <= '0';
         deserializer_reset <= '0';
 
-        buffer_read <= '1';
+        reg_write <= '1';
 
         if (per_count = to_unsigned(300, 9)) then
           period_count_reset <= '1';
@@ -157,8 +157,3 @@ begin
     end case;
   end process;
 end architecture behavioural;
-
-
-
-
-

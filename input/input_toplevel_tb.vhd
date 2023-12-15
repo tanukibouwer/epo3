@@ -1,22 +1,23 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity input_tb is
-end entity input_tb;
+entity input_toplevel_tb is
+end entity input_toplevel_tb;
 
-architecture behavioural of input_tb is
+architecture behavioural of input_toplevel_tb is
   component input_toplevel is
     port (
-      clk       : in    std_logic;
-      reset     : in    std_logic;
+      clk   : in std_logic;
+      reset : in std_logic;
 
       controller_latch    : out   std_logic;
       controller_clk      : out   std_logic;
 
-      p1_controller : in    std_logic;                    -- player 1 controller serial data in
-      p1_input      : out   std_logic_vector(7 downto 0); -- player 1 parallel out
-      p2_controller : in    std_logic;                    -- player 2 controller serial data in
-      p2_input      : out   std_logic_vector(7 downto 0)  -- player 2 parallel out
+      data_p1       : in    std_logic;                      -- serial in
+      buttons_p1    : out   std_logic_vector(7 downto 0);   -- parallel out
+
+      data_p2       : in    std_logic;                      -- serial in
+      buttons_p2    : out   std_logic_vector(7 downto 0)    -- parallel out
     );
   end component input_toplevel;
 
@@ -25,10 +26,10 @@ architecture behavioural of input_tb is
   signal controller_latch : std_logic;
   signal controller_clk   : std_logic;
 
-  signal p1_controller    : std_logic;
-  signal p1_input         : std_logic_vector(7 downto 0);
-  signal p2_controller    : std_logic;
-  signal p2_input         : std_logic_vector(7 downto 0);
+  signal data_p1      : std_logic;
+  signal buttons_p1   : std_logic_vector(7 downto 0);
+  signal data_p2      : std_logic;
+  signal buttons_p2   : std_logic_vector(7 downto 0);
 
 begin
   test: input_toplevel
@@ -37,10 +38,10 @@ begin
     reset => reset,
     controller_latch => controller_latch,
     controller_clk => controller_clk,
-    p1_controller => p1_controller,
-    p1_input => p1_input,
-    p2_controller => p2_controller,
-    p2_input => p2_input
+    data_p1 => data_p1,
+    buttons_p1=> buttons_p1,
+    data_p2 => data_p2,
+    buttons_p2 => buttons_p2
   );
 
   clk   <= '1' after 0 ns,
@@ -48,17 +49,17 @@ begin
 
   reset <= '1' after 0 ns,
            '0' after 70 ns,
-           '1' after 200 us,
+           '0' after 200 us,
            '0' after 201 us;
 
-  p1_controller <= '0' after 0 ns,
+  data_p1 <= '0' after 0 ns,
                    '1' after 30 us,
                    '0' after 55 us,
                    '1' after 185 us,
                    '0' after 290 us,
                    '1' after 330 us;
 
-  p2_controller <= '1' after 0 ns,
+  data_p2 <= '1' after 0 ns,
                    '0' after 55 us,
                    '1' after 70 us;
 

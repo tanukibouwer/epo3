@@ -32,7 +32,7 @@ architecture structural of chip_toplevel is
     -- between memory and graphics
     signal vsyncintern : std_logic; -- input into memory, out from graphics
 
-    -- between memory and physics 
+    -- between memory and physics
     signal char1posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
     signal char1posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
     signal char2posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
@@ -59,13 +59,14 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
 
-            controller_latch : out std_logic;
-            controller_clk   : out std_logic;
+            controller_latch    : out   std_logic;
+            controller_clk      : out   std_logic;
 
-            p1_controller : in std_logic; -- player 1 controller serial data in
-            p1_input      : out std_logic_vector(7 downto 0); -- player 1 parallel out
-            p2_controller : in std_logic; -- player 2 controller serial data in
-            p2_input      : out std_logic_vector(7 downto 0) -- player 2 parallel out
+            data_p1       : in    std_logic;                      -- serial in
+            buttons_p1    : out   std_logic_vector(7 downto 0);   -- parallel out
+
+            data_p2       : in    std_logic;                      -- serial in
+            buttons_p2    : out   std_logic_vector(7 downto 0)    -- parallel out
         );
     end component input_toplevel;
 
@@ -125,7 +126,7 @@ architecture structural of chip_toplevel is
             --att2dm  : out std_logic_vector(3 downto 0); -- attack2 damage
             -- att1kb		: out std_logic_vector(5 downto 0); -- attack1 knockback, currently unused
             -- att2kb		: out std_logic_vector(5 downto 0); -- attack2 knockback, currently unused
-            --plat1x  : out std_logic_vector(7 downto 0); -- plat(form)1 x position 
+            --plat1x  : out std_logic_vector(7 downto 0); -- plat(form)1 x position
             --plat1y  : out std_logic_vector(7 downto 0); -- plat1 y position
             --plat2x  : out std_logic_vector(7 downto 0); -- plat2 x position
             --plat2y  : out std_logic_vector(7 downto 0); -- plat2 y position
@@ -283,10 +284,10 @@ begin
         controller_latch => controller_latch,
         controller_clk   => controller_clk,
 
-        p1_controller => p1_controller,
-        p1_input      => inputsp1,
-        p2_controller => p2_controller,
-        p2_input      => inputsp2);
+        data_p1 => p1_controller,
+        buttons_p1      => inputsp1,
+        data_p2 => p2_controller,
+        buttons_p2      => inputsp2);
 
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 

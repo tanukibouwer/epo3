@@ -39,22 +39,24 @@ begin
     buttons_out_p2 => buttons_out_p2
   );
 
-  clk   <= '1' after 0 ns,
-           '0' after 20 ns when clk /= '0' else '1' after 20 ns;
+  clk   <= '0' after 0 ns,
+           '1' after 20 ns when clk /= '1' else '0' after 20 ns;
 
   reset <= '1' after 0 ns,
-           '0' after 70 ns;
+           '0' after 40 ns;
 
   write <= '0' after 0 ns,
-          '1' after 80 ns,
-          '0' after 120 ns,
-          '1' after 200 ns,
-          '0' after 240 ns;
+          '1' after 50 ns,
+          '0' after 90 ns,
+          '1' after 130 ns,
+          '0' after 170 ns;
 
   buttons_in_p1 <= "00000000" after 0 ns,
-                 "10110100" after 180 ns;
+                   "00010111" after 50 ns,
+                 "10110100" after 130 ns;
 
   buttons_in_p2 <= "00000000" after 0 ns,
-                 "10110100" after 180 ns;
+                   "01010000" after 50 ns,
+                 "10100101" after 130 ns;
 
 end architecture behavioural;

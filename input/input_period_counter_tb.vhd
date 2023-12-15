@@ -31,8 +31,8 @@ begin
 
   reset <= '1' after 0 ns,
            '0' after 70 ns,
-           '1' after 12000 ns,
-           '0' after 12040 ns;
+           '1' after 400 ns,
+           '0' after 430 ns;
 
 
 end architecture behavioural;

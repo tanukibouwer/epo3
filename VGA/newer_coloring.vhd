@@ -383,8 +383,8 @@ begin
                         elsif (char1_digc(0)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 0))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(1)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 1))) then -- line 1
+                            B_data <= "1111";
+                        elsif (char1_digc(1)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 1))) then -- line 1
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -447,8 +447,8 @@ begin
                         elsif (char1_digc(1)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 1))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(2)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 2))) then --line 2
+                            B_data <= "1111";
+                        elsif (char1_digc(2)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 2))) then --line 2
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -511,8 +511,8 @@ begin
                         elsif (char1_digc(2)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 2))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(3)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 3))) then -- line 3
+                            B_data <= "1111";
+                        elsif (char1_digc(3)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 3))) then -- line 3
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -575,8 +575,8 @@ begin
                         elsif (char1_digc(3)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 3))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(4)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 4))) then -- line 4
+                            B_data <= "1111";
+                        elsif (char1_digc(4)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 4))) then -- line 4
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -639,8 +639,8 @@ begin
                         elsif (char1_digc(4)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 4))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(5)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 5))) then -- line 5
+                            B_data <= "1111";
+                        elsif (char1_digc(5)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 5))) then -- line 5
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -703,8 +703,8 @@ begin
                         elsif (char1_digc(5)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 5))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(6)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 6))) then -- line 6
+                            B_data <= "1111";
+                        elsif (char1_digc(6)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 6))) then -- line 6
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -767,8 +767,8 @@ begin
                         elsif (char1_digc(6)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 6))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(7)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 6))) then -- line 7
+                            B_data <= "1111";
+                        elsif (char1_digc(7)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 6))) then -- line 7
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -831,8 +831,8 @@ begin
                         elsif (char1_digc(7)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 6))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(8)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 7))) then -- line 8
+                            B_data <= "1111";
+                        elsif (char1_digc(8)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 7))) then -- line 8
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -895,8 +895,8 @@ begin
                         elsif (char1_digc(8)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 7))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(9)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 8))) then -- line 9
+                            B_data <= "1111";
+                        elsif (char1_digc(9)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 8))) then -- line 9
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -959,8 +959,8 @@ begin
                         elsif (char1_digc(9)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 8))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(10)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 9))) then -- line 10
+                            B_data <= "1111";
+                        elsif (char1_digc(10)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 9))) then -- line 10
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1023,8 +1023,8 @@ begin
                         elsif (char1_digc(10)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 9))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(11)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 11))) then -- line 11
+                            B_data <= "1111";
+                        elsif (char1_digc(11)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 11))) then -- line 11
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1087,8 +1087,8 @@ begin
                         elsif (char1_digc(11)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 11))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(12)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 12))) then -- line 12
+                            B_data <= "1111";
+                        elsif (char1_digc(12)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 12))) then -- line 12
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1151,8 +1151,8 @@ begin
                         elsif (char1_digc(12)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 12))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(13)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 13))) then -- line 13
+                            B_data <= "1111";
+                        elsif (char1_digc(13)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 13))) then -- line 13
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1215,8 +1215,8 @@ begin
                         elsif (char1_digc(13)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 13))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(14)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 14))) then -- line 14
+                            B_data <= "1111";
+                        elsif (char1_digc(14)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 14))) then -- line 14
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1279,8 +1279,8 @@ begin
                         elsif (char1_digc(14)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 14))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(15)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 15))) then -- line 15
+                            B_data <= "1111";
+                        elsif (char1_digc(15)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 15))) then -- line 15
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1343,8 +1343,8 @@ begin
                         elsif (char1_digc(15)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 15))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(16)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 16))) then -- line 16
+                            B_data <= "1111";
+                        elsif (char1_digc(16)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 16))) then -- line 16
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1407,8 +1407,8 @@ begin
                         elsif (char1_digc(16)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 16))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(17)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 17))) then -- line 17
+                            B_data <= "1111";
+                        elsif (char1_digc(17)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 17))) then -- line 17
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1471,8 +1471,8 @@ begin
                         elsif (char1_digc(17)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 17))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(18)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 18))) then -- line 18
+                            B_data <= "1111";
+                        elsif (char1_digc(18)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 18))) then -- line 18
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1535,8 +1535,8 @@ begin
                         elsif (char1_digc(18)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 18))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(19)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 19))) then -- line 19
+                            B_data <= "1111";
+                        elsif  (char1_digc(19)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 19))) then -- line 19
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1599,8 +1599,8 @@ begin
                         elsif (char1_digc(19)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 19))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(20)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 20))) then -- line 20
+                            B_data <= "1111";
+                        elsif (char1_digc(20)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 20))) then -- line 20
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1663,8 +1663,8 @@ begin
                         elsif (char1_digc(20)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 20))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(21)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 21))) then -- line 21
+                            B_data <= "1111";
+                        elsif (char1_digc(21)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 21))) then -- line 21
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1727,8 +1727,8 @@ begin
                         elsif (char1_digc(21)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 21))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(22)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 22))) then -- line 22
+                            B_data <= "1111";
+                        elsif (char1_digc(22)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 22))) then -- line 22
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";
@@ -1791,8 +1791,8 @@ begin
                         elsif (char1_digc(22)(15) = '1' and ((uns_hcount - 156 = 15) and (uns_vcount - 463 = 22))) then
                             R_data <= "1111";
                             G_data <= "1111";
-                            B_data <= "1111";end if;
-                        if    (char1_digc(23)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 23))) then -- line 23
+                            B_data <= "1111";
+                        elsif (char1_digc(23)(0 ) = '1' and ((uns_hcount - 156 = 0 ) and (uns_vcount - 463 = 23))) then -- line 23
                             R_data <= "1111";
                             G_data <= "1111";
                             B_data <= "1111";

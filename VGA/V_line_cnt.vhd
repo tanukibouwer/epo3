@@ -33,7 +33,7 @@ begin
         if rising_edge(clk) then
             if reset = '1' then
                 cur_count <= (others => '0');
-            elsif unsigned(hcount) = 790 then -- add a count before the horizontal frame has ran out (at 796)
+            elsif unsigned(hcount) = 798 then -- add a count before the horizontal frame has ran out (at 796)
                 cur_count <= new_count;
             end if;
         end if;

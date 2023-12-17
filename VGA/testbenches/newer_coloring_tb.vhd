@@ -78,11 +78,11 @@ begin
         B_data        => B_data
     );
 
-    percentage_p1 <= "0000011100";
-    char1x        <= "00100111";
-    char1y        <= "00100111";
-    char2x        <= "00100111";
-    char2y        <= "00100111";
+    percentage_p1 <= "0100011100";
+    char1x        <= "00001111";
+    char1y        <= "00001111";
+    char2x        <= "00001111";
+    char2y        <= "00001111";
     SCNR1 : screen_scan port map(
         clk => clk, reset => reset, Hsync => Hsync, Vsync => Vsync, vcount_out => vcount, hcount_out => hcount
     );

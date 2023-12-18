@@ -102,9 +102,9 @@ begin
     );
 
     char1_x <= std_logic_vector(to_unsigned(50, char1_x'length));
-    char1_y <= std_logic_vector(to_unsigned(75, char1_x'length));
+    char1_y <= std_logic_vector(to_unsigned(70, char1_x'length));
     char2_x <= std_logic_vector(to_unsigned(150, char1_x'length));
-    char2_y <= std_logic_vector(to_unsigned(75, char1_x'length));
+    char2_y <= std_logic_vector(to_unsigned(70, char1_x'length));
     percentagep1 <= std_logic_vector(to_unsigned(123, percentagep1'length));
 
 end architecture;

@@ -103,36 +103,37 @@ architecture behavioural of coloring_new is
         );
     end component;
 
+    -- subtype color_val is std_logic_vector(11 downto 0); -- R(11,10,9,8) G(7,6,5,4) B(3,2,1,0)
     subtype color_val is std_logic range '0' to '1';
     type num_sprite_x is array (0 to 15) of color_val;
     type num_sprite_y is array (0 to 23) of num_sprite_x;
 
     constant char1_digc : num_sprite_y := (
-        (('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('1'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('1'),('1'),('1'),('0'),('0'),('0'),('0'),('0'),('0'),('1'),('1'),('1'),('1'),('0'),('0')),
-        (('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'),('0'))
-        );
+    (('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('1'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('1'), ('1'), ('1'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('1'), ('1'), ('1'), ('1'), ('0'), ('0')),
+    (('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'), ('0'))
+    );
 
     -- type declaration of the digit array
     type digit_array is array (0 to 23) of std_logic_vector(0 to 15);
@@ -180,10 +181,10 @@ begin
         ypos_scl1 => y_lowerbound_ch2, ypos_scl2 => y_upperbound_ch2
     );
 
-    -- player 1
+    -- player 1 data
     percentage_p1_to_digits : dig3_num_splitter port map(
-        num3dig => percentage_p1, num1 => digit1, num2 => digit2, num3 => digit3);
-
+        num3dig => percentage_p1, num1 => digit1, num2 => digit2, num3 => digit3
+    );
     digit1_p1_to_sprites : number_sprite port map(
         number => digit1,
         line1  => char1_dig1(0),
@@ -209,8 +210,8 @@ begin
         line21 => char1_dig1(20),
         line22 => char1_dig1(21),
         line23 => char1_dig1(22),
-        line24 => char1_dig1(23));
-
+        line24 => char1_dig1(23)
+    );
     digit2_p1_to_sprites : number_sprite port map(
         number => digit2,
         line1  => char1_dig2(0),
@@ -236,8 +237,8 @@ begin
         line21 => char1_dig2(20),
         line22 => char1_dig2(21),
         line23 => char1_dig2(22),
-        line24 => char1_dig2(23));
-
+        line24 => char1_dig2(23)
+    );
     digit3_p1_to_sprites : number_sprite port map(
         number => digit3,
         line1  => char1_dig3(0),
@@ -263,34 +264,8 @@ begin
         line21 => char1_dig3(20),
         line22 => char1_dig3(21),
         line23 => char1_dig3(22),
-        line24 => char1_dig3(23));
-
-    --constant image p1 
-
-    -- char1_digc(0)  <= "0000000000000000";
-    -- char1_digc(1)  <= "0111111111111110";
-    -- char1_digc(2)  <= "0111111111111110";
-    -- char1_digc(3)  <= "0111111111111110";
-    -- char1_digc(4)  <= "0111111111111110";
-    -- char1_digc(5)  <= "0111111111111110";
-    -- char1_digc(6)  <= "0111111111111110";
-    -- char1_digc(7)  <= "0111111111111110";
-    -- char1_digc(8)  <= "0111111111111110";
-    -- char1_digc(9)  <= "0111111111111110";
-    -- char1_digc(10) <= "0111111111111110";
-    -- char1_digc(11) <= "0111000000000000";
-    -- char1_digc(12) <= "0111000000000000";
-    -- char1_digc(13) <= "0111000000000000";
-    -- char1_digc(14) <= "0111000000000000";
-    -- char1_digc(15) <= "0111000000000000";
-    -- char1_digc(16) <= "0111000000111100";
-    -- char1_digc(17) <= "0111000000111100";
-    -- char1_digc(18) <= "0111000000111100";
-    -- char1_digc(19) <= "0111000000111100";
-    -- char1_digc(20) <= "0111000000111100";
-    -- char1_digc(21) <= "0111000000111100";
-    -- char1_digc(22) <= "0111000000111100";
-    -- char1_digc(23) <= "0000000000000000";
+        line24 => char1_dig3(23)
+    );
 
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
@@ -330,7 +305,7 @@ begin
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 178     and uns_vcount <= 182) then --platform 3, (55,36) --> (104,37)
+                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 178 and uns_vcount <= 182) then --platform 3, (55,36) --> (104,37)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
@@ -348,10 +323,11 @@ begin
                     R_data <= "0000";
                     G_data <= "1111";
                     B_data <= "1111";
+
                     --------------------------------------------------------------------------------
-                    -- p1 percentage markings
+                    -- percentage markings
                     --------------------------------------------------------------------------------
-                elsif (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data: 143 to 303 horizontal
+                elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then
                     --------------------------------------------------------------------------------
                     -- first assign background color for numbers
                     -- if any of the following statements be true, then assign a different color
@@ -362,80 +338,86 @@ begin
                     G_data <= "0111";
                     B_data <= "0100";
 
-                    --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                    if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
-                        R_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        R_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        R_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        R_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        G_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        G_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        G_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        G_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        B_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        B_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        B_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                        B_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
-                    elsif (uns_hcount > 195 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 486) then -- first digit --183 to 223 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    elsif (uns_hcount > 235 and uns_hcount <= 251) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --223 to 263 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    elsif (uns_hcount > 275 and uns_hcount <= 291) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --263 to 303 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    else -- fallback for testing purposes black
+                    --------------------------------------------------------------------------------
+                    -- p1 percentage markings
+                    --------------------------------------------------------------------------------
+                    if (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data: 143 to 303 horizontal
+
+                        --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                        if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
+                            R_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            R_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            R_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            R_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            G_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            G_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            G_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            G_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            B_data(0) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            B_data(1) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            B_data(2) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                            B_data(3) <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156);
+                        elsif (uns_hcount > 195 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 486) then -- first digit --183 to 223 idem
+                            R_data    <= "1111";
+                            G_data    <= "1111";
+                            B_data    <= "1111";
+                        elsif (uns_hcount > 235 and uns_hcount <= 251) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --223 to 263 idem
+                            R_data    <= "1111";
+                            G_data    <= "1111";
+                            B_data    <= "1111";
+                        elsif (uns_hcount > 275 and uns_hcount <= 291) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --263 to 303 idem
+                            R_data    <= "1111";
+                            G_data    <= "1111";
+                            B_data    <= "1111";
+                            -- else -- fallback for testing purposes black
+                            --     R_data <= "0000";
+                            --     G_data <= "0000";
+                            --     B_data <= "0000";
+                        end if;
+
+                        --------------------------------------------------------------------------------
+                        -- p2 percentage markings 
+                        --------------------------------------------------------------------------------
+                    elsif (uns_hcount > 623 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then --player 2 data: 623 to 783
+                        --------------------------------------------------------------------------------
+                        -- first assign background color for numbers
+                        -- if any of the following statements be true, then assign a different color
+                        -- this background is different from playable game background
+                        -- color in hex: #3f6f3f
+                        --------------------------------------------------------------------------------
+                        R_data <= "0100";
+                        G_data <= "0111";
+                        B_data <= "0100";
+
+                        --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                        if (uns_hcount > 635 and uns_hcount <= 651) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
+                            R_data <= "1111";
+                            G_data <= "1111";
+                            B_data <= "1111";
+                        elsif (uns_hcount > 675 and uns_hcount <= 691) and (uns_vcount > 462 and uns_vcount <= 486) then -- first digit -- 663 to 703 idem
+                            R_data <= "1111";
+                            G_data <= "1111";
+                            B_data <= "1111";
+                        elsif (uns_hcount > 715 and uns_hcount <= 731) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --703 to 743 idem
+                            R_data <= "1111";
+                            G_data <= "1111";
+                            B_data <= "1111";
+                        elsif (uns_hcount > 755 and uns_hcount <= 771) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --743 to 783 idem
+                            R_data <= "1111";
+                            G_data <= "1111";
+                            B_data <= "1111";
+                            -- else -- fallback for testing purposes black
+                            --     R_data <= "0000";
+                            --     G_data <= "0000";
+                            --     B_data <= "0000";
+                        end if;
+
+                    elsif (uns_hcount > 184 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2-4 -> displaying the numbers
+                        -- black for testing purposes
                         R_data <= "0000";
                         G_data <= "0000";
                         B_data <= "0000";
                     end if;
-
-                    --------------------------------------------------------------------------------
-                    -- p2 percentage markings 
-                    --------------------------------------------------------------------------------
-                elsif (uns_hcount > 623 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then --player 2 data: 623 to 783
-                    --------------------------------------------------------------------------------
-                    -- first assign background color for numbers
-                    -- if any of the following statements be true, then assign a different color
-                    -- this background is different from playable game background
-                    -- color in hex: #3f6f3f
-                    --------------------------------------------------------------------------------
-                    R_data <= "0100";
-                    B_data <= "0111";
-                    G_data <= "0100";
-
-                    --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                    if (uns_hcount > 635 and uns_hcount <= 651) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    elsif (uns_hcount > 675 and uns_hcount <= 691) and (uns_vcount > 462 and uns_vcount <= 486) then -- first digit -- 663 to 703 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    elsif (uns_hcount > 715 and uns_hcount <= 731) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --703 to 743 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    elsif (uns_hcount > 755 and uns_hcount <= 771) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --743 to 783 idem
-                        R_data <= "1111";
-                        G_data <= "1111";
-                        B_data <= "1111";
-                    else -- fallback for testing purposes black
-                        R_data <= "0000";
-                        G_data <= "0000";
-                        B_data <= "0000";
-                    end if;
-
-                elsif (uns_hcount > 184 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2-4 -> displaying the numbers
-                    -- black for testing purposes
-                    R_data <= "0000";
-                    G_data <= "0000";
-                    B_data <= "0000";
 
                 else -- global background color
                     R_data <= "0000";

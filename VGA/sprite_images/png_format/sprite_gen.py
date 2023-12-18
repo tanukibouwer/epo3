@@ -39,7 +39,7 @@ for path in paths:
             if pixel < 15:
                 fp.write('"),("')
             else:
-                fp.write(')')
+                fp.write('")')
             # print(bin(int((array[row][pixel][0]+1)/16)-1)[2:])
         if row < 23:
             fp.write('), \n')

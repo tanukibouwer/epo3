@@ -303,7 +303,6 @@ architecture behavioural of number_sprite is
         (("001101100011"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("111111111111"),("001101100011"),("001101100011")), 
         (("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011"),("001101100011")) 
     ); 
-
     
 begin
     int_hcount <= to_integer(unsigned(hcount));
@@ -312,13 +311,51 @@ begin
     process (number)
     begin
         case number is
-            when "0000" =>
-            R_data <= zero(int_vcount - 463)(int_hcount - 156)(11 to 8);
-            G_data <= zero(int_vcount - 463)(int_hcount - 156)(7 to 4);
-            B_data <= zero(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0000" => -- zero
+                R_data <= zero(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= zero(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= zero(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0001" => -- one
+                R_data <= one(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= one(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= one(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0010" => -- two
+                R_data <= two(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= two(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= two(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0011" => -- three
+                R_data <= three(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= three(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= three(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0100" => -- four
+                R_data <= four(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= four(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= four(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0101" => -- five
+                R_data <= five(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= five(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= five(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0110" => -- six
+                R_data <= six(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= six(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= six(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "0111" => -- seven
+                R_data <= seven(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= seven(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= seven(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "1000" => -- eight
+                R_data <= eight(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= eight(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= eight(int_vcount - 463)(int_hcount - 156)(3 to 0);
+            when "1001" => -- nine
+                R_data <= nine(int_vcount - 463)(int_hcount - 156)(11 to 8);
+                G_data <= nine(int_vcount - 463)(int_hcount - 156)(7 to 4);
+                B_data <= nine(int_vcount - 463)(int_hcount - 156)(3 to 0);
         
-            when others =>
-                null;
+            when others => -- fallback for error handling and checking
+                R_data <= "0000";
+                G_data <= "0000";
+                B_data <= "0000";
         end case;
     end process;
 

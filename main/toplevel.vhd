@@ -49,8 +49,12 @@ architecture structural of chip_toplevel is
 	-- between memory and attack
 	signal char1perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
 	signal char2perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
-	signal char1dc		: std_logic_vector(3 downto 0); -- inputs into memory, from attack
-	signal char2dc		: std_logic_vector(3 downto 0); -- inputs into memory, from attack
+	signal char1percin	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
+	signal char2percin	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
+	signal char1dc		: std_logic_vector(3 downto 0); -- output from memory, into attack
+	signal char2dc		: std_logic_vector(3 downto 0); -- output from memory, into attack
+	signal char1dcin	: std_logic_vector(3 downto 0); -- inputs into memory, from attack
+	signal char2dcin	: std_logic_vector(3 downto 0); -- inputs into memory, from attack
 
     -- between input and physics
     signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics
@@ -215,10 +219,14 @@ begin
         vsync => vsyncintern,
 		
 		-- death count and percentage
-		data_in4b1 => char1dc,
-		data_in4b2 => char2dc,
-		data_in10b1 => char1perc,
-		data_in10b2 => char2perc,
+		data_in4b1 => char1dcin,
+		data_in4b2 => char2dcin,
+		data_out4b1 => char1dc,
+		data_out4b2 => char2dc,
+		data_inhp1 => char1percin,
+		data_inhp2 => char2percin,
+		data_outhp1 => char1perc,
+		data_outhp2 => char2perc,
 
         --location
         data_in8b1  => char1posxin,

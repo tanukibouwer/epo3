@@ -47,8 +47,8 @@ architecture structural of chip_toplevel is
     signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
 	
 	-- between memory and attack
-	signal char1perc	: std_logic_vector(9 downto 0); -- output from memory, into attack
-	signal char2perc	: std_logic_vector(9 downto 0); -- output from memory, into attack
+	signal char1perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
+	signal char2perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
 	signal char1dc		: std_logic_vector(3 downto 0); -- inputs into memory, from attack
 	signal char2dc		: std_logic_vector(3 downto 0); -- inputs into memory, from attack
 
@@ -178,10 +178,10 @@ architecture structural of chip_toplevel is
             data_in4b2   : in std_logic_vector(3 downto 0); -- death count p2
             data_out4b1  : out std_logic_vector(3 downto 0); -- death count p1
             data_out4b2  : out std_logic_vector(3 downto 0); -- death count p2
-            data_in10b1  : in std_logic_vector(9 downto 0); --knockback percentage p1
-            data_in10b2  : in std_logic_vector(9 downto 0); --knockback percentage p2
-            data_out10b1 : out std_logic_vector(9 downto 0); --knockback percentage p1
-            data_out10b2 : out std_logic_vector(9 downto 0); --knockback percentage p2
+            data_inhp1  : in std_logic_vector(7 downto 0); --knockback percentage p1
+            data_inhp2  : in std_logic_vector(7 downto 0); --knockback percentage p2
+            data_outhp1 : out std_logic_vector(7 downto 0); --knockback percentage p1
+            data_outhp2 : out std_logic_vector(7 downto 0); --knockback percentage p2
             data_in8b1 : in std_logic_vector(7 downto 0); -- x pos p1
             data_in8b2 : in std_logic_vector(7 downto 0); -- y pos p1
             data_in8b3 : in std_logic_vector(7 downto 0); -- x pos p2

@@ -1,0 +1,8 @@
+https://colab.research.google.com/drive/1qjuv_YO_Y0nWcYNgv3YTeXL-7wIKt01L?usp=drive_link
+
+Simple python script specifically made for making character sprites from excel/csv, proven to safe time for smaller sprites
+
+For larger sprites, I recommend using kevin's more complicated image to sprites converter: "sprite_gen.py"
+
+-------
+Links may not work anymore and or discarded after the completion of the project

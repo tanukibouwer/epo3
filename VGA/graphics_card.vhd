@@ -27,15 +27,15 @@ entity graphics_card is
         char1_y       : in std_logic_vector(7 downto 0); --! character 1 y-location
         char2_x       : in std_logic_vector(7 downto 0); --! character 2 x-location
         char2_y       : in std_logic_vector(7 downto 0); --! character 2 y-location
-        percentage_p1 : in std_logic_vector(9 downto 0);
-        percentage_p2 : in std_logic_vector(9 downto 0);
+        percentage_p1 : in std_logic_vector(7 downto 0);
+        percentage_p2 : in std_logic_vector(7 downto 0);
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
-        R_data : out std_logic; --! RGB data to screen
-        G_data : out std_logic; --! RGB data to screen
-        B_data : out std_logic  --! RGB data to screen
+        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        B_data : out std_logic_vector(3 downto 0)  --! RGB data to screen
     );
 end entity graphics_card;
 
@@ -66,8 +66,8 @@ architecture structural of graphics_card is
             char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
             char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
             -- percentage from attack module
-            percentage_p1 : in std_logic_vector(9 downto 0);
-            percentage_p2 : in std_logic_vector(9 downto 0);
+            percentage_p1 : in std_logic_vector(7 downto 0);
+            percentage_p2 : in std_logic_vector(7 downto 0);
 
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); --! RGB data output

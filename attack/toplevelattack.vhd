@@ -140,4 +140,3 @@ PM5:	coldet port map(clk=>clk, res=>res, a1=>at1a, a2=>at2a, b1=>at1b, b2=>at2b,
 
 end architecture structural;
 
--- nog ff B attack fixen

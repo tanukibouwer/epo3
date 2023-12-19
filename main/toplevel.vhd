@@ -23,6 +23,14 @@ end chip_toplevel;
 
 architecture structural of chip_toplevel is
 
+
+    signal resetp1 : std_logic;
+    signal resetp2 : std_logic;
+
+    signal dirx1new : std_logic_vector(7 downto 0);
+    signal dirx2new : std_logic_vector(7 downto 0);
+    signal diry1new : std_logic_vector(7 downto 0);
+    signal diry2new : std_logic_vector(7 downto 0);
     -- signals for communication between memory and graphics+physics
     signal char1posx : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
     signal char1posy : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
@@ -51,6 +59,8 @@ architecture structural of chip_toplevel is
 	signal char2perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
 	signal char1percin	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
 	signal char2percin	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
+	signal char1perctemp	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
+	signal char2perctemp	: std_logic_vector(7 downto 0); -- inputs into memory, from attack
 	signal char1dc		: std_logic_vector(3 downto 0); -- output from memory, into attack
 	signal char2dc		: std_logic_vector(3 downto 0); -- output from memory, into attack
 	signal char1dcin	: std_logic_vector(3 downto 0); -- inputs into memory, from attack
@@ -80,6 +90,38 @@ architecture structural of chip_toplevel is
             buttons_p2    : out   std_logic_vector(7 downto 0)    -- parallel out
         );
     end component input_toplevel;
+
+    component topattack is
+	    port (
+	    clk : in std_logic;
+	    res : in std_logic;
+	    controller1 : in std_logic_vector(7 downto 0); 
+	    controller2 : in std_logic_vector(7 downto 0);
+	    x1in : in std_logic_vector(7 downto 0);
+	    y1in : in std_logic_vector(7 downto 0);
+	    x2in : in std_logic_vector(7 downto 0);
+	    y2in : in std_logic_vector(7 downto 0);
+	    percentage1in : in std_logic_vector(7 downto 0);
+	    percentage2in : in std_logic_vector(7 downto 0);
+	    killcount1in : in std_logic_vector(3 downto 0);
+	    killcount2in : in std_logic_vector(3 downto 0);
+	    directionx1out : out std_logic_vector(7 downto 0);
+	    directiony1out : out std_logic_vector(7 downto 0);
+	    directionx2out : out std_logic_vector(7 downto 0);
+	    directiony2out : out std_logic_vector(7 downto 0);
+	    damagepercentage1out : out std_logic_vector(7 downto 0);
+	    damagepercentage2out : out std_logic_vector(7 downto 0);
+	    percentage1out : out std_logic_vector(7 downto 0);
+	    percentage2out : out std_logic_vector(7 downto 0);
+	    newx1out : out std_logic_vector(7 downto 0);
+	    newx2out : out std_logic_vector(7 downto 0);
+	    newy1out : out std_logic_vector(7 downto 0);
+	    newy2out : out std_logic_vector(7 downto 0);
+ 	    killcount1out : out std_logic_vector(3 downto 0);
+ 	    killcount2out : out std_logic_vector(3 downto 0);
+	    restart1 : out std_logic;
+	    restart2 : out std_logic
+		 );
 
     component physics_system is
         port (
@@ -191,6 +233,37 @@ begin
 
     );
 
+    ATT1 : topattack port map(
+            clk => clk, 
+	    res => reset,
+	    controller1 => inputsp1,
+	    controller2 => inputsp2,
+	    x1in => char1posx,
+	    y1in => char1posy,
+	    x2in => char2posx,
+	    y2in => char2posy,
+	    percentage1in => char1perc,
+	    percentage2in => char2perc,
+	    killcount1in => char1dc,
+	    killcount2in => char2dc,
+	    directionx1out => dirx1new,
+	    directiony1out => diry1new,
+	    directionx2out => dirx2new,
+	    directiony2out => diry2new,
+	    damagepercentage1out => char1perctemp, 
+	    damagepercentage2out => char2perctemp,
+	    percentage1out => char1percin,
+	    percentage2out => char2percin,
+	    newx1out => char1posxin, 
+	    newx2out => char2posxin,
+	    newy1out => char1posyin,
+	    newy2out => char2posyin,
+ 	    killcount1out => char1dcin,
+ 	    killcount2out => char2dcin,
+	    restart1 => resetp1,
+	    restart2 => resetp2
+    );
+
     TL01 : graphics_card port map(
         clk   => clk,
         reset => reset,
@@ -217,9 +290,9 @@ begin
         pin_y => char1posy,
 
         player_input => inputsp1,
-        knockback_percentage => "00000000",
-        knockback_x => "00000000",
-        knockback_y => "00000000",
+        knockback_percentage => char1perctemp,
+        knockback_x => dirx1new,
+        knockback_y => diry1new,
 
         vout_x => char1velxin,
         vout_y => char1velyin,
@@ -233,9 +306,9 @@ begin
         pin_y => char2posy,
 
         player_input => inputsp2,
-        knockback_percentage => "00000000",
-        knockback_x => "00000000",
-        knockback_y => "00000000",
+        knockback_percentage => char2perctemp,
+        knockback_x => dirx2new,
+        knockback_y => diry2new,
 
         vout_x => char2velxin,
         vout_y => char2velyin,

@@ -17,21 +17,21 @@ architecture behaviour of collision_resolver is
 constant player_half_size_x : unsigned(7 downto 0) := to_unsigned(4, 8);
 constant player_half_size_y : unsigned(7 downto 0) := to_unsigned(6, 8);
 
-constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(9, 8); -- 10
-constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(60, 8); -- 59
-constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(73, 8); -- 74
-constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(68, 8); -- -6;
-constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(86, 8); -- 85
-constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(99, 8); -- 100
-constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(150, 8); -- 149
-constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(73, 8); -- 74
-constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(68, 8); -- -6;
-constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(86, 8); -- 85
-constant platform3_left_x : unsigned(7 downto 0) := to_unsigned(54, 8); -- 55
-constant platform3_right_x : unsigned(7 downto 0) := to_unsigned(105, 8); -- 104
-constant platform3_up_y : unsigned(7 downto 0) := to_unsigned(42, 8); -- 43
-constant platform3_placement_y : unsigned(7 downto 0) := to_unsigned(37, 8); -- -6;
-constant platform3_down_y : unsigned(7 downto 0) := to_unsigned(55, 8); -- 54
+constant platform1_left_x : unsigned(7 downto 0) := to_unsigned(17, 8); -- 10
+constant platform1_right_x : unsigned(7 downto 0) := to_unsigned(68, 8); -- 59
+constant platform1_up_y : unsigned(7 downto 0) := to_unsigned(78, 8); -- 74
+constant platform1_placement_y : unsigned(7 downto 0) := to_unsigned(72, 8); -- -6;
+constant platform1_down_y : unsigned(7 downto 0) := to_unsigned(91, 8); -- 85
+constant platform2_left_x : unsigned(7 downto 0) := to_unsigned(107, 8); -- 100
+constant platform2_right_x : unsigned(7 downto 0) := to_unsigned(158, 8); -- 149
+constant platform2_up_y : unsigned(7 downto 0) := to_unsigned(78, 8); -- 74
+constant platform2_placement_y : unsigned(7 downto 0) := to_unsigned(72, 8); -- -6;
+constant platform2_down_y : unsigned(7 downto 0) := to_unsigned(91, 8); -- 85
+constant platform3_left_x : unsigned(7 downto 0) := to_unsigned(62, 8); -- 55
+constant platform3_right_x : unsigned(7 downto 0) := to_unsigned(113, 8); -- 104
+constant platform3_up_y : unsigned(7 downto 0) := to_unsigned(45, 8); -- 43
+constant platform3_placement_y : unsigned(7 downto 0) := to_unsigned(39, 8); -- -6;
+constant platform3_down_y : unsigned(7 downto 0) := to_unsigned(58, 8); -- 54
 constant floor_y : unsigned(7 downto 0) := to_unsigned(101, 8); -- 107 - player_half_size.
 
 begin

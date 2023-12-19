@@ -53,7 +53,7 @@ begin
         end if;
 
       when still_pressed =>
-        jump <= '0';
+        jump <= '1';
 
         if (jump_in = '0') then
           new_state <= no_jump;

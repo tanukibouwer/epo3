@@ -1,4 +1,10 @@
 configuration coloring_cfg of coloring is
-    for structural
+    for behavioural
+        for all: char_offset_adder use configuration work.char_offset_adder_cfg;
+		end for;
+	for all: dig3_num_splitter use configuration work.dig3_num_splitter_cfg;
+		end for;
+	for all: number_sprite use configuration work.number_sprite_cfg;
+		end for;
     end for;
 end configuration coloring_cfg;

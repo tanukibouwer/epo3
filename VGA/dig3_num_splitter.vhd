@@ -21,7 +21,7 @@ entity dig3_num_splitter is
     port (
         -- clk       : in std_logic;
         -- reset     : in std_logic;
-        num3dig : in std_logic_vector(9 downto 0);
+        num3dig : in std_logic_vector(7 downto 0);
         num1    : out std_logic_vector(3 downto 0);
         num2    : out std_logic_vector(3 downto 0);
         num3    : out std_logic_vector(3 downto 0)
@@ -29,7 +29,7 @@ entity dig3_num_splitter is
     );
 end entity dig3_num_splitter;
 architecture behavioural of dig3_num_splitter is
-    signal number : unsigned(9 downto 0);
+    signal number : unsigned(7 downto 0);
 begin
     number <= unsigned(num3dig);
 

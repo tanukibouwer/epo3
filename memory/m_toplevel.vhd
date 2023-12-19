@@ -69,10 +69,10 @@ port(	--charhp		: out std_logic_vector(9 downto 0); --initial knockback percenta
 --		data_in4b2	: in std_logic_vector(3 downto 0);
 --		data_out4b1	: out std_logic_vector(3 downto 0);
 --		data_out4b2	: out std_logic_vector(3 downto 0);
---		data_in10b1	: in std_logic_vector(9 downto 0);  --knockback percentage
---		data_in10b2	: in std_logic_vector(9 downto 0);  --knockback percentage
---		data_out10b1	: out std_logic_vector(9 downto 0); --knockback percentage
---		data_out10b2	: out std_logic_vector(9 downto 0); --knockback percentage
+		data_in10b1	: in std_logic_vector(9 downto 0);  --knockback percentage
+		data_in10b2	: in std_logic_vector(9 downto 0);  --knockback percentage
+		data_out10b1	: out std_logic_vector(9 downto 0); --knockback percentage
+		data_out10b2	: out std_logic_vector(9 downto 0); --knockback percentage
 		data_in8b1 		: in std_logic_vector(7 downto 0);
 		data_in8b2		: in std_logic_vector(7 downto 0);
 		data_in8b3		: in std_logic_vector(7 downto 0);
@@ -120,14 +120,14 @@ architecture structural of memory is
 ----		write 		: in std_logic);
 ----	end component ram_4b;
 ----	
-----	component ram_10b is
-----	port(
-----		clk			: in std_logic;
---			reset		: in std_logic;
-----				data_in 	: in std_logic_vector(9 downto 0);
-----		data_out 	: out std_logic_vector(9 downto 0);
-----		write 		: in std_logic);
-----	end component ram_10b;
+	component ram_10b is
+	port(
+		clk			: in std_logic;
+			reset		: in std_logic;
+			data_in 	: in std_logic_vector(9 downto 0);
+		data_out 	: out std_logic_vector(9 downto 0);
+		write 		: in std_logic);
+	end component ram_10b;
 	
 	component ram_8b is
 	port(
@@ -169,18 +169,18 @@ begin
 --								data_out 	=> data_out4b2,
 --								write 		=> writeint);
 --								
---	DM10 : ram_10b port map (	clk			=> clk,
---								reset		=> reset,
---																data_in 	=> data_in10b1,
---								data_out 	=> data_out10b1,
---								write 		=> writeint);
---								
---	DM11 : ram_10b port map (	clk			=> clk,
---								reset		=> reset,
---																data_in 	=> data_in10b2,
---								data_out 	=> data_out10b2,
---								write 		=> writeint);
---								
+	DM10 : ram_10b port map (	clk			=> clk,
+								reset		=> reset,
+																data_in 	=> data_in10b1,
+								data_out 	=> data_out10b1,
+								write 		=> writeint);
+								
+	DM11 : ram_10b port map (	clk			=> clk,
+								reset		=> reset,
+																data_in 	=> data_in10b2,
+								data_out 	=> data_out10b2,
+								write 		=> writeint);
+								
 	DM20 : ram_8b port map (	clk			=> clk,
 								reset		=> reset,
 								initial		=> "00011010",

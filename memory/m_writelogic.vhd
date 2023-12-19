@@ -13,8 +13,7 @@ end writelogic;
 architecture behaviour of writelogic is
 	type	writestate is	(	off,
 				on1,
-				on2,
-				on3);
+				on2);
 	signal state, new_state :	writestate;
 begin
 	process(clk) is
@@ -39,14 +38,11 @@ begin
 				end if;
 			when on1 =>
 				write <= '1';
-					new_state <= on2;
+					new_state <= on2;	
 			when on2 =>
-				write <= '1';
-					new_state <= on3;	
-			when on3 =>
 				write <= '0';
 				if (vsync = '0') then
-					new_state <= on3;	
+					new_state <= on2;	
 				else
 					new_state <= off;
 				end if;

@@ -15,9 +15,9 @@ entity chip_toplevel is
         -- graphics i/o
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
-        R_data : out std_logic; --! RGB data to screen
-        G_data : out std_logic; --! RGB data to screen
-        B_data : out std_logic --! RGB data to screen
+        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        B_data : out std_logic_vector(3 downto 0) --! RGB data to screen
     );
 end chip_toplevel;
 
@@ -45,7 +45,7 @@ architecture structural of chip_toplevel is
     signal char1velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
     signal char2velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
     signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-	
+
 	-- between memory and attack
 	signal char1perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
 	signal char2perc	: std_logic_vector(7 downto 0); -- output from memory, into attack
@@ -109,9 +109,9 @@ architecture structural of chip_toplevel is
             -- vcount : out std_logic_vector(9 downto 0);
             Vsync  : out std_logic; --! sync signals -> active low
             Hsync  : out std_logic; --! sync signals -> active low
-            R_data : out std_logic; --! RGB data to screen
-            G_data : out std_logic; --! RGB data to screen
-            B_data : out std_logic);--! RGB data to screen
+            R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+            G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+            B_data : out std_logic_vector(3 downto 0));--! RGB data to screen
     end component graphics_card;
 
     component memory is
@@ -217,7 +217,7 @@ begin
         clk   => clk,
         reset => reset,
         vsync => vsyncintern,
-		
+
 		-- death count and percentage
 		data_in4b1 => char1dcin,
 		data_in4b2 => char2dcin,

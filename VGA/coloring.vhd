@@ -33,8 +33,8 @@ entity coloring is
         char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
 
         -- percentage from attack module
-        percentage_p1 : in std_logic_vector(9 downto 0);
-        percentage_p2 : in std_logic_vector(9 downto 0);
+        percentage_p1 : in std_logic_vector(7 downto 0);
+        percentage_p2 : in std_logic_vector(7 downto 0);
 
         -- RGB data outputs
         R_data : out std_logic_vector(3 downto 0); --! RGB data output
@@ -50,7 +50,7 @@ architecture behavioural of coloring is
 
     component dig3_num_splitter is
         port (
-            num3dig : in std_logic_vector(9 downto 0);
+            num3dig : in std_logic_vector(7 downto 0);
             num1    : out std_logic_vector(3 downto 0);
             num2    : out std_logic_vector(3 downto 0);
             num3    : out std_logic_vector(3 downto 0)

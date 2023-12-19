@@ -289,9 +289,9 @@ begin
         pin_y => char1posy,
 
         player_input => inputsp1,
-        knockback_percentage => "00000000",
-        knockback_x => "00000000",
-        knockback_y => "00000000",
+        knockback_percentage => char1perctemp,
+        knockback_x => dirx1new,
+        knockback_y => diry1new,
 
         vout_x => char1velxin,
         vout_y => char1velyin,
@@ -305,9 +305,9 @@ begin
         pin_y => char2posy,
 
         player_input => inputsp2,
-        knockback_percentage => "00000000",
-        knockback_x => "00000000",
-        knockback_y => "00000000",
+        knockback_percentage => char2perctemp,
+        knockback_x => dirx2new,
+        knockback_y => diry2new,
 
         vout_x => char2velxin,
         vout_y => char2velyin,

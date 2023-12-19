@@ -117,12 +117,14 @@ begin
 								
 	DM10 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp1int,
+								initial		=> "00000000",
 								data_in 	=> data_inhp1,
 								data_out 	=> data_outhp1,
 								write 		=> writeint);
 								
 	DM11 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp2int,
+								initial		=> "00000000",
 								data_in 	=> data_inhp2,
 								data_out 	=> data_outhp2,
 								write 		=> writeint);

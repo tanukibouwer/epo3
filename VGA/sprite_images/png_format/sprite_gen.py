@@ -22,7 +22,8 @@ for path in paths:
         fp.write('(')
         fp.write('("')
         for pixel in range(array.shape[1]):
-            # print((int((array[row][pixel][0]+1)/16)))
+            # print((int((array[row][pixel][1]+1)/16)))
+            # print(bin(int((array[row][pixel][0]+1)/16)-1))
             R = bin(int((array[row][pixel][0]+1)/16)-1)[2:]
             G = bin(int((array[row][pixel][1]+1)/16)-1)[2:]
             B = bin(int((array[row][pixel][2]+1)/16)-1)[2:]

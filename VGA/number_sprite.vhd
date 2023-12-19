@@ -24,6 +24,8 @@ entity number_sprite is
         -- player : in std_logic_vector(1 downto 0);
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
+        boundx : in std_logic_vector(9 downto 0);
+        boundy : in std_logic_vector(9 downto 0);
 
         R_data : out std_logic_vector(3 downto 0);
         G_data : out std_logic_vector(3 downto 0);
@@ -36,6 +38,7 @@ architecture behavioural of number_sprite is
 
     -- integer values for the counts
     signal int_hcount, int_vcount : integer;
+    signal int_boundx, int_boundy : integer;
 
     -- declare the array for the colours
     subtype color_val is std_logic_vector(11 downto 0); -- R(11,10,9,8) G(7,6,5,4) B(3,2,1,0)
@@ -307,50 +310,52 @@ architecture behavioural of number_sprite is
 begin
     int_hcount <= to_integer(unsigned(hcount));
     int_vcount <= to_integer(unsigned(vcount));
+    int_boundx <= to_integer(unsigned(boundx)) + 1;
+    int_boundy <= to_integer(unsigned(boundy)) + 1;
 
-    process (number)
+    process (number, int_hcount, int_vcount, int_boundx, int_boundy)
     begin
         case number is
             when "0000" => -- zero
-                R_data <= zero(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= zero(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= zero(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= zero(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= zero(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= zero(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0001" => -- one
-                R_data <= one(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= one(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= one(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= one(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= one(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= one(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0010" => -- two
-                R_data <= two(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= two(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= two(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= two(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= two(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= two(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0011" => -- three
-                R_data <= three(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= three(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= three(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= three(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= three(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= three(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0100" => -- four
-                R_data <= four(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= four(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= four(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= four(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= four(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= four(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0101" => -- five
-                R_data <= five(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= five(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= five(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= five(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= five(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= five(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0110" => -- six
-                R_data <= six(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= six(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= six(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= six(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= six(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= six(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "0111" => -- seven
-                R_data <= seven(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= seven(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= seven(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= seven(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= seven(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= seven(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "1000" => -- eight
-                R_data <= eight(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= eight(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= eight(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= eight(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= eight(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= eight(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
             when "1001" => -- nine
-                R_data <= nine(int_vcount - 463)(int_hcount - 156)(11 to 8);
-                G_data <= nine(int_vcount - 463)(int_hcount - 156)(7 to 4);
-                B_data <= nine(int_vcount - 463)(int_hcount - 156)(3 to 0);
+                R_data <= nine(int_vcount - int_boundy)(int_hcount - int_boundx)(11 downto 8);
+                G_data <= nine(int_vcount - int_boundy)(int_hcount - int_boundx)(7 downto 4);
+                B_data <= nine(int_vcount - int_boundy)(int_hcount - int_boundx)(3 downto 0);
         
             when others => -- fallback for error handling and checking
                 R_data <= "0000";

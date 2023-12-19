@@ -1,21 +1,15 @@
 --module: graphics_card
---version: 1.1.3
+--version: 2.0
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
 --! This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
 --! 
---! This component consists of 3 subcomponents, screen_scan, mem_vid and coloring 
+--! This component consists of 2 subcomponents, screen_scan and coloring 
 --! 
---! screen_scan to scan the screen, mem_vid as a frame buffer, coloring as logic to find the color at a pixel 
+--! screen_scan to scan the screen, coloring as logic to find the color at a pixel 
 --! 
---! offset adder to coordinates from frame buffer to pixel bounds.
---!
---! current version 1.1.3 is ready for the 'moving block' integration
---! 
---! TODO:
---! move char_offset_adder into the coloring module
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -29,10 +23,12 @@ entity graphics_card is
         clk   : in std_logic;
         reset : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-        char1_x : in std_logic_vector(7 downto 0); --! character 1 x-location
-        char1_y : in std_logic_vector(7 downto 0); --! character 1 y-location
-        char2_x : in std_logic_vector(7 downto 0); --! character 2 x-location
-        char2_y : in std_logic_vector(7 downto 0); --! character 2 y-location
+        char1_x       : in std_logic_vector(7 downto 0); --! character 1 x-location
+        char1_y       : in std_logic_vector(7 downto 0); --! character 1 y-location
+        char2_x       : in std_logic_vector(7 downto 0); --! character 2 x-location
+        char2_y       : in std_logic_vector(7 downto 0); --! character 2 y-location
+        percentage_p1 : in std_logic_vector(9 downto 0);
+        percentage_p2 : in std_logic_vector(9 downto 0);
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic; --! sync signals -> active low
@@ -56,43 +52,32 @@ architecture structural of graphics_card is
         );
     end component;
 
-    component char_offset_adder is
-        port (
-            xpos : in std_logic_vector(7 downto 0);
-            ypos : in std_logic_vector(7 downto 0);
-            xpos_scl1 : out std_logic_vector(9 downto 0);
-            xpos_scl2 : out std_logic_vector(9 downto 0);
-            ypos_scl1 : out std_logic_vector(9 downto 0);
-            ypos_scl2 : out std_logic_vector(9 downto 0)
-        );
-    end component;
-
     component coloring is
         port (
-            clk              : in std_logic;
-            reset            : in std_logic;
-            hcount           : in std_logic_vector(9 downto 0);
-            vcount           : in std_logic_vector(9 downto 0);
+            --! global inputs
+            clk   : in std_logic;
+            reset : in std_logic;
+            --! counter data
+            hcount : in std_logic_vector(9 downto 0);
+            vcount : in std_logic_vector(9 downto 0);
+            -- relevant data for x-y locations
+            char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
+            char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
+            char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            -- percentage from attack module
+            percentage_p1 : in std_logic_vector(9 downto 0);
+            percentage_p2 : in std_logic_vector(9 downto 0);
 
-            x_lowerbound_ch1 : in std_logic_vector(9 downto 0);
-            x_upperbound_ch1 : in std_logic_vector(9 downto 0);
-            y_lowerbound_ch1 : in std_logic_vector(9 downto 0);
-            y_upperbound_ch1 : in std_logic_vector(9 downto 0);
+            -- RGB data outputs
+            R_data : out std_logic_vector(3 downto 0); --! RGB data output
+            G_data : out std_logic_vector(3 downto 0); --! RGB data output
+            B_data : out std_logic_vector(3 downto 0)  --! RGB data output
 
-            x_lowerbound_ch2 : in std_logic_vector(9 downto 0);
-            x_upperbound_ch2 : in std_logic_vector(9 downto 0);
-            y_lowerbound_ch2 : in std_logic_vector(9 downto 0);
-            y_upperbound_ch2 : in std_logic_vector(9 downto 0);
-
-            R_data           : out std_logic;
-            G_data           : out std_logic;
-            B_data           : out std_logic
         );
     end component;
 
     signal vcount_int, hcount_int : std_logic_vector (9 downto 0);
-    signal c1x1, c1x2, c1y1, c1y2 : std_logic_vector(9 downto 0); --! char1 bounds
-    signal c2x1, c2x2, c2y1, c2y2 : std_logic_vector(9 downto 0); --! char2 bounds
 
 begin
 
@@ -103,25 +88,11 @@ begin
 
     --gib color to pixel
     CLR1 : coloring port map(
-        clk => clk, reset => reset, vcount => vcount_int, hcount => hcount_int,
-        x_lowerbound_ch1 => c1x1, x_upperbound_ch1 => c1x2, y_lowerbound_ch1 => c1y1, y_upperbound_ch1 => c1y2,
-        x_lowerbound_ch2 => c2x1, x_upperbound_ch2 => c2x2, y_lowerbound_ch2 => c2y1, y_upperbound_ch2 => c2y2,
+        clk => clk, reset => reset,
+        hcount => hcount_int, vcount => vcount_int,
+        char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
+        percentage_p1 => percentage_p1, percentage_p2 => percentage_p2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
-    --scale and place char1 on active screen
-    O_P1 : char_offset_adder port map(
-        xpos => char1_x, ypos => char1_y, 
-        xpos_scl1 => c1x1, xpos_scl2 => c1x2, ypos_scl1 => c1y1, ypos_scl2 => c1y2
-    );
-
-    --scale and place char1 on active screen
-    O_P2 : char_offset_adder port map(
-        xpos => char2_x, ypos => char2_y,
-        xpos_scl1 => c2x1, xpos_scl2 => c2x2, ypos_scl1 => c2y1, ypos_scl2 => c2y2
-    );
-
-    -- vcount <= vcount_int;
-
 end architecture;
-

@@ -61,10 +61,10 @@ architecture behavioural of coloring_new is
         port (
             reset  : in std_logic;
             number : in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
-            -- enable : in std_logic;
-            -- player : in std_logic_vector(1 downto 0);
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
+            boundx : in std_logic_vector(9 downto 0);
+            boundy : in std_logic_vector(9 downto 0);
 
             R_data : out std_logic_vector(3 downto 0);
             G_data : out std_logic_vector(3 downto 0);
@@ -152,6 +152,15 @@ architecture behavioural of coloring_new is
     signal p1d1R, p1d1G, p1d1B : std_logic_vector(3 downto 0); -- player 1 digit 1 RGB outputs
     signal p1d2R, p1d2G, p1d2B : std_logic_vector(3 downto 0); -- player 1 digit 2 RGB outputs
     signal p1d3R, p1d3G, p1d3B : std_logic_vector(3 downto 0); -- player 1 digit 3 RGB outputs
+    signal p1d1bx, p1d2bx, p1d3bx, digsby : std_logic_vector(9 downto 0);
+    constant int_digsby : integer := 462; -- global y location for digits
+    constant int_p1d1bx : integer := 196; -- x location for player 1 digit 1
+    constant int_p1d2bx : integer := 236; -- x location for player 1 digit 2
+    constant int_p1d3bx : integer := 276; -- x location for player 1 digit 3
+    -- constant int_p2d1bx : integer := 411; -- x location for player 2 digit 1
+    -- constant int_p2d2bx : integer := 451; -- x location for player 2 digit 2
+    -- constant int_p2d3bx : integer := 491; -- x location for player 2 digit 3
+    
     -- character location bounds
     signal x_lowerbound_ch1 : std_logic_vector(9 downto 0); -- character 1 bounds
     signal x_upperbound_ch1 : std_logic_vector(9 downto 0); -- character 1 bounds
@@ -180,26 +189,21 @@ begin
         num3dig => percentage_p1, num1 => p1digit1, num2 => p1digit2, num3 => p1digit3
     );
     data_dig1 : number_sprite port map(
-        reset => reset, number => p1digit1,
-        -- enable => en_p1d1, 
-        -- player => "00", 
-        hcount => hcount, vcount => vcount,
-        R_data => p1d1r, B_data => p1d1B, G_data => p1d1G
+        reset => reset, number => p1digit1, boundx => p1d1bx,
+        boundy => digsby, hcount => hcount, vcount => vcount,
+        R_data => p1d1R, B_data => p1d1B, G_data => p1d1G
     );
     data_dig2 : number_sprite port map(
-        reset => reset, number => p1digit2,
-        -- enable => en_p1d3, 
-        -- player => "00", 
-        hcount => hcount, vcount => vcount,
-        R_data => p1d2r, B_data => p1d2B, G_data => p1d2G
+        reset => reset, number => p1digit2, boundx => p1d2bx,
+        boundy => digsby, hcount => hcount, vcount => vcount,
+        R_data => p1d2R, B_data => p1d2B, G_data => p1d2G
     );
     data_dig3 : number_sprite port map(
-        reset => reset, number => p1digit3,
-        -- enable => en_p1d3, 
-        -- player => "00", 
-        hcount => hcount, vcount => vcount,
-        R_data => p1d3r, B_data => p1d3B, G_data => p1d3G
+        reset => reset, number => p1digit3, boundx => p1d3bx,
+        boundy => digsby, hcount => hcount, vcount => vcount,
+        R_data => p1d3R, B_data => p1d3B, G_data => p1d3G
     );
+
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
     -- char1 intermediate location assignment
@@ -212,6 +216,11 @@ begin
     ch2x2 <= unsigned(x_upperbound_ch2);
     ch2y1 <= unsigned(y_lowerbound_ch2);
     ch2y2 <= unsigned(y_upperbound_ch2);
+    digsby <= std_logic_vector(to_unsigned(int_digsby, digsby'length));
+    p1d1bx <= std_logic_vector(to_unsigned(int_p1d1bx, p1d1bx'length));
+    p1d2bx <= std_logic_vector(to_unsigned(int_p1d2bx, p1d2bx'length));
+    p1d3bx <= std_logic_vector(to_unsigned(int_p1d3bx, p1d3bx'length));
+
 
     process (clk, hcount, vcount)
     begin
@@ -257,7 +266,7 @@ begin
                     --------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
                     -- color in hex: #41FF00
-                    R_data <= "0100";
+                    R_data <= "0010";
                     G_data <= "1111";
                     B_data <= "0000";
                 elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) then --character 2
@@ -276,39 +285,39 @@ begin
                     -- this background is different from playable game background
                     -- color in hex: #3f6f3f
                     --------------------------------------------------------------------------------
-                    R_data <= "0100";
-                    G_data <= "0111";
-                    B_data <= "0100";
+                    R_data <= "0011";
+                    G_data <= "0110";
+                    B_data <= "0011";
 
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
                     if (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data: 143 to 303 horizontal
-                        R_data <= "0100";
-                        G_data <= "0111";
-                        B_data <= "0100";
+                        R_data <= "0011";
+                        G_data <= "0110";
+                        B_data <= "0011";
                         --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
                         if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
-                            R_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 to 8);
-                            G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 to 4);
-                            B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 to 0);
-                        elsif (uns_hcount > 195 and uns_hcount <= 211) and (uns_vcount > 462 and uns_vcount <= 486) then -- first digit --183 to 223 idem
+                            R_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
+                            G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
+                            B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
+                        elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- first digit --183 to 223 idem
                             R_data <= p1d1R;
                             G_data <= p1d1G;
                             B_data <= p1d1B;
-                        elsif (uns_hcount > 235 and uns_hcount <= 251) and (uns_vcount > 462 and uns_vcount <= 486) then -- second digit --223 to 263 idem
+                        elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- second digit --223 to 263 idem
                             R_data <= p1d2R;
                             G_data <= p1d2G;
                             B_data <= p1d2B;
-                        elsif (uns_hcount > 275 and uns_hcount <= 291) and (uns_vcount > 462 and uns_vcount <= 486) then -- third digit --263 to 303 idem
+                        elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- third digit --263 to 303 idem
                             R_data <= p1d3R;
                             G_data <= p1d3G;
                             B_data <= p1d3B;
                         else -- fallback -> for when no sprite is active such that no colours are bleeding through show background colour 
                             -- color in hex: #3f6f3f
-                            R_data <= "0100";
-                            G_data <= "0111";
-                            B_data <= "0100";
+                            R_data <= "0011";
+                            G_data <= "0110";
+                            B_data <= "0011";
                         end if;
 
                         --------------------------------------------------------------------------------
@@ -321,9 +330,9 @@ begin
                         -- this background is different from playable game background
                         -- color in hex: #3f6f3f
                         --------------------------------------------------------------------------------
-                        R_data <= "0100";
-                        G_data <= "0111";
-                        B_data <= "0100";
+                        R_data <= "0011";
+                        G_data <= "0110";
+                        B_data <= "0011";
 
                         --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
                         if (uns_hcount > 635 and uns_hcount <= 651) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit

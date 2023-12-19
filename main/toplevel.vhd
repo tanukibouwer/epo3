@@ -122,6 +122,7 @@ architecture structural of chip_toplevel is
 	    restart1 : out std_logic;
 	    restart2 : out std_logic
 		 );
+	 end component;
 
     component physics_system is
         port (

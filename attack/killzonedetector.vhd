@@ -21,6 +21,8 @@ entity killzonedetector is
         --oldvectorY3  : in  std_logic_vector (7 downto 0);
 	--oldvectorX4  : in  std_logic_vector (7 downto 0);
         --oldvectorY4  : in  std_logic_vector (7 downto 0);
+	restart1 : out  std_logic;
+	restart2 : out  std_logic;
         newdeathcount1  : out  std_logic_vector (3 downto 0);
 	newdeathcount2  : out  std_logic_vector (3 downto 0);
 	--newdeathcount3  : out  std_logic_vector (3 downto 0);
@@ -32,7 +34,7 @@ entity killzonedetector is
 	--newvectorX3  : out  std_logic_vector (7 downto 0);
         --newvectorY3  : out  std_logic_vector (7 downto 0);
 	--newvectorX4  : out  std_logic_vector (7 downto 0);
-        --newvectorY4  : out  std_logic_vector (7 downto 0)
+        --newvectorY4  : out  std_logic_vector (7 downto 0);
 	newvectorX1  : out  std_logic_vector (7 downto 0);
         newvectorY1  : out  std_logic_vector (7 downto 0);
 	newvectorX2  : out  std_logic_vector (7 downto 0);
@@ -97,6 +99,7 @@ begin
 				newpercentage1 <= "00000001";
 				newvectorX1 <= newlocationX1;
 				newvectorY1 <= newlocationY1;
+				restart1 <= '1';
 					new_state1 <= hold1;
 
 			when detection1 =>
@@ -104,6 +107,7 @@ begin
 				newpercentage1 <= "00000001";
 				newvectorX1 <= oldvectorX1;
 				newvectorY1 <= oldvectorY1;
+				restart1 <= '1';
 					new_state1 <= standardposition1;
 
 			when standardposition1 =>
@@ -111,6 +115,7 @@ begin
 				newpercentage1 <= oldpercentage1;
 				newvectorX1 <= newlocationX1;
 				newvectorY1 <= newlocationY1;
+				restart1 <= '1';
 					new_state1 <= hold1;
 
 			when hold1 =>
@@ -118,6 +123,7 @@ begin
 				newpercentage1 <= oldpercentage1;
 				newvectorX1 <= oldvectorX1;
 				newvectorY1 <= oldvectorY1;
+				restart1 <= '0';
 				if (oldvectorX1 > "10101000") or (oldvectorY1 > "01111000") or (oldvectorX1 < "00001000") or (oldvectorY1 < "00001000") then -- 168, 120, 8, 8
 					new_state1 <= detection1;
 				else
@@ -134,6 +140,7 @@ begin
 				newpercentage2 <= "00000001";
 				newvectorX2 <= newlocationX2;
 				newvectorY2 <= newlocationY2;
+				restart2 <= '1';
 					new_state2 <= hold2;
 
 			when detection2 =>
@@ -141,6 +148,7 @@ begin
 				newpercentage2 <= "00000001";
 				newvectorX2 <= oldvectorX2;
 				newvectorY2 <= oldvectorY2;
+				restart2 <= '1';
 					new_state2 <= standardposition2;
 
 			when standardposition2 =>
@@ -148,6 +156,7 @@ begin
 				newpercentage2 <= oldpercentage2;
 				newvectorX2 <= newlocationX2;
 				newvectorY2 <= newlocationY2;
+				restart2 <= '1';
 					new_state2 <= hold2;
 
 			when hold2 =>
@@ -155,6 +164,7 @@ begin
 				newpercentage2 <= oldpercentage2;
 				newvectorX2 <= oldvectorX2;
 				newvectorY2 <= oldvectorY2;
+				restart2 <= '0';
 				if (oldvectorX2 > "10101000") or (oldvectorY2 > "01111000") or (oldvectorX2 < "00001000") or (oldvectorY2 < "00001000") then -- 168, 120, 8, 8
 					new_state2 <= detection2;
 				else

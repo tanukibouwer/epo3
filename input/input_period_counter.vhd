@@ -7,12 +7,12 @@ entity input_period_counter is
     clk       : in    std_logic;
     reset     : in    std_logic;
 
-    count_out     : out   std_logic_vector(8 downto 0)
+    count_out     : out   std_logic_vector(3 downto 0)
   );
 end entity input_period_counter;
 
 architecture behavioural of input_period_counter is
-  signal count, new_count : unsigned(8 downto 0);
+  signal count, new_count : unsigned(3 downto 0);
 begin
   process (clk)
   begin

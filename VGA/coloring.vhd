@@ -251,17 +251,17 @@ begin
                     G_data <= "0100";
                     B_data <= "0000";
 
-                elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 310 and uns_vcount <= 314) then --platform 1, (10,69) --> (59,70)
+                elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 314 and uns_vcount <= 318) then --platform 1, (10,69) --> (59,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                elsif (uns_hcount > 543 and uns_hcount <= 739) and (uns_vcount > 310 and uns_vcount <= 314) then --platform 2, (100,69) --> (149,70)
+                elsif (uns_hcount > 543 and uns_hcount <= 739) and (uns_vcount > 314 and uns_vcount <= 318) then --platform 2, (100,69) --> (149,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 178 and uns_vcount <= 182) then --platform 3, (55,36) --> (104,37)
+                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 182 and uns_vcount <= 186) then --platform 3, (55,36) --> (104,37)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";

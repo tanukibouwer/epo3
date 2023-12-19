@@ -7,7 +7,7 @@ entity input_driver is
     clk       : in    std_logic;
     reset     : in    std_logic;
 
-    period_count  : in std_logic_vector(8 downto 0);
+    period_count  : in std_logic_vector(3 downto 0);
     period_count_reset  : out   std_logic;
 
     controller_latch    : out   std_logic;
@@ -23,7 +23,7 @@ architecture behavioural of input_driver is
   type driver_state is (reset_state, latch_high, latch_low, clk_high, clk_low, pause);
   signal state, new_state : driver_state;
 
-  signal per_count : unsigned (8 downto 0);
+  signal per_count : unsigned (3 downto 0);
 
   -- counts the amount of controller clock pulses
   signal pulse_count, pulse_new_count : unsigned (2 downto 0);
@@ -74,7 +74,7 @@ begin
 
         reg_write <= '0';
 
-        if (per_count = to_unsigned(300, 9)) then
+        if (per_count = to_unsigned(15, 4)) then
           period_count_reset <= '1';
           new_state <= latch_low;
         else
@@ -92,7 +92,7 @@ begin
 
         reg_write <= '0';
 
-        if (per_count = to_unsigned(300, 9)) then
+        if (per_count = to_unsigned(15, 4)) then
           period_count_reset <= '1';
           new_state <= clk_high;
         else
@@ -110,7 +110,7 @@ begin
 
         reg_write <= '0';
 
-        if (per_count = to_unsigned(300, 9)) then
+        if (per_count = to_unsigned(15, 4)) then
           period_count_reset <= '1';
           pulse_new_count <= pulse_count + 1;
           new_state <= clk_low;
@@ -129,7 +129,7 @@ begin
         reg_write <= '0';
 
 
-        if (per_count = to_unsigned(300, 9)) then
+        if (per_count = to_unsigned(15, 4)) then
           period_count_reset <= '1';
           -- if seven clock pulses have been given it should go to pause
           if (pulse_count >= to_unsigned(7, 3)) then
@@ -154,7 +154,7 @@ begin
         -- write the new button values to the output register
         reg_write <= '1';
 
-        if (per_count = to_unsigned(300, 9)) then
+        if (per_count = to_unsigned(15, 4)) then
           -- loop back to latch_high
           period_count_reset <= '1';
           new_state <= latch_high;

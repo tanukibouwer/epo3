@@ -23,11 +23,11 @@ use IEEE.std_logic_1164.ALL;
 entity char_animation_fsm is
     port(vsync  :in    std_logic;
          reset  :in    std_logic;
-         clk   : in std_logic;
 
          controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
          orientation   : in std_logic; --1 is right, 0 is left
-         sprite   :out   std_logic);
+         sprite: in std_logic_vector(2 downto 0)
+         );
  end char_animation_fsm;
  
 
@@ -51,7 +51,7 @@ begin
    begin
       case state is
          when Idle1 =>
-            if(orientation = '1') then
+            if(orientation = '1') then --see table in "character_sprites.vhd"
                sprite <= "001";
             else
                sprite <= "010";
@@ -67,7 +67,7 @@ begin
                new_state <= Idle1; --example: if left AND right is pressed 
             end if;
          when Run1 =>
-            if(orientation = '1') then
+            if(orientation = '1') then --see table in "character_sprites.vhd"
                sprite <= "010";
             else
                sprite <= "101";
@@ -84,7 +84,7 @@ begin
             end if;
 
          when Run2 =>
-            if(orientation = '1') then
+            if(orientation = '1') then --see table in "character_sprites.vhd"
                sprite <= "010";
             else
                sprite <= "101";
@@ -99,7 +99,7 @@ begin
             end if;
 
          when Idle2 =>
-            if(orientation = '1') then
+            if(orientation = '1') then --see table in "character_sprites.vhd"
                sprite <= "001";
             else
                sprite <= "010";
@@ -114,10 +114,10 @@ begin
             end if; 
 
          when Jump_Crouch =>
-            if(orientation = '1') then
+            if(orientation = '1') then --see table in "character_sprites.vhd"
                sprite <= "000";
             else
-               sprite <= "110";
+               sprite <= "011";
             end if;
 
             if (controller_in(2 downto 2) = '0' and controller_in(3 downto 3) = '0') then

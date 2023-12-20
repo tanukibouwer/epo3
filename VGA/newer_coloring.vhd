@@ -36,6 +36,17 @@ entity coloring_new is
         percentage_p1 : in std_logic_vector(7 downto 0);
         percentage_p2 : in std_logic_vector(7 downto 0);
 
+        --orientation from attackmodule
+        orientation_p1      : in std_logic; 
+        orientation_p2    : in std_logic;
+
+        --controls from input
+        controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+        controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+        
+        --vsync from screen scan
+        vsync      : in std_logic;
+
         -- RGB data outputs
         R_data : out std_logic_vector(3 downto 0); --! RGB data output
         G_data : out std_logic_vector(3 downto 0); --! RGB data output
@@ -73,6 +84,32 @@ architecture behavioural of coloring is
 
         );
     end component;
+
+    component char_sprites is
+        port (
+            reset  : in std_logic;
+            sprite: in std_logic_vector(2 downto 0); 
+    
+            hcount : in std_logic_vector(9 downto 0);
+            vcount : in std_logic_vector(9 downto 0);
+            boundx : in std_logic_vector(9 downto 0);
+            boundy : in std_logic_vector(9 downto 0);
+        
+            R_data : out std_logic_vector(3 downto 0);
+            G_data : out std_logic_vector(3 downto 0);
+            B_data : out std_logic_vector(3 downto 0)
+    
+        );
+    end component;
+
+    component char_animation_fsm is
+        port(vsync  :in    std_logic;
+             reset  :in    std_logic;
+
+             controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+             orientation   : in std_logic; --1 is right, 0 is left
+             sprite   :out   std_logic);
+     end component;
 
     component char_offset_adder is
         port (
@@ -132,6 +169,14 @@ architecture behavioural of coloring is
     signal p2d1R, p2d1G, p2d1B : std_logic_vector(3 downto 0); -- player 2 digit 1 RGB outputs
     signal p2d2R, p2d2G, p2d2B : std_logic_vector(3 downto 0); -- player 2 digit 2 RGB outputs
     signal p2d3R, p2d3G, p2d3B : std_logic_vector(3 downto 0); -- player 2 digit 3 RGB outputs
+
+    -- signals for the sprite output module
+    signal p1SR, p1SG, p1SB : std_logic_vector(3 downto 0); -- player 1 Sprite RGB outputs
+    signal p2SR, p2SG, p2SB : std_logic_vector(3 downto 0); -- player 2 Sprite RGB outputs
+    signal sprite_between1 : std_logic_vector(2 downto 0); 
+    signal sprite_between2 : std_logic_vector(2 downto 0); 
+    
+
     -- top (y) and left (x) bounds for sprite locations
     signal digsby : std_logic_vector(9 downto 0);
     signal p1d1bx, p1d2bx, p1d3bx : std_logic_vector(9 downto 0);
@@ -156,18 +201,9 @@ architecture behavioural of coloring is
     signal y_upperbound_ch2 : std_logic_vector(9 downto 0); -- character 2 bounds
 begin
 
-    -- character offsets
-    char_offset1 : char_offset_adder port map(
-        xpos => char1x, ypos => char1y,
-        xpos_scl1 => x_lowerbound_ch1, xpos_scl2 => x_upperbound_ch1,
-        ypos_scl1 => y_lowerbound_ch1, ypos_scl2 => y_upperbound_ch1
-    );
-    char_offset2 : char_offset_adder port map(
-        xpos => char2x, ypos => char2y,
-        xpos_scl1 => x_lowerbound_ch2, xpos_scl2 => x_upperbound_ch2,
-        ypos_scl1 => y_lowerbound_ch2, ypos_scl2 => y_upperbound_ch2
-    );
-
+    -----------------------------------------------------------------------------------------------------------------
+    --! Percentage sprites
+    -----------------------------------------------------------------------------------------------------------------
     -- player 1 damage data
     percentage_p1_to_digits : dig3_num_splitter port map(
         num3dig => percentage_p1, num1 => p1digit1, num2 => p1digit2, num3 => p1digit3
@@ -187,6 +223,10 @@ begin
         boundy => digsby, hcount => hcount, vcount => vcount,
         R_data => p1d3R, B_data => p1d3B, G_data => p1d3G
     );
+
+
+
+    -- player 2 damage data
     percentage_p2_to_digits : dig3_num_splitter port map(
         num3dig => percentage_p2, num1 => p2digit1, num2 => p2digit2, num3 => p2digit3
     );
@@ -206,6 +246,58 @@ begin
         R_data => p2d3R, B_data => p2d3B, G_data => p2d3G
     );
 
+    -----------------------------------------------------------------------------------------------------------------
+    --! character sprites
+    -----------------------------------------------------------------------------------------------------------------
+
+    -- character offsets
+    char_offset1 : char_offset_adder port map(
+        xpos => char1x, ypos => char1y,
+        xpos_scl1 => x_lowerbound_ch1, xpos_scl2 => x_upperbound_ch1,
+        ypos_scl1 => y_lowerbound_ch1, ypos_scl2 => y_upperbound_ch1
+    );
+    char_offset2 : char_offset_adder port map(
+        xpos => char2x, ypos => char2y,
+        xpos_scl1 => x_lowerbound_ch2, xpos_scl2 => x_upperbound_ch2,
+        ypos_scl1 => y_lowerbound_ch2, ypos_scl2 => y_upperbound_ch2
+    );
+
+        -- entity char_animation_fsm is
+    --     port(vsync  :in    std_logic;
+    --          reset  :in    std_logic;
+    
+    --          controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+    --          orientation   : in std_logic; --1 is right, 0 is left
+    --          sprite: in std_logic_vector(2 downto 0)
+    --          );
+    --  end char_animation_fsm;
+
+
+    --player 1 charcater sprites
+    p1_animation_fsm: char_animation_fsm port map( 
+        vsync => vsync, reset => reset, controller_in => controller_p1,
+        orientation => orientation_p1, sprite => sprite_between1
+    );
+
+    p2_animation_fsm: char_animation_fsm port map( 
+        vsync => vsync, reset => reset, controller_in => controller_p2,
+        orientation => orientation_p2, sprite => sprite_between2
+    );
+
+    p1_sprites: character_sprite port map(
+        reset => reset, sprite => sprite_between1, boundx => ch1x1,
+        boundy => ch1y1, hcount => hcount, vcount => vcount,
+        R_data => p1SR, B_data => p1SB, G_data => p1SG
+
+    );
+
+    p2_sprites: character_sprite port map(     --1 same as character 1 for now
+        reset => reset, sprite => sprite_between2, boundx => ch2x1,
+        boundy => ch2y1, hcount => hcount, vcount => vcount,
+        R_data => p2SR, B_data => p2SB, G_data => p2SG
+
+    );
+    --------------------------------------------------------------------------------------------------------------------
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
     -- char1 intermediate location assignment
@@ -270,15 +362,15 @@ begin
                     -- dynamic assignment of pixel colors due to character location
                     --------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
-                    -- color in hex: #41FF00
-                    R_data <= "0010";
-                    G_data <= "1111";
-                    B_data <= "0000";
+
+                    R_data <= p1SR;
+                    G_data <= p1SG;
+                    B_data <= p1SB;
                 elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) then --character 2
-                    -- color in hex: #00FFFF
-                    R_data <= "0000";
-                    G_data <= "1111";
-                    B_data <= "1111";
+
+                    R_data <= p2SR;
+                    G_data <= p2SG;
+                    B_data <= p2SB;
 
                     --------------------------------------------------------------------------------
                     -- percentage markings

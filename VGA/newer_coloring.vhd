@@ -55,7 +55,7 @@ entity coloring_new is
     );
 end entity coloring_new;
 
-architecture behavioural of coloring is
+architecture behavioural of coloring_new is
     signal uns_hcount, uns_vcount                                 : unsigned(9 downto 0);
     signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
 
@@ -103,13 +103,34 @@ architecture behavioural of coloring is
     end component;
 
     component char_animation_fsm is
-        port(vsync  :in    std_logic;
-             reset  :in    std_logic;
+        port(sprite_clk  : in    std_logic;
+             reset  :  in    std_logic;
 
              controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
              orientation   : in std_logic; --1 is right, 0 is left
-             sprite   :out   std_logic);
+             sprite   : out   std_logic);
      end component;
+
+
+     component sprite_clk_gen is
+        port (
+            clk       : in std_logic;
+            reset     : in std_logic;
+            count     : in std_logic_vector (3 downto 0);
+            sprite_clk      : out std_logic; 
+            cnt_reset : out std_logic
+        );
+    end component;
+
+    component vsync_cnt is
+        port (
+            vsync   : in std_logic;
+            reset : in std_logic;
+            count : out std_logic_vector(3 downto 0)
+        );
+    end component;
+    
+
 
     component char_offset_adder is
         port (
@@ -175,6 +196,10 @@ architecture behavioural of coloring is
     signal p2SR, p2SG, p2SB : std_logic_vector(3 downto 0); -- player 2 Sprite RGB outputs
     signal sprite_between1 : std_logic_vector(2 downto 0); 
     signal sprite_between2 : std_logic_vector(2 downto 0); 
+    --signals for sprtie counter
+    signal count_between : std_logic_vector(3 downto 0);
+    signal sprite_clk_between : std_logic;
+    signal reset_between : std_logic;
     
 
     -- top (y) and left (x) bounds for sprite locations
@@ -250,6 +275,8 @@ begin
     --! character sprites
     -----------------------------------------------------------------------------------------------------------------
 
+
+    
     -- character offsets
     char_offset1 : char_offset_adder port map(
         xpos => char1x, ypos => char1y,
@@ -262,36 +289,62 @@ begin
         ypos_scl1 => y_lowerbound_ch2, ypos_scl2 => y_upperbound_ch2
     );
 
-        -- entity char_animation_fsm is
-    --     port(vsync  :in    std_logic;
-    --          reset  :in    std_logic;
-    
+    -- component char_animation_fsm is
+    --     port(sprite_clk  : in    std_logic;
+    --          reset  :  in    std_logic;
+
     --          controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
     --          orientation   : in std_logic; --1 is right, 0 is left
-    --          sprite: in std_logic_vector(2 downto 0)
-    --          );
-    --  end char_animation_fsm;
+    --          sprite   : out   std_logic);
+    --  end component;
 
+
+    --  component sprite_clk_gen is
+    --     port (
+    --         clk       : in std_logic;
+    --         reset     : in std_logic;
+    --         count     : in std_logic_vector (3 downto 0);
+    --         sprite_clk      : out std_logic; 
+    --         cnt_reset : out std_logic
+    --     );
+    -- end component;
+
+    -- component vsync_cnt is
+    --     port (
+    --         vsync   : in std_logic;
+    --         reset : in std_logic;
+    --         count : out std_logic_vector(3 downto 0)
+    --     );
+    -- end component;
+
+    --sprite clock -> controls the frame rate of the sprites
+    vsync_cntr: vsync_cnt port map(
+        vsync => vsync, reset => reset_between, count => count_between
+    );
+
+    sprite_clk: sprite_clk_gen port map(
+        clk => clk, reset => reset, count => count_between, sprite_clk => sprite_clk_between, cnt_reset => reset_between
+    );
 
     --player 1 charcater sprites
     p1_animation_fsm: char_animation_fsm port map( 
-        vsync => vsync, reset => reset, controller_in => controller_p1,
+        sprite_clk => sprite_clk_between, reset => reset, controller_in => controller_p1,
         orientation => orientation_p1, sprite => sprite_between1
     );
 
     p2_animation_fsm: char_animation_fsm port map( 
-        vsync => vsync, reset => reset, controller_in => controller_p2,
+        sprite_clk => sprite_clk_between, reset => reset, controller_in => controller_p2,
         orientation => orientation_p2, sprite => sprite_between2
     );
 
-    p1_sprites: character_sprite port map(
+    p1_sprites: char_sprites port map(
         reset => reset, sprite => sprite_between1, boundx => ch1x1,
         boundy => ch1y1, hcount => hcount, vcount => vcount,
         R_data => p1SR, B_data => p1SB, G_data => p1SG
 
     );
 
-    p2_sprites: character_sprite port map(     --1 same as character 1 for now
+    p2_sprites: char_sprites port map(     --1 same as character 1 for now
         reset => reset, sprite => sprite_between2, boundx => ch2x1,
         boundy => ch2y1, hcount => hcount, vcount => vcount,
         R_data => p2SR, B_data => p2SB, G_data => p2SG

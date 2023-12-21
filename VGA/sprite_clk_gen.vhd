@@ -16,49 +16,38 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity animation_counter is
+entity sprite_clk_gen is
     port (
-        clk   : in std_logic;
-        reset : in std_logic;
-        vsync  : in std_logic;
-        sprite: out std_logic_vector(2 downto 0)
+        clk       : in std_logic;
+        reset     : in std_logic;
+        count     : in std_logic_vector (3 downto 0);
+        sprite_clk      : out std_logic; 
+        cnt_reset : out std_logic
     );
-end animation_counter;
+end entity sprite_clk_gen;
 
-architecture behavioural of animation_counter is
-    signal cur_count, new_count : unsigned(2 downto 0);
-
+architecture behaviour of sprite_clk_gen is
+    signal uns_count : unsigned(3 downto 0);
 begin
 
-    
-    process (clk) --storage of the count
+    process (clk, uns_count)
     begin
         if rising_edge(clk) then
             if reset = '1' then
-                cur_count <= (others => '0');
-            else
-                cur_count <= new_count;
+                sprite_clk      <= '1';
+                cnt_reset <= '1';
+            elsif reset = '0' then
+                if uns_count    <= 5 then --sync pulse
+                    sprite_clk            <= '0';
+                    cnt_reset       <= '0';
+                else --reset counter
+                    sprite_clk      <= '1';
+                    cnt_reset <= '1';
+                end if;
             end if;
         end if;
     end process;
 
-    process (cur_count, vsync) --count on clock/input
-    begin
-        if (vsync = '1' and cur_count = 0) then
-            new_count <= cur_count + 1;
-        elsif (vsync = '1' and cur_count = 1) then
-            new_count <= cur_count + 1;
-        elsif (vsync = '1' and cur_count = 2) then
-            new_count <= (others => '0');
-        else
-        new_count <= cur_count;
-        end if;
-
-    sprite <= std_logic_vector(cur_count);
-    end process;
-    
-
-
+    uns_count <= unsigned(count);
 
 end architecture;
-

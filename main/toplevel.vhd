@@ -23,10 +23,6 @@ end chip_toplevel;
 
 architecture structural of chip_toplevel is
 
-
-    signal resetp1 : std_logic;
-    signal resetp2 : std_logic;
-
     signal dirx1new : std_logic_vector(7 downto 0);
     signal dirx2new : std_logic_vector(7 downto 0);
     signal diry1new : std_logic_vector(7 downto 0);
@@ -65,6 +61,8 @@ architecture structural of chip_toplevel is
 	signal char2dc		: std_logic_vector(3 downto 0); -- output from memory, into attack
 	signal char1dcin	: std_logic_vector(3 downto 0); -- inputs into memory, from attack
 	signal char2dcin	: std_logic_vector(3 downto 0); -- inputs into memory, from attack
+	signal char1death	: std_logic; -- inputs into memory, from attack
+	signal char2death	: std_logic; -- inputs into memory, from attack
 
     -- between input and physics
     signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics
@@ -73,6 +71,7 @@ architecture structural of chip_toplevel is
     -- dummy signal that should be linked to the counter through an fsm or something like that
     signal readyphysicsin  : std_logic;
     signal readyphysicsout : std_logic;
+	
 
     component input_toplevel is
         port (
@@ -113,10 +112,6 @@ architecture structural of chip_toplevel is
 	    damagepercentage2out : out std_logic_vector(7 downto 0);
 	    percentage1out : out std_logic_vector(7 downto 0);
 	    percentage2out : out std_logic_vector(7 downto 0);
-	    newx1out : out std_logic_vector(7 downto 0);
-	    newx2out : out std_logic_vector(7 downto 0);
-	    newy1out : out std_logic_vector(7 downto 0);
-	    newy2out : out std_logic_vector(7 downto 0);
  	    killcount1out : out std_logic_vector(3 downto 0);
  	    killcount2out : out std_logic_vector(3 downto 0);
 	    restart1 : out std_logic;
@@ -199,8 +194,8 @@ begin
         reset => reset,
         vsync => vsyncintern,
 
-        resetp1 => '0',
-        resetp2 => '0',
+        resetp1 => char1death,
+        resetp2 => char2death,
 
 		-- death count and percentage
 		data_in4b1 => char1dcin,
@@ -235,7 +230,7 @@ begin
     );
 
     ATT1 : topattack port map(
-            clk => clk, 
+           clk => clk, 
 	    res => reset,
 	    controller1 => inputsp1,
 	    controller2 => inputsp2,
@@ -255,14 +250,10 @@ begin
 	    damagepercentage2out => char2perctemp,
 	    percentage1out => char1percin,
 	    percentage2out => char2percin,
-	    newx1out => char1posxin, 
-	    newx2out => char2posxin,
-	    newy1out => char1posyin,
-	    newy2out => char2posyin,
  	    killcount1out => char1dcin,
  	    killcount2out => char2dcin,
-	    restart1 => resetp1,
-	    restart2 => resetp2
+	    restart1 => char1death,
+	    restart2 => char2death
     );
 
     TL01 : graphics_card port map(

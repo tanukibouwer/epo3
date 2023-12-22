@@ -17,7 +17,7 @@ y2_in <= to_integer(unsigned(y2));
 x_verschil <= x2_in - x1_in;
 y_verschil <= y2_in - y1_in;
 
-lbl1: process(x_verschil, y_verschil, collision1a2, collision2a1, direction_y1, direction_x1, direction_y2, direction_x2, a1, a2, o1, o2)
+lbl1: process(x_verschil, y_verschil, a1, a2, o1, o2)
 	begin
 
 		if ((a1='1' or a2='1') and (-13 <= y_verschil and y_verschil <= 13)) then
@@ -1012,7 +1012,7 @@ lbl1: process(x_verschil, y_verschil, collision1a2, collision2a1, direction_y1, 
 
 	end process;
 
-lbl2: process(x_verschil, y_verschil, collision1b2, collision2b1, direction_y1, direction_x1, direction_y2, direction_x2, b1, b2, o1, o2)
+lbl2: process(x_verschil, y_verschil, b1, b2, o1, o2)
 	begin
 
 		if ((b1='1' or b2='1') and (-13 <= y_verschil and y_verschil <= 13)) then

@@ -109,6 +109,7 @@ architecture behavioural of coloring_new is
              controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
              orientation   : in std_logic; --1 is right, 0 is left
              sprite   : out   std_logic_vector(2 downto 0)
+     );
      end component;
 
 

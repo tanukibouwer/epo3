@@ -108,11 +108,11 @@ begin
 				else
 					new_state1 <= neutral1;
 				end if;
-			when damageA1 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			when damageA1 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				s2 <= s1 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
 				percentage1 <= oldpercentage1;
 					new_state1 <= neutral1; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-			when damageB1 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			when damageB1 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				s2 <= s1 + to_unsigned(10,8); --adding the value 10 to the old percentage to get the new percentage -- deze waarde willen we wss nog wel aanpassen afhankelijk van hoe op deze move is of hoe moeilijk deze move is
 				if (s1 < to_unsigned(50,8)) then
 					s9 <= s1 + to_unsigned(10,8); -- moet dit miss anders?
@@ -143,11 +143,11 @@ begin
 				else
 					new_state2 <= neutral2;
 				end if;
-			when damageA2 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			when damageA2 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				s4 <= s3 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
 				percentage2 <= oldpercentage2;
 					new_state2 <= neutral2; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-			when damageB2 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			when damageB2 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				s4 <= s3 + to_unsigned(10,8); --adding the value 10 to the old percentage to get the new percentage -- deze waarde willen we wss nog wel aanpassen afhankelijk van hoe op deze move is of hoe moeilijk deze move is
 				if (s3 < to_unsigned(50,8)) then
 					s10 <= s3 + to_unsigned(10,8); -- moet dit miss anders?
@@ -173,7 +173,7 @@ begin
 				--else
 					--new_state3 <= neutral3;
 				--end if;
-			--when damageA3 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			--when damageA3 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				--s6 <= s5 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
 				--percentage3 <= oldpercentage3;
 					--new_state3 <= neutral3; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
@@ -191,19 +191,19 @@ begin
 				--else
 					--new_state4 <= neutral4;
 				--end if;
-			--when damageA4 => -- wat als twee spelers teglijk damage doen op één speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+			--when damageA4 => -- wat als twee spelers teglijk damage doen op ï¿½ï¿½n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
 				--s8 <= s7 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
 				--percentage4 <= oldpercentage4;
 					--new_state4 <= neutral4; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
 		--end case;
 	--end process;
 
-	newpercentage1 <= std_logic_vector(s2);
-	newpercentage2 <= std_logic_vector(s4);
+	-- newpercentage1 <= std_logic_vector(s2);
+	-- newpercentage2 <= std_logic_vector(s4);
 	--newpercentage3 <= std_logic_vector(s6);
 	--newpercentage4 <= std_logic_vector(s8);
-	percentage1 <= std_logic_vector(s9);
-	percentage2 <= std_logic_vector(s10);
+	-- percentage1 <= std_logic_vector(s9);
+	-- percentage2 <= std_logic_vector(s10);
 	--percentage3 <= std_logic_vector(s11);
 	--percentage4 <= std_logic_vector(s12);
 end architecture behavioural;

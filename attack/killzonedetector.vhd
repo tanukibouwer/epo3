@@ -247,8 +247,8 @@ begin
 		--end case;
 	--end process;
 
-	newdeathcount1 <= std_logic_vector(s2);
-	newdeathcount2 <= std_logic_vector(s4);
+	-- newdeathcount1 <= std_logic_vector(s2);
+	-- newdeathcount2 <= std_logic_vector(s4);
 	--newdeathcount3 <= std_logic_vector(s6);
 	--newdeathcount4 <= std_logic_vector(s8);
 end architecture behavioural;

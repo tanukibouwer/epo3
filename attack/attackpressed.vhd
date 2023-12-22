@@ -153,7 +153,7 @@ begin
                 if vsync = '0' then
 					new_state2 <= neutral2; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else
-					new_state2 <= A1;
+					new_state2 <= A2;
 				end if;
 
             when B2 =>
@@ -162,7 +162,7 @@ begin
 				if vsync = '0' then
 					new_state2 <= neutral2; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else
-					new_state2 <= B1;
+					new_state2 <= B2;
 				end if;
 
         end case;

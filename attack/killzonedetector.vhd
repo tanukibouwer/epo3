@@ -24,7 +24,7 @@ entity killzonedetector is
     restart1       : out std_logic;
     restart2       : out std_logic;
     newdeathcount1 : out std_logic_vector (3 downto 0);
-    newdeathcount2 : out std_logic_vector (3 downto 0);
+    newdeathcount2 : out std_logic_vector (3 downto 0));
     --newdeathcount3  : out  std_logic_vector (3 downto 0);
     --newdeathcount4  : out  std_logic_vector (3 downto 0);
     -- -- newpercentage1  : out  std_logic_vector (7 downto 0);

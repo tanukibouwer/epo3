@@ -1,4 +1,4 @@
-configuration attackpressed-behavioural-cfg of attackpressed is
+configuration attackpressed_behavioural_cfg of attackp is
 	for behavioural
 		end for;
-end configuration attackpressed-behavioural-cfg;
+end configuration attackpressed_behavioural_cfg;

@@ -1,12 +1,12 @@
-configuration toplevelattack-structural-cfg of toplevelattack is
+configuration toplevelattack_structural_cfg of topattack is
 	for structural
-		for all: attackp use configuration work.attackpressed-behavioural-cfg;
+		for all: attackp use configuration work.attackpressed_behavioural_cfg;
 			end for;
-		for all: damagacalculator use configuration work.damagecalculator-behavioural-cfg;
+		for all: damagecalculator use configuration work.damagecalculator_behavioural_cfg;
 			end for;
-		for all: killzonedetector use configuration work.killzonedetector-behavioural-cfg;
+		for all: killzonedetector use configuration work.killzonedetector_behavioural_cfg;
 			end for;
-		for all: coldet use configuration work.coldet-behaviour-cfg;
+		for all: coldet use configuration work.coldet_behaviour_cfg;
 			end for;
 	end for;
-end configuration toplevelattack-structural-cfg;
+end configuration toplevelattack_structural_cfg;

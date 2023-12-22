@@ -1,4 +1,4 @@
-configuration coldet-behaviour-cfg of coldet is
+configuration coldet_behaviour_cfg of coldet is
 	for behaviour
 	end for;
-end configuraton coldet-behaviour-cfg;
+end configuration coldet_behaviour_cfg;

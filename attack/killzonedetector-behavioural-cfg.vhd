@@ -1,4 +1,4 @@
-configuration killzonedetector-behavioural-cfg of killzonedetector is
+configuration killzonedetector_behavioural_cfg of killzonedetector is
 	for behavioural
 		end for;
-end configuration killzondetector-behavioural-cfg;
+end configuration killzonedetector_behavioural_cfg;

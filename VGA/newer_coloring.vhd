@@ -354,15 +354,15 @@ begin
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
     -- char1 intermediate location assignment
-    ch1x1 <= std_logic_vector(x_lowerbound_ch1);
-    ch1x2 <= std_logic_vector(x_upperbound_ch1);
-    ch1y1 <= std_logic_vector(y_lowerbound_ch1);
-    ch1y2 <= std_logic_vector(y_upperbound_ch1);
+    ch1x1 <= unsigned(x_lowerbound_ch1);
+    ch1x2 <= unsigned(x_upperbound_ch1);
+    ch1y1 <= unsigned(y_lowerbound_ch1);
+    ch1y2 <= unsigned(y_upperbound_ch1);
     -- char2 intermediate location assignment
-    ch2x1 <= std_logic_vector(x_lowerbound_ch2);
-    ch2x2 <= std_logic_vector(x_upperbound_ch2);
-    ch2y1 <= std_logic_vector(y_lowerbound_ch2);
-    ch2y2 <= std_logic_vector(y_upperbound_ch2);
+    ch2x1 <= unsigned(x_lowerbound_ch2);
+    ch2x2 <= unsigned(x_upperbound_ch2);
+    ch2y1 <= unsigned(y_lowerbound_ch2);
+    ch2y2 <= unsigned(y_upperbound_ch2);
     -- convert constant integers to vectors for sprite color assignment
     digsby <= std_logic_vector(to_unsigned(int_digsby, digsby'length));
     p1d1bx <= std_logic_vector(to_unsigned(int_p1d1bx, p1d1bx'length));

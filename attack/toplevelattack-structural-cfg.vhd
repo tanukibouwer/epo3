@@ -1,8 +1,8 @@
-configuration toplevelattack_structural_cfg of toplevelattack is
+configuration toplevelattack_structural_cfg of topattack is
 	for structural
 		for all: attackp use configuration work.attackpressed_behavioural_cfg;
 			end for;
-		for all: damagacalculator use configuration work.damagecalculator_behavioural_cfg;
+		for all: damagecalculator use configuration work.damagecalculator_behavioural_cfg;
 			end for;
 		for all: killzonedetector use configuration work.killzonedetector_behavioural_cfg;
 			end for;

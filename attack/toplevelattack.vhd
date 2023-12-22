@@ -22,10 +22,10 @@ entity topattack is
 	damagepercentage2out  : out std_logic_vector (7 downto 0); --damage percentage (output to physics) player 2
 	percentage1out  : out std_logic_vector (7 downto 0); --new percentage (output to memory) player 1
 	percentage2out  : out std_logic_vector (7 downto 0); --new percentage (output to memory) player 2
-	newx1out  : out  std_logic_vector (7 downto 0); --x starting location after death player 1
-	newy1out  : out  std_logic_vector (7 downto 0); --y starting location after death player 1
-	newx2out  : out  std_logic_vector (7 downto 0); --x starting location after death player 2
-	newy2out  : out  std_logic_vector (7 downto 0); --y starting location after death player 2
+--	newx1out  : out  std_logic_vector (7 downto 0); --x starting location after death player 1
+--	newy1out  : out  std_logic_vector (7 downto 0); --y starting location after death player 1
+--	newx2out  : out  std_logic_vector (7 downto 0); --x starting location after death player 2
+--	newy2out  : out  std_logic_vector (7 downto 0); --y starting location after death player 2
 	--orientation1  : out std_logic; --orientation player 1 for vga
 	--orientation2  : out std_logic; --orientation player 2 for vga
 	killcount1out  : out std_logic_vector (3 downto 0); --killcount of player 1

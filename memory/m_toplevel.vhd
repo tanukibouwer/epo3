@@ -132,28 +132,28 @@ begin
 								
 	DM20 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp1int,
-								initial		=> "00011010",
+								initial		=> "00110010",
 								data_in 	=> data_in8b1,
 								data_out 	=> data_out8b1,
 								write 		=> writeint);
 								
 	DM21 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp1int,
-								initial		=> "00011010",
+								initial		=> "00011110",
 								data_in 	=> data_in8b2,
 								data_out 	=> data_out8b2,
 								write 		=> writeint);
 								
 	DM22 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp2int,
-								initial		=> "01111110",
+								initial		=> "01110100",
 								data_in 	=> data_in8b3,
 								data_out 	=> data_out8b3,
 								write 		=> writeint);
 								
 	DM23 : ram_8b port map (	clk			=> clk,
 								reset		=> resetp2int,
-								initial		=> "00011010",
+								initial		=> "00011110",
 								data_in 	=> data_in8b4,
 								data_out 	=> data_out8b4,
 								write 		=> writeint);

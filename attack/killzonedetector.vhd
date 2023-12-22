@@ -28,17 +28,17 @@ entity killzonedetector is
 	--newdeathcount3  : out  std_logic_vector (3 downto 0);
 	--newdeathcount4  : out  std_logic_vector (3 downto 0);
 	newpercentage1  : out  std_logic_vector (7 downto 0);
-	newpercentage2  : out  std_logic_vector (7 downto 0);
+	newpercentage2  : out  std_logic_vector (7 downto 0));
 	--newpercentage3  : out  std_logic_vector (7 downto 0);
 	--newpercentage4  : out  std_logic_vector (7 downto 0);
 	--newvectorX3  : out  std_logic_vector (7 downto 0);
         --newvectorY3  : out  std_logic_vector (7 downto 0);
 	--newvectorX4  : out  std_logic_vector (7 downto 0);
         --newvectorY4  : out  std_logic_vector (7 downto 0);
-	newvectorX1  : out  std_logic_vector (7 downto 0);
-        newvectorY1  : out  std_logic_vector (7 downto 0);
-	newvectorX2  : out  std_logic_vector (7 downto 0);
-        newvectorY2  : out  std_logic_vector (7 downto 0));
+--	newvectorX1  : out  std_logic_vector (7 downto 0);
+--        newvectorY1  : out  std_logic_vector (7 downto 0);
+--	newvectorX2  : out  std_logic_vector (7 downto 0);
+--        newvectorY2  : out  std_logic_vector (7 downto 0));
 end entity killzonedetector;
 
 architecture behavioural of killzonedetector is
@@ -54,7 +54,7 @@ architecture behavioural of killzonedetector is
 	--type c4_state is (neutral4, detection4, standardposition4, hold4); 
 	--signal state4, new_state4: c4_state;
 
-	signal newlocationX1, newlocationY1, newlocationX2, newlocationY2: std_logic_vector (7 downto 0);
+--	signal newlocationX1, newlocationY1, newlocationX2, newlocationY2: std_logic_vector (7 downto 0);
 	--signal newlocationX3, newlocationY3, newlocationX4, newlocationY4: std_logic_vector (7 downto 0);
 
 	signal s1, s2, s3, s4: unsigned(3 downto 0);
@@ -65,10 +65,10 @@ begin
 	--s5 <= unsigned(olddeathcount3);
 	--s7 <= unsigned(olddeathcount4);
 
-	newlocationX1 <= "00110010"; -- start location 50
-	newlocationY1 <= "00011110"; -- start location 30
-	newlocationX2 <= "01110100"; -- start location 116
-	newlocationY2 <= "00011110"; -- start location 30
+--	newlocationX1 <= "00110010"; -- start location 50
+--	newlocationY1 <= "00011110"; -- start location 30
+--	newlocationX2 <= "01110100"; -- start location 116
+--	newlocationY2 <= "00011110"; -- start location 30
 	--newlocationX3 <= "01001000"; -- start location 72 (deze is goed)
 	--newlocationY3 <= "00011110"; -- start location 30 (deze is goed)
 	--newlocationX4 <= "01011110"; -- start location 94 (deze is goed)
@@ -97,32 +97,32 @@ begin
 			when neutral1 =>
 				newdeathcount1 <= "0000";
 				newpercentage1 <= "00000001";
-				newvectorX1 <= newlocationX1;
-				newvectorY1 <= newlocationY1;
+--				newvectorX1 <= newlocationX1;
+--				newvectorY1 <= newlocationY1;
 				restart1 <= '1';
 					new_state1 <= hold1;
 
 			when detection1 =>
 				s2 <= s1 + to_unsigned(1,4);
 				newpercentage1 <= "00000001";
-				newvectorX1 <= oldvectorX1;
-				newvectorY1 <= oldvectorY1;
+--				newvectorX1 <= oldvectorX1;
+--				newvectorY1 <= oldvectorY1;
 				restart1 <= '1';
 					new_state1 <= standardposition1;
 
 			when standardposition1 =>
 				newdeathcount1 <= olddeathcount1;
 				newpercentage1 <= oldpercentage1;
-				newvectorX1 <= newlocationX1;
-				newvectorY1 <= newlocationY1;
+--				newvectorX1 <= newlocationX1;
+--				newvectorY1 <= newlocationY1;
 				restart1 <= '1';
 					new_state1 <= hold1;
 
 			when hold1 =>
 				newdeathcount1 <= olddeathcount1;
 				newpercentage1 <= oldpercentage1;
-				newvectorX1 <= oldvectorX1;
-				newvectorY1 <= oldvectorY1;
+--				newvectorX1 <= oldvectorX1;
+--				newvectorY1 <= oldvectorY1;
 				restart1 <= '0';
 				if (oldvectorX1 > "10101000") or (oldvectorY1 > "01111000") or (oldvectorX1 < "00001000") or (oldvectorY1 < "00001000") then -- 168, 120, 8, 8
 					new_state1 <= detection1;
@@ -138,32 +138,32 @@ begin
 			when neutral2 =>
 				newdeathcount2 <= "0000";
 				newpercentage2 <= "00000001";
-				newvectorX2 <= newlocationX2;
-				newvectorY2 <= newlocationY2;
+--				newvectorX2 <= newlocationX2;
+--				newvectorY2 <= newlocationY2;
 				restart2 <= '1';
 					new_state2 <= hold2;
 
 			when detection2 =>
 				s4 <= s3 + to_unsigned(1,4);
 				newpercentage2 <= "00000001";
-				newvectorX2 <= oldvectorX2;
-				newvectorY2 <= oldvectorY2;
+--				newvectorX2 <= oldvectorX2;
+--				newvectorY2 <= oldvectorY2;
 				restart2 <= '1';
 					new_state2 <= standardposition2;
 
 			when standardposition2 =>
 				newdeathcount2 <= olddeathcount2;
 				newpercentage2 <= oldpercentage2;
-				newvectorX2 <= newlocationX2;
-				newvectorY2 <= newlocationY2;
+--				newvectorX2 <= newlocationX2;
+--				newvectorY2 <= newlocationY2;
 				restart2 <= '1';
 					new_state2 <= hold2;
 
 			when hold2 =>
 				newdeathcount2 <= olddeathcount2;
 				newpercentage2 <= oldpercentage2;
-				newvectorX2 <= oldvectorX2;
-				newvectorY2 <= oldvectorY2;
+--				newvectorX2 <= oldvectorX2;
+--				newvectorY2 <= oldvectorY2;
 				restart2 <= '0';
 				if (oldvectorX2 > "10101000") or (oldvectorY2 > "01111000") or (oldvectorX2 < "00001000") or (oldvectorY2 < "00001000") then -- 168, 120, 8, 8
 					new_state2 <= detection2;

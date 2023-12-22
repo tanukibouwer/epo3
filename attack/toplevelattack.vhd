@@ -102,11 +102,7 @@ architecture structural of topattack is
             restart1       : out std_logic;
             restart2       : out std_logic;
             newdeathcount1 : out std_logic_vector (3 downto 0);
-            newdeathcount2 : out std_logic_vector (3 downto 0);
-            newvectorX1    : out std_logic_vector (7 downto 0);
-            newvectorY1    : out std_logic_vector (7 downto 0);
-            newvectorX2    : out std_logic_vector (7 downto 0);
-            newvectorY2    : out std_logic_vector (7 downto 0));
+            newdeathcount2 : out std_logic_vector (3 downto 0));
     end component killzonedetector;
 
     component coldet is

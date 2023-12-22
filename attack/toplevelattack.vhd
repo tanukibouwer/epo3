@@ -5,6 +5,7 @@ entity topattack is
     port (
         clk                  : in std_logic; --clock
         res                  : in std_logic; --reset
+        vsync                : in std_logic;
         controller1          : in std_logic_vector (7 downto 0); --input player 1
         controller2          : in std_logic_vector (7 downto 0); --input player 2
         x1in                 : in std_logic_vector (7 downto 0); --x position of player 1
@@ -58,6 +59,7 @@ architecture structural of topattack is
             res      : in std_logic;
             input1   : in std_logic_vector (7 downto 0);
             input2   : in std_logic_vector (7 downto 0);
+            vsync    : in std_logic;
             output1A : out std_logic;
             output1B : out std_logic;
             output2A : out std_logic;
@@ -150,6 +152,7 @@ begin
         res      => res,
         input1   => controller1,
         input2   => controller2,
+        vsync    => vsync,
         output1A => at1a,
         output1B => at1b,
         output2A => at2a,

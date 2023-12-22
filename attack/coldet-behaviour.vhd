@@ -17,7 +17,7 @@ y2_in <= to_integer(unsigned(y2));
 x_verschil <= x2_in - x1_in;
 y_verschil <= y2_in - y1_in;
 
-lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
+lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direction_y)
 	begin
 
 		if ((a1='1' or a2='1' or b1='1' or b2='1') and (-13 <= y_verschil and y_verschil <= 13)) then

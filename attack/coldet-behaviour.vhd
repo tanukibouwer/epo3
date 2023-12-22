@@ -484,7 +484,9 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
-					
+						collision1b2 <= '0';
+						collision2b1 <= '0';
+
 					elsif ((o1='1' and b1='1') and (o2='0' and b2='1')) then 
 						direction_x2 <= direction_x;						 
 						direction_y2 <= direction_y;
@@ -492,6 +494,8 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision1a2 <= '0';
+						collision2a1 <= '0';
 						
 					elsif ((o1='1' and a1='1') and (o2='0' and b2='1')) then 
 						direction_x2 <= direction_x;						 
@@ -500,6 +504,8 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision1b2 <= '0';
+						collision2a1 <= '0';
 
 					elsif ((o1='1' and b1='1') and (o2='0' and a2='1')) then 
 						direction_x2 <= direction_x;						 
@@ -508,26 +514,32 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
+						collision1a2 <= '0';
+						collision2b1 <= '0';
 
 					elsif(o1='1' and a1='1') then
 						direction_x2 <= direction_x;						 
 						direction_y2 <= direction_y;
 						collision1a2 <= '1';
+						collision1b2 <= '0';
 
 					elsif(o2='0' and a2='1')then
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
+						collision2b1 <= '0';
 					
 					elsif(o1='1' and b1='1')then
 						direction_x2 <= direction_x;						 
 						direction_y2 <= direction_y;
 						collision1b2 <= '1';
+						collision1a2 <= '0';
 
 					elsif(o2='0' and b2='1')then
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision2a1 <= '0';
 					
 					end if;
 
@@ -1004,6 +1016,8 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
+						collision1b2 <= '0';
+						collision2b1 <= '0';
 					
 					elsif ((o1='0' and b1='1') and (o2='1' and b2='1')) then 
 						direction_x2 <= direction_x;						 
@@ -1012,6 +1026,8 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision1a2 <= '0';
+						collision2a1 <= '0';
 						
 					elsif ((o1='0' and a1='1') and (o2='1' and b2='1')) then 
 						direction_x2 <= direction_x;						 
@@ -1020,6 +1036,8 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision1b2 <= '0';
+						collision2a1 <= '0';
 
 					elsif ((o1='0' and b1='1') and (o2='1' and a2='1')) then 
 						direction_x2 <= direction_x;						 
@@ -1028,26 +1046,32 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2)
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
+						collision1a2 <= '0';
+						collision2b1 <= '0';
 
 					elsif(o1='0' and a1='1')then
 						direction_x2 <= direction_x;						 
 						direction_y2 <= direction_y;
 						collision1a2 <= '1';
+						collision1b2 <= '0';
 
 					elsif(o2='1' and a2='1')then
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2a1 <= '1';
+						collision2b1 <= '0';
 					
 					elsif(o1='0' and b1='1') then
 						direction_x2 <= direction_x;						 
 						direction_y2 <= direction_y;
 						collision1b2 <= '1';
+						collision1a2 <= '0';
 
 					elsif(o2='1' and b2='1')then
 						direction_x1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_x))+ 1, direction_x1'length));						 
 						direction_y1 <= std_logic_vector(to_signed(to_integer(unsigned(not direction_y))+ 1, direction_y1'length));
 						collision2b1 <= '1';
+						collision2a1 <= '0';
 						
 					end if;
 				

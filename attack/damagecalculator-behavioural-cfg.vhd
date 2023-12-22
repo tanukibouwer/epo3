@@ -1,4 +1,4 @@
-configuration damagecalculator-behavioural-cfg of damagecalculator is
+configuration damagecalculator_behavioural_cfg of damagecalculator is
 	for behavioural
 	end for;
-end configuration damagecalculator-behavioural-cfg;
+end configuration damagecalculator_behavioural_cfg;

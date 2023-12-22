@@ -1,4 +1,4 @@
-configuration orientation-behavioural-cfg of orientation is
+configuration orientation_behavioural_cfg of orientation is
 	for behavioural
 		end for;
-end configuration orientation-behavioural-cfg;
+end configuration orientation_behavioural_cfg;

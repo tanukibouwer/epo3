@@ -108,7 +108,7 @@ architecture behavioural of coloring_new is
 
              controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
              orientation   : in std_logic; --1 is right, 0 is left
-             sprite   : out   std_logic_vector(2 downto 0);
+             sprite   : out   std_logic_vector(2 downto 0)
      end component;
 
 
@@ -354,15 +354,15 @@ begin
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
     -- char1 intermediate location assignment
-    ch1x1 <= std_logic_vector(to_unsigned(x_lowerbound_ch1, ch1x1'length));
-    ch1x2 <= std_logic_vector(to_unsigned(x_upperbound_ch1, ch1x2'length)));
-    ch1y1 <= std_logic_vector(to_unsigned(y_lowerbound_ch1, ch1y1'length)));
-    ch1y2 <= std_logic_vector(to_unsigned(y_upperbound_ch1, ch1y2'length)));
+    ch1x1 <= std_logic_vector(x_lowerbound_ch1);
+    ch1x2 <= std_logic_vector(x_upperbound_ch1);
+    ch1y1 <= std_logic_vector(y_lowerbound_ch1);
+    ch1y2 <= std_logic_vector(y_upperbound_ch1);
     -- char2 intermediate location assignment
-    ch2x1 <= std_logic_vector(to_unsigned(x_lowerbound_ch2, ch2x1'length)));
-    ch2x2 <= std_logic_vector(to_unsigned(x_upperbound_ch2, ch2x2'length)));
-    ch2y1 <= std_logic_vector(to_unsigned(y_lowerbound_ch2, ch2y1'length)));
-    ch2y2 <= std_logic_vector(to_unsigned(y_upperbound_ch2, ch2y2'length)));
+    ch2x1 <= std_logic_vector(x_lowerbound_ch2);
+    ch2x2 <= std_logic_vector(x_upperbound_ch2);
+    ch2y1 <= std_logic_vector(y_lowerbound_ch2);
+    ch2y2 <= std_logic_vector(y_upperbound_ch2);
     -- convert constant integers to vectors for sprite color assignment
     digsby <= std_logic_vector(to_unsigned(int_digsby, digsby'length));
     p1d1bx <= std_logic_vector(to_unsigned(int_p1d1bx, p1d1bx'length));

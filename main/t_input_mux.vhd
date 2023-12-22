@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------
--- Multiplexor for the outputs so that the internal signals on the chip can
+-- Multiplexor for the inputs so that the internal signals on the chip can
 -- be tested.
 --
--- Without any selection input the output pins will entail the VGA outputs,
+-- Without any selection input the output pins will entail the controller outputs,
 -- with a selection input any different signal can be selected.
 -----------------------------------------------------------------------------
 
@@ -11,16 +11,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-entity output_mux is
+entity t_input_mux is
     port(
     -- selection signals to choose which operation mode/which signals to output
     sel : in std_logic_vector(x downto 0);
-    -- VGA inputs from the VGA module
-    R_data : in std_logic_vector(3 downto 0);
-    G_data : in std_logic_vector(3 downto 0);
-    B_data : in std_logic_vector(3 downto 0);
-    Vsync : in std_logic;
-    Hsync : in std_logic;
+    -- inputs from the controllers
+    C1_data	: in std_logic;
+    C2_data	: in std_logic;
 
     -- Other inputs from internal components
 
@@ -43,31 +40,30 @@ entity output_mux is
 
         );
 
-end entity output_mux;
+end entity t_input_mux;
 
-architecture behavioural of output_mux is
-	
+architecture behavioural of t_input_mux is
 
 begin
 
 	process(sel)
 	begin
 		case sel is
-			when "00" => -- standard operation, thus display is active
-				pin1 <= R_data(0),
-				pin2 <= R_data(0),
-				pin3 <= R_data(0),
-				pin4 <= R_data(0),
-				pin5 <= G_data(0),
-				pin6 <= G_data(0),
-				pin7 <= G_data(0),
-				pin8 <= G_data(0),
-				pin9 <= B_data(0),
-				pin10 <= B_data(0),
-				pin11 <= B_data(0),
-				pin12 <= B_data(0),
-				pin13 <= Vsync,
-				pin14 <= Hsync);
+			when "00" => -- standard operation, controllers active
+				pin1 <= C1_data,
+				pin2 <= C2_data,
+				pin3 <= '0',
+				pin4 <= '0',
+				pin5 <= '0',
+				pin6 <= '0',
+				pin7 <= '0',
+				pin8 <= '0',
+				pin9 <= '0',
+				pin10 <= '0',
+				pin11 <= '0',
+				pin12 <= '0',
+				pin13 <= '0',
+				pin14 <= '0');
 			when "01" => -- first set of test signals
 				pin1 <= 
 				pin2 <= 

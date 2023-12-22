@@ -14,7 +14,7 @@ use ieee.math_real.all;
 entity t_input_mux is
     port(
     -- selection signals to choose which operation mode/which signals to output
-    sel : in std_logic_vector(x downto 0);
+    sel : in std_logic_vector(2 downto 0);
     -- inputs from the controllers
     C1_data	: in std_logic;
     C2_data	: in std_logic;
@@ -49,7 +49,7 @@ begin
 	process(sel)
 	begin
 		case sel is
-			when "00" => -- standard operation, controllers active
+			when "000" => -- standard operation, controllers active
 				pin1 <= C1_data,
 				pin2 <= C2_data,
 				pin3 <= '0',
@@ -64,7 +64,7 @@ begin
 				pin12 <= '0',
 				pin13 <= '0',
 				pin14 <= '0');
-			when "01" => -- first set of test signals
+			when "001" => -- first set of test signals
 				pin1 <= 
 				pin2 <= 
 				pin3 <= 
@@ -79,6 +79,12 @@ begin
 				pin12 <=
 				pin13 <=
 				pin14 <=
+			when "010" =>
+			when "011" =>
+			when "100" =>
+			when "101" =>
+			when "110" =>
+			when "111" =>
 		end case;
 	end process;
 end architecture behavioural;

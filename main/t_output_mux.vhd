@@ -14,7 +14,7 @@ use ieee.math_real.all;
 entity output_mux is
     port(
     -- selection signals to choose which operation mode/which signals to output
-    sel : in std_logic_vector(x downto 0);
+    sel : in std_logic_vector(4 downto 0);
     -- VGA inputs from the VGA module
     R_data : in std_logic_vector(3 downto 0);
     G_data : in std_logic_vector(3 downto 0);
@@ -53,7 +53,7 @@ begin
 	process(sel)
 	begin
 		case sel is
-			when "00" => -- standard operation, thus display is active
+			when "00000" => -- standard operation, thus display is active
 				pin1 <= R_data(0),
 				pin2 <= R_data(0),
 				pin3 <= R_data(0),
@@ -68,7 +68,7 @@ begin
 				pin12 <= B_data(0),
 				pin13 <= Vsync,
 				pin14 <= Hsync);
-			when "01" => -- first set of test signals
+			when "00001" => -- first set of test signals
 				pin1 <= 
 				pin2 <= 
 				pin3 <= 
@@ -83,6 +83,36 @@ begin
 				pin12 <=
 				pin13 <=
 				pin14 <=
+				when "00010" =>
+				when "00011" =>
+				when "00100" =>
+				when "00101" =>
+				when "00110" =>
+				when "00111" =>
+				when "01000" =>
+				when "01001" =>
+				when "01010" =>
+				when "01011" =>
+				when "01100" =>
+				when "01101" =>
+				when "01110" =>
+				when "01111" =>
+				when "10000" =>
+				when "10001" =>
+				when "10010" =>
+				when "10011" =>
+				when "10100" =>
+				when "10101" =>
+				when "10110" =>
+				when "10111" =>
+				when "11000" =>
+				when "11001" =>
+				when "11010" =>
+				when "11011" =>
+				when "11100" =>
+				when "11101" =>
+				when "11110" =>
+				when "11111" =>
 		end case;
 	end process;
 end architecture behavioural;

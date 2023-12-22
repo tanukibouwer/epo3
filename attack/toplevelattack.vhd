@@ -122,9 +122,9 @@ component coldet is
 	direction_y1 : out std_logic_vector(7 downto 0);
         direction_y2 : out std_logic_vector(7 downto 0);
 	collision1a2  : out std_logic;
-	collision2a1  : out std_logic;
+	collision2a1  :ï¿½outï¿½std_logic;
 	collision1b2  : out std_logic;
-	collision2b1  : out std_logic);
+	collision2b1  :ï¿½outï¿½std_logic);
 end component coldet;
 
 signal co1a2, co1b2, co2a1, co2b1: std_logic;
@@ -134,7 +134,7 @@ begin
 PM1:	orientation port map(clk=>clk, res=>res, input1=>controller1, input2=>controller2, output1=>or1, output2=>or2);
 PM2:	attackp port map(clk=>clk, res=>res, input1=>controller1, input2=>controller2, output1A=>at1a, output1B=>at1b, output2A=>at2a, output2B=>at2b);
 PM3:	damagecalculator port map(clk=>clk, res=>res, collision1A2=>co1a2, collision1B2=>co1b2, collision2A1=>co2a1, collision2B1=>co2b1, oldpercentage1=>percentage1in, oldpercentage2=>percentage2in, percentage1=>damagepercentage1out, percentage2=>damagepercentage2out, newpercentage1=>percentage1out, newpercentage2=>percentage2out);
-PM4:	killzonedetector port map(clk=>clk, res=>res, olddeathcount1=>killcount1in, olddeathcount2=>killcount2in, oldpercentage1=>percentage1in, oldpercentage2=>percentage2in, oldvectorX1=>x1in, oldvectorY1=>y1in, oldvectorX2=>x2in, oldvectorY2=>y2in, restart1=>restart1, restart2=>restart2, newdeathcount1=>killcount1out, newdeathcount2=>killcount2out, newpercentage1=>percentage1out, newpercentage2=>percentage1out, newvectorX1=>newx1out, newvectorY1=>newy1out, newvectorX2=>newx2out, newvectorY2=>newy2out);
+PM4:	killzonedetector port map(clk=>clk, res=>res, olddeathcount1=>killcount1in, olddeathcount2=>killcount2in, oldpercentage1=>percentage1in, oldpercentage2=>percentage2in, oldvectorX1=>x1in, oldvectorY1=>y1in, oldvectorX2=>x2in, oldvectorY2=>y2in, restart1=>restart1, restart2=>restart2, newdeathcount1=>killcount1out, newdeathcount2=>killcount2out, newpercentage1=>percentage1out, newpercentage2=>percentage1out);
 PM5:	coldet port map(clk=>clk, res=>res, a1=>at1a, a2=>at2a, b1=>at1b, b2=>at2b, o1=>or1, o2=>or2, x1=>x1in, x2=>x2in, y1=>y1in, y2=>y2in, direction_x1=>directionx1out, direction_x2=>directionx2out, direction_y1=>directiony1out, direction_y2=>directiony2out, collision1a2=>co1a2, collision1b2=>co1b2, collision2a1=>co2a1, collision2b1=>co2b1);
 
 

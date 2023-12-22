@@ -122,9 +122,9 @@ component coldet is
 	direction_y1 : out std_logic_vector(7 downto 0);
         direction_y2 : out std_logic_vector(7 downto 0);
 	collision1a2  : out std_logic;
-	collision2a1  :�out�std_logic;
+	collision2a1  : out std_logic;
 	collision1b2  : out std_logic;
-	collision2b1  :�out�std_logic);
+	collision2b1  : out std_logic);
 end component coldet;
 
 signal co1a2, co1b2, co2a1, co2b1: std_logic;

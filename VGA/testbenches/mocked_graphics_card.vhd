@@ -4,14 +4,14 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
---! 
---! This component consists of 3 subcomponents, screen_scan, mem_vid and coloring 
---! 
---! screen_scan to scan the screen, mem_vid as a frame buffer, coloring as logic to find the color at a pixel 
---! 
---! offset adder to coordinates from frame buffer to pixel bounds.
---!
+-- This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
+-- 
+-- This component consists of 3 subcomponents, screen_scan, mem_vid and coloring 
+-- 
+-- screen_scan to scan the screen, mem_vid as a frame buffer, coloring as logic to find the color at a pixel 
+-- 
+-- offset adder to coordinates from frame buffer to pixel bounds.
+--
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -29,17 +29,21 @@ entity graphics_card is
         sw2 : in std_logic;
         sw3 : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-        -- char1_x : in std_logic_vector(7 downto 0); --! character 1 x-location
-        -- char1_y : in std_logic_vector(7 downto 0); --! character 1 y-location
-        -- char2_x : in std_logic_vector(7 downto 0); --! character 2 x-location
-        -- char2_y : in std_logic_vector(7 downto 0); --! character 2 y-location
+        -- char1_x : in std_logic_vector(7 downto 0); -- character 1 x-location
+        -- char1_y : in std_logic_vector(7 downto 0); -- character 1 y-location
+        -- char2_x : in std_logic_vector(7 downto 0); -- character 2 x-location
+        -- char2_y : in std_logic_vector(7 downto 0); -- character 2 y-location
+        -- controller_p1 : in std_logic_vector(7 downto 0);
+        -- controller_p2 : in std_logic_vector(7 downto 0);
+        -- orientation_p1 : in std_logic;
+        -- orientation_p2 : in std_logic;
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
-        Vsync  : out std_logic; --! sync signals -> active low
-        Hsync  : out std_logic; --! sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        B_data : out std_logic_vector(3 downto 0) --! RGB data to screen
+        Vsync  : out std_logic; -- sync signals -> active low
+        Hsync  : out std_logic; -- sync signals -> active low
+        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        B_data : out std_logic_vector(3 downto 0) -- RGB data to screen
     );
 end entity graphics_card;
 
@@ -58,17 +62,17 @@ architecture structural of graphics_card is
 
     component coloring_new is
         port (
-            --! global inputs
+            -- global inputs
             clk   : in std_logic;
             reset : in std_logic;
-            --! counter data
+            -- counter data
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
             -- relevant data for x-y locations
-            char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
-            char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
-            char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
-            char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            char1x : in std_logic_vector(7 downto 0); -- character 1 coordinates
+            char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
+            char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
+            char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
     
             -- percentage from attack module
             percentage_p1 : in std_logic_vector(7 downto 0);
@@ -81,14 +85,11 @@ architecture structural of graphics_card is
             --controls from input
             controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
             controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-            
-            --vsync from screen scan
-            vsync      : in std_logic;
     
             -- RGB data outputs
-            R_data : out std_logic_vector(3 downto 0); --! RGB data output
-            G_data : out std_logic_vector(3 downto 0); --! RGB data output
-            B_data : out std_logic_vector(3 downto 0)  --! RGB data output
+            R_data : out std_logic_vector(3 downto 0); -- RGB data output
+            G_data : out std_logic_vector(3 downto 0); -- RGB data output
+            B_data : out std_logic_vector(3 downto 0)  -- RGB data output
     
         );
     end component;
@@ -112,17 +113,17 @@ begin
     );
     -- component coloring_new is
     --     port (
-    --         --! global inputs
+    --         -- global inputs
     --         clk   : in std_logic;
     --         reset : in std_logic;
-    --         --! counter data
+    --         -- counter data
     --         hcount : in std_logic_vector(9 downto 0);
     --         vcount : in std_logic_vector(9 downto 0);
     --         -- relevant data for x-y locations
-    --         char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
-    --         char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
-    --         char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
-    --         char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+    --         char1x : in std_logic_vector(7 downto 0); -- character 1 coordinates
+    --         char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
+    --         char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
+    --         char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
     
     --         -- percentage from attack module
     --         percentage_p1 : in std_logic_vector(7 downto 0);
@@ -140,9 +141,9 @@ begin
     --         vsync      : in std_logic;
     
     --         -- RGB data outputs
-    --         R_data : out std_logic_vector(3 downto 0); --! RGB data output
-    --         G_data : out std_logic_vector(3 downto 0); --! RGB data output
-    --         B_data : out std_logic_vector(3 downto 0)  --! RGB data output
+    --         R_data : out std_logic_vector(3 downto 0); -- RGB data output
+    --         G_data : out std_logic_vector(3 downto 0); -- RGB data output
+    --         B_data : out std_logic_vector(3 downto 0)  -- RGB data output
     
     --     );
     -- end component;
@@ -158,8 +159,6 @@ begin
         orientation_p2 => orientationp2,
         controller_p1 => controllerp1,
         controller_p2 => controllerp2,
-        vsync => vsync_between,
-
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 

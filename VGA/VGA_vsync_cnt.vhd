@@ -17,30 +17,33 @@ use ieee.math_real.all;
 
 entity vsync_cnt is
     port (
-        vsync   : in std_logic;
+        vcount : in std_logic_vector(9 downto 0);
         reset : in std_logic;
-        count : out std_logic_vector(3 downto 0)
+        count : out std_logic_vector(1 downto 0)
     );
 end entity;
 
 architecture behavioural of vsync_cnt is
-    signal cur_count, new_count : unsigned(3 downto 0);
+    signal cur_count, new_count : unsigned(1 downto 0);
 begin
 
-    process (vsync) --storage of the count
+    process (vcount, reset, new_count) --storage of the count
     begin
-        if rising_edge(vsync) then
-            if reset = '1' then
-                cur_count <= (others => '0');
-            else
-                cur_count <= new_count;
-            end if;
+        if reset = '1' then
+            cur_count <= (others => '0');
+        else
+            cur_count <= new_count;
         end if;
     end process;
 
-    process (cur_count, vsync) --count on clock/input
+    process (cur_count, vcount, new_count) --count on clock/input
     begin
-        new_count <= cur_count + 1;
+        if unsigned(vcount) = 780 then
+            new_count <= cur_count + 1;
+        else 
+            new_count <= cur_count;
+        end if;
+
     end process;
 
     count <= std_logic_vector(cur_count);

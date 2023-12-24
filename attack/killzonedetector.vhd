@@ -91,10 +91,11 @@ begin
         end if;
     end process;
 
-    lbl1 : process (state1, olddeathcount1, oldvectorX1, oldvectorY1)
+    lbl1 : process (state1, olddeathcount1, oldvectorX1, oldvectorY1, s2, s1)
     begin
         case state1 is
             when neutral1 =>
+                s2 <= s1;
                 newdeathcount1 <= "0000";
                 -- newpercentage1 <= "00000001";
                 --				newvectorX1 <= newlocationX1;
@@ -113,6 +114,7 @@ begin
                 new_state1 <= standardposition1;
 
             when standardposition1 =>
+                s2 <= s1;
                 newdeathcount1 <= olddeathcount1;
                 -- newpercentage1 <= oldpercentage1;
                 --				newvectorX1 <= newlocationX1;
@@ -121,6 +123,7 @@ begin
                 new_state1 <= hold1;
 
             when hold1 =>
+                s2 <= s1;
                 newdeathcount1 <= olddeathcount1;
                 -- newpercentage1 <= oldpercentage1;
                 --				newvectorX1 <= oldvectorX1;
@@ -134,10 +137,11 @@ begin
         end case;
     end process;
 
-    lbl2 : process (state2, olddeathcount2, oldvectorX2, oldvectorY2)
+    lbl2 : process (state2, olddeathcount2, oldvectorX2, oldvectorY2, s4, s3)
     begin
         case state2 is
             when neutral2 =>
+                s4 <= s3;
                 newdeathcount2 <= "0000";
                 -- newpercentage2 <= "00000001";
                 --				newvectorX2 <= newlocationX2;
@@ -156,6 +160,7 @@ begin
                 new_state2 <= standardposition2;
 
             when standardposition2 =>
+                s4 <= s3;
                 newdeathcount2 <= olddeathcount2;
                 -- newpercentage2 <= oldpercentage2;
                 --				newvectorX2 <= newlocationX2;
@@ -164,6 +169,7 @@ begin
                 new_state2 <= hold2;
 
             when hold2 =>
+                s4 <= s3;
                 newdeathcount2 <= olddeathcount2;
                 -- newpercentage2 <= oldpercentage2;
                 --				newvectorX2 <= oldvectorX2;

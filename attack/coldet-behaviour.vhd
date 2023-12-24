@@ -86,6 +86,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111110";						 
 							direction_x <= "11110010";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
 				
 
@@ -149,7 +153,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "01000000";						 
-							direction_x <= "11111011";						
+							direction_x <= "11111011";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";					
 						end if;
 
 
@@ -217,7 +225,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "01000000";						 
-							direction_x <= "00000101";						
+							direction_x <= "00000101";
+							
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
 					
 
@@ -282,7 +294,12 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111110";						 
 							direction_x <= "00001110";
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
+						
+						
 					
 
 
@@ -346,7 +363,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111100";						 
-							direction_x <= "00010111";						
+							direction_x <= "00010111";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";						
 						end if;
 
 
@@ -409,7 +430,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111000";						 
-							direction_x <= "00011110";						
+							direction_x <= "00011110";
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";						
 						end if;
 					
 
@@ -473,7 +497,13 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00110101";						 
 							direction_x <= "00100100";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
+
+						
 					end if;
 						
 
@@ -557,6 +587,16 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						collision1a2 <= '0';
 						collision1b2 <= '0';
 
+					else
+						collision1a2 <= '0';
+						collision2a1 <= '0';
+						collision1b2 <= '0';
+						collision2b1 <= '0';
+						direction_y1 <= "00000000";						 
+						direction_x1 <= "00000000";
+						direction_y2 <= "00000000";						 
+						direction_x2 <= "00000000";
+
 					end if;
 
 
@@ -636,6 +676,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00110101";						 
 							direction_x <= "11011100";
+						
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
 
 
@@ -699,6 +743,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
                         elsif (12 <= y_verschil and y_verschil <= 13) then						 
                             direction_y <= "00111000";						 
                             direction_x <= "11100010";
+						
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
                         end if;					 
                         
 
@@ -762,6 +810,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
                         elsif (12 <= y_verschil and y_verschil <= 13) then						 
                             direction_y <= "00111100";						 
                             direction_x <= "11101001";
+						
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
                         end if;
 
 
@@ -825,6 +877,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111110";						 
 							direction_x <= "11110010";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
 						
 
@@ -887,7 +943,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "01000000";						 
-							direction_x <= "11111011";						
+							direction_x <= "11111011";
+							
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
 					
 
@@ -956,7 +1016,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "01000000";						 
-							direction_x <= "00000101";						
+							direction_x <= "00000101";
+
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";						
 						end if;
 					
 				
@@ -1020,7 +1084,16 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						elsif (12 <= y_verschil and y_verschil <= 13) then						 
 							direction_y <= "00111110";						 
 							direction_x <= "00001110";
+						else 
+							direction_y <= "00000000";
+							direction_x <= "00000000";
 						end if;
+
+					else 
+						direction_y <= "00000000";
+						direction_x <= "00000000";
+
+						
 					end if;
 
 
@@ -1104,6 +1177,17 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 						direction_x2 <= "00000000";
 						collision1a2 <= '0';
 						collision1b2 <= '0';
+					
+					
+					else
+						collision1a2 <= '0';
+						collision2a1 <= '0';
+						collision1b2 <= '0';
+						collision2b1 <= '0';
+						direction_y1 <= "00000000";						 
+						direction_x1 <= "00000000";
+						direction_y2 <= "00000000";						 
+						direction_x2 <= "00000000";
 					end if;
 				
 				

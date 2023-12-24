@@ -11,86 +11,93 @@
 --! 
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
-
-
 library IEEE;
-use IEEE.std_logic_1164.ALL;
+use IEEE.std_logic_1164.all;
 
 entity char_animation_fsm is
-    port(sprite_clk  :in    std_logic;
-         reset  :in    std_logic;
+    port (
+        clk   : in std_logic;
+        reset : in std_logic;
+        animation_clk : in std_logic_vector(1 downto 0);
 
-         controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-         orientation   : in std_logic; --1 is right, 0 is left
-         sprite  : out std_logic_vector(2 downto 0)
-         );
- end char_animation_fsm;
- 
-
+        -- orientation   : in std_logic;                    --1 is right, 0 is left
+        controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+        sprite : out std_logic_vector(1 downto 0)
+        -- frame         : out std_logic
+    );
+end char_animation_fsm;
 architecture behaviour of char_animation_fsm is
-   type sprite_state is (Idle1, Run1, Jump_Crouch);
-   signal state, new_state: sprite_state;
+
+    type sprite_state is (
+        idle, duck, run_frame1, run_frame2
+        );
+    signal state, new_state : sprite_state;
+
 begin
-   lbl1:
-   process (sprite_clk) 
-   begin
-      if (sprite_clk'event and sprite_clk = '1') then
-         if (reset = '1') then
-            state <= Idle1;
-         else
+    process (clk)
+    begin
+        if rising_edge(clk) then
             state <= new_state;
-         end if;
-      end if;
-   end process;
-   lbl2:
-   process(state, sprite_clk, controller_in, orientation)
-   begin
-      case state is
-         when Idle1 =>
-            if(orientation = '1') then --see table in "character_sprites.vhd"
-               sprite <= "001";
-            else
-               sprite <= "010";
-            end if;
+        end if;
+    end process;
 
-            if (controller_in(0 downto 0) = "1" or controller_in(1 downto 1) = "1") and (controller_in(2 downto 2) = "0" and controller_in(3 downto 3) = "0") then
-               new_state <= Run1;
-            elsif(controller_in(0 downto 0) = "0" and controller_in(1 downto 1) = "0") and (controller_in(2 downto 2) = "0" and controller_in(3 downto 3) = "0") then
-               new_state <= Idle1;  --redundant elsif statement but easier for me to process
-            elsif(controller_in(2 downto 2) = "1" or controller_in(3 downto 3) = "1") then
-               new_state <= Jump_Crouch;
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            if reset = '1' then
+                new_state <= idle;
+                sprite <= "00";
+                -- frame <= '0';
             else
-               new_state <= Idle1; --example: if left AND right is pressed 
+                case state is
+                    when idle =>
+                        sprite <= "00"; -- set sprite to idle
+                        -- frame <= '0';
+                        if (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                            new_state <= duck;
+                        elsif (controller_in = "00000001" or controller_in = "00000010") then
+                            new_state <= run_frame1;
+                        else -- remain in idle whenever nothing is pressed
+                            new_state <= idle;
+                        end if;
+                    when duck => 
+                        sprite <= "01"; -- set sprite to duck
+                        -- frame <= '0';
+                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                            new_state <= idle;
+                        elsif (controller_in = "00000001" or controller_in = "00000010") then -- go to the run animation only when left or right is pressed
+                            new_state <=  run_frame1;
+                        else
+                            new_state <= duck;
+                        end if;
+                    when run_frame1 =>
+                        sprite <= "10"; -- set sprite to run
+                        -- frame <= '0';
+                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                            new_state <= idle;
+                        elsif (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                            new_state <= duck;
+                        elsif animation_clk(1) = '1' then
+                            new_state <= run_frame2;
+                        else
+                            new_state <= run_frame1;
+                        end if;
+                    when run_frame1 =>
+                        sprite <= "00"; -- set sprite to idle for animation purposes
+                        -- frame <= '0';
+                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                            new_state <= idle;
+                        elsif (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                            new_state <= duck;
+                        elsif animation_clk(1) = '1' then
+                            new_state <= run_frame1;
+                        else
+                            new_state <= run_frame2;
+                        end if;
+                    when others =>
+                        null;
+                end case;
             end if;
-         when Run1 =>
-            if(orientation = '1') then --see table in "character_sprites.vhd"
-               sprite <= "010";
-            else
-               sprite <= "101";
-            end if;
-
-            if (controller_in(0 downto 0) = "0" or controller_in(1 downto 1) = "0") and (controller_in(2 downto 2) = "0" and controller_in(3 downto 3) = "0") then
-               new_state <= Idle1;
-            elsif(controller_in(2 downto 2) = "1" or controller_in(3 downto 3) = "1") then
-               new_state <= Jump_Crouch;
-            else
-               new_state <= Run1; --example: if left AND right is pressed 
-            end if;
-
-         when Jump_Crouch =>
-            if(orientation = '1') then --see table in "character_sprites.vhd"
-               sprite <= "000";
-            else
-               sprite <= "011";
-            end if;
-
-            if (controller_in(2 downto 2) = "0" and controller_in(3 downto 3) = "0") then
-               new_state <= Idle1;
-            else
-               new_state <= Jump_Crouch; 
-            end if;         
-                   
-
-      end case;
-   end process;
+        end if;
+    end process;
 end behaviour;

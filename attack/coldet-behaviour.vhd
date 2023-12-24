@@ -502,7 +502,7 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 							direction_y <= "00000000";
 							direction_x <= "00000000";
 						end if;
-						
+
 					else 
 						direction_y <= "00000000";
 						direction_x <= "00000000";
@@ -613,6 +613,9 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 					direction_x1 <= "00000000";
 					direction_y2 <= "00000000";						 
 					direction_x2 <= "00000000";
+
+					direction_x <= "00000000";
+					direction_y <= "00000000";
 				end if;
 
 
@@ -1205,6 +1208,11 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 					direction_x1 <= "00000000";
 					direction_y2 <= "00000000";						 
 					direction_x2 <= "00000000";
+					
+					direction_x <= "00000000";
+					direction_y <= "00000000";
+
+
 				
 				end if;
 
@@ -1218,6 +1226,9 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 				direction_x1 <= "00000000";
 				direction_y2 <= "00000000";						 
 				direction_x2 <= "00000000";
+
+				direction_x <= "00000000";
+				direction_y <= "00000000";
             end if;
 		
 		else 
@@ -1229,6 +1240,9 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 		direction_x1 <= "00000000";
 		direction_y2 <= "00000000";						 
 		direction_x2 <= "00000000";
+
+		direction_y <= "00000000";
+		direction_x <= "00000000";
 		end if;
 
 	end process;

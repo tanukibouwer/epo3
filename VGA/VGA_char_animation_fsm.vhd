@@ -18,12 +18,10 @@ entity char_animation_fsm is
     port (
         clk   : in std_logic;
         reset : in std_logic;
-        animation_clk : in std_logic_vector(1 downto 0);
+        animation_clk : in std_logic_vector(3 downto 0);
 
-        -- orientation   : in std_logic;                    --1 is right, 0 is left
         controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
         sprite : out std_logic_vector(1 downto 0)
-        -- frame         : out std_logic
     );
 end char_animation_fsm;
 architecture behaviour of char_animation_fsm is
@@ -47,12 +45,10 @@ begin
             if reset = '1' then
                 new_state <= idle;
                 sprite <= "00";
-                -- frame <= '0';
             else
                 case state is
                     when idle =>
                         sprite <= "00"; -- set sprite to idle
-                        -- frame <= '0';
                         if (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
                             new_state <= duck;
                         elsif (controller_in = "00000001" or controller_in = "00000010") then
@@ -62,8 +58,7 @@ begin
                         end if;
                     when duck => 
                         sprite <= "01"; -- set sprite to duck
-                        -- frame <= '0';
-                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                        if (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
                             new_state <= idle;
                         elsif (controller_in = "00000001" or controller_in = "00000010") then -- go to the run animation only when left or right is pressed
                             new_state <=  run_frame1;
@@ -72,25 +67,23 @@ begin
                         end if;
                     when run_frame1 =>
                         sprite <= "10"; -- set sprite to run
-                        -- frame <= '0';
-                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                        if animation_clk(3) = '1' then
+                            new_state <= run_frame2;
+                        elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
                             new_state <= idle;
                         elsif (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
                             new_state <= duck;
-                        elsif animation_clk(1) = '1' then
-                            new_state <= run_frame2;
                         else
                             new_state <= run_frame1;
                         end if;
-                    when run_frame1 =>
+                    when run_frame2 =>
                         sprite <= "00"; -- set sprite to idle for animation purposes
-                        -- frame <= '0';
-                        if (controller_in = "00000000") then -- back to idle when nothing is pressed
+                        if animation_clk(3) = '1' then
+                            new_state <= run_frame1;
+                        elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
                             new_state <= idle;
                         elsif (controller_in = "00000100" or controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111" or controller_in = "00001011") then -- make sure that going to duck is prioritised
                             new_state <= duck;
-                        elsif animation_clk(1) = '1' then
-                            new_state <= run_frame1;
                         else
                             new_state <= run_frame2;
                         end if;

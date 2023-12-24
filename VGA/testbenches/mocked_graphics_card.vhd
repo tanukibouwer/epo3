@@ -24,10 +24,10 @@ entity graphics_card is
     port (
         clk   : in std_logic;
         reset : in std_logic;
-        sw0 : in std_logic;
-        sw1 : in std_logic;
-        sw2 : in std_logic;
-        sw3 : in std_logic;
+        sw0   : in std_logic;
+        sw1   : in std_logic;
+        sw2   : in std_logic;
+        sw3   : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
         -- char1_x : in std_logic_vector(7 downto 0); -- character 1 x-location
         -- char1_y : in std_logic_vector(7 downto 0); -- character 1 y-location
@@ -39,11 +39,11 @@ entity graphics_card is
         -- orientation_p2 : in std_logic;
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
-        Vsync  : out std_logic; -- sync signals -> active low
-        Hsync  : out std_logic; -- sync signals -> active low
+        Vsync  : out std_logic;                    -- sync signals -> active low
+        Hsync  : out std_logic;                    -- sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        B_data : out std_logic_vector(3 downto 0) -- RGB data to screen
+        B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
     );
 end entity graphics_card;
 
@@ -73,37 +73,37 @@ architecture structural of graphics_card is
             char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
             char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
             char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
-    
+
             -- percentage from attack module
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
-    
+
             --orientation from attackmodule
-            orientation_p1      : in std_logic; 
-            orientation_p2    : in std_logic;
-    
+            orientation_p1 : in std_logic;
+            orientation_p2 : in std_logic;
+
             --controls from input
             controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
             controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-    
+
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); -- RGB data output
             G_data : out std_logic_vector(3 downto 0); -- RGB data output
             B_data : out std_logic_vector(3 downto 0)  -- RGB data output
-    
+
         );
     end component;
-    
+
     signal vcount_int, hcount_int             : std_logic_vector (9 downto 0);
     signal char1_x, char1_y, char2_x, char2_y : std_logic_vector(7 downto 0);
-    signal percentagep1 : std_logic_vector(7 downto 0);
-    signal percentagep2 : std_logic_vector(7 downto 0);
-    signal sw_vec : std_logic_vector(3 downto 0);
-    signal orientationp1 : std_logic;
-    signal orientationp2 : std_logic;
-    signal vsync_between : std_logic;
-    signal controllerp1 : std_logic_vector(7 downto 0);
-    signal controllerp2 : std_logic_vector(7 downto 0);
+    signal percentagep1                       : std_logic_vector(7 downto 0);
+    signal percentagep2                       : std_logic_vector(7 downto 0);
+    signal sw_vec                             : std_logic_vector(3 downto 0);
+    signal orientationp1                      : std_logic;
+    signal orientationp2                      : std_logic;
+    signal vsync_between                      : std_logic;
+    signal controllerp1                       : std_logic_vector(7 downto 0);
+    signal controllerp2                       : std_logic_vector(7 downto 0);
 
 begin
 
@@ -124,27 +124,27 @@ begin
     --         char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
     --         char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
     --         char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
-    
+
     --         -- percentage from attack module
     --         percentage_p1 : in std_logic_vector(7 downto 0);
     --         percentage_p2 : in std_logic_vector(7 downto 0);
-    
+
     --         --orientation from attackmodule
     --         orientation_p1      : in std_logic; 
     --         orientation_p2    : in std_logic;
-    
+
     --         --controls from input
     --         controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
     --         controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-            
+
     --         --vsync from screen scan
     --         vsync      : in std_logic;
-    
+
     --         -- RGB data outputs
     --         R_data : out std_logic_vector(3 downto 0); -- RGB data output
     --         G_data : out std_logic_vector(3 downto 0); -- RGB data output
     --         B_data : out std_logic_vector(3 downto 0)  -- RGB data output
-    
+
     --     );
     -- end component;
 
@@ -153,81 +153,97 @@ begin
         clk => clk, reset => reset,
         hcount => hcount_int, vcount => vcount_int,
         char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
-        percentage_p1 => percentagep1,
-        percentage_p2 => percentagep2,
+        percentage_p1  => percentagep1,
+        percentage_p2  => percentagep2,
         orientation_p1 => orientationp1,
         orientation_p2 => orientationp2,
-        controller_p1 => controllerp1,
-        controller_p2 => controllerp2,
+        controller_p1  => controllerp1,
+        controller_p2  => controllerp2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
-    char1_x <= std_logic_vector(to_unsigned(50, char1_x'length));
-    char1_y <= std_logic_vector(to_unsigned(70, char1_x'length));
-    char2_x <= std_logic_vector(to_unsigned(150, char1_x'length));
-    char2_y <= std_logic_vector(to_unsigned(70, char1_x'length));
-    sw_vec(0) <= sw0; --> controlling player 1 only & rightside orientation for now
-    sw_vec(1) <= sw1; 
-    sw_vec(2) <= sw2; 
-    sw_vec(3) <= sw3; 
+    char1_x      <= std_logic_vector(to_unsigned(50, char1_x'length));
+    char1_y      <= std_logic_vector(to_unsigned(70, char1_x'length));
+    char2_x      <= std_logic_vector(to_unsigned(150, char1_x'length));
+    char2_y      <= std_logic_vector(to_unsigned(70, char1_x'length));
+    sw_vec(0)    <= sw0; --> controlling player 1 only & rightside orientation for now
+    sw_vec(1)    <= sw1;
+    sw_vec(2)    <= sw2;
+    sw_vec(3)    <= sw3;
     percentagep1 <= "00000000";
     percentagep2 <= "00000000";
-    orientationp1 <= '0';
+    -- orientationp1 <= '0';
     orientationp2 <= '0';
 
     process (sw_vec)
     begin
         case sw_vec is
-            when "0001" => 
-                controllerp1 <= "00000001";
-                controllerp2 <= "00000000";
+            when "0001" =>
+                controllerp1  <= "00000001";
+                controllerp2  <= "00000000";
+                orientationp1 <= '0';
             when "0010" =>
-                controllerp1 <= "00000010";
-                controllerp2 <= "00000000";
+                controllerp1  <= "00000010";
+                orientationp1 <= '1';
+                controllerp2  <= "00000000";
             when "0011" =>
-                controllerp1 <= "00000011";
-                controllerp2 <= "00000000";
+                controllerp1  <= "00000011";
+                orientationp1 <= '1';
+                controllerp2  <= "00000000";
             when "0100" =>
-                controllerp1 <= "00000100";
-                controllerp2 <= "00000000";
+                controllerp1  <= "00000100";
+                orientationp1 <= '0';
+                controllerp2  <= "00000000";
             when "0101" =>
-                controllerp1 <= "00000101";
-                controllerp2 <= "00000000";
+                controllerp1  <= "00000101";
+                orientationp1 <= '1';
+                controllerp2  <= "00000000";
             when "0110" =>
                 controllerp1 <= "00000110";
+                orientationp1 <= '0';
                 controllerp2 <= "00000000";
             when "0111" =>
                 controllerp1 <= "00000111";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when "1000" =>
                 controllerp1 <= "00001000";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when "1001" =>
                 controllerp1 <= "00001001";
+                orientationp1 <= '0';
                 controllerp2 <= "00000000";
             when "1010" =>
                 controllerp1 <= "00001010";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when "1011" =>
                 controllerp1 <= "00001011";
+                orientationp1 <= '0';
                 controllerp2 <= "00000000";
             when "1100" =>
                 controllerp1 <= "00001100";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when "1101" =>
                 controllerp1 <= "00001101";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when "1110" =>
                 controllerp1 <= "00001110";
+                orientationp1 <= '0';
                 controllerp2 <= "00000000";
             when "1111" =>
                 controllerp1 <= "00001111";
+                orientationp1 <= '1';
                 controllerp2 <= "00000000";
             when others =>
                 controllerp1 <= "00000000";
+                orientationp1 <= '0';
                 controllerp2 <= "00000000";
         end case;
-        
+
     end process;
 
     -- process (sw_vec)
@@ -282,8 +298,6 @@ begin
     --             percentagep1 <= (others => '0');
     --             percentagep2 <= (others => '0');
     --     end case;
-        
-    -- end process;
 
-    
+    -- end process;
 end architecture;

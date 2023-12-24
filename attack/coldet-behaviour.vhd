@@ -502,6 +502,10 @@ lbl0: process(x_verschil, y_verschil, a1, a2, b1, b2, o1, o2, direction_x, direc
 							direction_y <= "00000000";
 							direction_x <= "00000000";
 						end if;
+						
+					else 
+						direction_y <= "00000000";
+						direction_x <= "00000000";
 
 						
 					end if;

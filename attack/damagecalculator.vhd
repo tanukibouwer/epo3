@@ -95,7 +95,7 @@ begin
     end process;
 
     lbl1 : process (state1, collision2A1
-        , collision2B1, s1, s2, oldpercentage1, s9-- B attack that player 1 receives
+        , collision2B1, s1, s2, oldpercentage1, s9 -- B attack that player 1 receives
         )
     begin
         case state1 is

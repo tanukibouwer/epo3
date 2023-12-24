@@ -41,6 +41,13 @@ entity graphics_card is
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic;                    -- sync signals -> active low
         Hsync  : out std_logic;                    -- sync signals -> active low
+        num7seg0: out std_logic;
+        num7seg1: out std_logic;
+        num7seg2: out std_logic;
+        num7seg3: out std_logic;
+        num7seg4: out std_logic;
+        num7seg5: out std_logic;
+        num7seg6: out std_logic;
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
@@ -85,6 +92,7 @@ architecture structural of graphics_card is
             --controls from input
             controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
             controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+            sprite_cnt_out : out std_logic_vector(3 downto 0);
 
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); -- RGB data output
@@ -104,6 +112,8 @@ architecture structural of graphics_card is
     signal vsync_between                      : std_logic;
     signal controllerp1                       : std_logic_vector(7 downto 0);
     signal controllerp2                       : std_logic_vector(7 downto 0);
+    signal sprite_cnt : std_logic_vector(3 downto 0);
+    
 
 begin
 
@@ -159,6 +169,7 @@ begin
         orientation_p2 => orientationp2,
         controller_p1  => controllerp1,
         controller_p2  => controllerp2,
+        sprite_cnt_out => sprite_cnt,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
@@ -174,6 +185,28 @@ begin
     percentagep2 <= "00000000";
     -- orientationp1 <= '0';
     orientationp2 <= '0';
+
+    process (sprite_cnt)
+    begin
+        if sprite_cnt(3) = '1' then
+            num7seg0 <= '1';
+            num7seg1 <= '1';
+            num7seg2 <= '1';
+            num7seg3 <= '1';
+            num7seg4 <= '1';
+            num7seg5 <= '1';
+            num7seg6 <= '1';
+        else
+            num7seg0 <= '0';
+            num7seg1 <= '0';
+            num7seg2 <= '0';
+            num7seg3 <= '0';
+            num7seg4 <= '0';
+            num7seg5 <= '0';
+            num7seg6 <= '0';
+
+        end if;
+    end process;
 
     process (sw_vec)
     begin

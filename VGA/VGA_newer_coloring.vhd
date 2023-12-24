@@ -44,6 +44,8 @@ entity coloring_new is
         controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
         controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
 
+        sprite_cnt_out : out std_logic_vector(3 downto 0);
+
         -- RGB data outputs
         R_data : out std_logic_vector(3 downto 0); --! RGB data output
         G_data : out std_logic_vector(3 downto 0); --! RGB data output

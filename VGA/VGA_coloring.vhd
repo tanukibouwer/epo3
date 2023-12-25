@@ -1,5 +1,5 @@
 --module: coloring
---version: b3.2.
+--version: 3.2.9
 --author: Kevin Vermaat & Parama Fawwaz
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
@@ -45,8 +45,6 @@ entity coloring is
 end entity coloring;
 
 architecture behavioural of coloring is
-    signal uns_hcount, uns_vcount                                 : unsigned(9 downto 0);
-    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
 
     component dig3_num_splitter is
         port (
@@ -140,35 +138,52 @@ architecture behavioural of coloring is
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011")),
         (("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"))
     );
-    -- digit signals for the number splitter
+
+    -- unsigned count values
+    signal uns_hcount, uns_vcount : unsigned(9 downto 0);
+
+    --------------------------------------------------------------------------------
+    -- signals for the number sprite output module
+    --------------------------------------------------------------------------------
+    
+    -- seperated digits
     signal p1digit1 : std_logic_vector(3 downto 0);
     signal p1digit2 : std_logic_vector(3 downto 0);
     signal p1digit3 : std_logic_vector(3 downto 0);
     signal p2digit1 : std_logic_vector(3 downto 0);
     signal p2digit2 : std_logic_vector(3 downto 0);
     signal p2digit3 : std_logic_vector(3 downto 0);
-
-    -- signals for the sprite output module
+    
+    -- RGB outputs for digits --> get assigned to the outputs when required
     signal p1d1R, p1d1G, p1d1B : std_logic_vector(3 downto 0); -- player 1 digit 1 RGB outputs
     signal p1d2R, p1d2G, p1d2B : std_logic_vector(3 downto 0); -- player 1 digit 2 RGB outputs
     signal p1d3R, p1d3G, p1d3B : std_logic_vector(3 downto 0); -- player 1 digit 3 RGB outputs
     signal p2d1R, p2d1G, p2d1B : std_logic_vector(3 downto 0); -- player 2 digit 1 RGB outputs
     signal p2d2R, p2d2G, p2d2B : std_logic_vector(3 downto 0); -- player 2 digit 2 RGB outputs
     signal p2d3R, p2d3G, p2d3B : std_logic_vector(3 downto 0); -- player 2 digit 3 RGB outputs
-    -- top (y) and left (x) bounds for sprite locations
+
+    -- top (y) and left (x) bounds for number sprite locations --> these are the box bounds in which the number sprites occur
     signal digsby                 : std_logic_vector(9 downto 0);
     signal p1d1bx, p1d2bx, p1d3bx : std_logic_vector(9 downto 0);
     signal p2d1bx, p2d2bx, p2d3bx : std_logic_vector(9 downto 0);
-    -- constants regarding 
-    constant int_digsby : integer := 462; -- global y location for digits
+
+    -- constants for the box bounds for numbers
+    -- to move the digit locations change these variables
+    constant int_digsby : integer := 462; -- global y location for digits -> keep them on the same height
+    constant int_p1dcbx : integer := 155; -- x location for player 1 constant image
     constant int_p1d1bx : integer := 196; -- x location for player 1 digit 1
     constant int_p1d2bx : integer := 236; -- x location for player 1 digit 2
     constant int_p1d3bx : integer := 276; -- x location for player 1 digit 3
+    constant int_p2dcbx : integer := 635; -- x location for player 2 constant image
     constant int_p2d1bx : integer := 675; -- x location for player 2 digit 1
     constant int_p2d2bx : integer := 715; -- x location for player 2 digit 2
     constant int_p2d3bx : integer := 755; -- x location for player 2 digit 3
+    
+    --------------------------------------------------------------------------------
+    -- signals for character bounds
+    --------------------------------------------------------------------------------
 
-    -- character location bounds
+    -- output signals from the offset adders
     signal x_lowerbound_ch1 : std_logic_vector(9 downto 0); -- character 1 bounds
     signal x_upperbound_ch1 : std_logic_vector(9 downto 0); -- character 1 bounds
     signal y_lowerbound_ch1 : std_logic_vector(9 downto 0); -- character 1 bounds
@@ -177,9 +192,13 @@ architecture behavioural of coloring is
     signal x_upperbound_ch2 : std_logic_vector(9 downto 0); -- character 2 bounds
     signal y_lowerbound_ch2 : std_logic_vector(9 downto 0); -- character 2 bounds
     signal y_upperbound_ch2 : std_logic_vector(9 downto 0); -- character 2 bounds
-begin
 
-    -- character offsets
+    -- unsigned version of the above signals
+    signal ch1x1, ch1x2, ch1y1, ch1y2, ch2x1, ch2x2, ch2y1, ch2y2 : unsigned(9 downto 0);
+begin
+    --------------------------------------------------------------------------------
+    -- character offsets --> see label name for which character
+    --------------------------------------------------------------------------------
     char_offset1 : char_offset_adder port map(
         xpos => char1x, ypos => char1y,
         xpos_scl1 => x_lowerbound_ch1, xpos_scl2 => x_upperbound_ch1,
@@ -191,10 +210,14 @@ begin
         ypos_scl1 => y_lowerbound_ch2, ypos_scl2 => y_upperbound_ch2
     );
 
-    -- player 1 damage data
+    --------------------------------------------------------------------------------
+    -- extract digit sprites from the numbers
+    --------------------------------------------------------------------------------
+    -- seperate player 1 dmg percentage
     percentage_p1_to_digits : dig3_num_splitter port map(
         num3dig => percentage_p1, num1 => p1digit1, num2 => p1digit2, num3 => p1digit3
     );
+    -- assign the RGB outputs according to the sprites
     data_dig1_p1 : number_sprite port map(
         reset => reset, number => p1digit1, boundx => p1d1bx,
         boundy => digsby, hcount => hcount, vcount => vcount,
@@ -210,9 +233,11 @@ begin
         boundy => digsby, hcount => hcount, vcount => vcount,
         R_data => p1d3R, B_data => p1d3B, G_data => p1d3G
     );
+    -- seperate player 2 dmg percentage
     percentage_p2_to_digits : dig3_num_splitter port map(
         num3dig => percentage_p2, num1 => p2digit1, num2 => p2digit2, num3 => p2digit3
     );
+    -- assign the RGB outputs according to the sprites
     data_dig1_p2 : number_sprite port map(
         reset => reset, number => p2digit1, boundx => p2d1bx,
         boundy => digsby, hcount => hcount, vcount => vcount,
@@ -229,6 +254,7 @@ begin
         R_data => p2d3R, B_data => p2d3B, G_data => p2d3G
     );
 
+    -- assign the unsigned counts
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
     -- char1 intermediate location assignment
@@ -258,16 +284,17 @@ begin
                 G_data <= "0000";
                 B_data <= "0000";
             elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 34 and uns_vcount <= 514) then -- active screen time
-                -- priority -> highest priority is first, lowest is last
+                -- assuming priority -> highest priority is first, lowest is last -> think of placing images on top of each other
                 --------------------------------------------------------------------------------
-                -- show platforms, ground platforms and floating platforms
+                -- show platforms
                 --------------------------------------------------------------------------------
+                -- ground platform
                 if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 429 and uns_vcount <= 434) then --platform horizon 4 pixels thick y = 21 (in coords from below) 
                     -- color in hex: #104000
                     R_data <= "0001";
                     G_data <= "0100";
                     B_data <= "0000";
-
+                -- floating platforms
                 elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 314 and uns_vcount <= 318) then --platform 1, (10,69) --> (59,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
@@ -283,9 +310,9 @@ begin
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                    --------------------------------------------------------------------------------
-                    -- dynamic assignment of pixel colors due to character location
-                    --------------------------------------------------------------------------------
+                --------------------------------------------------------------------------------
+                -- dynamic assignment of pixel colors due to character location
+                --------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
                     -- color in hex: #41FF00
                     R_data <= "0010";
@@ -297,16 +324,16 @@ begin
                     G_data <= "1111";
                     B_data <= "1111";
 
-                    --------------------------------------------------------------------------------
-                    -- percentage markings
-                    --------------------------------------------------------------------------------
+                --------------------------------------------------------------------------------
+                -- percentage markings and displaying game data on screen
+                --------------------------------------------------------------------------------
                 elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then
-                    --------------------------------------------------------------------------------
-                    -- first assign background color for numbers
-                    -- if any of the following statements be true, then assign a different color
+                    ----------------------------------------------------------------------------
+                    -- first assign background color for numbers -> data background when not displaying numbers
+                    -- then assign the appropriate number sprite colours
                     -- this background is different from playable game background
                     -- color in hex: #3f6f3f
-                    --------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------
                     R_data <= "0011";
                     G_data <= "0110";
                     B_data <= "0011";
@@ -314,85 +341,63 @@ begin
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
-                    if (uns_hcount > 143 and uns_hcount <= 303) and (uns_vcount > 434 and uns_vcount <= 514) then --player 1 data: 143 to 303 horizontal
-                        R_data <= "0011";
-                        G_data <= "0110";
-                        B_data <= "0011";
                         --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                        if (uns_hcount > 155 and uns_hcount <= 171) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
-                            R_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
-                            G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
-                            B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
-                        elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- first digit --183 to 223 idem
-                            R_data <= p1d1R;
-                            G_data <= p1d1G;
-                            B_data <= p1d1B;
-                        elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- second digit --223 to 263 idem
-                            R_data <= p1d2R;
-                            G_data <= p1d2G;
-                            B_data <= p1d2B;
-                        elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- third digit --263 to 303 idem
-                            R_data <= p1d3R;
-                            G_data <= p1d3G;
-                            B_data <= p1d3B;
-                        else -- fallback -> for when no sprite is active such that no colours are bleeding through show background colour 
-                            -- color in hex: #3f6f3f
-                            R_data <= "0011";
-                            G_data <= "0110";
-                            B_data <= "0011";
-                        end if;
-
-                        --------------------------------------------------------------------------------
-                        -- p2 percentage markings 
-                        --------------------------------------------------------------------------------
-                    elsif (uns_hcount > 623 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then --player 2 data: 623 to 783
-                        --------------------------------------------------------------------------------
-                        -- first assign background color for numbers
-                        -- if any of the following statements be true, then assign a different color
-                        -- this background is different from playable game background
+                    if (uns_hcount > int_p1dcbx and uns_hcount <= int_p1dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
+                        R_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
+                        G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
+                        B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
+                    elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- first digit --183 to 223 idem
+                        R_data <= p1d1R;
+                        G_data <= p1d1G;
+                        B_data <= p1d1B;
+                    elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- second digit --223 to 263 idem
+                        R_data <= p1d2R;
+                        G_data <= p1d2G;
+                        B_data <= p1d2B;
+                    elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- third digit --263 to 303 idem
+                        R_data <= p1d3R;
+                        G_data <= p1d3G;
+                        B_data <= p1d3B;
+                    else -- fallback -> for when no sprite is active such that no sprite colours are wrongly bleeding through 
                         -- color in hex: #3f6f3f
-                        --------------------------------------------------------------------------------
                         R_data <= "0011";
                         G_data <= "0110";
                         B_data <= "0011";
-
-                        --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                        if (uns_hcount > 635 and uns_hcount <= 651) and (uns_vcount > 462 and uns_vcount <= 486) then -- constant digit
-                            R_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(11 downto 8);
-                            G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);
-                            B_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(3 downto 0);
-                        elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- first digit -- 663 to 703 idem
-                            R_data <= p2d1R;
-                            G_data <= p2d1G;
-                            B_data <= p2d1B;
-                        elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- second digit --703 to 743 idem
-                            R_data <= p2d2R;
-                            G_data <= p2d2G;
-                            B_data <= p2d2B;
-                        elsif (uns_hcount > int_p2d3bx and uns_hcount <= int_p2d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= 486) then -- third digit --743 to 783 idem
-                            R_data <= p2d3R;
-                            G_data <= p2d3G;
-                            B_data <= p2d3B;
-                        else -- fallback -> for when no sprite is active such that no colours are bleeding through show background colour 
-                            -- color in hex: #3f6f3f
-                            R_data <= "0011";
-                            G_data <= "0110";
-                            B_data <= "0011";
-                        end if;
-
-                    elsif (uns_hcount > 184 and uns_hcount <= 223) and (uns_vcount > 434 and uns_vcount <= 514) then --percentage box2-4 -> displaying the numbers
-                        -- black for testing purposes
-                        R_data <= "0000";
-                        G_data <= "0000";
-                        B_data <= "0000";
                     end if;
 
-                else -- global background color
+                    --------------------------------------------------------------------------------
+                    -- p2 percentage markings 
+                    --------------------------------------------------------------------------------
+                        --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                    if (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
+                        R_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(11 downto 8);
+                        G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);
+                        B_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(3 downto 0);
+                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- first digit -- 663 to 703 idem
+                        R_data <= p2d1R;
+                        G_data <= p2d1G;
+                        B_data <= p2d1B;
+                    elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- second digit --703 to 743 idem
+                        R_data <= p2d2R;
+                        G_data <= p2d2G;
+                        B_data <= p2d2B;
+                    elsif (uns_hcount > int_p2d3bx and uns_hcount <= int_p2d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) then -- third digit --743 to 783 idem
+                        R_data <= p2d3R;
+                        G_data <= p2d3G;
+                        B_data <= p2d3B;
+                    else -- fallback -> for when no sprite is active such that no sprite colours are wrongly bleeding through
+                        -- color in hex: #3f6f3f
+                        R_data <= "0011";
+                        G_data <= "0110";
+                        B_data <= "0011";
+                    end if;
+
+                else -- global background color --> the sky background in the playable stage
                     R_data <= "0000";
                     G_data <= "1100";
                     B_data <= "1111";
                 end if;
-            else -- fall back for when a case is not defined
+            else -- fall back for when a case is not defined --> easy to find if there is an error
                 R_data <= "0000";
                 G_data <= "0000";
                 B_data <= "0000";

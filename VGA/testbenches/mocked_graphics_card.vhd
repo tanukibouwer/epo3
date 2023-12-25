@@ -48,6 +48,7 @@ entity graphics_card is
         num7seg4: out std_logic;
         num7seg5: out std_logic;
         num7seg6: out std_logic;
+        numstate: out std_logic_vector(6 downto 0);
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
@@ -88,6 +89,7 @@ architecture structural of graphics_card is
             --orientation from attackmodule
             orientation_p1 : in std_logic;
             orientation_p2 : in std_logic;
+            numstate : out std_logic_vector(6 downto 0);
 
             --controls from input
             controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
@@ -170,6 +172,7 @@ begin
         controller_p1  => controllerp1,
         controller_p2  => controllerp2,
         sprite_cnt_out => sprite_cnt,
+        numstate => numstate,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 

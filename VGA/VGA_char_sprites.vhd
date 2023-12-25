@@ -29,6 +29,7 @@ entity char_sprites is
         vsync_cnt   : in std_logic_vector(3 downto 0);
         orientation : in std_logic;
         controller  : in std_logic_vector(7 downto 0);
+        numstate: out std_logic_vector(6 downto 0);
         -- going through the array
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
@@ -48,6 +49,7 @@ architecture behavioural of char_sprites is
             clk   : in std_logic;
             reset : in std_logic;
             animation_clk : in std_logic_vector(3 downto 0);
+            numstate : out std_logic_vector(6 downto 0);
 
             controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
             -- orientation   : in std_logic;                    --1 is right, 0 is left
@@ -676,6 +678,7 @@ begin
         clk           => clk,
         reset         => reset,
         animation_clk => vsync_cnt,
+        numstate => numstate,
         controller_in => controller,
         sprite        => sprite
     );

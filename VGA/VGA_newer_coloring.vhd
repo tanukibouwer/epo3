@@ -45,6 +45,7 @@ entity coloring_new is
         controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
 
         sprite_cnt_out : out std_logic_vector(3 downto 0);
+        numstate : out std_logic_vector(6 downto 0);
 
         -- RGB data outputs
         R_data : out std_logic_vector(3 downto 0); --! RGB data output
@@ -91,6 +92,7 @@ architecture behavioural of coloring_new is
             vsync_cnt   : in std_logic_vector(3 downto 0);
             orientation : in std_logic;
             controller  : in std_logic_vector(7 downto 0);
+            numstate : out std_logic_vector(6 downto 0);
 
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
@@ -322,15 +324,17 @@ begin
         orientation => orientation_p1, controller => controller_p1,
         boundx => x_lowerbound_ch1, boundy => y_lowerbound_ch1,
         hcount => hcount, vcount => vcount,
+        numstate => numstate,
         R_data => p1SR, B_data => p1SB, G_data => p1SG
 
     );
-
+    sprite_cnt_out <= sprite_cnt;
     p2_sprites : char_sprites port map(--1 same as character 1 for now
         clk => clk, reset => reset, vsync_cnt => sprite_cnt,
         orientation => orientation_p1, controller => controller_p1,
         boundx => x_lowerbound_ch2, boundy => y_lowerbound_ch2,
         hcount => hcount, vcount => vcount,
+        numstate => open,
         R_data => p2SR, B_data => p2SB, G_data => p2SG
 
     );

@@ -44,7 +44,7 @@ entity coloring_new is
         controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
         controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
 
-        sprite_cnt_out : out std_logic_vector(3 downto 0);
+        -- sprite_cnt_out : out std_logic_vector(6 downto 0);
         numstate : out std_logic_vector(6 downto 0);
 
         -- RGB data outputs
@@ -89,7 +89,7 @@ architecture behavioural of coloring_new is
         port (
             clk         : in std_logic;
             reset       : in std_logic;
-            vsync_cnt   : in std_logic_vector(3 downto 0);
+            -- vsync_cnt   : in std_logic_vector(5 downto 0);
             orientation : in std_logic;
             controller  : in std_logic_vector(7 downto 0);
             numstate : out std_logic_vector(6 downto 0);
@@ -126,14 +126,7 @@ architecture behavioural of coloring_new is
     --     );
     -- end component;
 
-    component vsync_cnt is
-        port (
-            clk : in std_logic;
-            reset : in std_logic;
-            vcount : in std_logic_vector(9 downto 0);
-            count : out std_logic_vector(3 downto 0)
-        );
-    end component;
+    
 
     component char_offset_adder is
         port (
@@ -210,7 +203,7 @@ architecture behavioural of coloring_new is
     signal p2digit2 : std_logic_vector(3 downto 0);
     signal p2digit3 : std_logic_vector(3 downto 0);
 
-    -- signals for the sprite output module
+    -- signals for the number sprite output module
     signal p1d1R, p1d1G, p1d1B : std_logic_vector(3 downto 0); -- player 1 digit 1 RGB outputs
     signal p1d2R, p1d2G, p1d2B : std_logic_vector(3 downto 0); -- player 1 digit 2 RGB outputs
     signal p1d3R, p1d3G, p1d3B : std_logic_vector(3 downto 0); -- player 1 digit 3 RGB outputs
@@ -218,13 +211,13 @@ architecture behavioural of coloring_new is
     signal p2d2R, p2d2G, p2d2B : std_logic_vector(3 downto 0); -- player 2 digit 2 RGB outputs
     signal p2d3R, p2d3G, p2d3B : std_logic_vector(3 downto 0); -- player 2 digit 3 RGB outputs
 
-    -- signals for the sprite output module
+    -- signals for the player sprite output module
     signal p1SR, p1SG, p1SB : std_logic_vector(3 downto 0); -- player 1 Sprite RGB outputs
     signal p2SR, p2SG, p2SB : std_logic_vector(3 downto 0); -- player 2 Sprite RGB outputs
     -- signal sprite_between1 : std_logic_vector(2 downto 0); 
     -- signal sprite_between2 : std_logic_vector(2 downto 0); 
     --signals for sprite counter
-    signal sprite_cnt : std_logic_vector(3 downto 0);
+    signal sprite_cnt : std_logic_vector(5 downto 0);
     -- signal sprite_clk_between : std_logic;
     -- top (y) and left (x) bounds for sprite locations
     signal digsby                 : std_logic_vector(9 downto 0);
@@ -310,9 +303,9 @@ begin
     );
 
     --sprite clock -> controls the rate of change of the sprites
-    vsync_cntr : vsync_cnt port map(
-        clk => clk, vcount => vcount, reset => reset, count => sprite_cnt
-    );
+    -- vsync_cntr : vsync_cnt port map(
+    --     clk => clk, vcount => vcount, reset => reset, count => sprite_cnt
+    -- );
 
     -- sprite_clk: sprite_clk_gen port map(
     --     clk => clk, reset => reset, count => sprite_cnt, sprite_clk => sprite_clk_between, cnt_reset => reset
@@ -320,7 +313,8 @@ begin
 
     -- this component controlls which sprite image is loaded for the player
     p1_sprites : char_sprites port map(
-        clk => clk, reset => reset, vsync_cnt => sprite_cnt,
+        clk => clk, reset => reset, 
+        -- vsync_cnt => sprite_cnt,
         orientation => orientation_p1, controller => controller_p1,
         boundx => x_lowerbound_ch1, boundy => y_lowerbound_ch1,
         hcount => hcount, vcount => vcount,
@@ -328,9 +322,9 @@ begin
         R_data => p1SR, B_data => p1SB, G_data => p1SG
 
     );
-    sprite_cnt_out <= sprite_cnt;
     p2_sprites : char_sprites port map(--1 same as character 1 for now
-        clk => clk, reset => reset, vsync_cnt => sprite_cnt,
+        clk => clk, reset => reset, 
+        -- vsync_cnt => sprite_cnt,
         orientation => orientation_p1, controller => controller_p1,
         boundx => x_lowerbound_ch2, boundy => y_lowerbound_ch2,
         hcount => hcount, vcount => vcount,

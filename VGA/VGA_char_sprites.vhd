@@ -26,7 +26,7 @@ entity char_sprites is
         clk   : in std_logic;
         reset : in std_logic;
         -- sprite control signals
-        vsync_cnt   : in std_logic_vector(3 downto 0);
+        -- vsync_cnt   : in std_logic_vector(5 downto 0);
         orientation : in std_logic;
         controller  : in std_logic_vector(7 downto 0);
         numstate: out std_logic_vector(6 downto 0);
@@ -48,8 +48,9 @@ architecture behavioural of char_sprites is
         port (
             clk   : in std_logic;
             reset : in std_logic;
-            animation_clk : in std_logic_vector(3 downto 0);
+            -- animation_clk : in std_logic_vector(5 downto 0);
             numstate : out std_logic_vector(6 downto 0);
+            vcount : in std_logic_vector(9 downto 0);
 
             controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
             -- orientation   : in std_logic;                    --1 is right, 0 is left
@@ -59,7 +60,7 @@ architecture behavioural of char_sprites is
     end component;
 
     -- control signals for the animation fsm
-    signal an_on  : std_logic;
+    -- signal an_on  : std_logic;
     -- signal frame  : std_logic;
     signal sprite : std_logic_vector(1 downto 0);
 
@@ -677,8 +678,8 @@ begin
     frame_control : char_animation_fsm port map(
         clk           => clk,
         reset         => reset,
-        animation_clk => vsync_cnt,
-        numstate => numstate,
+        vcount        => vcount,
+        numstate      => numstate,
         controller_in => controller,
         sprite        => sprite
     );

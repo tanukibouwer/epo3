@@ -28,14 +28,12 @@ architecture behavioural of vsync_cnt is
     signal cur_count, new_count : unsigned(3 downto 0);
 begin
 
-    process (clk) --storage of the count
+    process (reset, vcount) --storage of the count
     begin
-        if rising_edge(clk) then
-            if reset = '1' then
-                cur_count <= (others => '0');
-            elsif unsigned(vcount) = 500 then -- add a count before the vertical frame has ran out (at 796)
-                cur_count <= new_count;
-            end if;
+        if reset = '1' then
+            cur_count <= (others => '0');
+        elsif unsigned(vcount) = 500 then -- add a count before the vertical frame has ran out (at 796)
+            cur_count <= new_count;
         end if;
     end process;
 

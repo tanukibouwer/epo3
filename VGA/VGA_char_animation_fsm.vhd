@@ -71,7 +71,7 @@ begin
                     when run_frame1 =>
                         numstate <= "0110000"; --3
                         sprite <= "10"; -- set sprite to run
-                        if animation_clk(3) = '1' then
+                        if animation_clk = "1000" then
                             new_state <= run_frame2;
                         elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
                             new_state <= idle;
@@ -83,7 +83,7 @@ begin
                     when run_frame2 =>
                         numstate <= "0011001"; --4
                         sprite <= "00"; -- set sprite to idle for animation purposes
-                        if animation_clk(3) = '1' then
+                        if animation_clk = "1000" then
                             new_state <= run_frame1;
                         elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
                             new_state <= idle;

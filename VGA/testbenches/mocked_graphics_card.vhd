@@ -191,7 +191,7 @@ begin
 
     process (sprite_cnt)
     begin
-        if sprite_cnt(3) = '1' then
+        if sprite_cnt = "1000" then
             num7seg0 <= '1';
             num7seg1 <= '1';
             num7seg2 <= '1';

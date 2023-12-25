@@ -20,7 +20,7 @@ y_verschil <= y2_in - y1_in;
 
 	--process for collision detection player 1
 
-lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction_x, direction_y)
+lbl1: process(x_verschil, y_verschil, a1, b1, o1)
 	begin
 
 		if ((a1='1' or b1='1') and (-13 <= y_verschil and y_verschil <= 13)) then
@@ -1008,7 +1008,7 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction_x, direction_y)
 
 	--process for collision detection player 2
 
-lbl2: process(x_verschil, y_verschil, a2, b2, o2, direction_x, direction_y)
+lbl: process(x_verschil, y_verschil, a2, b2, o2)
 	begin
 
 		if ((a2='1' or b2='1') and (-13 <= y_verschil and y_verschil <= 13)) then

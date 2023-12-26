@@ -25,17 +25,18 @@ entity char_sprites is
     port (
         clk   : in std_logic;
         reset : in std_logic;
-        -- sprite control signals
-        -- vsync_cnt   : in std_logic_vector(5 downto 0);
+        -- controller input information
         orientation : in std_logic;
         controller  : in std_logic_vector(7 downto 0);
-        numstate: out std_logic_vector(6 downto 0);
         -- going through the array
+        -- count for where one is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
+        -- top and left bounds for normalisation
         boundx : in std_logic_vector(9 downto 0);
         boundy : in std_logic_vector(9 downto 0);
 
+        -- RGB outputs
         R_data : out std_logic_vector(3 downto 0);
         G_data : out std_logic_vector(3 downto 0);
         B_data : out std_logic_vector(3 downto 0)
@@ -48,14 +49,16 @@ architecture behavioural of char_sprites is
         port (
             clk   : in std_logic;
             reset : in std_logic;
-            -- animation_clk : in std_logic_vector(5 downto 0);
-            numstate : out std_logic_vector(6 downto 0);
-            vcount : in std_logic_vector(9 downto 0);
 
+            -- global frame counters
+            vcount : in std_logic_vector(9 downto 0); -- vertical frame counter
+            hcount : in std_logic_vector(9 downto 0); -- horizontal line counter
+
+            -- controller input signal
             controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-            -- orientation   : in std_logic;                    --1 is right, 0 is left
+
+            -- sprite output value
             sprite : out std_logic_vector(1 downto 0)
-            -- frame  : out std_logic
         );
     end component;
 
@@ -465,8 +468,8 @@ architecture behavioural of char_sprites is
         ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111")),
         (
         ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"))
-    );
-    constant jump_crouch_R : char_sprite_y := (
+        );
+        constant jump_crouch_R : char_sprite_y := (
         (
         ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111"), ("000011001111")),
         (
@@ -679,7 +682,7 @@ begin
         clk           => clk,
         reset         => reset,
         vcount        => vcount,
-        numstate      => numstate,
+        hcount        => hcount,
         controller_in => controller,
         sprite        => sprite
     );

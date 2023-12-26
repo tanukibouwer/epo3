@@ -41,14 +41,14 @@ entity graphics_card is
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic;                    -- sync signals -> active low
         Hsync  : out std_logic;                    -- sync signals -> active low
-        num7seg0: out std_logic;
-        num7seg1: out std_logic;
-        num7seg2: out std_logic;
-        num7seg3: out std_logic;
-        num7seg4: out std_logic;
-        num7seg5: out std_logic;
-        num7seg6: out std_logic;
-        numstate: out std_logic_vector(6 downto 0);
+        -- num7seg0: out std_logic;
+        -- num7seg1: out std_logic;
+        -- num7seg2: out std_logic;
+        -- num7seg3: out std_logic;
+        -- num7seg4: out std_logic;
+        -- num7seg5: out std_logic;
+        -- num7seg6: out std_logic;
+        -- numstate: out std_logic_vector(6 downto 0);
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
@@ -87,13 +87,13 @@ architecture structural of graphics_card is
             percentage_p2 : in std_logic_vector(7 downto 0);
 
             --orientation from attackmodule
-            orientation_p1 : in std_logic;
-            orientation_p2 : in std_logic;
-            numstate : out std_logic_vector(6 downto 0);
+            orientationp1 : in std_logic;
+            orientationp2 : in std_logic;
+            -- numstate : out std_logic_vector(6 downto 0);
 
             --controls from input
-            controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-            controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+            controllerp1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+            controllerp2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
 
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); -- RGB data output
@@ -122,42 +122,6 @@ begin
     SCNR1 : screen_scan port map(
         clk => clk, reset => reset, Hsync => Hsync, Vsync => Vsync, vcount_out => vcount_int, hcount_out => hcount_int
     );
-    -- component coloring_new is
-    --     port (
-    --         -- global inputs
-    --         clk   : in std_logic;
-    --         reset : in std_logic;
-    --         -- counter data
-    --         hcount : in std_logic_vector(9 downto 0);
-    --         vcount : in std_logic_vector(9 downto 0);
-    --         -- relevant data for x-y locations
-    --         char1x : in std_logic_vector(7 downto 0); -- character 1 coordinates
-    --         char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
-    --         char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
-    --         char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
-
-    --         -- percentage from attack module
-    --         percentage_p1 : in std_logic_vector(7 downto 0);
-    --         percentage_p2 : in std_logic_vector(7 downto 0);
-
-    --         --orientation from attackmodule
-    --         orientation_p1      : in std_logic; 
-    --         orientation_p2    : in std_logic;
-
-    --         --controls from input
-    --         controller_p1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-    --         controller_p2 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
-
-    --         --vsync from screen scan
-    --         vsync      : in std_logic;
-
-    --         -- RGB data outputs
-    --         R_data : out std_logic_vector(3 downto 0); -- RGB data output
-    --         G_data : out std_logic_vector(3 downto 0); -- RGB data output
-    --         B_data : out std_logic_vector(3 downto 0)  -- RGB data output
-
-    --     );
-    -- end component;
 
     --gib color to pixel
     CLR1 : coloring_new port map(
@@ -166,11 +130,10 @@ begin
         char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
         percentage_p1  => percentagep1,
         percentage_p2  => percentagep2,
-        orientation_p1 => orientationp1,
-        orientation_p2 => orientationp2,
-        controller_p1  => controllerp1,
-        controller_p2  => controllerp2,
-        numstate => numstate,
+        orientationp1 => orientationp1,
+        orientationp2 => orientationp2,
+        controllerp1  => controllerp1,
+        controllerp2  => controllerp2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 
@@ -186,15 +149,6 @@ begin
     percentagep2 <= "00000000";
     -- orientationp1 <= '0';
     orientationp2 <= '0';
-
-    num7seg0 <= '1';
-    num7seg1 <= '1';
-    num7seg2 <= '1';
-    num7seg3 <= '1';
-    num7seg4 <= '1';
-    num7seg5 <= '1';
-    num7seg6 <= '1';
-
 
     process (sw_vec)
     begin

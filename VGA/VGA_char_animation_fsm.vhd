@@ -135,7 +135,9 @@ begin
                             new_state <= run_frame2;
                         end if;
                     when others =>
-                        null;
+                        cnt_reset <= '1';
+                        sprite <= "00";
+                        new_state <= idle;
                 end case;
             end if;
         end if;

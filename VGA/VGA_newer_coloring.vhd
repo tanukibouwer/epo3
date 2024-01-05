@@ -297,6 +297,7 @@ begin
     --------------------------------------------------------------------------------
     -- assign the correct character sprite for the animations
     --------------------------------------------------------------------------------
+    -- player 1
     char1_sprite : char_sprites port map (
         clk => clk,
         reset => reset,
@@ -310,6 +311,7 @@ begin
         G_data => p1G,
         B_data => p1B
     );
+    -- player 2
     char2_sprite : char_sprites port map (
         clk => clk,
         reset => reset,

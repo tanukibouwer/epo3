@@ -660,7 +660,7 @@ begin
         elsif (number = 150) then
             num1 <= "0001";
             num2 <= "0101";
-            num3 <= "1010";
+            num3 <= "0000";
 
         elsif (number = 151) then
             num1 <= "0001";

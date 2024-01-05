@@ -703,6 +703,10 @@ begin
                     R_data <= idle_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(11 downto 8);
                     G_data <= idle_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(7 downto 4);
                     B_data <= idle_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(3 downto 0);
+                else 
+                    R_data <= "0000";
+                    G_data <= "0000";
+                    B_data <= "0000";    
                 end if;
             when "01" => -- show ducking sprite
                 if orientation = '0' then
@@ -713,6 +717,10 @@ begin
                     R_data <= jump_crouch_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(11 downto 8);
                     G_data <= jump_crouch_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(7 downto 4);
                     B_data <= jump_crouch_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(3 downto 0);
+                else 
+                    R_data <= "0000";
+                    G_data <= "0000";
+                    B_data <= "0000";    
                 end if;
             when "10" => -- show running sprite
                 if orientation = '0' then
@@ -723,6 +731,10 @@ begin
                     R_data <= running_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(11 downto 8);
                     G_data <= running_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(7 downto 4);
                     B_data <= running_1_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(3 downto 0);
+                else 
+                    R_data <= "0000";
+                    G_data <= "0000";
+                    B_data <= "0000";    
                 end if;
 
             when others =>

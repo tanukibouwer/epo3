@@ -358,18 +358,11 @@ begin
                         R_data <= p1d3R;
                         G_data <= p1d3G;
                         B_data <= p1d3B;
-                    else -- fallback -> for when no sprite is active such that no sprite colours are wrongly bleeding through 
-                        -- color in hex: #3f6f3f
-                        R_data <= "0011";
-                        G_data <= "0110";
-                        B_data <= "0011";
-                    end if;
-
                     --------------------------------------------------------------------------------
                     -- p2 percentage markings 
                     --------------------------------------------------------------------------------
                         --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                    if (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
+                    elsif (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
                         R_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(11 downto 8);
                         G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);
                         B_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(3 downto 0);

@@ -194,14 +194,14 @@ architecture structural of chip_toplevel is
             data_out9b4 : out std_logic_vector(8 downto 0));
     end component memory;
 
-    -- component t_8bregs is
-    --     port (
-    --         clk     : in std_logic;
-    --         reset   : in std_logic;
-    --         vec_in  : in std_logic_vector(7 downto 0);
-    --         vec_out : out std_logic_vector(7 downto 0)
-    --     );
-    -- end component;
+    component t_8bregs is
+        port (
+            clk     : in std_logic;
+            reset   : in std_logic;
+            vec_in  : in std_logic_vector(7 downto 0);
+            vec_out : out std_logic_vector(7 downto 0)
+        );
+    end component;
 begin
 
     TL00 : memory port map(
@@ -262,11 +262,8 @@ begin
         pin_y                => char1posy,
         player_input         => inputsp1,
         knockback_percentage => char1perctemp1,
-        -- knockback_percentage => "01000101",
-        -- knockback_x          => dirx1new1,
-        -- knockback_y          => diry1new1,
-        knockback_x          => "10000000",
-        knockback_y          => "10000000",
+        knockback_x          => dirx1new2,
+        knockback_y          => diry1new2,
         vout_x               => char1velxin,
         vout_y               => char1velyin,
         pout_x               => char1posxin,
@@ -279,11 +276,8 @@ begin
         pin_y                => char2posy,
         player_input         => inputsp2,
         knockback_percentage => char2perctemp1,
-        -- knockback_percentage => "01000101",
-        -- knockback_x          => dirx2new1,
-        -- knockback_y          => diry2new1,
-        knockback_x          => "10000000",
-        knockback_y          => "10000000",
+        knockback_x          => dirx2new2,
+        knockback_y          => diry2new2,
         vout_x               => char2velxin,
         vout_y               => char2velyin,
         pout_x               => char2posxin,
@@ -321,42 +315,30 @@ begin
         restart1             => char1death,
         restart2             => char2death
     );
-    -- buf1: t_8bregs port map (
-    --     clk => clk,
-    --     reset => vsyncintern,
-    --     vec_in => char1perctemp1,
-    --     vec_out => char1perctemp2
-    -- );
-    -- buf2: t_8bregs port map (
-    --     clk => clk,
-    --     reset => vsyncintern,
-    --     vec_in => char2perctemp1,
-    --     vec_out => char2perctemp2
-    -- );
-    -- buf3: t_8bregs port map (
-    --     clk => clk,
-    --     reset => reset,
-    --     vec_in => dirx1new1,
-    --     vec_out => dirx1new2
-    -- );
-    -- buf4: t_8bregs port map (
-    --     clk => clk,
-    --     reset => reset,
-    --     vec_in => diry1new1,
-    --     vec_out => diry1new2
-    -- );
-    -- buf5: t_8bregs port map (
-    --     clk => clk,
-    --     reset => vsyncintern,
-    --     vec_in => dirx2new1,
-    --     vec_out => dirx2new2
-    -- );
-    -- buf6: t_8bregs port map (
-    --     clk => clk,
-    --     reset => vsyncintern,
-    --     vec_in => diry2new1,
-    --     vec_out => diry2new2
-    -- );
+    buf3: t_8bregs port map (
+        clk => clk,
+        reset => reset,
+        vec_in => dirx1new1,
+        vec_out => dirx1new2
+    );
+    buf4: t_8bregs port map (
+        clk => clk,
+        reset => reset,
+        vec_in => diry1new1,
+        vec_out => diry1new2
+    );
+    buf5: t_8bregs port map (
+        clk => clk,
+        reset => vsyncintern,
+        vec_in => dirx2new1,
+        vec_out => dirx2new2
+    );
+    buf6: t_8bregs port map (
+        clk => clk,
+        reset => vsyncintern,
+        vec_in => diry2new1,
+        vec_out => diry2new2
+    );
     TL04 : input_toplevel port map(
         clk              => clk,
         reset            => reset,
@@ -369,5 +351,4 @@ begin
         buttons_p2       => inputsp2);
 
     Vsync          <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
-    -- directionx1out <= char2perctemp1;
 end architecture structural;

@@ -20,10 +20,10 @@ use ieee.math_real.all;
 
 entity coloring is
     port (
-        --! global inputs
+        -- global inputs
         clk   : in std_logic;
         reset : in std_logic;
-        --! counter data
+        -- counter data
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
@@ -31,10 +31,17 @@ entity coloring is
         char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
         char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
         char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+        -- player orientation information
+        orientationp1 : in std_logic;
+        orientationp2 : in std_logic;
 
         -- percentage from attack module
         percentage_p1 : in std_logic_vector(7 downto 0);
         percentage_p2 : in std_logic_vector(7 downto 0);
+
+        -- controller inputs
+        controllerp1 : in std_logic_vector(7 downto 0);
+        controllerp2 : in std_logic_vector(7 downto 0);
 
         -- RGB data outputs
         R_data : out std_logic_vector(3 downto 0); --! RGB data output
@@ -83,12 +90,37 @@ architecture behavioural of coloring is
         );
     end component;
 
+    component char_sprites is
+        port (
+            clk   : in std_logic;
+            reset : in std_logic;
+            player : in std_logic;
+            -- controller input information
+            orientation : in std_logic;
+            controller  : in std_logic_vector(7 downto 0);
+            -- going through the array
+            -- count for where one is
+            hcount : in std_logic_vector(9 downto 0);
+            vcount : in std_logic_vector(9 downto 0);
+            -- top and left bounds for normalisation
+            boundx : in std_logic_vector(9 downto 0);
+            boundy : in std_logic_vector(9 downto 0);
+    
+            -- RGB outputs
+            R_data : out std_logic_vector(3 downto 0);
+            G_data : out std_logic_vector(3 downto 0);
+            B_data : out std_logic_vector(3 downto 0)
+    
+        );
+    end component;
+
     -- subtype color_val is std_logic range '0' to '1';
     subtype color_val is std_logic_vector(11 downto 0); -- R(11,10,9,8) G(7,6,5,4) B(3,2,1,0)
     type num_sprite_x is array (0 to 15) of color_val;
     type num_sprite_y is array (0 to 23) of num_sprite_x;
 
-    constant char1_digc : num_sprite_y := ((("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011")),
+    constant char1_digc : num_sprite_y := (
+        (("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("111111111111"), ("111111111111"), ("001101100011")),
@@ -113,7 +145,8 @@ architecture behavioural of coloring is
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011")),
         (("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"))
     );
-    constant char2_digc : num_sprite_y := ((("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011")),
+    constant char2_digc : num_sprite_y := (
+        (("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011")),
         (("001101100011"), ("111111111111"), ("111111111111"), ("111111111111"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("001101100011"), ("111111111111"), ("111111111111"), ("001101100011")),
@@ -145,7 +178,6 @@ architecture behavioural of coloring is
     --------------------------------------------------------------------------------
     -- signals for the number sprite output module
     --------------------------------------------------------------------------------
-    
     -- seperated digits
     signal p1digit1 : std_logic_vector(3 downto 0);
     signal p1digit2 : std_logic_vector(3 downto 0);
@@ -153,7 +185,7 @@ architecture behavioural of coloring is
     signal p2digit1 : std_logic_vector(3 downto 0);
     signal p2digit2 : std_logic_vector(3 downto 0);
     signal p2digit3 : std_logic_vector(3 downto 0);
-    
+
     -- RGB outputs for digits --> get assigned to the outputs when required
     signal p1d1R, p1d1G, p1d1B : std_logic_vector(3 downto 0); -- player 1 digit 1 RGB outputs
     signal p1d2R, p1d2G, p1d2B : std_logic_vector(3 downto 0); -- player 1 digit 2 RGB outputs
@@ -178,7 +210,18 @@ architecture behavioural of coloring is
     constant int_p2d1bx : integer := 675; -- x location for player 2 digit 1
     constant int_p2d2bx : integer := 715; -- x location for player 2 digit 2
     constant int_p2d3bx : integer := 755; -- x location for player 2 digit 3
-    
+
+
+    --------------------------------------------------------------------------------
+    -- signals for the character sprites
+    --------------------------------------------------------------------------------
+    --
+    signal p1R : std_logic_vector(3 downto 0);
+    signal p1G : std_logic_vector(3 downto 0);
+    signal p1B : std_logic_vector(3 downto 0);
+    signal p2R : std_logic_vector(3 downto 0);
+    signal p2G : std_logic_vector(3 downto 0);
+    signal p2B : std_logic_vector(3 downto 0);
     --------------------------------------------------------------------------------
     -- signals for character bounds
     --------------------------------------------------------------------------------
@@ -254,6 +297,42 @@ begin
         R_data => p2d3R, B_data => p2d3B, G_data => p2d3G
     );
 
+    --------------------------------------------------------------------------------
+    -- assign the correct character sprite for the animations
+    --------------------------------------------------------------------------------
+    -- player 1
+    char1_sprite : char_sprites port map (
+        clk => clk,
+        reset => reset,
+        player => '0',
+        orientation => orientationp1,
+        controller => controllerp1,
+        hcount => hcount,
+        vcount => vcount,
+        boundx => x_lowerbound_ch1,
+        boundy => y_lowerbound_ch1,
+        R_data => p1R,
+        G_data => p1G,
+        B_data => p1B
+    );
+    -- player 2
+    char2_sprite : char_sprites port map (
+        clk => clk,
+        reset => reset,
+        player => '1',
+        orientation => orientationp2,
+        controller => controllerp2,
+        hcount => hcount,
+        vcount => vcount,
+        boundx => x_lowerbound_ch2,
+        boundy => y_lowerbound_ch2,
+        R_data => p2R,
+        G_data => p2G,
+        B_data => p2B
+    );
+    --------------------------------------------------------------------------------
+    -- standard/global assignments
+    --------------------------------------------------------------------------------
     -- assign the unsigned counts
     uns_hcount <= unsigned(hcount);
     uns_vcount <= unsigned(vcount);
@@ -267,7 +346,7 @@ begin
     ch2x2 <= unsigned(x_upperbound_ch2);
     ch2y1 <= unsigned(y_lowerbound_ch2);
     ch2y2 <= unsigned(y_upperbound_ch2);
-    -- convert constant integers to vectors for sprite color assignment
+    -- convert constant integers to vectors to enter into the number sprite modules
     digsby <= std_logic_vector(to_unsigned(int_digsby, digsby'length));
     p1d1bx <= std_logic_vector(to_unsigned(int_p1d1bx, p1d1bx'length));
     p1d2bx <= std_logic_vector(to_unsigned(int_p1d2bx, p1d2bx'length));
@@ -276,6 +355,9 @@ begin
     p2d2bx <= std_logic_vector(to_unsigned(int_p2d2bx, p1d2bx'length));
     p2d3bx <= std_logic_vector(to_unsigned(int_p2d3bx, p1d3bx'length));
 
+    --------------------------------------------------------------------------------
+    -- color choice process
+    --------------------------------------------------------------------------------
     process (clk, hcount, vcount)
     begin
         if rising_edge(clk) then
@@ -294,7 +376,7 @@ begin
                     R_data <= "0001";
                     G_data <= "0100";
                     B_data <= "0000";
-                -- floating platforms
+                    -- floating platforms
                 elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 314 and uns_vcount <= 318) then --platform 1, (10,69) --> (59,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
@@ -310,23 +392,23 @@ begin
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                --------------------------------------------------------------------------------
-                -- dynamic assignment of pixel colors due to character location
-                --------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------
+                    -- dynamic assignment of pixel colors due to character location
+                    --------------------------------------------------------------------------------
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) then --character 1
                     -- color in hex: #41FF00
-                    R_data <= "0010";
-                    G_data <= "1111";
-                    B_data <= "0000";
+                    R_data <= p1R;
+                    G_data <= p1G;
+                    B_data <= p1B;
                 elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) then --character 2
                     -- color in hex: #00FFFF
-                    R_data <= "0000";
-                    G_data <= "1111";
-                    B_data <= "1111";
+                    R_data <= p2R;
+                    G_data <= p2G;
+                    B_data <= p2B;
 
-                --------------------------------------------------------------------------------
-                -- percentage markings and displaying game data on screen
-                --------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------
+                    -- percentage markings and displaying game data on screen
+                    --------------------------------------------------------------------------------
                 elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 434 and uns_vcount <= 514) then
                     ----------------------------------------------------------------------------
                     -- first assign background color for numbers -> data background when not displaying numbers
@@ -341,7 +423,7 @@ begin
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
-                        --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                    --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
                     if (uns_hcount > int_p1dcbx and uns_hcount <= int_p1dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
                         R_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
                         G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
@@ -361,7 +443,7 @@ begin
                     --------------------------------------------------------------------------------
                     -- p2 percentage markings 
                     --------------------------------------------------------------------------------
-                        --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
+                    --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
                     elsif (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > 462 and uns_vcount <= int_digsby + 24) then -- constant digit
                         R_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(11 downto 8);
                         G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);

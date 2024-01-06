@@ -990,6 +990,8 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 
 
 			else
+				direction1_y <= "00000000";						 
+				direction1_x <= "00000000";
 				direction_x2 <= "00000000";	
 				direction_y2 <= "00000000";
 				collision1a2 <= '0';
@@ -998,6 +1000,8 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 
 		
 		else 
+		direction1_y <= "00000000";						 
+		direction1_x <= "00000000";
 		direction_x2 <= "00000000";
 		direction_y2 <= "00000000";
 		collision1a2 <= '0';		
@@ -1012,7 +1016,7 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 
 	--process for collision detection player 2
 
-lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
+lbl: process(x_verschil, y_verschil, a2, a1, b1, b2, o2, direction2_y, direction2_x)
 	begin
 
 		if ((a2='1' or b2='1') and (-13 <= y_verschil and y_verschil <= 13)) then
@@ -1973,6 +1977,8 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 								
 				
 				else
+					direction2_y <= "00000000";						 
+					direction2_x <= "00000000";
 					direction_y1 <= "00000000";
 					direction_x1 <= "00000000";
 					collision2a1 <= '0';
@@ -1981,6 +1987,8 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 
 
 			else
+				direction2_y <= "00000000";						 
+				direction2_x <= "00000000";
 				direction_y1 <= "00000000";
 				direction_x1 <= "00000000";
 				collision2a1 <= '0';
@@ -1989,6 +1997,8 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 
 		
 		else 
+			direction2_y <= "00000000";						 
+			direction2_x <= "00000000";
 			direction_y1 <= "00000000";
 			direction_x1 <= "00000000";
 			collision2a1 <= '0';

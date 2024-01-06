@@ -3,19 +3,23 @@ use IEEE.std_logic_1164.all;
 
 entity topattack is
     port (
+        --	newx1out  : out  std_logic_vector (7 downto 0); --x starting location after death player 1
+        --	newy1out  : out  std_logic_vector (7 downto 0); --y starting location after death player 1
+        --	newx2out  : out  std_logic_vector (7 downto 0); --x starting location after death player 2
+        --	newy2out  : out  std_logic_vector (7 downto 0); --y starting location after death player 2
         clk                  : in std_logic; --clock
         res                  : in std_logic; --reset
         vsync                : in std_logic;
-        controller1          : in std_logic_vector (7 downto 0); --input player 1
-        controller2          : in std_logic_vector (7 downto 0); --input player 2
-        x1in                 : in std_logic_vector (7 downto 0); --x position of player 1
-        y1in                 : in std_logic_vector (7 downto 0); --y position of player 1
-        x2in                 : in std_logic_vector (7 downto 0); --x position of player 2
-        y2in                 : in std_logic_vector (7 downto 0); --y position of player 2
-        percentage1in        : in std_logic_vector (7 downto 0); --percentage of player 1
-        percentage2in        : in std_logic_vector (7 downto 0); --percentage of player 2
-        killcount1in         : in std_logic_vector (3 downto 0); --killcount of player 1
-        killcount2in         : in std_logic_vector (3 downto 0); --killcount of player 2
+        controller1          : in std_logic_vector (7 downto 0);  --input player 1
+        controller2          : in std_logic_vector (7 downto 0);  --input player 2
+        x1in                 : in std_logic_vector (7 downto 0);  --x position of player 1
+        y1in                 : in std_logic_vector (7 downto 0);  --y position of player 1
+        x2in                 : in std_logic_vector (7 downto 0);  --x position of player 2
+        y2in                 : in std_logic_vector (7 downto 0);  --y position of player 2
+        percentage1in        : in std_logic_vector (7 downto 0);  --percentage of player 1
+        percentage2in        : in std_logic_vector (7 downto 0);  --percentage of player 2
+        killcount1in         : in std_logic_vector (3 downto 0);  --killcount of player 1
+        killcount2in         : in std_logic_vector (3 downto 0);  --killcount of player 2
         directionx1out       : out std_logic_vector (7 downto 0); --x direction vector for knockback player 1
         directiony1out       : out std_logic_vector (7 downto 0); --y direction vector for knockback player 1
         directionx2out       : out std_logic_vector (7 downto 0); --x direction vector for knockback player 2
@@ -24,16 +28,12 @@ entity topattack is
         damagepercentage2out : out std_logic_vector (7 downto 0); --damage percentage (output to physics) player 2
         percentage1out       : out std_logic_vector (7 downto 0); --new percentage (output to memory) player 1
         percentage2out       : out std_logic_vector (7 downto 0); --new percentage (output to memory) player 2
-        --	newx1out  : out  std_logic_vector (7 downto 0); --x starting location after death player 1
-        --	newy1out  : out  std_logic_vector (7 downto 0); --y starting location after death player 1
-        --	newx2out  : out  std_logic_vector (7 downto 0); --x starting location after death player 2
-        --	newy2out  : out  std_logic_vector (7 downto 0); --y starting location after death player 2
-        --orientation1  : out std_logic; --orientation player 1 for vga
-        --orientation2  : out std_logic; --orientation player 2 for vga
-        killcount1out : out std_logic_vector (3 downto 0); --killcount of player 1
-        killcount2out : out std_logic_vector (3 downto 0); --killcount of player 2
-        restart1      : out std_logic; --restart bit of player 1 for physics in order to reset the velocity
-        restart2      : out std_logic); --restart bit of player 2 for physics in order to reset the velocity
+        orientation1         : out std_logic;                     --orientation player 1 for vga
+        orientation2         : out std_logic;                     --orientation player 2 for vga
+        killcount1out        : out std_logic_vector (3 downto 0); --killcount of player 1
+        killcount2out        : out std_logic_vector (3 downto 0); --killcount of player 2
+        restart1             : out std_logic;                     --restart bit of player 1 for physics in order to reset the velocity
+        restart2             : out std_logic);                    --restart bit of player 2 for physics in order to reset the velocity
 end entity topattack;
 
 --dont forget to make extra component since there are two FSMs that give a new output percentage so make sure that one has priority over the other (percentage1out and percentage2out)
@@ -202,4 +202,6 @@ begin
         collision1b2 => co1b2,
         collision2a1 => co2a1,
         collision2b1 => co2b1);
+    orientation1 <= or1;
+    orientation2 <= or2;
 end architecture structural;

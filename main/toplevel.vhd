@@ -14,34 +14,38 @@ entity chip_toplevel is
         controller_clk   : out std_logic;
         -- directionx1out   : out std_logic_vector(7 downto 0);
         -- graphics i/o
-        Vsync  : out std_logic;                    --! sync signals -> active low
-        Hsync  : out std_logic;                    --! sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        B_data : out std_logic_vector(3 downto 0)  --! RGB data to screen
+        Vsync  : out std_logic;                    -- sync signals -> active low
+        Hsync  : out std_logic;                    -- sync signals -> active low
+        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
     );
 end chip_toplevel;
 
 architecture structural of chip_toplevel is
 
-    signal dirx1new1 : std_logic_vector(7 downto 0);
-    signal dirx2new1 : std_logic_vector(7 downto 0);
-    signal diry1new1 : std_logic_vector(7 downto 0);
-    signal diry2new1 : std_logic_vector(7 downto 0);
-    signal dirx1new2 : std_logic_vector(7 downto 0);
-    signal dirx2new2 : std_logic_vector(7 downto 0);
-    signal diry1new2 : std_logic_vector(7 downto 0);
-    signal diry2new2 : std_logic_vector(7 downto 0);
-    -- signals for communication between memory and graphics+physics
-    signal char1posx : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char1posy : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posx : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posy : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    -- knockback direction vectors as info from attack to physics
+    signal dirx1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
 
-    -- between memory and graphics
+    -- orientation signal to know which direction to render the character
+    signal orientationp1 : std_logic; -- output from attack, into graphics
+    signal orientationp2 : std_logic; -- output from attack, into graphics
+
+    -- to tap the vsync signal for global memory timing purposes
     signal vsyncintern : std_logic; -- input into memory, out from graphics
 
-    -- between memory and physics
+    -- character position and velocity vectors
+    signal char1posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char1posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char2posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
+    signal char2posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
     signal char1posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
     signal char1posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
     signal char2posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
@@ -55,29 +59,28 @@ architecture structural of chip_toplevel is
     signal char2velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
     signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
 
-    -- between memory and attack
-    signal char1perc      : std_logic_vector(7 downto 0); -- output from memory, into attack
-    signal char2perc      : std_logic_vector(7 downto 0); -- output from memory, into attack
-    signal char1percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
-    signal char2percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
-    signal char1perctemp1 : std_logic_vector(7 downto 0); -- inputs into buffer, from attack
-    signal char2perctemp1 : std_logic_vector(7 downto 0); -- inputs into buffer, from attack
-    signal char1perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from buffer
-    signal char2perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from buffer
-    signal char1dc        : std_logic_vector(3 downto 0); -- output from memory, into attack
-    signal char2dc        : std_logic_vector(3 downto 0); -- output from memory, into attack
-    signal char1dcin      : std_logic_vector(3 downto 0); -- inputs into memory, from attack
-    signal char2dcin      : std_logic_vector(3 downto 0); -- inputs into memory, from attack
-    signal char1death     : std_logic;                    -- inputs into memory, from attack
-    signal char2death     : std_logic;                    -- inputs into memory, from attack
+    -- character damage percentages and death counts
+    signal char1perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
+    signal char2perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
+    signal char1percin   : std_logic_vector(7 downto 0); -- inputs into memory, from attack
+    signal char2percin   : std_logic_vector(7 downto 0); -- inputs into memory, from attack
+    signal char1perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char2perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char1dc       : std_logic_vector(3 downto 0); -- output from memory, into attack
+    signal char2dc       : std_logic_vector(3 downto 0); -- output from memory, into attack
+    signal char1dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
+    signal char2dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
+    signal char1death    : std_logic;                    -- inputs into memory, from attack
+    signal char2death    : std_logic;                    -- inputs into memory, from attack
 
-    -- between input and physics
-    signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics
-    signal inputsp2 : std_logic_vector(7 downto 0); -- inputs from input, into physics
+    -- synchronised controller vectors
+    signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics and graphics and attack
+    signal inputsp2 : std_logic_vector(7 downto 0); -- inputs from input, into physics and graphics and attack
 
     -- dummy signal that should be linked to the counter through an fsm or something like that
     signal readyphysicsin  : std_logic;
     signal readyphysicsout : std_logic;
+
     component input_toplevel is
         port (
             clk   : in std_logic;
@@ -120,6 +123,8 @@ architecture structural of chip_toplevel is
             percentage2out       : out std_logic_vector(7 downto 0);
             killcount1out        : out std_logic_vector(3 downto 0);
             killcount2out        : out std_logic_vector(3 downto 0);
+            orientation1         : out std_logic;
+            orientation2         : out std_logic;
             restart1             : out std_logic;
             restart2             : out std_logic
         );
@@ -146,19 +151,24 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
             -- inputs from memory -> relevant data to be displayed on screen
-            char1_x       : in std_logic_vector(7 downto 0); --! character 1 x-location
-            char1_y       : in std_logic_vector(7 downto 0); --! character 1 y-location
-            char2_x       : in std_logic_vector(7 downto 0); --! character 2 x-location
-            char2_y       : in std_logic_vector(7 downto 0); --! character 2 y-location
+            char1_x       : in std_logic_vector(7 downto 0); -- character 1 x-location
+            char1_y       : in std_logic_vector(7 downto 0); -- character 1 y-location
+            char2_x       : in std_logic_vector(7 downto 0); -- character 2 x-location
+            char2_y       : in std_logic_vector(7 downto 0); -- character 2 y-location
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
+            -- inputs from attack and input
+            controllerp1  : in std_logic_vector(7 downto 0);
+            controllerp2  : in std_logic_vector(7 downto 0);
+            orientationp1 : in std_logic;
+            orientationp2 : in std_logic;
             -- outputs to screen (and other components)
             -- vcount : out std_logic_vector(9 downto 0);
-            Vsync  : out std_logic;                    --! sync signals -> active low
-            Hsync  : out std_logic;                    --! sync signals -> active low
-            R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-            G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-            B_data : out std_logic_vector(3 downto 0));--! RGB data to screen
+            Vsync  : out std_logic;                     -- sync signals -> active low
+            Hsync  : out std_logic;                     -- sync signals -> active low
+            R_data : out std_logic_vector(3 downto 0);  -- RGB data to screen
+            G_data : out std_logic_vector(3 downto 0);  -- RGB data to screen
+            B_data : out std_logic_vector(3 downto 0)); -- RGB data to screen
     end component graphics_card;
 
     component memory is
@@ -239,7 +249,6 @@ begin
         data_out9b4 => char2vely
 
     );
-
     TL01 : graphics_card port map(
         clk           => clk,
         reset         => reset,
@@ -249,96 +258,109 @@ begin
         char2_y       => char2posy,
         percentage_p1 => char1perc,
         percentage_p2 => char2perc,
+        controllerp1  => inputsp1,
+        controllerp2  => inputsp2,
+        orientationp1 => orientationp1,
+        orientationp2 => orientationp2,
         Vsync         => vsyncintern,
         Hsync         => Hsync,
         R_data        => R_data,
         G_data        => G_data,
-        B_data        => B_data);
-
+        B_data        => B_data
+    );
     TL02 : physics_system port map(
         vin_x                => char1velx,
         vin_y                => char1vely,
         pin_x                => char1posx,
         pin_y                => char1posy,
         player_input         => inputsp1,
-        knockback_percentage => char1perctemp1,
+        knockback_percentage => char1perctemp,
         knockback_x          => dirx1new2,
         knockback_y          => diry1new2,
         vout_x               => char1velxin,
         vout_y               => char1velyin,
         pout_x               => char1posxin,
-        pout_y               => char1posyin);
-
+        pout_y               => char1posyin
+    );
     TL03 : physics_system port map(
         vin_x                => char2velx,
         vin_y                => char2vely,
         pin_x                => char2posx,
         pin_y                => char2posy,
         player_input         => inputsp2,
-        knockback_percentage => char2perctemp1,
+        knockback_percentage => char2perctemp,
         knockback_x          => dirx2new2,
         knockback_y          => diry2new2,
         vout_x               => char2velxin,
         vout_y               => char2velyin,
         pout_x               => char2posxin,
-        pout_y               => char2posyin);
-
+        pout_y               => char2posyin
+    );
     ATT1 : topattack port map(
         -- timing signals
-        clk                  => clk,
-        res                  => reset,
-        vsync                => vsyncintern,
+        clk   => clk,
+        res   => reset,
+        vsync => vsyncintern,
         -- data input
-        controller1          => inputsp1,
-        controller2          => inputsp2,
-        x1in                 => char1posx,
-        y1in                 => char1posy,
-        x2in                 => char2posx,
-        y2in                 => char2posy,
-        percentage1in        => char1perc,
-        percentage2in        => char2perc,
-        killcount1in         => char1dc,
-        killcount2in         => char2dc,
+        controller1   => inputsp1,
+        controller2   => inputsp2,
+        x1in          => char1posx,
+        y1in          => char1posy,
+        x2in          => char2posx,
+        y2in          => char2posy,
+        percentage1in => char1perc,
+        percentage2in => char2perc,
+        killcount1in  => char1dc,
+        killcount2in  => char2dc,
         -- data output
         -- data for physics
-        directionx1out       => dirx1new1, -- knockback direction for physics calculation
-        directiony1out       => diry1new1, -- knockback direction for physics calculation
-        directionx2out       => dirx2new1, -- knockback direction for physics calculation
-        directiony2out       => diry2new1, -- knockback direction for physics calculation
-        damagepercentage1out => char1perctemp1, -- percentage data for physics calculation
-        damagepercentage2out => char2perctemp1, -- percentage data for physics calculation
+        directionx1out       => dirx1new1,     -- knockback direction for physics calculation
+        directiony1out       => diry1new1,     -- knockback direction for physics calculation
+        directionx2out       => dirx2new1,     -- knockback direction for physics calculation
+        directiony2out       => diry2new1,     -- knockback direction for physics calculation
+        damagepercentage1out => char1perctemp, -- percentage data for physics calculation
+        damagepercentage2out => char2perctemp, -- percentage data for physics calculation
         -- data for storage
-        percentage1out       => char1percin, -- percentage data input to memory for storage
-        percentage2out       => char2percin, -- percentage data input to memory for storage
-        killcount1out        => char1dcin,
-        killcount2out        => char2dcin,
-        restart1             => char1death,
-        restart2             => char2death
+        percentage1out => char1percin, -- percentage data input to memory for storage
+        percentage2out => char2percin, -- percentage data input to memory for storage
+        orientation1   => orientationp1,
+        orientation2   => orientationp2,
+        killcount1out  => char1dcin,
+        killcount2out  => char2dcin,
+        restart1       => char1death,
+        restart2       => char2death
     );
-    buf3: t_8bregs port map (
-        clk => clk,
-        reset => reset,
-        vec_in => dirx1new1,
+    --------------------------------------------------------------------------------
+    -- these buffers are here as this was easier to write at the time.
+    -- the sole purpose of these buffers is to make sure the knockback works
+    -- these make sure the knockback direction is set steady forever, without
+    -- these buffers the whole attack system breaks.
+    --------------------------------------------------------------------------------
+    buf3 : t_8bregs port map(
+        clk     => clk,
+        reset   => reset,
+        vec_in  => dirx1new1,
         vec_out => dirx1new2
     );
-    buf4: t_8bregs port map (
-        clk => clk,
-        reset => reset,
-        vec_in => diry1new1,
+    buf4 : t_8bregs port map(
+        clk     => clk,
+        reset   => reset,
+        vec_in  => diry1new1,
         vec_out => diry1new2
     );
-    buf5: t_8bregs port map (
-        clk => clk,
-        reset => vsyncintern,
-        vec_in => dirx2new1,
+    buf5 : t_8bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => dirx2new1,
         vec_out => dirx2new2
     );
-    buf6: t_8bregs port map (
-        clk => clk,
-        reset => vsyncintern,
-        vec_in => diry2new1,
+    buf6 : t_8bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => diry2new1,
         vec_out => diry2new2
     );
+    --------------------------------------------------------------------------------
     TL04 : input_toplevel port map(
         clk              => clk,
         reset            => reset,
@@ -348,7 +370,8 @@ begin
         data_p1          => p1_controller,
         buttons_p1       => inputsp1,
         data_p2          => p2_controller,
-        buttons_p2       => inputsp2);
+        buttons_p2       => inputsp2
+    );
 
-    Vsync          <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
+    Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 end architecture structural;

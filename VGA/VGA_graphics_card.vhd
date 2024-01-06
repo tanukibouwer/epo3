@@ -29,6 +29,11 @@ entity graphics_card is
         char2_y       : in std_logic_vector(7 downto 0); --! character 2 y-location
         percentage_p1 : in std_logic_vector(7 downto 0);
         percentage_p2 : in std_logic_vector(7 downto 0);
+        -- inputs from attack and input
+        controllerp1 : in std_logic_vector(7 downto 0);
+        controllerp2 : in std_logic_vector(7 downto 0);
+        orientationp1 : in std_logic;
+        orientationp2 : in std_logic;
         -- outputs to screen (and other components)
         -- vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic; --! sync signals -> active low
@@ -54,10 +59,10 @@ architecture structural of graphics_card is
 
     component coloring is
         port (
-            --! global inputs
+            -- global inputs
             clk   : in std_logic;
             reset : in std_logic;
-            --! counter data
+            -- counter data
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
             -- relevant data for x-y locations
@@ -65,15 +70,23 @@ architecture structural of graphics_card is
             char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
             char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
             char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            -- player orientation information
+            orientationp1 : in std_logic;
+            orientationp2 : in std_logic;
+    
             -- percentage from attack module
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
-
+    
+            -- controller inputs
+            controllerp1 : in std_logic_vector(7 downto 0);
+            controllerp2 : in std_logic_vector(7 downto 0);
+    
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); --! RGB data output
             G_data : out std_logic_vector(3 downto 0); --! RGB data output
             B_data : out std_logic_vector(3 downto 0)  --! RGB data output
-
+    
         );
     end component;
 
@@ -92,6 +105,7 @@ begin
         hcount => hcount_int, vcount => vcount_int,
         char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
         percentage_p1 => percentage_p1, percentage_p2 => percentage_p2,
+        orientationp1 => orientationp1, orientationp2 => orientationp2, controllerp1 => controllerp1, controllerp2 => controllerp2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
 

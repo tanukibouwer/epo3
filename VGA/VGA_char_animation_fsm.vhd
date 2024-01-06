@@ -149,7 +149,7 @@ begin
                     when jump => 
                         cnt_reset <=  '0';
                         sprite <= "01";
-                        if unsigned(frame_count) = 10 then
+                        if unsigned(frame_count) >= 10 then
                             cnt_reset <= '1';
                             if (controller_in = "00001011" or controller_in = "00001010" or controller_in = "00001001" or controller_in = "00001000" or controller_in = "00000011" or controller_in = "00000010" or controller_in = "00000001"  or controller_in = "00000000")  then
                                 new_state <=  idle;

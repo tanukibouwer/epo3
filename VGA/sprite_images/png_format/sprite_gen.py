@@ -3,7 +3,7 @@ import numpy as np
 import csv
 
 # paths = ('C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/eight_mine.png','C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/eight_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/five_parama.png','C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/four_parama.png','C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/nine_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/nine_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/one_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/one_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/p1_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/p1_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/seven_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/seven_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/six_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/three_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/three_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/two_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/zero_mine.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/zero_parama.png', 'C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/p2_mine.png'
-paths = ('C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/Untitled-1.png','C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/Untitled-1.png')
+paths = ('C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/Untitled-1.png','C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/ewi_top_bg.jpeg')
 
 
 fp = open('C:/Users/Kevin/Desktop/code/epo3-1/VGA/sprite_images/png_format/sprite_output.txt', 'w')
@@ -39,11 +39,11 @@ for path in paths:
             for i in range(4-len(B)):
                 fp.write('0')
             fp.write(str(B))
-            if pixel < 15:
+            if pixel < array.shape[1]-1:
                 fp.write('"),("')
             else:
                 fp.write('")')
-        if row < 23:
+        if row < array.shape[0]-1:
             fp.write('), \n')
         else:
             fp.write(') \n')

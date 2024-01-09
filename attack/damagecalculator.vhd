@@ -133,10 +133,12 @@ begin
                     s9 <= s1 + to_unsigned(10, 8); -- moet dit miss anders?
                 elsif (s1 < to_unsigned(100, 8)) then
                     s9 <= s1 + to_unsigned(20, 8); -- moet dit miss anders?
-                elsif (s1 < to_unsigned(200, 8)) then
+                elsif (s1 < to_unsigned(150, 8)) then
                     s9 <= s1 + to_unsigned(50, 8); -- moet dit miss anders?
-                else
+                elsif (s1 < to_unsigned(200, 8)) then
                     s9 <= s1 + to_unsigned(120, 8); -- moet dit miss anders?
+		else
+			s9 <= s1;
                 end if;
                 new_state1 <= neutral1; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
 
@@ -180,10 +182,12 @@ begin
                     s10 <= s3 + to_unsigned(10, 8); -- moet dit miss anders?
                 elsif (s3 < to_unsigned(100, 8)) then
                     s10 <= s3 + to_unsigned(20, 8); -- moet dit miss anders?
-                elsif (s3 < to_unsigned(200, 8)) then
+                elsif (s3 < to_unsigned(150, 8)) then
                     s10 <= s3 + to_unsigned(50, 8); -- moet dit miss anders?
-                else
+                elsif (s3 < to_unsigned(200, 8)) then
                     s10 <= s3 + to_unsigned(120, 8); -- moet dit miss anders?
+		else
+			s10 <= s3;
                 end if;
                 
                 new_state2 <= neutral2; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet

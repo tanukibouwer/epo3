@@ -70,8 +70,8 @@ architecture behavioural of char_sprites is
     signal sprite : std_logic_vector(1 downto 0);
 
     -- integer values for the counts
-    signal int_hcount, int_vcount : integer;
-    signal int_boundx, int_boundy : integer;
+    -- signal int_hcount, int_vcount : integer;
+    -- signal int_boundx, int_boundy : integer;
 
     -- declare the array for the colours --> copy from number_sprite.vhd basically, but different sprites --> for now sprite left and right is the same for now
     constant sprite_x_length : integer := 31;
@@ -677,10 +677,10 @@ architecture behavioural of char_sprites is
     -- sprite = 4: idle sprite 1 left
     -- sprite = 5: running sprite 1 left
 begin
-    int_hcount <= to_integer(unsigned(hcount));
-    int_vcount <= to_integer(unsigned(vcount));
-    int_boundx <= to_integer(unsigned(boundx));
-    int_boundy <= to_integer(unsigned(boundy));
+    -- int_hcount <= to_integer(unsigned(hcount));
+    -- int_vcount <= to_integer(unsigned(vcount));
+    -- int_boundx <= to_integer(unsigned(boundx));
+    -- int_boundy <= to_integer(unsigned(boundy));
 
     frame_control : char_animation_fsm port map(
         clk           => clk,
@@ -692,7 +692,14 @@ begin
     );
 
     process (sprite, orientation, int_hcount, int_vcount, int_boundx, int_boundy, player)
+        variable int_boundx : integer;
+        variable int_boundy : integer;
     begin
+        int_hcount := to_integer(unsigned(hcount));
+        int_vcount := to_integer(unsigned(vcount));
+        int_boundx := to_integer(unsigned(boundx));
+        int_boundy := to_integer(unsigned(boundy));
+
         -- choose which "animation" to play dependent on the input
         -- R_data <= jump_crouch_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(11 downto 8);
         -- G_data <= jump_crouch_R(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(7 downto 4);

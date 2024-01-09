@@ -41,6 +41,12 @@ entity killzonedetector is
     --        newvectorY2  : out  std_logic_vector (7 downto 0));
 end entity killzonedetector;
 
+
+-- 168, 120, 8, 8 boundaries van het zichtbare scherm: xmax, ymax, xmin, ymin
+-- 240, 232, 184, 144 boundaries van de killzone: xmax, ymax, xmin, ymin
+-- teleportation wordt gergeld door physics
+
+
 architecture behavioural of killzonedetector is
     type c1_state is (neutral1, detection1, standardposition1, hold1);
     signal state1, new_state1 : c1_state;
@@ -65,10 +71,10 @@ begin
     --s5 <= unsigned(olddeathcount3);
     --s7 <= unsigned(olddeathcount4);
 
-    --	newlocationX1 <= "00110010"; -- start location 50
-    --	newlocationY1 <= "00011110"; -- start location 30
-    --	newlocationX2 <= "01110100"; -- start location 116
-    --	newlocationY2 <= "00011110"; -- start location 30
+    --newlocationX1 <= "xxxxxxxx"; -- start location 35
+    --newlocationY1 <= "xxxxxxxx"; -- start location 50
+    --newlocationX2 <= "xxxxxxxx"; -- start location 125
+    --newlocationY2 <= "xxxxxxxx"; -- start location 50
     --newlocationX3 <= "01001000"; -- start location 72 (deze is goed)
     --newlocationY3 <= "00011110"; -- start location 30 (deze is goed)
     --newlocationX4 <= "01011110"; -- start location 94 (deze is goed)
@@ -129,7 +135,7 @@ begin
                 --				newvectorX1 <= oldvectorX1;
                 --				newvectorY1 <= oldvectorY1;
                 restart1 <= '0';
-                if (oldvectorX1 > "10101000") or (oldvectorY1 > "01111000") or (oldvectorX1 < "00001000") or (oldvectorY1 < "00001000") then -- 168, 120, 8, 8
+                if ((oldvectorX1 > "10111000") and (oldvectorX1 < "11110000")) or ((oldvectorY1 > "10010000") and (oldvectorY1 < "11101000")) then -- boundaries killzone: xmax 240, ymax 232, xmin 184, ymin 144
                     new_state1 <= detection1;
                 else
                     new_state1 <= hold1;
@@ -175,7 +181,7 @@ begin
                 --				newvectorX2 <= oldvectorX2;
                 --				newvectorY2 <= oldvectorY2;
                 restart2 <= '0';
-                if (oldvectorX2 > "10101000") or (oldvectorY2 > "01111000") or (oldvectorX2 < "00001000") or (oldvectorY2 < "00001000") then -- 168, 120, 8, 8
+                if ((oldvectorX2 > "10111000") and (oldvectorX2 < "11110000")) or ((oldvectorY2 > "10010000") and (oldvectorY2 < "11101000")) then -- boundaries killzone: xmax 240, ymax 232, xmin 184, ymin 144
                     new_state2 <= detection2;
                 else
                     new_state2 <= hold2;

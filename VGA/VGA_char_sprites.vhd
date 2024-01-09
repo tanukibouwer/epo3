@@ -691,9 +691,11 @@ begin
         sprite        => sprite
     );
 
-    process (sprite, orientation, int_hcount, int_vcount, int_boundx, int_boundy, player)
+    process (sprite, orientation, player)
         variable int_boundx : integer;
         variable int_boundy : integer;
+        variable int_hcount : integer;
+        variable int_vcount : integer;
     begin
         int_hcount := to_integer(unsigned(hcount));
         int_vcount := to_integer(unsigned(vcount));

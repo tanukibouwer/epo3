@@ -1504,7 +1504,7 @@ lbl: process(x_verschil, y_verschil, a2, a1, b1, b2, o2, direction2_y, direction
 				end if;
 
 
-			elsif ((o2='1' and (a1='1' or b1='1'))) then										--(a2='1' or b2='1') just to be sure
+			elsif ((o2='1' and (a2='1' or b2='1'))) then										--(a2='1' or b2='1') just to be sure
 
 				if (-10 <= x_verschil and x_verschil <= 4) then
 						

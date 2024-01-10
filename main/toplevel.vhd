@@ -25,14 +25,14 @@ end chip_toplevel;
 architecture structural of chip_toplevel is
 
     -- knockback direction vectors as info from attack to physics
-    signal dirx1new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal dirx2new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal diry1new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal diry2new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal dirx1new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal dirx2new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal diry1new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
-    signal diry2new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal dirx1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal diry2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
 
     -- orientation signal to know which direction to render the character
     signal orientationp1 : std_logic; -- output from attack, into graphics
@@ -113,10 +113,10 @@ architecture structural of chip_toplevel is
             percentage2in        : in std_logic_vector(7 downto 0);
             killcount1in         : in std_logic_vector(3 downto 0);
             killcount2in         : in std_logic_vector(3 downto 0);
-            directionx1out       : out std_logic_vector(8 downto 0);
-            directiony1out       : out std_logic_vector(8 downto 0);
-            directionx2out       : out std_logic_vector(8 downto 0);
-            directiony2out       : out std_logic_vector(8 downto 0);
+            directionx1out       : out std_logic_vector(7 downto 0);
+            directiony1out       : out std_logic_vector(7 downto 0);
+            directionx2out       : out std_logic_vector(7 downto 0);
+            directiony2out       : out std_logic_vector(7 downto 0);
             damagepercentage1out : out std_logic_vector(7 downto 0);
             damagepercentage2out : out std_logic_vector(7 downto 0);
             percentage1out       : out std_logic_vector(7 downto 0);
@@ -138,8 +138,8 @@ architecture structural of chip_toplevel is
             pin_y                : in std_logic_vector(8 downto 0);
             player_input         : in std_logic_vector(7 downto 0);
             knockback_percentage : in std_logic_vector(7 downto 0);
-            knockback_x          : in std_logic_vector(8 downto 0);
-            knockback_y          : in std_logic_vector(8 downto 0);
+            knockback_x          : in std_logic_vector(7 downto 0);
+            knockback_y          : in std_logic_vector(7 downto 0);
             vout_x               : out std_logic_vector(9 downto 0);
             vout_y               : out std_logic_vector(9 downto 0);
             pout_x               : out std_logic_vector(8 downto 0);

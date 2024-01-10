@@ -10,10 +10,10 @@ entity coldet is
 	b2	     : in  std_logic;
 	o1	     : in  std_logic;
 	o2	     : in  std_logic;
-        x1		     : in  std_logic_vector(7 downto 0);
-        x2    		     : in  std_logic_vector(7 downto 0);
-        y1     		    : in  std_logic_vector(7 downto 0);
-        y2     		    : in  std_logic_vector(7 downto 0);
+        x1		     : in  std_logic_vector(8 downto 0);
+        x2    		     : in  std_logic_vector(8 downto 0);
+        y1     		    : in  std_logic_vector(8 downto 0);
+        y2     		    : in  std_logic_vector(8 downto 0);
         direction_x1 : out std_logic_vector(7 downto 0);
         direction_x2 : out std_logic_vector(7 downto 0);
         direction_y1 : out std_logic_vector(7 downto 0);

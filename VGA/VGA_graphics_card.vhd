@@ -35,7 +35,7 @@ entity graphics_card is
         orientationp1 : in std_logic;
         orientationp2 : in std_logic;
         -- outputs to screen (and other components)
-        -- vcount : out std_logic_vector(9 downto 0);
+        vcount : out std_logic_vector(9 downto 0);
         Vsync  : out std_logic; --! sync signals -> active low
         Hsync  : out std_logic; --! sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
@@ -108,5 +108,6 @@ begin
         orientationp1 => orientationp1, orientationp2 => orientationp2, controllerp1 => controllerp1, controllerp2 => controllerp2,
         R_data => R_data, G_data => G_data, B_data => B_data
     );
-
+    
+    vcount <= vcount_int;
 end architecture;

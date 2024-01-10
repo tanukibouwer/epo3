@@ -27,10 +27,10 @@ entity coloring is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
-        char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
-        char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
-        char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
-        char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+        char1x : in std_logic_vector(8 downto 0); --! character 1 coordinates
+        char1y : in std_logic_vector(8 downto 0); --! character 1 coordinates
+        char2x : in std_logic_vector(8 downto 0); --! character 2 coordinates
+        char2y : in std_logic_vector(8 downto 0); --! character 2 coordinates
         -- player orientation information
         orientationp1 : in std_logic;
         orientationp2 : in std_logic;
@@ -81,8 +81,8 @@ architecture behavioural of coloring is
 
     component char_offset_adder is
         port (
-            xpos      : in std_logic_vector(7 downto 0);
-            ypos      : in std_logic_vector(7 downto 0);
+            xpos      : in std_logic_vector(8 downto 0);
+            ypos      : in std_logic_vector(8 downto 0);
             xpos_scl1 : out std_logic_vector(9 downto 0);
             xpos_scl2 : out std_logic_vector(9 downto 0);
             ypos_scl1 : out std_logic_vector(9 downto 0);

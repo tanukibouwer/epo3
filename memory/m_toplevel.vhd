@@ -18,22 +18,22 @@ port(
 		data_inhp2	: in std_logic_vector(7 downto 0); 
 		data_outhp1	: out std_logic_vector(7 downto 0); 
 		data_outhp2	: out std_logic_vector(7 downto 0); 
-		data_in8b1 		: in std_logic_vector(7 downto 0);
-		data_in8b2		: in std_logic_vector(7 downto 0);
-		data_in8b3		: in std_logic_vector(7 downto 0);
-		data_in8b4		: in std_logic_vector(7 downto 0);
-		data_out8b1		: out std_logic_vector(7 downto 0);
-		data_out8b2		: out std_logic_vector(7 downto 0);
-		data_out8b3		: out std_logic_vector(7 downto 0);
-		data_out8b4		: out std_logic_vector(7 downto 0);
-		data_in9b1		: in std_logic_vector(8 downto 0);
-		data_in9b2		: in std_logic_vector(8 downto 0);
-		data_in9b3		: in std_logic_vector(8 downto 0);
-		data_in9b4		: in std_logic_vector(8 downto 0);
-		data_out9b1		: out std_logic_vector(8 downto 0);
-		data_out9b2		: out std_logic_vector(8 downto 0);
-		data_out9b3		: out std_logic_vector(8 downto 0);
-		data_out9b4		: out std_logic_vector(8 downto 0));
+		data_in8b1 		: in std_logic_vector(8 downto 0);
+		data_in8b2		: in std_logic_vector(8 downto 0);
+		data_in8b3		: in std_logic_vector(8 downto 0);
+		data_in8b4		: in std_logic_vector(8 downto 0);
+		data_out8b1		: out std_logic_vector(8 downto 0);
+		data_out8b2		: out std_logic_vector(8 downto 0);
+		data_out8b3		: out std_logic_vector(8 downto 0);
+		data_out8b4		: out std_logic_vector(8 downto 0);
+		data_in9b1		: in std_logic_vector(9 downto 0);
+		data_in9b2		: in std_logic_vector(9 downto 0);
+		data_in9b3		: in std_logic_vector(9 downto 0);
+		data_in9b4		: in std_logic_vector(9 downto 0);
+		data_out9b1		: out std_logic_vector(9 downto 0);
+		data_out9b2		: out std_logic_vector(9 downto 0);
+		data_out9b3		: out std_logic_vector(9 downto 0);
+		data_out9b4		: out std_logic_vector(9 downto 0));
 end memory;
 
 architecture structural of memory is
@@ -83,10 +83,20 @@ architecture structural of memory is
 	port(
 		clk			: in std_logic;
 		reset		: in std_logic;
+		initial 	: in std_logic_vector(8 downto 0);
 		data_in 	: in std_logic_vector(8 downto 0);
 		data_out 	: out std_logic_vector(8 downto 0);
 		write 		: in std_logic);
 	end component ram_9b;
+	
+	component ram_10b is
+	port(
+		clk			: in std_logic;
+		reset		: in std_logic;
+		data_in 	: in std_logic_vector(9 downto 0);
+		data_out 	: out std_logic_vector(9 downto 0);
+		write 		: in std_logic);
+	end component ram_10b;
 	
 		
 begin
@@ -130,53 +140,53 @@ begin
 								write 		=> writeint);
 
 								
-	DM20 : ram_8b port map (	clk			=> clk,
+	DM20 : ram_9b port map (	clk			=> clk,
 								reset		=> resetp1int,
-								initial		=> "00100011",
+								initial		=> "001000110",
 								data_in 	=> data_in8b1,
 								data_out 	=> data_out8b1,
 								write 		=> writeint);
 								
-	DM21 : ram_8b port map (	clk			=> clk,
+	DM21 : ram_9b port map (	clk			=> clk,
 								reset		=> resetp1int,
-								initial		=> "00110010",
+								initial		=> "001100100",
 								data_in 	=> data_in8b2,
 								data_out 	=> data_out8b2,
 								write 		=> writeint);
 								
-	DM22 : ram_8b port map (	clk			=> clk,
+	DM22 : ram_9b port map (	clk			=> clk,
 								reset		=> resetp2int,
-								initial		=> "01111101",
+								initial		=> "011111010",
 								data_in 	=> data_in8b3,
 								data_out 	=> data_out8b3,
 								write 		=> writeint);
 								
-	DM23 : ram_8b port map (	clk			=> clk,
+	DM23 : ram_9b port map (	clk			=> clk,
 								reset		=> resetp2int,
-								initial		=> "00110010",
+								initial		=> "001100100",
 								data_in 	=> data_in8b4,
 								data_out 	=> data_out8b4,
 								write 		=> writeint);
 	
-	DM30 : ram_9b port map (	clk			=> clk,
+	DM30 : ram_10b port map (	clk			=> clk,
 								reset		=> resetp1int,
 								data_in 	=> data_in9b1,
 								data_out 	=> data_out9b1,
 								write 		=> writeint);
 								
-	DM31 : ram_9b port map (	clk			=> clk,
+	DM31 : ram_10b port map (	clk			=> clk,
 								reset		=> resetp1int,
 								data_in 	=> data_in9b2,
 								data_out 	=> data_out9b2,
 								write 		=> writeint);
 								
-	DM32 : ram_9b port map (	clk			=> clk,
+	DM32 : ram_10b port map (	clk			=> clk,
 								reset		=> resetp2int,
 								data_in 	=> data_in9b3,
 								data_out 	=> data_out9b3,
 								write 		=> writeint);
 								
-	DM33 : ram_9b port map (	clk			=> clk,
+	DM33 : ram_10b port map (	clk			=> clk,
 								reset		=> resetp2int,
 								data_in 	=> data_in9b4,
 								data_out 	=> data_out9b4,

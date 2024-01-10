@@ -25,14 +25,14 @@ end chip_toplevel;
 architecture structural of chip_toplevel is
 
     -- knockback direction vectors as info from attack to physics
-    signal dirx1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal dirx2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal diry1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal diry2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal dirx1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal dirx2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal diry1new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
-    signal diry2new2 : std_logic_vector(7 downto 0); -- output from attack, into physics
+    signal dirx1new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal dirx2new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal diry1new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal diry2new1 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal dirx1new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal dirx2new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal diry1new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
+    signal diry2new2 : std_logic_vector(8 downto 0); -- output from attack, into physics
 
     -- orientation signal to know which direction to render the character
     signal orientationp1 : std_logic; -- output from attack, into graphics
@@ -42,22 +42,22 @@ architecture structural of chip_toplevel is
     signal vsyncintern : std_logic; -- input into memory, out from graphics
 
     -- character position and velocity vectors
-    signal char1posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char1posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char1posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char1posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char2posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char2posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char1velx   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char1vely   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char2velx   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char2vely   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char1velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char1velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char2velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char1posy   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char2posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char2posy   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char1posxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1posyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char2posxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char2posyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1velx   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char1vely   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char2velx   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char2vely   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char1velxin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char1velyin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char2velxin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char2velyin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
 
     -- character damage percentages and death counts
     signal char1perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
@@ -105,18 +105,18 @@ architecture structural of chip_toplevel is
             vsync                : in std_logic;
             controller1          : in std_logic_vector(7 downto 0);
             controller2          : in std_logic_vector(7 downto 0);
-            x1in                 : in std_logic_vector(7 downto 0);
-            y1in                 : in std_logic_vector(7 downto 0);
-            x2in                 : in std_logic_vector(7 downto 0);
-            y2in                 : in std_logic_vector(7 downto 0);
+            x1in                 : in std_logic_vector(8 downto 0);
+            y1in                 : in std_logic_vector(8 downto 0);
+            x2in                 : in std_logic_vector(8 downto 0);
+            y2in                 : in std_logic_vector(8 downto 0);
             percentage1in        : in std_logic_vector(7 downto 0);
             percentage2in        : in std_logic_vector(7 downto 0);
             killcount1in         : in std_logic_vector(3 downto 0);
             killcount2in         : in std_logic_vector(3 downto 0);
-            directionx1out       : out std_logic_vector(7 downto 0);
-            directiony1out       : out std_logic_vector(7 downto 0);
-            directionx2out       : out std_logic_vector(7 downto 0);
-            directiony2out       : out std_logic_vector(7 downto 0);
+            directionx1out       : out std_logic_vector(8 downto 0);
+            directiony1out       : out std_logic_vector(8 downto 0);
+            directionx2out       : out std_logic_vector(8 downto 0);
+            directiony2out       : out std_logic_vector(8 downto 0);
             damagepercentage1out : out std_logic_vector(7 downto 0);
             damagepercentage2out : out std_logic_vector(7 downto 0);
             percentage1out       : out std_logic_vector(7 downto 0);
@@ -132,18 +132,18 @@ architecture structural of chip_toplevel is
 
     component physics_system is
         port (
-            vin_x                : in std_logic_vector(8 downto 0);
-            vin_y                : in std_logic_vector(8 downto 0);
-            pin_x                : in std_logic_vector(7 downto 0);
-            pin_y                : in std_logic_vector(7 downto 0);
+            vin_x                : in std_logic_vector(9 downto 0);
+            vin_y                : in std_logic_vector(9 downto 0);
+            pin_x                : in std_logic_vector(8 downto 0);
+            pin_y                : in std_logic_vector(8 downto 0);
             player_input         : in std_logic_vector(7 downto 0);
             knockback_percentage : in std_logic_vector(7 downto 0);
-            knockback_x          : in std_logic_vector(7 downto 0);
-            knockback_y          : in std_logic_vector(7 downto 0);
-            vout_x               : out std_logic_vector(8 downto 0);
-            vout_y               : out std_logic_vector(8 downto 0);
-            pout_x               : out std_logic_vector(7 downto 0);
-            pout_y               : out std_logic_vector(7 downto 0));
+            knockback_x          : in std_logic_vector(8 downto 0);
+            knockback_y          : in std_logic_vector(8 downto 0);
+            vout_x               : out std_logic_vector(9 downto 0);
+            vout_y               : out std_logic_vector(9 downto 0);
+            pout_x               : out std_logic_vector(8 downto 0);
+            pout_y               : out std_logic_vector(8 downto 0));
     end component physics_system;
 
     component graphics_card is
@@ -151,10 +151,10 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
             -- inputs from memory -> relevant data to be displayed on screen
-            char1_x       : in std_logic_vector(7 downto 0); -- character 1 x-location
-            char1_y       : in std_logic_vector(7 downto 0); -- character 1 y-location
-            char2_x       : in std_logic_vector(7 downto 0); -- character 2 x-location
-            char2_y       : in std_logic_vector(7 downto 0); -- character 2 y-location
+            char1_x       : in std_logic_vector(8 downto 0); -- character 1 x-location
+            char1_y       : in std_logic_vector(8 downto 0); -- character 1 y-location
+            char2_x       : in std_logic_vector(8 downto 0); -- character 2 x-location
+            char2_y       : in std_logic_vector(8 downto 0); -- character 2 y-location
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
             -- inputs from attack and input
@@ -186,30 +186,30 @@ architecture structural of chip_toplevel is
             data_inhp2  : in std_logic_vector(7 downto 0);
             data_outhp1 : out std_logic_vector(7 downto 0);
             data_outhp2 : out std_logic_vector(7 downto 0);
-            data_in8b1  : in std_logic_vector(7 downto 0);
-            data_in8b2  : in std_logic_vector(7 downto 0);
-            data_in8b3  : in std_logic_vector(7 downto 0);
-            data_in8b4  : in std_logic_vector(7 downto 0);
-            data_out8b1 : out std_logic_vector(7 downto 0);
-            data_out8b2 : out std_logic_vector(7 downto 0);
-            data_out8b3 : out std_logic_vector(7 downto 0);
-            data_out8b4 : out std_logic_vector(7 downto 0);
-            data_in9b1  : in std_logic_vector(8 downto 0);
-            data_in9b2  : in std_logic_vector(8 downto 0);
-            data_in9b3  : in std_logic_vector(8 downto 0);
-            data_in9b4  : in std_logic_vector(8 downto 0);
-            data_out9b1 : out std_logic_vector(8 downto 0);
-            data_out9b2 : out std_logic_vector(8 downto 0);
-            data_out9b3 : out std_logic_vector(8 downto 0);
-            data_out9b4 : out std_logic_vector(8 downto 0));
+            data_in8b1  : in std_logic_vector(8 downto 0);
+            data_in8b2  : in std_logic_vector(8 downto 0);
+            data_in8b3  : in std_logic_vector(8 downto 0);
+            data_in8b4  : in std_logic_vector(8 downto 0);
+            data_out8b1 : out std_logic_vector(8 downto 0);
+            data_out8b2 : out std_logic_vector(8 downto 0);
+            data_out8b3 : out std_logic_vector(8 downto 0);
+            data_out8b4 : out std_logic_vector(8 downto 0);
+            data_in9b1  : in std_logic_vector(9 downto 0);
+            data_in9b2  : in std_logic_vector(9 downto 0);
+            data_in9b3  : in std_logic_vector(9 downto 0);
+            data_in9b4  : in std_logic_vector(9 downto 0);
+            data_out9b1 : out std_logic_vector(9 downto 0);
+            data_out9b2 : out std_logic_vector(9 downto 0);
+            data_out9b3 : out std_logic_vector(9 downto 0);
+            data_out9b4 : out std_logic_vector(9 downto 0));
     end component memory;
 
     component t_8bregs is
         port (
             clk     : in std_logic;
             reset   : in std_logic;
-            vec_in  : in std_logic_vector(7 downto 0);
-            vec_out : out std_logic_vector(7 downto 0)
+            vec_in  : in std_logic_vector(8 downto 0);
+            vec_out : out std_logic_vector(8 downto 0)
         );
     end component;
 begin

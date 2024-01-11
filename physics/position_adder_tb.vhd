@@ -28,7 +28,7 @@ begin
             "0000000001" after 90 ns,
             "1111111111" after 120 ns;
    vin_y <= "0000000000" after 0 ns,
-            "001001010" after 20 ns,
+            "0001001010" after 20 ns,
             "1111010101" after 40 ns,
             "0010101101" after 60 ns,
             "0000000001" after 90 ns,

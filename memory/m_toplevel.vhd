@@ -14,10 +14,10 @@ port(
 		data_in4b2	: in std_logic_vector(3 downto 0);
 		data_out4b1	: out std_logic_vector(3 downto 0);
 		data_out4b2	: out std_logic_vector(3 downto 0);
-		data_inhp1	: in std_logic_vector(8 downto 0); 
-		data_inhp2	: in std_logic_vector(8 downto 0); 
-		data_outhp1	: out std_logic_vector(8 downto 0); 
-		data_outhp2	: out std_logic_vector(8 downto 0); 
+		data_inhp1	: in std_logic_vector(7 downto 0); 
+		data_inhp2	: in std_logic_vector(7 downto 0); 
+		data_outhp1	: out std_logic_vector(7 downto 0); 
+		data_outhp2	: out std_logic_vector(7 downto 0); 
 		data_in8b1 		: in std_logic_vector(8 downto 0);
 		data_in8b2		: in std_logic_vector(8 downto 0);
 		data_in8b3		: in std_logic_vector(8 downto 0);
@@ -74,8 +74,8 @@ architecture structural of memory is
 		clk			: in std_logic;
 		reset		: in std_logic;
 		initial		: in std_logic_vector(7 downto 0);
-		data_in 	: in std_logic_vector(8 downto 0);
-		data_out 	: out std_logic_vector(8 downto 0);
+		data_in 	: in std_logic_vector(7 downto 0);
+		data_out 	: out std_logic_vector(7 downto 0);
 		write 		: in std_logic);
 	end component ram_8b;
 	

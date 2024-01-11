@@ -49,66 +49,66 @@ architecture structural of physics_top is
     signal kb_y : std_logic_vector(7 downto 0);
 
 	component p_mux is
-    port(
-	clk		: in std_logic;
-	reset	: in std_logic;
-	
-	-- vcount goes to 524, half of that is 262
-	
-	vcount : in std_logic_vector(9 downto 0);
-	hcount : in std_logic_vector(9 downto 0);
-	
-	-- inputs from input module
-	
-	inputsp1 : in std_logic_vector(7 downto 0);
-	inputsp2 : in std_logic_vector(7 downto 0);
-	
-    -- inputs from the attack module
-	
-	directionx1out       : in std_logic_vector(7 downto 0);
-    directiony1out       : in std_logic_vector(7 downto 0);
-	char1perctemp 		: in std_logic_vector(7 downto 0);
-	
-    directionx2out       : in std_logic_vector(7 downto 0);
-    directiony2out       : in std_logic_vector(7 downto 0);
-	char2perctemp 		: in std_logic_vector(7 downto 0);
-	
-	-- inputs and outputs from the memory module
-	
-	data_in8b1  : out std_logic_vector(8 downto 0);
-    data_in8b2  : out std_logic_vector(8 downto 0);
-    data_in8b3  : out std_logic_vector(8 downto 0);
-    data_in8b4  : out std_logic_vector(8 downto 0);
-	
-    data_out8b1 : in std_logic_vector(8 downto 0);
-    data_out8b2 : in std_logic_vector(8 downto 0);
-    data_out8b3 : in std_logic_vector(8 downto 0);
-    data_out8b4 : in std_logic_vector(8 downto 0);
-	
-    data_in9b1  : out std_logic_vector(9 downto 0);
-    data_in9b2  : out std_logic_vector(9 downto 0);
-    data_in9b3  : out std_logic_vector(9 downto 0);
-    data_in9b4  : out std_logic_vector(9 downto 0);
-	
-    data_out9b1 : in std_logic_vector(9 downto 0);
-    data_out9b2 : in std_logic_vector(9 downto 0);
-    data_out9b3 : in std_logic_vector(9 downto 0);
-    data_out9b4 : in std_logic_vector(9 downto 0);
-	
-	-- inputs and outputs from the physics module
-	
-	vin_x                : out std_logic_vector(9 downto 0);
-    vin_y                : out std_logic_vector(9 downto 0);
-    pin_x                : out std_logic_vector(8 downto 0);
-    pin_y                : out std_logic_vector(8 downto 0);
-    player_input         : out std_logic_vector(7 downto 0);
-	knockback_percentage : out std_logic_vector(7 downto 0);
-    knockback_x          : out std_logic_vector(7 downto 0);
-    knockback_y          : out std_logic_vector(7 downto 0);
-    vout_x               : in std_logic_vector(9 downto 0);
-    vout_y               : in std_logic_vector(9 downto 0);
-    pout_x               : in std_logic_vector(8 downto 0);
-    pout_y               : in std_logic_vector(8 downto 0));
+		port(
+		clk		: in std_logic;
+		reset	: in std_logic;
+		
+		-- vcount goes to 524, half of that is 262
+		
+		vcount : in std_logic_vector(9 downto 0);
+		hcount : in std_logic_vector(9 downto 0);
+		
+		-- inputs from input module
+		
+		inputsp1 : in std_logic_vector(7 downto 0);
+		inputsp2 : in std_logic_vector(7 downto 0);
+		
+		-- inputs from the attack module
+		
+		directionx1out       : in std_logic_vector(7 downto 0);
+		directiony1out       : in std_logic_vector(7 downto 0);
+		char1perctemp 		: in std_logic_vector(7 downto 0);
+		
+		directionx2out       : in std_logic_vector(7 downto 0);
+		directiony2out       : in std_logic_vector(7 downto 0);
+		char2perctemp 		: in std_logic_vector(7 downto 0);
+		
+		-- inputs and outputs from the memory module
+		
+		data_in8b1  : out std_logic_vector(8 downto 0);
+		data_in8b2  : out std_logic_vector(8 downto 0);
+		data_in8b3  : out std_logic_vector(8 downto 0);
+		data_in8b4  : out std_logic_vector(8 downto 0);
+		
+		data_out8b1 : in std_logic_vector(8 downto 0);
+		data_out8b2 : in std_logic_vector(8 downto 0);
+		data_out8b3 : in std_logic_vector(8 downto 0);
+		data_out8b4 : in std_logic_vector(8 downto 0);
+		
+		data_in9b1  : out std_logic_vector(9 downto 0);
+		data_in9b2  : out std_logic_vector(9 downto 0);
+		data_in9b3  : out std_logic_vector(9 downto 0);
+		data_in9b4  : out std_logic_vector(9 downto 0);
+		
+		data_out9b1 : in std_logic_vector(9 downto 0);
+		data_out9b2 : in std_logic_vector(9 downto 0);
+		data_out9b3 : in std_logic_vector(9 downto 0);
+		data_out9b4 : in std_logic_vector(9 downto 0);
+		
+		-- inputs and outputs from the physics module
+		
+		vin_x                : out std_logic_vector(9 downto 0);
+		vin_y                : out std_logic_vector(9 downto 0);
+		pin_x                : out std_logic_vector(8 downto 0);
+		pin_y                : out std_logic_vector(8 downto 0);
+		player_input         : out std_logic_vector(7 downto 0);
+		knockback_percentage : out std_logic_vector(7 downto 0);
+		knockback_x          : out std_logic_vector(7 downto 0);
+		knockback_y          : out std_logic_vector(7 downto 0);
+		vout_x               : in std_logic_vector(9 downto 0);
+		vout_y               : in std_logic_vector(9 downto 0);
+		pout_x               : in std_logic_vector(8 downto 0);
+		pout_y               : in std_logic_vector(8 downto 0));
 
 	end component p_mux;
 	

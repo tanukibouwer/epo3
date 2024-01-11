@@ -107,10 +107,10 @@ architecture structural of chip_toplevel is
             vsync                : in std_logic;
             controller1          : in std_logic_vector(7 downto 0);
             controller2          : in std_logic_vector(7 downto 0);
-            x1in                 : in std_logic_vector(7 downto 0);
-            y1in                 : in std_logic_vector(7 downto 0);
-            x2in                 : in std_logic_vector(7 downto 0);
-            y2in                 : in std_logic_vector(7 downto 0);
+            x1in                 : in std_logic_vector(8 downto 0);
+            y1in                 : in std_logic_vector(8 downto 0);
+            x2in                 : in std_logic_vector(8 downto 0);
+            y2in                 : in std_logic_vector(8 downto 0);
             percentage1in        : in std_logic_vector(7 downto 0);
             percentage2in        : in std_logic_vector(7 downto 0);
             killcount1in         : in std_logic_vector(3 downto 0);

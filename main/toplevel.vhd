@@ -44,22 +44,22 @@ architecture structural of chip_toplevel is
 	signal hcountintern : std_logic_vector(9 downto 0);
 
     -- character position and velocity vectors
-    signal char1posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char1posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posx   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char2posy   : std_logic_vector(7 downto 0); -- output from memory, into graphics and physics
-    signal char1posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char1posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char2posxin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char2posyin : std_logic_vector(7 downto 0); -- inputs into memory, out from physics
-    signal char1velx   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char1vely   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char2velx   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char2vely   : std_logic_vector(8 downto 0); -- output from memory, into physics
-    signal char1velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char1velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char2velxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
-    signal char2velyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char1posy   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char2posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char2posy   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
+    signal char1posxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1posyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char2posxin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char2posyin : std_logic_vector(8 downto 0); -- inputs into memory, out from physics
+    signal char1velx   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char1vely   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char2velx   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char2vely   : std_logic_vector(9 downto 0); -- output from memory, into physics
+    signal char1velxin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char1velyin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char2velxin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
+    signal char2velyin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
 
     -- character damage percentages and death counts
     signal char1perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
@@ -169,10 +169,10 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
             -- inputs from memory -> relevant data to be displayed on screen
-            char1_x       : in std_logic_vector(7 downto 0); -- character 1 x-location
-            char1_y       : in std_logic_vector(7 downto 0); -- character 1 y-location
-            char2_x       : in std_logic_vector(7 downto 0); -- character 2 x-location
-            char2_y       : in std_logic_vector(7 downto 0); -- character 2 y-location
+            char1_x       : in std_logic_vector(8 downto 0); -- character 1 x-location
+            char1_y       : in std_logic_vector(8 downto 0); -- character 1 y-location
+            char2_x       : in std_logic_vector(8 downto 0); -- character 2 x-location
+            char2_y       : in std_logic_vector(8 downto 0); -- character 2 y-location
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
             -- inputs from attack and input
@@ -205,22 +205,22 @@ architecture structural of chip_toplevel is
             data_inhp2  : in std_logic_vector(7 downto 0);
             data_outhp1 : out std_logic_vector(7 downto 0);
             data_outhp2 : out std_logic_vector(7 downto 0);
-            data_in8b1  : in std_logic_vector(7 downto 0);
-            data_in8b2  : in std_logic_vector(7 downto 0);
-            data_in8b3  : in std_logic_vector(7 downto 0);
-            data_in8b4  : in std_logic_vector(7 downto 0);
-            data_out8b1 : out std_logic_vector(7 downto 0);
-            data_out8b2 : out std_logic_vector(7 downto 0);
-            data_out8b3 : out std_logic_vector(7 downto 0);
-            data_out8b4 : out std_logic_vector(7 downto 0);
-            data_in9b1  : in std_logic_vector(8 downto 0);
-            data_in9b2  : in std_logic_vector(8 downto 0);
-            data_in9b3  : in std_logic_vector(8 downto 0);
-            data_in9b4  : in std_logic_vector(8 downto 0);
-            data_out9b1 : out std_logic_vector(8 downto 0);
-            data_out9b2 : out std_logic_vector(8 downto 0);
-            data_out9b3 : out std_logic_vector(8 downto 0);
-            data_out9b4 : out std_logic_vector(8 downto 0));
+            data_in8b1  : in std_logic_vector(8 downto 0);
+            data_in8b2  : in std_logic_vector(8 downto 0);
+            data_in8b3  : in std_logic_vector(8 downto 0);
+            data_in8b4  : in std_logic_vector(8 downto 0);
+            data_out8b1 : out std_logic_vector(8 downto 0);
+            data_out8b2 : out std_logic_vector(8 downto 0);
+            data_out8b3 : out std_logic_vector(8 downto 0);
+            data_out8b4 : out std_logic_vector(8 downto 0);
+            data_in9b1  : in std_logic_vector(9 downto 0);
+            data_in9b2  : in std_logic_vector(9 downto 0);
+            data_in9b3  : in std_logic_vector(9 downto 0);
+            data_in9b4  : in std_logic_vector(9 downto 0);
+            data_out9b1 : out std_logic_vector(9 downto 0);
+            data_out9b2 : out std_logic_vector(9 downto 0);
+            data_out9b3 : out std_logic_vector(9 downto 0);
+            data_out9b4 : out std_logic_vector(9 downto 0));
     end component memory;
 
     component t_8bregs is

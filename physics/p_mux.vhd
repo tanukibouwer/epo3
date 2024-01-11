@@ -20,12 +20,12 @@ entity p_mux is
 	
     -- inputs from the attack module
 	
-	directionx1out       : in std_logic_vector(8 downto 0);
-    directiony1out       : in std_logic_vector(8 downto 0);
+	directionx1out       : in std_logic_vector(7 downto 0);
+    directiony1out       : in std_logic_vector(7 downto 0);
 	char1perctemp 		: in std_logic_vector(7 downto 0);
 	
-    directionx2out       : in std_logic_vector(8 downto 0);
-    directiony2out       : in std_logic_vector(8 downto 0);
+    directionx2out       : in std_logic_vector(7 downto 0);
+    directiony2out       : in std_logic_vector(7 downto 0);
 	char2perctemp 		: in std_logic_vector(7 downto 0);
 	
 	-- inputs and outputs from the memory module
@@ -58,8 +58,8 @@ entity p_mux is
     pin_y                : out std_logic_vector(8 downto 0);
     player_input         : out std_logic_vector(7 downto 0);
 	knockback_percentage : out std_logic_vector(7 downto 0);
-    knockback_x          : out std_logic_vector(8 downto 0);
-    knockback_y          : out std_logic_vector(8 downto 0);
+    knockback_x          : out std_logic_vector(7 downto 0);
+    knockback_y          : out std_logic_vector(7 downto 0);
     vout_x               : in std_logic_vector(9 downto 0);
     vout_y               : in std_logic_vector(9 downto 0);
     pout_x               : in std_logic_vector(8 downto 0);

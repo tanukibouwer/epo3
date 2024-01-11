@@ -23,10 +23,10 @@ entity graphics_card is
         clk   : in std_logic;
         reset : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-        char1_x       : in std_logic_vector(7 downto 0); --! character 1 x-location
-        char1_y       : in std_logic_vector(7 downto 0); --! character 1 y-location
-        char2_x       : in std_logic_vector(7 downto 0); --! character 2 x-location
-        char2_y       : in std_logic_vector(7 downto 0); --! character 2 y-location
+        char1_x       : in std_logic_vector(8 downto 0); --! character 1 x-location
+        char1_y       : in std_logic_vector(8 downto 0); --! character 1 y-location
+        char2_x       : in std_logic_vector(8 downto 0); --! character 2 x-location
+        char2_y       : in std_logic_vector(8 downto 0); --! character 2 y-location
         percentage_p1 : in std_logic_vector(7 downto 0);
         percentage_p2 : in std_logic_vector(7 downto 0);
         -- inputs from attack and input
@@ -67,10 +67,10 @@ architecture structural of graphics_card is
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
             -- relevant data for x-y locations
-            char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
-            char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
-            char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
-            char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+            char1x : in std_logic_vector(8 downto 0); --! character 1 coordinates
+            char1y : in std_logic_vector(8 downto 0); --! character 1 coordinates
+            char2x : in std_logic_vector(8 downto 0); --! character 2 coordinates
+            char2y : in std_logic_vector(8 downto 0); --! character 2 coordinates
             -- player orientation information
             orientationp1 : in std_logic;
             orientationp2 : in std_logic;

@@ -12,10 +12,10 @@ entity topattack is
         vsync                : in std_logic;
         controller1          : in std_logic_vector (7 downto 0);  --input player 1
         controller2          : in std_logic_vector (7 downto 0);  --input player 2
-        x1in                 : in std_logic_vector (7 downto 0);  --x position of player 1
-        y1in                 : in std_logic_vector (7 downto 0);  --y position of player 1
-        x2in                 : in std_logic_vector (7 downto 0);  --x position of player 2
-        y2in                 : in std_logic_vector (7 downto 0);  --y position of player 2
+        x1in                 : in std_logic_vector (8 downto 0);  --x position of player 1
+        y1in                 : in std_logic_vector (8 downto 0);  --y position of player 1
+        x2in                 : in std_logic_vector (8 downto 0);  --x position of player 2
+        y2in                 : in std_logic_vector (8 downto 0);  --y position of player 2
         percentage1in        : in std_logic_vector (7 downto 0);  --percentage of player 1
         percentage2in        : in std_logic_vector (7 downto 0);  --percentage of player 2
         killcount1in         : in std_logic_vector (3 downto 0);  --killcount of player 1
@@ -95,10 +95,10 @@ architecture structural of topattack is
             olddeathcount2 : in std_logic_vector (3 downto 0);
             oldpercentage1 : in std_logic_vector (7 downto 0);
             oldpercentage2 : in std_logic_vector (7 downto 0);
-            oldvectorX1    : in std_logic_vector (7 downto 0);
-            oldvectorY1    : in std_logic_vector (7 downto 0);
-            oldvectorX2    : in std_logic_vector (7 downto 0);
-            oldvectorY2    : in std_logic_vector (7 downto 0);
+            oldvectorX1    : in std_logic_vector (8 downto 0);
+            oldvectorY1    : in std_logic_vector (8 downto 0);
+            oldvectorX2    : in std_logic_vector (8 downto 0);
+            oldvectorY2    : in std_logic_vector (8 downto 0);
             restart1       : out std_logic;
             restart2       : out std_logic;
             newdeathcount1 : out std_logic_vector (3 downto 0);
@@ -115,10 +115,10 @@ architecture structural of topattack is
             b2           : in std_logic;
             o1           : in std_logic;
             o2           : in std_logic;
-            x1           : in std_logic_vector (7 downto 0);
-            x2           : in std_logic_vector (7 downto 0);
-            y1           : in std_logic_vector (7 downto 0);
-            y2           : in std_logic_vector (7 downto 0);
+            x1           : in std_logic_vector (8 downto 0);
+            x2           : in std_logic_vector (8 downto 0);
+            y1           : in std_logic_vector (8 downto 0);
+            y2           : in std_logic_vector (8 downto 0);
             direction_x1 : out std_logic_vector (7 downto 0);
             direction_x2 : out std_logic_vector (7 downto 0);
             direction_y1 : out std_logic_vector(7 downto 0);

@@ -45,8 +45,8 @@ architecture structural of physics_top is
 	signal ovy	: std_logic_vector(9 downto 0);
 	signal pl_in : std_logic_vector(7 downto 0);
 	signal kb_pc : std_logic_vector(7 downto 0);
-    signal kb_x : std_logic_vector(8 downto 0);
-    signal kb_y : std_logic_vector(8 downto 0);
+    signal kb_x : std_logic_vector(7 downto 0);
+    signal kb_y : std_logic_vector(7 downto 0);
 
 	component p_mux is
     port(
@@ -103,8 +103,8 @@ architecture structural of physics_top is
     pin_y                : out std_logic_vector(8 downto 0);
     player_input         : out std_logic_vector(7 downto 0);
 	knockback_percentage : out std_logic_vector(7 downto 0);
-    knockback_x          : out std_logic_vector(8 downto 0);
-    knockback_y          : out std_logic_vector(8 downto 0);
+    knockback_x          : out std_logic_vector(7 downto 0);
+    knockback_y          : out std_logic_vector(7 downto 0);
     vout_x               : in std_logic_vector(9 downto 0);
     vout_y               : in std_logic_vector(9 downto 0);
     pout_x               : in std_logic_vector(8 downto 0);

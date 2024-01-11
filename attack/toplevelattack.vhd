@@ -95,10 +95,10 @@ architecture structural of topattack is
             olddeathcount2 : in std_logic_vector (3 downto 0);
             oldpercentage1 : in std_logic_vector (7 downto 0);
             oldpercentage2 : in std_logic_vector (7 downto 0);
-            oldvectorX1    : in std_logic_vector (7 downto 0);
-            oldvectorY1    : in std_logic_vector (7 downto 0);
-            oldvectorX2    : in std_logic_vector (7 downto 0);
-            oldvectorY2    : in std_logic_vector (7 downto 0);
+            oldvectorX1    : in std_logic_vector (8 downto 0);
+            oldvectorY1    : in std_logic_vector (8 downto 0);
+            oldvectorX2    : in std_logic_vector (8 downto 0);
+            oldvectorY2    : in std_logic_vector (8 downto 0);
             restart1       : out std_logic;
             restart2       : out std_logic;
             newdeathcount1 : out std_logic_vector (3 downto 0);

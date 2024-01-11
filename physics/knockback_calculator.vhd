@@ -3,13 +3,13 @@ use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_std.all;
 
 entity p_knockback_calculator is
-   port(vin_x  : in  std_logic_vector(8 downto 0);
-        vin_y  : in  std_logic_vector(8 downto 0);
+   port(vin_x  : in  std_logic_vector(9 downto 0);
+        vin_y  : in  std_logic_vector(9 downto 0);
 	knockback_percentage : in std_logic_vector(7 downto 0);
 	knockback_x : in std_logic_vector(7 downto 0);
 	knockback_y : in std_logic_vector(7 downto 0);
-        vout_x : out std_logic_vector(8 downto 0);
-        vout_y : out std_logic_vector(8 downto 0));
+        vout_x : out std_logic_vector(9 downto 0);
+        vout_y : out std_logic_vector(9 downto 0));
 end p_knockback_calculator;
 
 architecture behaviour of p_knockback_calculator is
@@ -40,6 +40,6 @@ begin
    multiplied_bitshifted_vector_y <= std_logic_vector(signed(bitshifted_vector_y) * signed(balance_factor_y));
    bitshifted_multiplied_bitshifted_vector_x <= multiplied_bitshifted_vector_x(18 downto 6);
    bitshifted_multiplied_bitshifted_vector_y <= multiplied_bitshifted_vector_y(18 downto 6);
-   vout_x <= std_logic_vector(signed(vin_x) + signed(bitshifted_multiplied_bitshifted_vector_x(8 downto 0)));
-   vout_y <= std_logic_vector(signed(vin_y) + signed(bitshifted_multiplied_bitshifted_vector_y(8 downto 0)));
+   vout_x <= std_logic_vector(signed(vin_x) + signed(bitshifted_multiplied_bitshifted_vector_x(9 downto 0)));
+   vout_y <= std_logic_vector(signed(vin_y) + signed(bitshifted_multiplied_bitshifted_vector_y(9 downto 0)));
 end behaviour;

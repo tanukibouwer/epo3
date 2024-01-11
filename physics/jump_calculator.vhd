@@ -5,13 +5,13 @@ use IEEE.numeric_std.ALL;
 entity jump_calculator is
 	port(	collision_in	: in std_logic;
 			c_input			: in std_logic;
-			vin_y	         : in std_logic_vector (8 downto 0);
-			vout_y	   	: out std_logic_vector (8 downto 0));
+			vin_y	         : in std_logic_vector (9 downto 0);
+			vout_y	   	: out std_logic_vector (9 downto 0));
 end jump_calculator;
 
 architecture behaviour of jump_calculator is
 
-constant	jump_velocity	: std_logic_vector := "111110111"; -- -9
+constant	jump_velocity	: std_logic_vector := "1111110111"; -- -9
 
 begin
 

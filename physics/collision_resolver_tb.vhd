@@ -7,46 +7,46 @@ end collision_resolver_tb;
 
 architecture behaviour of collision_resolver_tb is
    component collision_resolver
-      port(vin_y   : in  std_logic_vector(8 downto 0);
-        pin_x      : in  std_logic_vector(7 downto 0);
-        pin_y      : in  std_logic_vector(7 downto 0);
+      port(vin_y   : in  std_logic_vector(9 downto 0);
+        pin_x      : in  std_logic_vector(8 downto 0);
+        pin_y      : in  std_logic_vector(8 downto 0);
         input_down : in  std_logic;
-        vout_y     : out std_logic_vector(8 downto 0);
-        pout_y     : out std_logic_vector(7 downto 0);
+        vout_y     : out std_logic_vector(9 downto 0);
+        pout_y     : out std_logic_vector(8 downto 0);
         on_floor   : out std_logic);
    end component;
-   signal vin_y      : std_logic_vector(8 downto 0);
-   signal pin_x      : std_logic_vector(7 downto 0);
-   signal pin_y      : std_logic_vector(7 downto 0);
+   signal vin_y      : std_logic_vector(9 downto 0);
+   signal pin_x      : std_logic_vector(8 downto 0);
+   signal pin_y      : std_logic_vector(8 downto 0);
    signal input_down : std_logic;
-   signal vout_y     : std_logic_vector(8 downto 0);
-   signal pout_y     : std_logic_vector(7 downto 0);
+   signal vout_y     : std_logic_vector(9 downto 0);
+   signal pout_y     : std_logic_vector(8 downto 0);
    signal on_floor   : std_logic;
 begin
    test: collision_resolver port map (vin_y, pin_x, pin_y, input_down, vout_y, pout_y, on_floor);
-   vin_y <= "000000000" after 0 ns,
-            "111111011" after 10 ns,
-            "000000101" after 80 ns;
-   pin_x <= "00000000" after 0 ns,
-            "00011110" after 6 ns,
-            "00000000" after 15 ns,
-            "00011110" after 18 ns,
-            "00000000" after 80 ns,
-            "00011110" after 86 ns,
-            "00000000" after 95 ns,
-            "00011110" after 98 ns;
-   pin_y <= "00000000" after 0 ns,
-            "00100100" after 5 ns,
-            "00101101" after 15 ns,
-            "01010000" after 25 ns,
-            "01101110" after 50 ns,
-            "01100111" after 60 ns,
-            "00000000" after 80 ns,
-            "00100100" after 85 ns,
-            "00101101" after 95 ns,
-            "01010000" after 105 ns,
-            "01101110" after 130 ns,
-            "01100111" after 140 ns;
+   vin_y <= "0000000000" after 0 ns,
+            "1111111011" after 10 ns,
+            "0000000101" after 80 ns;
+   pin_x <= "000000000" after 0 ns,
+            "000011110" after 6 ns,
+            "000000000" after 15 ns,
+            "000011110" after 18 ns,
+            "000000000" after 80 ns,
+            "000011110" after 86 ns,
+            "000000000" after 95 ns,
+            "000011110" after 98 ns;
+   pin_y <= "000000000" after 0 ns,
+            "000100100" after 5 ns,
+            "000101101" after 15 ns,
+            "001010000" after 25 ns,
+            "001101110" after 50 ns,
+            "001100111" after 60 ns,
+            "000000000" after 80 ns,
+            "000100100" after 85 ns,
+            "000101101" after 95 ns,
+            "001010000" after 105 ns,
+            "001101110" after 130 ns,
+            "001100111" after 140 ns;
    input_down <= '0' after 0 ns,
                  '1' after 5 ns,
                  '0' after 7 ns,

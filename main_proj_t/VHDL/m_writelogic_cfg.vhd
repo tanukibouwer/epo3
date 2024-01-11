@@ -1,0 +1,1 @@
+../../memory/m_writelogic_cfg.vhd

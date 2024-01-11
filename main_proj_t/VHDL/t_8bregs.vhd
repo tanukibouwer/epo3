@@ -1,0 +1,1 @@
+../../main/t_8bregs.vhd

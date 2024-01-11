@@ -1,0 +1,1 @@
+../../VGA/VGA_char_animation_fsm_cfg.vhd

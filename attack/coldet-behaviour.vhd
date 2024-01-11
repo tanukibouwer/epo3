@@ -1212,7 +1212,7 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 							direction2_y <= "01000000";						 
 							direction2_x <= "00000111";
 
-						elsif (20 <= y_verschil and y_verschil < ) then						 
+						elsif (20 <= y_verschil and y_verschil < 24) then						 
 							direction2_y <= "01000000";						 
 							direction2_x <= "00000110";
 

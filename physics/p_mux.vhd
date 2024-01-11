@@ -20,12 +20,12 @@ entity p_mux is
 	
     -- inputs from the attack module
 	
-	directionx1out       : in std_logic_vector(8 downto 0);
-    directiony1out       : in std_logic_vector(8 downto 0);
+	directionx1out       : in std_logic_vector(7 downto 0);
+    directiony1out       : in std_logic_vector(7 downto 0);
 	char1perctemp 		: in std_logic_vector(7 downto 0);
 	
-    directionx2out       : in std_logic_vector(8 downto 0);
-    directiony2out       : in std_logic_vector(8 downto 0);
+    directionx2out       : in std_logic_vector(7 downto 0);
+    directiony2out       : in std_logic_vector(7 downto 0);
 	char2perctemp 		: in std_logic_vector(7 downto 0);
 	
 	-- inputs and outputs from the memory module

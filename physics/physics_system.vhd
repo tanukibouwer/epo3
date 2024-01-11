@@ -2,56 +2,56 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 
 entity physics_system is
-   port(vin_x : in std_logic_vector(8 downto 0);
-        vin_y : in std_logic_vector(8 downto 0);
-        pin_x : in std_logic_vector(7 downto 0);
-        pin_y : in std_logic_vector(7 downto 0);
+   port(vin_x : in std_logic_vector(9 downto 0);
+        vin_y : in std_logic_vector(9 downto 0);
+        pin_x : in std_logic_vector(8 downto 0);
+        pin_y : in std_logic_vector(8 downto 0);
         player_input : in std_logic_Vector(7 downto 0);
         knockback_percentage : in std_logic_vector(7 downto 0);
         knockback_x : in std_logic_vector(7 downto 0);
         knockback_y : in std_logic_vector(7 downto 0);
-        vout_x : out std_logic_vector(8 downto 0);
-        vout_y : out std_logic_vector(8 downto 0);
-        pout_x : out std_logic_vector(7 downto 0);
-        pout_y : out std_logic_vector(7 downto 0));
+        vout_x : out std_logic_vector(9 downto 0);
+        vout_y : out std_logic_vector(9 downto 0);
+        pout_x : out std_logic_vector(8 downto 0);
+        pout_y : out std_logic_vector(8 downto 0));
 end physics_system;
 
 architecture behaviour of physics_system is
    component gravity
-   	port(	velocity_in 	: in std_logic_vector (8 downto 0);
-   			velocity_out	: out std_logic_vector (8 downto 0));
+   	port(	velocity_in 	: in std_logic_vector (9 downto 0);
+   			velocity_out	: out std_logic_vector (9 downto 0));
    end component;
 
    component p_knockback_calculator
-      port(vin_x  : in  std_logic_vector(8 downto 0);
-           vin_y  : in  std_logic_vector(8 downto 0);
+      port(vin_x  : in  std_logic_vector(9 downto 0);
+           vin_y  : in  std_logic_vector(9 downto 0);
    	knockback_percentage : in std_logic_vector(7 downto 0);
    	knockback_x : in std_logic_vector(7 downto 0);
    	knockback_y : in std_logic_vector(7 downto 0);
-           vout_x : out std_logic_vector(8 downto 0);
-           vout_y : out std_logic_vector(8 downto 0));
+           vout_x : out std_logic_vector(9 downto 0);
+           vout_y : out std_logic_vector(9 downto 0));
    end component;
 
    component jump_calculator
    	port(	collision_in	: in std_logic;
    			c_input			: in std_logic;
-   			vin_y       	: in std_logic_vector (8 downto 0);
-   			vout_y    		: out std_logic_vector (8 downto 0));
+   			vin_y       	: in std_logic_vector (9 downto 0);
+   			vout_y    		: out std_logic_vector (9 downto 0));
    end component;
 
    component collision_resolver
-      port(vin_y      : in  std_logic_vector(8 downto 0);
-           pin_x      : in  std_logic_vector(7 downto 0);
-           pin_y      : in  std_logic_vector(7 downto 0);
+      port(vin_y      : in  std_logic_vector(9 downto 0);
+           pin_x      : in  std_logic_vector(8 downto 0);
+           pin_y      : in  std_logic_vector(8 downto 0);
            input_down : in  std_logic;
-           vout_y     : out std_logic_vector(8 downto 0);
-           pout_y     : out std_logic_vector(7 downto 0);
+           vout_y     : out std_logic_vector(9 downto 0);
+           pout_y     : out std_logic_vector(8 downto 0);
            on_floor   : out std_logic);
    end component;
 
    component velocity_interpolator is
-      port(vin_x : in std_logic_vector(8 downto 0);
-           vout_x : out std_logic_vector(8 downto 0);
+      port(vin_x : in std_logic_vector(9 downto 0);
+           vout_x : out std_logic_vector(9 downto 0);
            movement_target : in std_logic_vector(5 downto 0));
    end component;
    
@@ -61,23 +61,23 @@ architecture behaviour of physics_system is
    end component;
    
    component position_adder
-      port(vin_x  : in  std_logic_vector(8 downto 0);
-           vin_y  : in  std_logic_vector(8 downto 0);
-           pin_x  : in  std_logic_vector(7 downto 0);
-           pin_y  : in  std_logic_vector(7 downto 0);
-           pout_x : out std_logic_vector(7 downto 0);
-           pout_y : out std_logic_vector(7 downto 0));
+      port(vin_x  : in  std_logic_vector(9 downto 0);
+           vin_y  : in  std_logic_vector(9 downto 0);
+           pin_x  : in  std_logic_vector(8 downto 0);
+           pin_y  : in  std_logic_vector(8 downto 0);
+           pout_x : out std_logic_vector(8 downto 0);
+           pout_y : out std_logic_vector(8 downto 0));
    end component;
 
-   signal knockback_vout_x : std_logic_vector(8 downto 0);
-   signal knockback_vout_y : std_logic_vector(8 downto 0);
-   signal collision_vout_y : std_logic_vector(8 downto 0);
+   signal knockback_vout_x : std_logic_vector(9 downto 0);
+   signal knockback_vout_y : std_logic_vector(9 downto 0);
+   signal collision_vout_y : std_logic_vector(9 downto 0);
    signal collision_on_floor : std_logic;
-   signal interpolator_vout_x : std_logic_vector(8 downto 0);
+   signal interpolator_vout_x : std_logic_vector(9 downto 0);
    signal movement_target : std_logic_vector(5 downto 0);
-   signal gravity_vout_y : std_logic_vector(8 downto 0);
-   signal adder_pout_x : std_logic_vector(7 downto 0);
-   signal adder_pout_y : std_logic_vector(7 downto 0);
+   signal gravity_vout_y : std_logic_vector(9 downto 0);
+   signal adder_pout_x : std_logic_vector(8 downto 0);
+   signal adder_pout_y : std_logic_vector(8 downto 0);
    signal jump_input : std_logic;
    signal down_input : std_logic;
 

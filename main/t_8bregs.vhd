@@ -7,14 +7,14 @@ entity t_8bregs is
     port (
         clk     : in std_logic;
         reset   : in std_logic;
-        vec_in  : in std_logic_vector(8 downto 0);
-        vec_out : out std_logic_vector(8 downto 0)
+        vec_in  : in std_logic_vector(7 downto 0);
+        vec_out : out std_logic_vector(7 downto 0)
     );
 end entity t_8bregs;
 
 architecture rtl of t_8bregs is
 
-    subtype stored_type is std_logic_vector(8 downto 0);
+    subtype stored_type is std_logic_vector(7 downto 0);
     signal stored : stored_type;
 
 begin

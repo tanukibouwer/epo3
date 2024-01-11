@@ -40,6 +40,8 @@ architecture structural of chip_toplevel is
 
     -- to tap the vsync signal for global memory timing purposes
     signal vsyncintern : std_logic; -- input into memory, out from graphics
+	signal vcountintern : std_logic_vector(9 downto 0);
+	signal hcountintern : std_logic_vector(9 downto 0);
 
     -- character position and velocity vectors
     signal char1posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
@@ -130,8 +132,12 @@ architecture structural of chip_toplevel is
         );
     end component;
 
-    component physics_system is
+    component physics_top is
         port (
+			clk					 : in std_logic;
+			reset				 : in std_logic;
+			vcount 				 : in std_logic_vector(9 downto 0);
+			hcount 				 : in std_logic_vector(9 downto 0);
             vin_x                : in std_logic_vector(9 downto 0);
             vin_y                : in std_logic_vector(9 downto 0);
             pin_x                : in std_logic_vector(8 downto 0);
@@ -143,8 +149,20 @@ architecture structural of chip_toplevel is
             vout_x               : out std_logic_vector(9 downto 0);
             vout_y               : out std_logic_vector(9 downto 0);
             pout_x               : out std_logic_vector(8 downto 0);
-            pout_y               : out std_logic_vector(8 downto 0));
-    end component physics_system;
+            pout_y               : out std_logic_vector(8 downto 0);
+			vin_x2               : in std_logic_vector(9 downto 0);
+            vin_y2               : in std_logic_vector(9 downto 0);
+            pin_x2                : in std_logic_vector(8 downto 0);
+            pin_y2                : in std_logic_vector(8 downto 0);
+            player2_input         : in std_logic_vector(7 downto 0);
+            knockback_percentage2 : in std_logic_vector(7 downto 0);
+            knockback_x2          : in std_logic_vector(7 downto 0);
+            knockback_y2          : in std_logic_vector(7 downto 0);
+            vout_x2               : out std_logic_vector(9 downto 0);
+            vout_y2               : out std_logic_vector(9 downto 0);
+            pout_x2               : out std_logic_vector(8 downto 0);
+            pout_y2               : out std_logic_vector(8 downto 0));
+    end component physics_top;
 
     component graphics_card is
         port (
@@ -209,8 +227,8 @@ architecture structural of chip_toplevel is
         port (
             clk     : in std_logic;
             reset   : in std_logic;
-            vec_in  : in std_logic_vector(8 downto 0);
-            vec_out : out std_logic_vector(8 downto 0)
+            vec_in  : in std_logic_vector(7 downto 0);
+            vec_out : out std_logic_vector(7 downto 0)
         );
     end component;
 begin
@@ -264,12 +282,18 @@ begin
         orientationp1 => orientationp1,
         orientationp2 => orientationp2,
         Vsync         => vsyncintern,
+		vcount		  => vcountintern,
+		hcount		  => hcountintern,
         Hsync         => Hsync,
         R_data        => R_data,
         G_data        => G_data,
         B_data        => B_data
     );
-    TL02 : physics_system port map(
+    TL02 : physics_top port map(
+		clk					 => clk,
+		reset				 => reset,
+		vcount 				 => vcountintern,
+		hcount 				 => hcountintern,
         vin_x                => char1velx,
         vin_y                => char1vely,
         pin_x                => char1posx,
@@ -281,21 +305,19 @@ begin
         vout_x               => char1velxin,
         vout_y               => char1velyin,
         pout_x               => char1posxin,
-        pout_y               => char1posyin
-    );
-    TL03 : physics_system port map(
-        vin_x                => char2velx,
-        vin_y                => char2vely,
-        pin_x                => char2posx,
-        pin_y                => char2posy,
-        player_input         => inputsp2,
-        knockback_percentage => char2perctemp,
-        knockback_x          => dirx2new2,
-        knockback_y          => diry2new2,
-        vout_x               => char2velxin,
-        vout_y               => char2velyin,
-        pout_x               => char2posxin,
-        pout_y               => char2posyin
+        pout_y               => char1posyin,
+        vin_x2                => char2velx,
+        vin_y2                => char2vely,
+        pin_x2                => char2posx,
+        pin_y2                => char2posy,
+        player2_input         => inputsp2,
+        knockback_percentage2 => char2perctemp,
+        knockback_x2          => dirx2new2,
+        knockback_y2          => diry2new2,
+        vout_x2               => char2velxin,
+        vout_y2               => char2velyin,
+        pout_x2               => char2posxin,
+        pout_y2               => char2posyin
     );
     ATT1 : topattack port map(
         -- timing signals

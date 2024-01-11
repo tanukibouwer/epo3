@@ -107,7 +107,7 @@ begin
 	data_in8b1 <= px1m;
 	data_in8b2 <= py1m;
 
-	process(vcount)
+	process(vcount, sel, data_out9b1, data_out9b2, data_out9b3, data_out9b4, data_out8b1, data_out8b2, data_out8b3, data_out8b4, inputsp1, inputsp2, char1perctemp, char2perctemp, directionx1out, directiony1out, directionx2out, directiony2out, vout_x, vout_y, pout_x, pout_y)
 	begin
 		case sel is
 			when "0" =>

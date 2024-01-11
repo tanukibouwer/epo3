@@ -1,0 +1,1 @@
+../../input/input_buffer_behavioural_cfg.vhd

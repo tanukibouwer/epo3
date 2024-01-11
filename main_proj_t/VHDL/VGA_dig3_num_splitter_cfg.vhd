@@ -1,0 +1,1 @@
+../../VGA/VGA_dig3_num_splitter_cfg.vhd

@@ -1,0 +1,1 @@
+../../VGA/VGA_Vsync_gen_cfg.vhd

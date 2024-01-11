@@ -1,0 +1,1 @@
+../../memory/m_ram10bit_cfg.vhd

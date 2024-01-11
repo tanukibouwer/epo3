@@ -1,0 +1,1 @@
+../../VGA/VGA_number_sprite_cfg.vhd

@@ -3,8 +3,8 @@ use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_std.all;
 
 entity velocity_interpolator is
-   port(vin_x : in std_logic_vector(8 downto 0);
-        vout_x : out std_logic_vector(8 downto 0);
+   port(vin_x : in std_logic_vector(9 downto 0);
+        vout_x : out std_logic_vector(9 downto 0);
         movement_target : in std_logic_vector(5 downto 0));
 end velocity_interpolator;
 
@@ -14,7 +14,7 @@ constant neg_accel : signed(3 downto 0) := "1110";
 begin
 
 calculate : process (vin_x, movement_target) is
-   variable difference : signed(8 downto 0) := (others => '0');
+   variable difference : signed(9 downto 0) := (others => '0');
    variable small_difference : std_logic;
 begin
    difference := signed(vin_x) - signed(movement_target);

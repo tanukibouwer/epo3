@@ -20,8 +20,8 @@ use ieee.math_real.all;
 
 entity char_offset_adder is
     port (
-        xpos : in std_logic_vector(7 downto 0); --! character center coordinate
-        ypos : in std_logic_vector(7 downto 0); --! character center coordinate
+        xpos : in std_logic_vector(8 downto 0); --! character center coordinate
+        ypos : in std_logic_vector(8 downto 0); --! character center coordinate
         -- xsize     : in std_logic_vector(3 downto 0);
         -- ysize     : in std_logic_vector(3 downto 0);
         xpos_scl1 : out std_logic_vector(9 downto 0); --! scaled and moved character box bounds

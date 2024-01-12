@@ -42,10 +42,10 @@ begin
     xpos_int <= to_integer(unsigned(xpos));
     ypos_int <= to_integer(unsigned(ypos));
     -- then do the transformation
-    xpos_int1 <= ((xpos_int * 2) - (2 * 4) + 108);
-    xpos_int2 <= ((xpos_int * 2) + (2 * 4) + 107);
-    ypos_int1 <= ((ypos_int * 2) - (2 * 6));
-    ypos_int2 <= ((ypos_int * 2) + (2 * 6) - 1);
+    xpos_int1 <= ((xpos_int * 2) - (2 * 8) + 108);
+    xpos_int2 <= ((xpos_int * 2) + (2 * 8) + 107);
+    ypos_int1 <= ((ypos_int * 2) - (2 * 12));
+    ypos_int2 <= ((ypos_int * 2) + (2 * 12) - 1);
     -- then return to a vector output
     xpos_scl1 <= std_logic_vector(to_unsigned(xpos_int1, xpos_scl1'length));
     xpos_scl2 <= std_logic_vector(to_unsigned(xpos_int2, xpos_scl1'length));

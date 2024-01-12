@@ -1,3 +1,8 @@
+-------------------------------------------------------------------------------------------------------------
+-- multiplexor and memory to calculate both players' physics using only one instance of the physics system --
+-- don't believe the lies of the entity name this thing is not just a mux, and also somewhat janky		   --
+-------------------------------------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -107,7 +112,7 @@ begin
 	data_in8b1 <= px1m;
 	data_in8b2 <= py1m;
 
-	process(vcount)
+	process(vcount, clk)
 	begin
 		case sel is
 			when "0" =>

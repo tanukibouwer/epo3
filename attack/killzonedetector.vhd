@@ -43,7 +43,7 @@ end entity killzonedetector;
 
 
 -- 336, 240, 16, 16 boundaries van het zichtbare scherm: xmax, ymax, xmin, ymin
--- 480, 464, 368, 288 boundaries van de killzone: xmax, ymax, xmin, ymin
+-- 496, 464, 352, 288? boundaries van de killzone: xmax, ymax, xmin, ymin
 -- teleportation wordt gergeld door physics
 
 
@@ -135,7 +135,7 @@ begin
                 --				newvectorX1 <= oldvectorX1;
                 --				newvectorY1 <= oldvectorY1;
                 restart1 <= '0';
-                if ((oldvectorX1 > "101110000") and (oldvectorX1 < "111100000")) or ((oldvectorY1 > "100100000") and (oldvectorY1 < "111010000")) then -- boundaries killzone: xmax 480, ymax 464, xmin 368, ymin 288
+                if ((oldvectorX1 > "101100000") and (oldvectorX1 < "111110000")) or ((oldvectorY1 > "100100000") and (oldvectorY1 < "111010000")) then -- boundaries killzone: xmax 496, ymax 464, xmin 352, ymin 288
                     new_state1 <= detection1;
                 else
                     new_state1 <= hold1;
@@ -181,7 +181,7 @@ begin
                 --				newvectorX2 <= oldvectorX2;
                 --				newvectorY2 <= oldvectorY2;
                 restart2 <= '0';
-                if ((oldvectorX2 > "101110000") and (oldvectorX2 < "111100000")) or ((oldvectorY2 > "100100000") and (oldvectorY2 < "111010000")) then -- boundaries killzone: xmax 480, ymax 464, xmin 368, ymin 288
+                if ((oldvectorX2 > "101100000") and (oldvectorX2 < "111110000")) or ((oldvectorY2 > "100100000") and (oldvectorY2 < "111010000")) then -- boundaries killzone: xmax 496, ymax 464, xmin 352, ymin 288
                     new_state2 <= detection2;
                 else
                     new_state2 <= hold2;

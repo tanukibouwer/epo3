@@ -80,7 +80,7 @@ elsif (player_down_y > platform3_up_y and player_down_y < platform3_down_y) and
    vout_y <= (others => '0');
    on_floor <= '1';
 elsif unsigned(pin_y) > floor_y_up and unsigned(pin_y) < floor_y_down then -- Prevent integer underflow
-   pout_y <= std_logic_vector(floor_y);
+   pout_y <= std_logic_vector(floor_y_up);
    vout_y <= (others => '0');
    on_floor <= '1';
 else

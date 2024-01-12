@@ -166,7 +166,7 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 							direction1_y <= "00000000";						 
 							direction1_x <= "01000000";
 
-						else (10 < y_verschil and y_verschil <= 28) then						 
+						else
 							direction1_y <= "11000000";						 
 							direction1_x <= "00000000";
 						end if;
@@ -200,11 +200,11 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 						elsif (-4 <= y_verschil and y_verschil < 0) then						 
 							direction1_y <= "11000011";						 
 							direction1_x <= "00101101";
-
+							
 						elsif (y_verschil = 0) then						 
 							direction1_y <= "00000000";						 
 							direction1_x <= "01000000";
-
+							
 						elsif (0 < y_verschil and y_verschil < 4) then						 
 							direction1_y <= "00101101";						 
 							direction1_x <= "00101101";
@@ -849,7 +849,7 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 							direction1_y <= "00000000";						 
 							direction1_x <= "11000000";
 	
-						else (10 < y_verschil and y_verschil <= 28) then						 
+						else 						 
 							direction1_y <= "11000000";						 
 							direction1_x <= "00000000";
 						end if;
@@ -1181,7 +1181,7 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 							direction2_y <= "00000000";						 
 							direction2_x <= "01000000";
 	
-						else (10 < y_verschil and y_verschil <= 28) then						 
+						else					 
 							direction2_y <= "11000000";						 
 							direction2_x <= "00000000";
 						end if;
@@ -1866,7 +1866,7 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 							direction2_y <= "00000000";						 
 							direction2_x <= "11000000";
 		
-						else (10 < y_verschil and y_verschil <= 28) then						 
+						else
 							direction2_y <= "11000000";						 
 							direction2_x <= "00000000";
 						end if;

@@ -11,7 +11,7 @@ end jump_calculator;
 
 architecture behaviour of jump_calculator is
 
-constant	jump_velocity	: std_logic_vector := "1111110111"; -- -9
+constant	jump_velocity	: std_logic_vector := "1111110011"; -- -9
 
 begin
 

@@ -55,6 +55,6 @@ begin
     	count1 <= std_logic_vector(cur_count1);
 	count2 <= std_logic_vector(cur_count2);
 
-    
+-- misschien gwn extra state toevoegen in attack pressed waarbij die na de B state naar een soort counter state gaat en 3 seconden telt doormiddel van de vsync 180 keer (aangezien 60 fps) te doorlopen en daarna terug te gaan naar de neutral state    
 end architecture;
 

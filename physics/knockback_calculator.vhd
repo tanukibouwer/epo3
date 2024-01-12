@@ -13,7 +13,7 @@ entity p_knockback_calculator is
 end p_knockback_calculator;
 
 architecture behaviour of p_knockback_calculator is
-   constant balance_factor_x : std_logic_vector(4 downto 0) := "00100"; -- Signed
+   constant balance_factor_x : std_logic_vector(4 downto 0) := "00010"; -- Signed
    constant balance_factor_y : std_logic_vector(4 downto 0) := "00100"; -- Signed
    constant knockback_y_addition_const : std_logic_vector(7 downto 0) := "01000000"; -- Same format as knockback_y
    -- sorry :(

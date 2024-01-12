@@ -32,7 +32,8 @@ constant platform3_right_x : unsigned(8 downto 0) := to_unsigned(226, 9); -- 104
 constant platform3_up_y : unsigned(8 downto 0) := to_unsigned(90, 9); -- 43
 constant platform3_placement_y : unsigned(8 downto 0) := to_unsigned(78, 9); -- -6;
 constant platform3_down_y : unsigned(8 downto 0) := to_unsigned(116, 9); -- 54
-constant floor_y : unsigned(8 downto 0) := to_unsigned(202, 9); -- 214 - player_half_size.
+constant floor_y_up : unsigned(8 downto 0) := to_unsigned(202, 9); -- 214 - player_half_size.
+constant floor_y_down : unsigned (8 downto 0) := to_unsigned(276, 9); -- 288 - player_half_size.
 
 begin
 resolver : process (vin_y, pin_x, pin_y, input_down) is
@@ -78,7 +79,7 @@ elsif (player_down_y > platform3_up_y and player_down_y < platform3_down_y) and
    pout_y <= std_logic_vector(platform3_placement_y);
    vout_y <= (others => '0');
    on_floor <= '1';
-elsif unsigned(pin_y) > floor_y and unsigned(pin_y) > to_unsigned(3, 2) then -- Prevent integer underflow
+elsif unsigned(pin_y) > floor_y_up and unsigned(pin_y)< floor_y_down then -- Prevent integer underflow
    pout_y <= std_logic_vector(floor_y);
    vout_y <= (others => '0');
    on_floor <= '1';

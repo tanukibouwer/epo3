@@ -128,7 +128,11 @@ begin
 				data_in8b3            	<= pout_x;
 				data_in8b4            	<= pout_y;
 				if (vcount <= "0100000110") then
-					new_sel	<= "0";
+					if (vcount <= "0000000010") then
+						new_sel <= "1";
+					else
+						new_sel	<= "0";
+					end if;
 				else
 					new_sel <= "1";
 				end if;
@@ -150,7 +154,11 @@ begin
 				data_in8b3            	<= pout_x;
 				data_in8b4            	<= pout_y;
 				if (vcount <= "0100000110") then
-					new_sel	<= "0";
+					if (vcount <= "0000000010") then
+						new_sel <= "1";
+					else
+						new_sel	<= "0";
+					end if;
 				else
 					new_sel <= "1";
 				end if;
@@ -172,7 +180,11 @@ begin
 				data_in8b3            	<= pout_x;
 				data_in8b4            	<= pout_y;
 				if (vcount <= "0100000110") then
-					new_sel	<= "0";
+					if (vcount <= "0000000010") then
+						new_sel <= "1";
+					else
+						new_sel	<= "0";
+					end if;
 				else
 					new_sel <= "1";
 				end if;

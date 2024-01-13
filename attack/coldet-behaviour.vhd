@@ -158,11 +158,11 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 
 
 					elsif (x_verschil = 0) then
-						if (-28 <= y_verschil and y_verschil < -10 ) then						 
+						if (-28 <= y_verschil and y_verschil < -5 ) then						 
 							direction1_y <= "01000000";						 
 							direction1_x <= "00000000";
 
-						elsif (-10 <= y_verschil and y_verschil <= 10) then						 
+						elsif (-5 <= y_verschil and y_verschil <= 5) then						 
 							direction1_y <= "00000000";						 
 							direction1_x <= "01000000";
 
@@ -841,11 +841,11 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 					
 
 					elsif (x_verschil = 0) then
-						if (-28 <= y_verschil and y_verschil < -10 ) then						 
+						if (-28 <= y_verschil and y_verschil < -5 ) then						 
 							direction1_y <= "01000000";						 
 							direction1_x <= "00000000";
 	
-						elsif (-10 <= y_verschil and y_verschil <= 10) then						 
+						elsif (-5 <= y_verschil and y_verschil <= 5) then						 
 							direction1_y <= "00000000";						 
 							direction1_x <= "11000000";
 	
@@ -1173,11 +1173,11 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 
 
 					elsif (x_verschil = 0) then
-						if (-28 <= y_verschil and y_verschil < -10 ) then						 
+						if (-28 <= y_verschil and y_verschil < -5 ) then						 
 							direction2_y <= "01000000";						 
 							direction2_x <= "00000000";
 
-						elsif (-10 <= y_verschil and y_verschil <= 10) then						 
+						elsif (-5 <= y_verschil and y_verschil <= 5) then						 
 							direction2_y <= "00000000";						 
 							direction2_x <= "01000000";
 	
@@ -1858,11 +1858,11 @@ lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 					
 
 					elsif (x_verschil = 0) then
-						if (-28 <= y_verschil and y_verschil < -10 ) then						 
+						if (-28 <= y_verschil and y_verschil < -5 ) then						 
 							direction2_y <= "01000000";						 
 							direction2_x <= "00000000";
 
-						elsif (-10 <= y_verschil and y_verschil <= 10) then						 
+						elsif (-5 <= y_verschil and y_verschil <= 5) then						 
 							direction2_y <= "00000000";						 
 							direction2_x <= "11000000";
 		

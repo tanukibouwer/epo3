@@ -51,14 +51,14 @@ architecture behaviour of game_state_fsm is
 begin
     
 
-    process (clk, controller_in, killcountp1, killcountp2) -- state register -> ONLY REGISTER
+    process (clk) -- state register -> ONLY REGISTER
     begin
         if rising_edge(clk) then
             state <= new_state;
         end if;
     end process;
 
-    process (clk)
+    process (clk, controller_in, killcountp1, killcountp2)
     begin
         if rising_edge(clk) then
             if reset = '1' then 

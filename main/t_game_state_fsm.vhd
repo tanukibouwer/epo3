@@ -89,9 +89,9 @@ begin
            
                         reset_game <= '0';
 
-                    if (unsigned(killcountp1) >= 1) and (unsigned(killcountp1) > unsigned(killcountp2)) then
+                    if (unsigned(killcountp2) >= 1) and (unsigned(killcountp2) > unsigned(killcountp1)) then
                         new_state <= endscreen1;
-                    elsif (unsigned(killcountp2) >= 1) and (unsigned(killcountp2) > unsigned(killcountp1)) then
+                    elsif (unsigned(killcountp1) >= 1) and (unsigned(killcountp1) > unsigned(killcountp2)) then
                         new_state <= endscreen2;
                     elsif (unsigned(killcountp2) >= 1) and (unsigned(killcountp1) = 1) then
                         new_state <= endscreen3;

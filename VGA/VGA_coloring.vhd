@@ -529,6 +529,30 @@ begin
                     R_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                     G_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
                     B_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);
+                elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) and (game = '0') and (p1_wins = '0' and p2_wins = '0') then
+                    if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
+                        R_data <= "1001";
+                        G_data <= "0101";
+                        B_data <= "0101";
+                    elsif (uns_hcount > 407 and uns_hcount <= 420) then -- 2nd vertical line
+                        R_data <= "1100";
+                        G_data <= "0110";
+                        B_data <= "0110";
+                    else
+                        R_data <= "1110";
+                        G_data <= "0110";
+                        B_data <= "0110";
+                    end if;
+                elsif (uns_hcount > 143 and uns_hcount <= 783) and (game = '0') and (p1_wins = '0' and p2_wins = '0') then
+                    if (uns_hcount > 158 and uns_hcount <= 762) then -- darker colour
+                        R_data <= "1001";
+                        G_data <= "0101";
+                        B_data <= "0101";
+                    else -- part where you see through to the sky
+                        R_data <= "0000";
+                        G_data <= "1100";
+                        B_data <= "1111";
+                    end if;
                 --------------------------------------------------------------------------------
                 -- show platforms
                 --------------------------------------------------------------------------------

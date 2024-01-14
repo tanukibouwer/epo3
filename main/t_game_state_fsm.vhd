@@ -101,7 +101,7 @@ begin
 
 
                     when endscreen1 =>
-                        game <= '0';
+                        game <= '1';
       
                         p1_wins <= '1';
                         p2_wins <= '0';
@@ -116,7 +116,7 @@ begin
                     end if;
 
                     when endscreen2 =>
-                        game <= '0';
+                        game <= '1';
             
                         p1_wins <= '0';
                         p2_wins <= '1';
@@ -130,7 +130,7 @@ begin
                         end if;
 
                     when endscreen3 =>
-                        game <= '0';
+                        game <= '1';
 
                         p1_wins <= '1';
                         p2_wins <= '1';

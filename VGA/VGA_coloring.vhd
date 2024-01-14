@@ -526,9 +526,9 @@ begin
                 -- start screen, displays game title
                 ----------------------------------------------------------------------------
                 if (uns_hcount > 313 and uns_hcount <= 613) and (uns_vcount > 150 and uns_vcount <= 250) and (game = '0') and (p1_wins = '0' and p2_wins = '0') then
-                    R_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                    G_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                    B_data <= smashpo_logo(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);
+                    R_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(11 downto 8);
+                    G_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(7 downto 4);
+                    B_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(3 downto 0);
                 elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) and (game = '0') and (p1_wins = '0' and p2_wins = '0') then
                     if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                         R_data <= "1001";

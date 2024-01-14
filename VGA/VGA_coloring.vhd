@@ -564,17 +564,17 @@ begin
                     G_data <= "0110";
                     B_data <= "0110";
                     -- floating platforms
-                elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 314 and uns_vcount <= 318) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- platform 1, (10,69) --> (59,70)
+                elsif (uns_hcount > 183 and uns_hcount <= 379) and (uns_vcount > 314 and uns_vcount <= 318) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- platform 1, (10,69) --> (59,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                elsif (uns_hcount > 543 and uns_hcount <= 739) and (uns_vcount > 314 and uns_vcount <= 318) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- platform 2, (100,69) --> (149,70)
+                elsif (uns_hcount > 543 and uns_hcount <= 739) and (uns_vcount > 314 and uns_vcount <= 318) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- platform 2, (100,69) --> (149,70)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
                     B_data <= "1111";
-                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 182 and uns_vcount <= 186) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then-- platform 3, (55,36) --> (104,37)
+                elsif (uns_hcount > 363 and uns_hcount <= 559) and (uns_vcount > 182 and uns_vcount <= 186) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then-- platform 3, (55,36) --> (104,37)
                     -- color in hex: #FFFFFF
                     R_data <= "1111";
                     G_data <= "1111";
@@ -582,7 +582,7 @@ begin
                     --------------------------------------------------------------------------------
                     -- dynamic assignment of pixel colors due to character location
                     --------------------------------------------------------------------------------
-                elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- character 1
+                elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- character 1
                     -- color in hex: #41FF00
                     if (p1R = "0001" and p1G = "0001" and p1B = "0001") then
                         -- if (ch2x1 <= ch1x2 and ch2y1 <= ch1y2) then -- then check if the players are overlapped
@@ -638,7 +638,7 @@ begin
                         G_data <= p1G;
                         B_data <= p1B;
                     end if;
-                elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- character 2
+                elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- character 2
                     -- color in hex: #00FFFF
                     if (p2R = "0001" and p2G ="0001" and p2B = "0001") then
                         -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
@@ -703,7 +703,7 @@ begin
                     -- p1 percentage markings
                     --------------------------------------------------------------------------------
                     --143 to 183 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                    if (uns_hcount > int_p1dcbx and uns_hcount <= int_p1dcbx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1' or p1_wins = '1' or p2_wins = '1' ) then -- constant digit
+                    if (uns_hcount > int_p1dcbx and uns_hcount <= int_p1dcbx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1' and p1_wins = '0' and p2_wins = '0') or ((p1_wins = '1' or p2_wins = '1' ) and game = '0')) then -- constant digit
                         if (char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156) = "000100010001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -738,7 +738,7 @@ begin
                             G_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
                             B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
                         end if;
-                    elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- first digit --183 to 223 idem
+                    elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- first digit --183 to 223 idem
                         if (p1d1R = "0001" and p1d1G = "0001" and p1d1B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -773,11 +773,11 @@ begin
                             G_data <= p1d1G;
                             B_data <= p1d1B;
                         end if;
-                    elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (p1_wins = '1') then -- winner is p1 -> trophy sprite replaces digit 1, I want the rest of the digits to vanish is a player wins
+                    elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (p1_wins = '1' and game = '0') then -- p1 wins, no more digits
                             R_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
                             G_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
                             B_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
-                    elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- second digit --223 to 263 idem
+                    elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --223 to 263 idem
                         if (p1d2R = "0001" and p1d2G = "0001" and p1d2B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -812,7 +812,7 @@ begin
                             G_data <= p1d2G;
                             B_data <= p1d2B;
                         end if;
-                    elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- third digit --263 to 303 idem
+                    elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- third digit --263 to 303 idem
                         if (p1d3R = "0001" and p1d3G = "0001" and p1d3B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -851,7 +851,7 @@ begin
                     -- p2 percentage markings 
                     --------------------------------------------------------------------------------
                     --623 to 663 horizontale indeling, margins: 12 left and right & 28 up and bottom
-                    elsif (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1' or p1_wins = '1' or p2_wins = '1' ) then -- constant digit
+                    elsif (uns_hcount > int_p2dcbx and uns_hcount <= int_p2dcbx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1' and p1_wins = '0' and p2_wins = '0') or ((p1_wins = '1' or p2_wins = '1' ) and game = '0')) then -- constant digit
                         if (char2_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156) = "000100010001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -886,7 +886,7 @@ begin
                             G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);
                             B_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(3 downto 0);
                         end if;
-                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- first digit -- 663 to 703 idem
+                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- first digit -- 663 to 703 idem
                         if (p2d1R = "0001" and p2d1G = "0001" and p2d1B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -922,11 +922,11 @@ begin
                             B_data <= p2d1B;
                         end if;
 
-                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (p2_wins = '1') then -- p2 wins
+                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (p2_wins = '1' and game = '0') then -- p2 wins, no more digits
                             R_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(11 downto 8);
                             G_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(7 downto 4);
                             B_data <= trophy_sprite(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
-                    elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- second digit --703 to 743 idem
+                    elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --703 to 743 idem
                         if (p2d2R = "0001" and p2d2G = "0001" and p2d2B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
@@ -961,7 +961,7 @@ begin
                             G_data <= p2d2G;
                             B_data <= p2d2B;
                         end if;
-                    elsif (uns_hcount > int_p2d3bx and uns_hcount <= int_p2d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- third digit --743 to 783 idem
+                    elsif (uns_hcount > int_p2d3bx and uns_hcount <= int_p2d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- third digit --743 to 783 idem
                         if (p2d3R = "0001" and p2d3G = "0001" and p2d3B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);

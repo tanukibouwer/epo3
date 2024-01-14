@@ -12,5 +12,7 @@ configuration toplevel_cfg of chip_toplevel is
         end for;
         for all : t_8bregs use configuration work.t_8bregs_cfg;
         end for;
+        for all : game_state_fsm use configuration work.game_state_fsm_cfg;
+        end for;
     end for;
 end configuration toplevel_cfg;

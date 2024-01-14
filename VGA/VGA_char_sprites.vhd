@@ -451,9 +451,9 @@ begin
                         G_data <= jump_crouch_1(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(7 downto 4);
                         B_data <= jump_crouch_1(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(3 downto 0);
                     else --  if it is player 2 then show the sprite for player 2
-                        R_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - int_hcount - ((int_boundx + 0)))(11 downto 8);
-                        G_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - int_hcount - ((int_boundx + 0)))(7 downto 4);
-                        B_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - int_hcount - ((int_boundx + 0)))(3 downto 0);
+                        R_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - (int_hcount - (int_boundx + 0)))(11 downto 8);
+                        G_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - (int_hcount - (int_boundx + 0)))(7 downto 4);
+                        B_data <= jump_crouch_2(int_vcount - (int_boundy + 0))(sprite_x_length - (int_hcount - (int_boundx + 0)))(3 downto 0);
                     end if;
                 elsif orientation = '0' then -- show the sprite in verted to how it is drawn
                     if player = '0' then -- if it is player 1 then show the sprite for player 2

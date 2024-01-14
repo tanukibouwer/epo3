@@ -41,7 +41,12 @@ entity graphics_card is
         Hsync  : out std_logic; --! sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
         G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        B_data : out std_logic_vector(3 downto 0)  --! RGB data to screen
+        B_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+
+        -- game states
+        game : in std_logic;
+        p1_wins : in std_logic;
+        p2_wins : in std_logic
     );
 end entity graphics_card;
 
@@ -86,7 +91,12 @@ architecture structural of graphics_card is
             -- RGB data outputs
             R_data : out std_logic_vector(3 downto 0); --! RGB data output
             G_data : out std_logic_vector(3 downto 0); --! RGB data output
-            B_data : out std_logic_vector(3 downto 0)  --! RGB data output
+            B_data : out std_logic_vector(3 downto 0);  --! RGB data output
+
+             -- game states
+            game : in std_logic;
+            p1_wins : in std_logic;
+            p2_wins : in std_logic
     
         );
     end component;
@@ -107,7 +117,7 @@ begin
         char1x => char1_x, char1y => char1_y, char2x => char2_x, char2y => char2_y,
         percentage_p1 => percentage_p1, percentage_p2 => percentage_p2,
         orientationp1 => orientationp1, orientationp2 => orientationp2, controllerp1 => controllerp1, controllerp2 => controllerp2,
-        R_data => R_data, G_data => G_data, B_data => B_data
+        R_data => R_data, G_data => G_data, B_data => B_data, game => game, p1_wins => p1_wins, p2_wins => p2_wins
     );
     
     vcount <= vcount_int;

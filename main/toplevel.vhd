@@ -24,6 +24,12 @@ end chip_toplevel;
 
 architecture structural of chip_toplevel is
 
+    -- signals regarding to start and end screen
+    signal resetgameintern : std_logic;
+    signal gameintern : std_logic;
+    signal p1winsintern : std_logic;
+    signal p2winsintern : std_logic;
+
     -- knockback direction vectors as info from attack to physics
     signal dirx1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
     signal dirx2new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
@@ -169,26 +175,56 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
             -- inputs from memory -> relevant data to be displayed on screen
-            char1_x       : in std_logic_vector(8 downto 0); -- character 1 x-location
-            char1_y       : in std_logic_vector(8 downto 0); -- character 1 y-location
-            char2_x       : in std_logic_vector(8 downto 0); -- character 2 x-location
-            char2_y       : in std_logic_vector(8 downto 0); -- character 2 y-location
+            char1_x       : in std_logic_vector(8 downto 0); --! character 1 x-location
+            char1_y       : in std_logic_vector(8 downto 0); --! character 1 y-location
+            char2_x       : in std_logic_vector(8 downto 0); --! character 2 x-location
+            char2_y       : in std_logic_vector(8 downto 0); --! character 2 y-location
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
             -- inputs from attack and input
-            controllerp1  : in std_logic_vector(7 downto 0);
-            controllerp2  : in std_logic_vector(7 downto 0);
+            controllerp1 : in std_logic_vector(7 downto 0);
+            controllerp2 : in std_logic_vector(7 downto 0);
             orientationp1 : in std_logic;
             orientationp2 : in std_logic;
             -- outputs to screen (and other components)
-			hcount : out std_logic_vector(9 downto 0);
+            hcount : out std_logic_vector(9 downto 0);
             vcount : out std_logic_vector(9 downto 0);
-            Vsync  : out std_logic;                     -- sync signals -> active low
-            Hsync  : out std_logic;                     -- sync signals -> active low
-            R_data : out std_logic_vector(3 downto 0);  -- RGB data to screen
-            G_data : out std_logic_vector(3 downto 0);  -- RGB data to screen
-            B_data : out std_logic_vector(3 downto 0)); -- RGB data to screen
-    end component graphics_card;
+            Vsync  : out std_logic; --! sync signals -> active low
+            Hsync  : out std_logic; --! sync signals -> active low
+            R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+            G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+            B_data : out std_logic_vector(3 downto 0);  --! RGB data to screen
+    
+            -- game states
+            game : in std_logic;
+            p1_wins : in std_logic;
+            p2_wins : in std_logic
+        );
+    end component;
+
+    component game_state_fsm is
+        port (
+            clk    : in std_logic;
+            reset  : in std_logic;
+    
+            -- controller input signal, player 1 controls start menu! (see top level)
+            controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
+    
+            --killcounters
+            killcountp1 : in std_logic_vector(3 downto 0);
+            killcountp2 : in std_logic_vector(3 downto 0);
+            
+            -- reset to freeze the game at the start of the game
+            reset_game : out std_logic;
+            
+    
+            -- game states
+            game : out std_logic;
+            p1_wins : out std_logic;
+            p2_wins : out std_logic
+    
+        );
+    end component;
 
     component memory is
         port (
@@ -287,11 +323,15 @@ begin
         Hsync         => Hsync,
         R_data        => R_data,
         G_data        => G_data,
-        B_data        => B_data
+        B_data        => B_data,
+        game => gameintern,
+        p1_wins => p1winsintern,
+        p2_wins => p2winsintern
+
     );
     TL02 : physics_top port map(
 		clk					 => clk,
-		reset				 => reset,
+		reset				 => resetgameintern, --freezes the game in start/end screen
 		vcount 				 => vcountintern,
 		hcount 				 => hcountintern,
         vin_x                => char1velx,
@@ -319,10 +359,26 @@ begin
         pout_x2               => char2posxin,
         pout_y2               => char2posyin
     );
+
+    
+    TL03: game_state_fsm port map(
+        clk => clk,
+        reset => reset,
+        controller_in => inputsp1,
+        killcountp1 => char1dc,
+        killcountp2 => char2dc,
+        reset_game => resetgameintern,
+        game => gameintern,
+        p1_wins => p1winsintern,
+        p2_wins => p2winsintern
+
+    );
+
+
     ATT1 : topattack port map(
         -- timing signals
         clk   => clk,
-        res   => reset,
+        res   => resetgameintern, --freezes the game in start/end screen
         vsync => vsyncintern,
         -- data input
         controller1   => inputsp1,

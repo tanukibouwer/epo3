@@ -89,11 +89,11 @@ begin
            
                         reset_game <= '0';
 
-                    if (unsigned(killcountp1) >= 10) and (killcountp1 > killcountp2) then
+                    if (unsigned(killcountp1) >= 1) and (unsigned(killcountp1) > unsigned(killcountp2)) then
                         new_state <= endscreen1;
-                    elsif (unsigned(killcountp2) >= 10) and (killcountp2 > killcountp1) then
+                    elsif (unsigned(killcountp2) >= 1) and (unsigned(killcountp2) > unsigned(killcountp1)) then
                         new_state <= endscreen2;
-                    elsif (unsigned(killcountp2) >= 10) and (unsigned(killcountp1) >= 10) then
+                    elsif (unsigned(killcountp2) >= 1) and (unsigned(killcountp1) = 1) then
                         new_state <= endscreen3;
                     else
                         new_state <= gamescreen;
@@ -101,7 +101,7 @@ begin
 
 
                     when endscreen1 =>
-                        game <= '1';
+                        game <= '0';
       
                         p1_wins <= '1';
                         p2_wins <= '0';
@@ -116,7 +116,7 @@ begin
                     end if;
 
                     when endscreen2 =>
-                        game <= '1';
+                        game <= '0';
             
                         p1_wins <= '0';
                         p2_wins <= '1';
@@ -130,7 +130,7 @@ begin
                         end if;
 
                     when endscreen3 =>
-                        game <= '1';
+                        game <= '0';
 
                         p1_wins <= '1';
                         p2_wins <= '1';

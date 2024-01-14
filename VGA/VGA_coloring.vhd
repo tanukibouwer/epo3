@@ -888,7 +888,7 @@ begin
                             G_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(7 downto 4);
                             B_data <= char2_digc(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - 635)(3 downto 0);
                         end if;
-                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (p1_wins = '0' and p2_wins = '0') then -- first digit -- 663 to 703 idem
+                    elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and (game = '1') and (p1_wins = '0' and p2_wins = '0') then -- first digit -- 663 to 703 idem
                         if (p2d1R = "0001" and p2d1G = "0001" and p2d1B = "0001") then
                             -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
                             -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);

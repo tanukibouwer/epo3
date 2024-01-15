@@ -120,10 +120,17 @@ begin
                 newpercentage1 <= std_logic_vector(s2);
                 percentage1 <= oldpercentage1;
                 
-                s9 <= s1;
+                if (s1 < to_unsigned(15, 8)) then
+                    s9 <= to_unsigned(15, 8);
+		else
+			s9 <= s1;
+		end if;
                 
                 new_state1 <= neutral1; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-            when damageB1 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+            	
+		
+
+	    when damageB1 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
                 s2             <= s1 + to_unsigned(10, 8); --adding the value 10 to the old percentage to get the new percentage -- deze waarde willen we wss nog wel aanpassen afhankelijk van hoe op deze move is of hoe moeilijk deze move is
                 newpercentage1 <= std_logic_vector(s2);
                 percentage1    <= std_logic_vector(s9);
@@ -169,7 +176,11 @@ begin
                 percentage2    <= oldpercentage2;
                 newpercentage2 <= std_logic_vector(s4);
 
-                s10 <= s3;
+                if (s3 < to_unsigned(15, 8)) then
+                    s10 <= to_unsigned(15, 8);
+		else
+			s10 <= s3;
+		end if;
 
                 new_state2     <= neutral2; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
             when damageB2 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)

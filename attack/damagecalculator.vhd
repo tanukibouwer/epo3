@@ -118,7 +118,7 @@ begin
             when damageA1 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
                 s2          <= s1 + to_unsigned(5, 8); --adding the value 5 to the old percentage to get the new percentage
                 newpercentage1 <= std_logic_vector(s2);
-                percentage1 <= oldpercentage1;
+                percentage1    <= std_logic_vector(s9);
                 
                 if (s1 < to_unsigned(15, 8)) then
                     s9 <= to_unsigned(15, 8);
@@ -173,7 +173,7 @@ begin
                 end if;
             when damageA2 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
                 s4             <= s3 + to_unsigned(5, 8); --adding the value 5 to the old percentage to get the new percentage
-                percentage2    <= oldpercentage2;
+                percentage2    <= std_logic_vector(s10);
                 newpercentage2 <= std_logic_vector(s4);
 
                 if (s3 < to_unsigned(15, 8)) then

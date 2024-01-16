@@ -323,12 +323,6 @@ begin
         data_in8b2  => char1posyin,
         data_in8b3  => char2posxin,
         data_in8b4  => char2posyin,
-		  
-		  --data_in8b1  => "001000110",
-        --data_in8b2  => "001100100",
-        --data_in8b3  => "011111010",
-        --data_in8b4  => "001100100",
-		  
         data_out8b1 => char1posx,
         data_out8b2 => char1posy,
         data_out8b3 => char2posx,
@@ -338,12 +332,6 @@ begin
         data_in9b2  => char1velyin,
         data_in9b3  => char2velxin,
         data_in9b4  => char2velyin,
- 
-        --data_in9b1  => "000000000",
-        --data_in9b2  => "000000000",
-        --data_in9b3  => "000000000",
-        --data_in9b4  => "000000000",
-		  
 		  data_out9b1 => char1velx,
         data_out9b2 => char1vely,
         data_out9b3 => char2velx,

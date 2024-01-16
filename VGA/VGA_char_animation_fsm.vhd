@@ -27,7 +27,7 @@ entity char_animation_fsm is
         hcount : in std_logic_vector(9 downto 0); -- horizontal line counter
 
         -- controller input signal
-        controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down
+        controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = a, bit 5 = b
 
         -- sprite output value
         sprite        : out std_logic_vector(1 downto 0)  
@@ -48,7 +48,7 @@ architecture behaviour of char_animation_fsm is
     signal cnt_reset     : std_logic;
     signal frame_count : std_logic_vector(4 downto 0);
     type sprite_state is (
-        idle, duck, jump, run_frame1, run_frame2
+        idle, duck, jump, run_frame1, run_frame2, attack
     );
     signal state, new_state : sprite_state;
 
@@ -80,12 +80,15 @@ begin
                         -- numstate <= "1111001"; --1
                         cnt_reset <= '1';
                         sprite    <= "00"; -- set sprite to idle
-                        if (controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                        if (controller_in(3 downto 0) = "1000" or controller_in(3 downto 0) = "1001" or controller_in(3 downto 0) = "1010" or controller_in(3 downto 0) = "1011") then -- make sure that going to duck is prioritised
                             new_state <= duck;
-                        elsif (controller_in = "00000100" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111") then -- second priority is the jump animation
+                        elsif (controller_in(4) = '1' or controller_in(5) = '1') then
+                            cnt_reset <=  '1';
+                            new_state <= attack;
+                        elsif (controller_in(3 downto 0) = "00000100" or controller_in(3 downto 0) = "0110" or controller_in(3 downto 0) = "0101" or controller_in(3 downto 0) = "0111") then -- second priority is the jump animation
                             cnt_reset <= '0';
                             new_state <= jump;
-                        elsif (controller_in = "00000001" or controller_in = "00000010") then -- go to the run animation only when left or right is pressed
+                        elsif (controller_in(3 downto 0) = "0001" or controller_in(3 downto 0) = "0010") then -- go to the run animation only when left or right is pressed
                             cnt_reset <= '0';
                             new_state <= run_frame1;
                         else -- remain in idle whenever nothing is pressed
@@ -95,12 +98,15 @@ begin
                         -- numstate <= "0100100"; --2
                         cnt_reset <= '1';
                         sprite    <= "01"; -- set sprite to duck
-                        if (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
+                        if (controller_in(3 downto 0) = "0000" or controller_in(3 downto 0) = "0011") then -- back to idle when nothing is pressed
                             new_state <= idle;
-                        elsif (controller_in = "00000001" or controller_in = "00000010") then -- go to the run animation only when left or right is pressed
+                        elsif (controller_in(4) = '1' or controller_in(5) = '1') then
+                            cnt_reset <=  '1';
+                            new_state <= attack;
+                        elsif (controller_in(3 downto 0) = "0001" or controller_in(3 downto 0) = "0010") then -- go to the run animation only when left or right is pressed
                             cnt_reset <= '0';
                             new_state <= run_frame1;
-                        elsif (controller_in = "00000100" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111") then 
+                        elsif (controller_in(3 downto 0) = "0100" or controller_in(3 downto 0) = "0110" or controller_in(3 downto 0) = "0101" or controller_in(3 downto 0) = "0111") then 
                             cnt_reset <= '0';
                             new_state <= jump;
                         else
@@ -113,13 +119,16 @@ begin
                         if unsigned(frame_count) >= 3 then
                             cnt_reset <= '1';
                             new_state <= run_frame2;
-                        elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
+                        elsif (controller_in(3 downto 0) = "0000" or controller_in(3 downto 0) = "0011") then -- back to idle when nothing is pressed
                             cnt_reset <= '1';
                             new_state <= idle;
-                        elsif (controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                        elsif (controller_in(4) = '1' or controller_in(5) = '1') then
+                            cnt_reset <=  '1';
+                            new_state <= attack;
+                        elsif (controller_in(3 downto 0) = "1000" or controller_in(3 downto 0) = "1001" or controller_in(3 downto 0) = "1010" or controller_in(3 downto 0) = "1011") then -- make sure that going to duck is prioritised
                             cnt_reset <= '1';
                             new_state <= duck;
-                        elsif (controller_in = "00000100" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111") then -- second priority is the jump animation
+                        elsif (controller_in(3 downto 0) = "0100" or controller_in(3 downto 0) = "0110" or controller_in(3 downto 0) = "0101" or controller_in(3 downto 0) = "0111") then -- second priority is the jump animation
                             cnt_reset <= '0';
                             new_state <= jump;
                         else
@@ -133,13 +142,16 @@ begin
                         if unsigned(frame_count) >= 3 then
                             cnt_reset <= '1';
                             new_state <= run_frame1;
-                        elsif (controller_in = "00000000" or controller_in = "00000011") then -- back to idle when nothing is pressed
+                        elsif (controller_in(3 downto 0) = "0000" or controller_in(3 downto 0) = "0011") then -- back to idle when nothing is pressed
                             cnt_reset <= '1';
                             new_state <= idle;
-                        elsif (controller_in = "00001000" or controller_in = "00001001" or controller_in = "00001010" or controller_in = "00001011") then -- make sure that going to duck is prioritised
+                        elsif (controller_in(4) = '1' or controller_in(5) = '1') then
+                            cnt_reset <=  '1';
+                            new_state <= attack;
+                        elsif (controller_in(3 downto 0) = "1000" or controller_in(3 downto 0) = "1001" or controller_in(3 downto 0) = "1010" or controller_in(3 downto 0) = "1011") then -- make sure that going to duck is prioritised
                             cnt_reset <= '1';
                             new_state <= duck;
-                        elsif (controller_in = "00000100" or controller_in = "00000110" or controller_in = "00000101" or controller_in = "00000111") then -- second priority is the jump animation
+                        elsif (controller_in(3 downto 0) = "0100" or controller_in(3 downto 0) = "0110" or controller_in(3 downto 0) = "0101" or controller_in(3 downto 0) = "0111") then -- second priority is the jump animation
                             cnt_reset <= '0';
                             new_state <= jump;
                         else
@@ -151,7 +163,7 @@ begin
                         sprite <= "01";
                         if unsigned(frame_count) >= 10 then
                             cnt_reset <= '1';
-                            if (controller_in = "00001011" or controller_in = "00001010" or controller_in = "00001001" or controller_in = "00001000" or controller_in = "00000011" or controller_in = "00000010" or controller_in = "00000001"  or controller_in = "00000000")  then
+                            if (controller_in(3 downto 0) = "1011" or controller_in(3 downto 0) = "1010" or controller_in(3 downto 0) = "1001" or controller_in(3 downto 0) = "1000" or controller_in(3 downto 0) = "0011" or controller_in(3 downto 0) = "0010" or controller_in(3 downto 0) = "0001"  or controller_in(3 downto 0) = "0000")  then
                                 new_state <=  idle;
                             else
                                 new_state <= jump;
@@ -159,6 +171,24 @@ begin
                         else
                             cnt_reset <= '0';
                             new_state <= jump;
+                        end if;
+                    when attack => 
+                        cnt_reset <= '1';
+                        sprite <= "11";
+                        if (controller_in(3 downto 0) = "1000" or controller_in(3 downto 0) = "1001" or controller_in(3 downto 0) = "1010" or controller_in(3 downto 0) = "1011") then -- make sure that going to duck is prioritised
+                            cnt_reset <= '1';
+                            new_state <= duck;
+                        elsif (controller_in(3 downto 0) = "0000" or controller_in(3 downto 0) = "0011") then -- back to idle when nothing is pressed
+                            cnt_reset <=  '1';
+                            new_state <= idle;
+                        elsif (controller_in(3 downto 0) = "0001" or controller_in(3 downto 0) = "0010") then -- go to the run animation only when left or right is pressed
+                            cnt_reset <= '0';
+                            new_state <= run_frame1;
+                        elsif (controller_in(3 downto 0) = "0100" or controller_in(3 downto 0) = "0110" or controller_in(3 downto 0) = "0101" or controller_in(3 downto 0) = "0111") then 
+                            cnt_reset <= '0';
+                            new_state <= jump;
+                        else
+                            new_state <= attack;
                         end if;
                     when others =>
                         cnt_reset <= '1';

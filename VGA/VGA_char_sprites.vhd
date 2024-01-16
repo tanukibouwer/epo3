@@ -387,6 +387,8 @@ architecture behavioural of char_sprites is
         (("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111")), 
         (("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111")) 
     ); 
+    constant attack_1 : char_sprite_y := 
+    constant attack_2 : char_sprite_y :=
 begin
     -- int_hcount <= to_integer(unsigned(hcount));
     -- int_vcount <= to_integer(unsigned(vcount));
@@ -496,6 +498,32 @@ begin
                     G_data <= "0000";
                     B_data <= "0000";    
                 end if;
+            when "11" => 
+            if orientation = '1' then -- show the sprite how it is drawn
+                if player = '0' then -- if it is player 1 then show the sprite for player 2
+                    R_data <= attack_1(int_vcount - (int_boundy))(int_hcount - (int_boundx))(11 downto 8);
+                    G_data <= attack_1(int_vcount - (int_boundy))(int_hcount - (int_boundx))(7 downto 4);
+                    B_data <= attack_1(int_vcount - (int_boundy))(int_hcount - (int_boundx))(3 downto 0);
+                else --  if it is player 2 then show the sprite for player 2
+                    R_data <= attack_2(int_vcount - (int_boundy))(sprite_x_length - (int_hcount - (int_boundx)))(11 downto 8);
+                    G_data <= attack_2(int_vcount - (int_boundy))(sprite_x_length - (int_hcount - (int_boundx)))(7 downto 4);
+                    B_data <= attack_2(int_vcount - (int_boundy))(sprite_x_length - (int_hcount - (int_boundx)))(3 downto 0);
+                end if;
+            elsif orientation = '0' then -- show the sprite in verted to how it is drawn
+                if player = '0' then -- if it is player 1 then show the sprite for player 2
+                    R_data <= attack_1((int_vcount - (int_boundy)))(sprite_x_length - (int_hcount - (int_boundx)))(11 downto 8);
+                    G_data <= attack_1((int_vcount - (int_boundy)))(sprite_x_length - (int_hcount - (int_boundx)))(7 downto 4);
+                    B_data <= attack_1((int_vcount - (int_boundy)))(sprite_x_length - (int_hcount - (int_boundx)))(3 downto 0);
+                else --  if it is player 2 then show the sprite for player 2
+                    R_data <= attack_2((int_vcount - (int_boundy)))(int_hcount - (int_boundx))(11 downto 8);
+                    G_data <= attack_2((int_vcount - (int_boundy)))(int_hcount - (int_boundx))(7 downto 4);
+                    B_data <= attack_2((int_vcount - (int_boundy)))(int_hcount - (int_boundx))(3 downto 0);
+                end if;
+            else 
+                R_data <= "0000";
+                G_data <= "0000";
+                B_data <= "0000";    
+            end if;
 
             when others =>
                 R_data <= "0000";

@@ -228,7 +228,8 @@ architecture structural of chip_toplevel is
 
 
             -- controller input signal, player 1 controls start menu! (see top level)
-            controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
+            controller_in1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
+				controller_in2 : in std_logic_vector(7 downto 0);
 
 
             --killcounters
@@ -399,7 +400,8 @@ begin
     TL03: game_state_fsm port map(
         clk => clk,
         reset => reset,
-        controller_in => inputsp1,
+        controller_in1 => inputsp1,
+		  controller_in2 => inputsp2,
         killcountp1 => char1dcin,
         killcountp2 => char2dcin,
         reset_game => resetgameintern,

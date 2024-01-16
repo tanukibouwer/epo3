@@ -22,9 +22,10 @@ entity game_state_fsm is
         clk    : in std_logic;
         reset  : in std_logic;
 
-        -- controller input signal, player 1 controls start menu! (see top level)
-        controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
-
+        -- controller input signa
+        controller_in1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
+		  controller_in2 : in std_logic_vector(7 downto 0);
+		  
         --killcounters
         killcountp1 : in std_logic_vector(3 downto 0);
         killcountp2 : in std_logic_vector(3 downto 0);
@@ -58,7 +59,7 @@ begin
         end if;
     end process;
 
-    process (clk, controller_in, killcountp1, killcountp2)
+    process (clk, controller_in1, controller_in2, killcountp1, killcountp2)
     begin
         if rising_edge(clk) then
             if reset = '1' then 
@@ -73,7 +74,7 @@ begin
                         reset_game <= '1';
                    
 
-                    if (controller_in = "01000000") then
+                    if (controller_in1(6) = '1' or controller_in2(6) = '1') then
                         new_state <= gamescreen;
                     else
                         new_state <= startscreen;
@@ -109,7 +110,7 @@ begin
    
                         reset_game <= '0';
 
-                    if (controller_in = "10000000") then
+                    if (controller_in1(7) = '1' or controller_in2(7) = '1') then
                         new_state <= startscreen;
                     else
                         new_state <= endscreen1;
@@ -123,7 +124,7 @@ begin
                         
                         reset_game <= '0';
 
-                        if (controller_in = "10000000") then
+                        if (controller_in1(7) = '1' or controller_in2(7) = '1') then
                             new_state <= startscreen;
                         else
                             new_state <= endscreen2;
@@ -137,7 +138,7 @@ begin
                         
                         reset_game <= '0';
 
-                        if (controller_in = "10000000") then
+                        if (controller_in1(7) = '1' or controller_in2(7) = '1') then
                             new_state <= startscreen;
                         else
                             new_state <= endscreen3;

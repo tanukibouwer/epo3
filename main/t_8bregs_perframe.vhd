@@ -11,7 +11,7 @@ entity t_8bregs_perframe is
         vec_in  : in std_logic_vector(7 downto 0);
         vec_out : out std_logic_vector(7 downto 0)
     );
-end entity t_8bregs;
+end entity t_8bregs_perframe;
 
 architecture rtl of t_8bregs_perframe is
 

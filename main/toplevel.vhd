@@ -472,33 +472,33 @@ begin
         vec_out => diry2new2
     );
 
-    buf7 : t_4bregs port map(
-        clk     => clk,
-        reset   => vsyncintern,
-        vec_in  => char1dc,
-        vec_out => char1dc_buff
-    );
+    -- buf7 : t_4bregs port map(
+    --     clk     => clk,
+    --     reset   => vsyncintern,
+    --     vec_in  => char1dc,
+    --     vec_out => char1dc_buff
+    -- );
 
-    buf8 : t_4bregs port map(
-        clk     => clk,
-        reset   => vsyncintern,
-        vec_in  => char2dc,
-        vec_out => char2dc_buff
-    );
+    -- buf8 : t_4bregs port map(
+    --     clk     => clk,
+    --     reset   => vsyncintern,
+    --     vec_in  => char2dc,
+    --     vec_out => char2dc_buff
+    -- );
 
-    buf9 : t_4bregs port map(
-        clk     => clk,
-        reset   => vsyncintern,
-        vec_in  => char1dcin,
-        vec_out => char1dcin_buff
-    );
+    -- buf9 : t_4bregs port map(
+    --     clk     => clk,
+    --     reset   => vsyncintern,
+    --     vec_in  => char1dcin,
+    --     vec_out => char1dcin_buff
+    -- );
 
-    buf10 : t_4bregs port map(
-        clk     => clk,
-        reset   => vsyncintern,
-        vec_in  => char2dcin,
-        vec_out => char2dcin_buff
-    );
+    -- buf10 : t_4bregs port map(
+    --     clk     => clk,
+    --     reset   => vsyncintern,
+    --     vec_in  => char2dcin,
+    --     vec_out => char2dcin_buff
+    -- );
     --------------------------------------------------------------------------------
     TL04 : input_toplevel port map(
         clk              => clk,

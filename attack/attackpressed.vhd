@@ -104,7 +104,7 @@ begin
                 output1B <= '0';
 		if vsync = '0' then
 			if (cur_count1 < "1111000" ) then
-				new_count1 <= cur_count1 + 1;
+				new_count1 <= cur_count1 + "0000001";
 				new_state1 <= count1;
 			else
 				new_count1 <= (others => '0');
@@ -185,7 +185,7 @@ begin
                 output2B <= '0';
 		if vsync = '0' then
 			if (cur_count2 < "1111000" ) then
-				new_count2 <= cur_count2 + 1;
+				new_count2 <= cur_count2 + "0000001";
 				new_state2 <= count2;
 			else
 				new_count2 <= (others => '0');

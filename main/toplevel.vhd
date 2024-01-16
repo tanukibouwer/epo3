@@ -26,6 +26,9 @@ entity chip_toplevel is
         -- test outputs
         test_out : out std_logic_vector(9 downto 0);
 
+		  -- uncomment this and comment rgb and test_out for the chip
+		  --gp_outputs : out std_logic_vector(11 downto 0);
+		  
         -- controllers
         controller_latch : out std_logic;
         controller_clk   : out std_logic
@@ -543,7 +546,7 @@ begin
 				test_out(7 downto 4) <= char1dcin;
 				test_out(3 downto 0) <= char1dc_buff;
           when "00101" =>
-
+            test_out <= "0000000000";
           when "00110" =>
             test_out(9 downto 8) <= "00";
 				test_out(7 downto 4) <= char2dcin;
@@ -604,6 +607,9 @@ begin
             test_out <= "1111111111";
         end case;
       else
+		  --gp_outputs(11 downto 8) <= R_data;
+		  --gp_outputs(7 downto 4) <= G_data;
+		  --gp_outputs(3 downto 0) <= B_data;
         test_out <= "0000000000";
       end if;
     end process;

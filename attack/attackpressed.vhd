@@ -64,6 +64,7 @@ begin
             when neutral1 =>
                 output1A <= '0';
                 output1B <= '0';
+		new_count1 <= (others => '0');
                 if (input1(4 downto 4) = "1") and (input1(5 downto 5) = "0") then
                     new_state1 <= holdA1;
                 elsif (input1(4 downto 4) = "0") and (input1(5 downto 5) = "1") then
@@ -75,6 +76,7 @@ begin
             when holdA1 =>
                 output1A <= '0';
                 output1B <= '0';
+		new_count1 <= (others => '0');
                 if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "1") then
                     new_state1 <= A1;
                 elsif (input1(4 downto 4) = "0") and (input1(5 downto 5) = "0") then
@@ -86,6 +88,7 @@ begin
             when holdB1 =>
                 output1A <= '0';
                 output1B <= '0';
+		new_count1 <= (others => '0');
                 if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "0") then
                     --wait 500 ms; -- dit werkt sws nie met synthesis maar miss wel
                     new_state1 <= count1;
@@ -101,7 +104,7 @@ begin
                 output1B <= '0';
 		if vsync = '0' then
 			if (cur_count1 < "1111000" ) then
-				new_count1 <= cur_count1 + 1;
+				new_count1 <= cur_count1 + "0000001";
 				new_state1 <= count1;
 			else
 				new_count1 <= (others => '0');
@@ -116,6 +119,7 @@ begin
             when A1 =>
                 output1A   <= '1';
                 output1B   <= '0';
+		new_count1 <= (others => '0');
 				if vsync = '0' then
 					new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else
@@ -125,6 +129,7 @@ begin
             when B1 =>
                 output1A   <= '0';
                 output1B   <= '1';
+		new_count1 <= (others => '0');
                 if vsync = '0' then
 					new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else
@@ -140,6 +145,7 @@ begin
             when neutral2 =>
                 output2A <= '0';
                 output2B <= '0';
+		new_count2 <= (others => '0');
                 if (input2(4 downto 4) = "1") and (input2(5 downto 5) = "0") then
                     new_state2 <= holdA2;
                 elsif (input2(4 downto 4) = "0") and (input2(5 downto 5) = "1") then
@@ -151,6 +157,7 @@ begin
             when holdA2 =>
                 output2A <= '0';
                 output2B <= '0';
+		new_count2 <= (others => '0');
                 if (input2(4 downto 4) = "0") and (input2(5 downto 5) = "1") then
                     new_state2 <= A2;
                 elsif (input2(4 downto 4) = "0") and (input2(5 downto 5) = "0") then
@@ -162,6 +169,7 @@ begin
             when holdB2 =>
                 output2A <= '0';
                 output2B <= '0';
+		new_count2 <= (others => '0');
                 if (input2(4 downto 4) = "0") and (input2(5 downto 5) = "0") then
                     --wait 500 ms; -- dit werkt sws nie met synthesis maar miss wel
                     new_state2 <= count2;
@@ -177,7 +185,7 @@ begin
                 output2B <= '0';
 		if vsync = '0' then
 			if (cur_count2 < "1111000" ) then
-				new_count2 <= cur_count2 + 1;
+				new_count2 <= cur_count2 + "0000001";
 				new_state2 <= count2;
 			else
 				new_count2 <= (others => '0');
@@ -190,6 +198,7 @@ begin
             when A2 =>
                 output2A   <= '1';
                 output2B   <= '0';
+		new_count2 <= (others => '0');
                 if vsync = '0' then
 					new_state2 <= neutral2; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else
@@ -199,6 +208,7 @@ begin
             when B2 =>
                 output2A   <= '0';
                 output2B   <= '1';
+		new_count2 <= (others => '0');
 				if vsync = '0' then
 					new_state2 <= neutral2; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
 				else

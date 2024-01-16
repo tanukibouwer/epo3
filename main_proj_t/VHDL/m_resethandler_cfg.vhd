@@ -1,1 +1,0 @@
-../../memory/m_resethandler_cfg.vhd

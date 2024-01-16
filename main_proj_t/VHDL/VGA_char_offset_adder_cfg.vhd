@@ -1,1 +1,0 @@
-../../VGA/VGA_char_offset_adder_cfg.vhd

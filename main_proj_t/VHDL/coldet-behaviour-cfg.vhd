@@ -1,1 +1,0 @@
-../../attack/coldet-behaviour-cfg.vhd

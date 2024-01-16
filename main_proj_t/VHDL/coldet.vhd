@@ -1,1 +1,0 @@
-../../attack/coldet.vhd

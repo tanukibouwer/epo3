@@ -143,12 +143,8 @@ architecture structural of chip_toplevel is
         );
     end component;
 
-    component physics_top is
+    component physics_system is
         port (
-			clk					 : in std_logic;
-			reset				 : in std_logic;
-			vcount 				 : in std_logic_vector(9 downto 0);
-			hcount 				 : in std_logic_vector(9 downto 0);
             vin_x                : in std_logic_vector(9 downto 0);
             vin_y                : in std_logic_vector(9 downto 0);
             pin_x                : in std_logic_vector(8 downto 0);
@@ -160,20 +156,8 @@ architecture structural of chip_toplevel is
             vout_x               : out std_logic_vector(9 downto 0);
             vout_y               : out std_logic_vector(9 downto 0);
             pout_x               : out std_logic_vector(8 downto 0);
-            pout_y               : out std_logic_vector(8 downto 0);
-			vin_x2               : in std_logic_vector(9 downto 0);
-            vin_y2               : in std_logic_vector(9 downto 0);
-            pin_x2                : in std_logic_vector(8 downto 0);
-            pin_y2                : in std_logic_vector(8 downto 0);
-            player2_input         : in std_logic_vector(7 downto 0);
-            knockback_percentage2 : in std_logic_vector(7 downto 0);
-            knockback_x2          : in std_logic_vector(7 downto 0);
-            knockback_y2          : in std_logic_vector(7 downto 0);
-            vout_x2               : out std_logic_vector(9 downto 0);
-            vout_y2               : out std_logic_vector(9 downto 0);
-            pout_x2               : out std_logic_vector(8 downto 0);
-            pout_y2               : out std_logic_vector(8 downto 0));
-    end component physics_top;
+            pout_y               : out std_logic_vector(8 downto 0));
+    end component physics_system;
 
     component graphics_card is
         port (
@@ -343,7 +327,7 @@ begin
         p2_wins => p2winsintern
 
     );
-    TL02 : physics_top port map(
+    TL02 : physics_system port map (
 		clk					 => clk,
 		reset				 => resetgameintern, --freezes the game in start/end screen
 		vcount 				 => vcountintern,
@@ -359,20 +343,21 @@ begin
         vout_x               => char1velxin,
         vout_y               => char1velyin,
         pout_x               => char1posxin,
-        pout_y               => char1posyin,
-        vin_x2                => char2velx,
-        vin_y2                => char2vely,
-        pin_x2                => char2posx,
-        pin_y2                => char2posy,
-        player2_input         => inputsp2,
-        knockback_percentage2 => char2perctemp,
-        knockback_x2          => dirx2new2,
-        knockback_y2          => diry2new2,
-        vout_x2               => char2velxin,
-        vout_y2               => char2velyin,
-        pout_x2               => char2posxin,
-        pout_y2               => char2posyin
-    );
+        pout_y               => char1posyin);
+		
+	TL03 : physics_system port map (
+        vin_x                => char2velx,
+        vin_y                => char2vely,
+        pin_x                => char2posx,
+        pin_y                => char2posy,
+        player_input         => inputsp2,
+        knockback_percentage => char2perctemp,
+        knockback_x          => dirx2new2,
+        knockback_y          => diry2new2,
+        vout_x               => char2velxin,
+        vout_y               => char2velyin,
+        pout_x               => char2posxin,
+        pout_y               => char2posyin);
 
     
     TL03: game_state_fsm port map(

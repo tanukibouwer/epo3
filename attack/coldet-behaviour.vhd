@@ -1035,7 +1035,7 @@ lbl1: process(x_verschil, y_verschil, a1, b1, o1, direction1_x, direction1_y)
 
 	--process for collision detection player 2
 
-lbl: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
+lbl2: process(x_verschil, y_verschil, a2, b2, o2, direction2_y, direction2_x)
 	begin
 
 		if ((a2='1' or b2='1') and (-26 <= y_verschil and y_verschil <= 26)) then

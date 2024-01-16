@@ -551,12 +551,10 @@ begin
           when "00011" =>
             test_out(9 downto 8) <= "00";
             test_out(7 downto 4) <= char1dc;
-            test_out(3 downto 0) <= char1dcin;
+            test_out(3 downto 0) <= char2dc;
 
           when "00100" =>
-				test_out(9 downto 8) <= "00";
-				test_out(7 downto 4) <= char2dc;
-				test_out(3 downto 0) <= char2dcin;
+            test_out <= "0000000000";			 
           when "00101" =>
             test_out <= "0000000000";
           when "00110" =>

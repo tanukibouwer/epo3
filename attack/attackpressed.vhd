@@ -87,21 +87,21 @@ begin
 
 			  when count1 =>
 					 output1A <= '0';
-					 
+					 output1B <= '1';
 					 if vsync = '0' then
-					     if (cur_count1 < "0000011" ) then -- 1111000 for 120
+					     if (cur_count1 < "0000011" ) then -- 1111000 for 120 0111100 for 60
 						      new_count1 <= cur_count1 + "0000001";
 								new_state1 <= count1;
-							output1B <= '0';
+							
 						  else
-							   new_count1 <= (others => '0');
-							output1B <= '1';
+							   new_count1 <= cur_count1;
+							
 				            new_state1 <= B1;
 						  end if;
 					 else
 					     new_count1 <= cur_count1;
 						  new_state1 <= count1;
-						output1B <= '0';
+						
 					 end if;
 		
             when A1 =>
@@ -170,20 +170,21 @@ begin
 
 	    when count2 =>
 		output2A <= '0';
+		output2B <= '1';
 		if vsync = '0' then
-			if (cur_count2 < "0000011" ) then -- 1111000 for 120
+			if (cur_count2 < "0000011" ) then -- 1111000 for 120 0111100 for 60
 				new_count2 <= cur_count2 + "0000001";
 				new_state2 <= count2;
-				output2B <= '0';
+				
 			else
-				new_count2 <= (others => '0');
-				output2B <= '1';
+				new_count2 <= cur_count2;
+				
 				new_state2 <= B2;
 			end if;
 		else
 			new_count2 <= cur_count2;
 			new_state2 <= count2;
-			output2B <= '0';
+			
 		end if;
 
             when A2 =>

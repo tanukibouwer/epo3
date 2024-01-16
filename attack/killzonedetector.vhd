@@ -122,7 +122,7 @@ begin
 
             when standardposition1 =>
                 s2 <= s1;
-                newdeathcount1 <= olddeathcount1 + "0001";
+                newdeathcount1 <= to_unsigned(olddeathcount1) + 1;
                 -- newpercentage1 <= oldpercentage1;
                 --				newvectorX1 <= newlocationX1;
                 --				newvectorY1 <= newlocationY1;
@@ -168,7 +168,7 @@ begin
 
             when standardposition2 =>
                 s4 <= s3;
-                newdeathcount2 <= olddeathcount2 + "0001";
+                newdeathcount2 <= to_unsigned(olddeathcount2) + 1;
                 -- newpercentage2 <= oldpercentage2;
                 --				newvectorX2 <= newlocationX2;
                 --				newvectorY2 <= newlocationY2;

@@ -58,7 +58,7 @@ begin
         end if;
     end process;
 
-    lbl1 : process (state1, input1, vsync, cur_count1) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
+    lbl1 : process (state1, input1, vsync, cur_count1, new_count1) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
     begin
         case state1 is
             when neutral1 =>
@@ -139,7 +139,7 @@ begin
         end case;
     end process;
 
-    lbl2 : process (state2, input2, vsync, cur_count2) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
+    lbl2 : process (state2, input2, vsync, cur_count2, new_count2) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
     begin
         case state2 is
             when neutral2 =>

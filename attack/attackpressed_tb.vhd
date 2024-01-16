@@ -9,6 +9,7 @@ architecture behaviour of attackp_tb is
 	component attackp is
 		port(	clk : in  std_logic;
         		res : in  std_logic;
+			vsync  : in std_logic;
         		input1  : in  std_logic_vector (7 downto 0);
         		input2  : in  std_logic_vector (7 downto 0);
         		output1A  : out std_logic;
@@ -19,6 +20,7 @@ architecture behaviour of attackp_tb is
 
    signal clk : std_logic;
    signal res : std_logic;
+   signal vsync : std_logic;
    signal input1  : std_logic_vector (7 downto 0);
    signal input2  : std_logic_vector (7 downto 0);
    signal output1A  : std_logic;
@@ -26,9 +28,11 @@ architecture behaviour of attackp_tb is
    signal output2A  : std_logic;
    signal output2B  : std_logic;
 begin
-   test: attackp port map (clk, res, input1, input2, output1A, output1B, output2A, output2B);
+   test: attackp port map (clk, res, vsync, input1, input2, output1A, output1B, output2A, output2B);
    clk <= '0' after 0 ns,
-          '1' after 10 ns when clk /= '1' else '0' after 10 ns;
+          '1' after 5 ns when clk /= '1' else '0' after 5 ns;
+   vsync <= '0' after 0 ns,
+          '1' after 10 ns when vsync /= '1' else '0' after 10 ns;
    res <= '0' after 0 ns, '1' after 500 ns;
 
    input1(0) <= '0' after 0 ns;

@@ -4,21 +4,21 @@ use IEEE.numeric_std.all;
 
 entity chip_toplevel is
     port (
-      -- inputs
+        -- inputs
         -- general
         clk   : in std_logic;
         reset : in std_logic;
         -- controllers
-        p1_controller    : in std_logic;
-        p2_controller    : in std_logic;
+        p1_controller : in std_logic;
+        p2_controller : in std_logic;
 
         -- test switches
         switches : in std_logic_vector(5 downto 0);
 
-      -- outputs
+        -- outputs
         -- graphics
-        Vsync  : out std_logic;                    -- sync signals -> active low
-        Hsync  : out std_logic;                    -- sync signals -> active low
+        Vsync  : out std_logic; -- sync signals -> active low
+        Hsync  : out std_logic; -- sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
@@ -26,9 +26,9 @@ entity chip_toplevel is
         -- test outputs
         test_out : out std_logic_vector(9 downto 0);
 
-		  -- uncomment this and comment rgb and test_out for the chip
-		  --gp_outputs : out std_logic_vector(11 downto 0);
-		  
+        -- uncomment this and comment rgb and test_out for the chip
+        --gp_outputs : out std_logic_vector(11 downto 0);
+
         -- controllers
         controller_latch : out std_logic;
         controller_clk   : out std_logic
@@ -39,9 +39,9 @@ architecture structural of chip_toplevel is
 
     -- signals regarding to start and end screen
     signal resetgameintern : std_logic;
-    signal gameintern : std_logic;
-    signal p1winsintern : std_logic;
-    signal p2winsintern : std_logic;
+    signal gameintern      : std_logic;
+    signal p1winsintern    : std_logic;
+    signal p2winsintern    : std_logic;
 
     -- knockback direction vectors as info from attack to physics
     signal dirx1new1 : std_logic_vector(7 downto 0); -- output from attack, into physics
@@ -58,9 +58,9 @@ architecture structural of chip_toplevel is
     signal orientationp2 : std_logic; -- output from attack, into graphics
 
     -- to tap the vsync signal for global memory timing purposes
-    signal vsyncintern : std_logic; -- input into memory, out from graphics
-	signal vcountintern : std_logic_vector(9 downto 0);
-	signal hcountintern : std_logic_vector(9 downto 0);
+    signal vsyncintern  : std_logic; -- input into memory, out from graphics
+    signal vcountintern : std_logic_vector(9 downto 0);
+    signal hcountintern : std_logic_vector(9 downto 0);
 
     -- character position and velocity vectors
     signal char1posx   : std_logic_vector(8 downto 0); -- output from memory, into graphics and physics
@@ -81,23 +81,25 @@ architecture structural of chip_toplevel is
     signal char2velyin : std_logic_vector(9 downto 0); -- inputs into memory, out from physics
 
     -- character damage percentages and death counts
-    signal char1perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
-    signal char2perc     : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
-    signal char1percin   : std_logic_vector(7 downto 0); -- inputs into memory, from attack
-    signal char2percin   : std_logic_vector(7 downto 0); -- inputs into memory, from attack
-    signal char1perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char2perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char1dc       : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
-    signal char2dc       : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
-    signal char1dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
-    signal char2dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
-    signal char1death    : std_logic;                    -- inputs into memory, from attack
-    signal char2death    : std_logic;                    -- inputs into memory, from attack
+    signal char1perc      : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
+    signal char2perc      : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
+    signal char1percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
+    signal char2percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
+    signal char1perctemp1 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char1perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char2perctemp1 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char2perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char1dc        : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
+    signal char2dc        : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
+    signal char1dcin      : std_logic_vector(3 downto 0); -- inputs into memory, from attack
+    signal char2dcin      : std_logic_vector(3 downto 0); -- inputs into memory, from attack
+    signal char1death     : std_logic; -- inputs into memory, from attack
+    signal char2death     : std_logic; -- inputs into memory, from attack
 
-    signal char1dc_buff       : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
-    signal char2dc_buff       : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
-    signal char1dcin_buff      : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
-    signal char2dcin_buff      : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
+    signal char1dc_buff   : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
+    signal char2dc_buff   : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
+    signal char1dcin_buff : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
+    signal char2dcin_buff : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
 
     -- synchronised controller vectors
     signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics and graphics and attack
@@ -116,10 +118,10 @@ architecture structural of chip_toplevel is
             controller_latch : out std_logic;
             controller_clk   : out std_logic;
 
-            data_p1    : in std_logic;                     -- serial in
+            data_p1    : in std_logic; -- serial in
             buttons_p1 : out std_logic_vector(7 downto 0); -- parallel out
 
-            data_p2    : in std_logic;                    -- serial in
+            data_p2    : in std_logic; -- serial in
             buttons_p2 : out std_logic_vector(7 downto 0) -- parallel out
         );
     end component input_toplevel;
@@ -158,24 +160,24 @@ architecture structural of chip_toplevel is
 
     component physics_top is
         port (
-			clk					 : in std_logic;
-			reset				 : in std_logic;
-			vcount 				 : in std_logic_vector(9 downto 0);
-			hcount 				 : in std_logic_vector(9 downto 0);
-            vin_x                : in std_logic_vector(9 downto 0);
-            vin_y                : in std_logic_vector(9 downto 0);
-            pin_x                : in std_logic_vector(8 downto 0);
-            pin_y                : in std_logic_vector(8 downto 0);
-            player_input         : in std_logic_vector(7 downto 0);
-            knockback_percentage : in std_logic_vector(7 downto 0);
-            knockback_x          : in std_logic_vector(7 downto 0);
-            knockback_y          : in std_logic_vector(7 downto 0);
-            vout_x               : out std_logic_vector(9 downto 0);
-            vout_y               : out std_logic_vector(9 downto 0);
-            pout_x               : out std_logic_vector(8 downto 0);
-            pout_y               : out std_logic_vector(8 downto 0);
-			vin_x2               : in std_logic_vector(9 downto 0);
-            vin_y2               : in std_logic_vector(9 downto 0);
+            clk                   : in std_logic;
+            reset                 : in std_logic;
+            vcount                : in std_logic_vector(9 downto 0);
+            hcount                : in std_logic_vector(9 downto 0);
+            vin_x                 : in std_logic_vector(9 downto 0);
+            vin_y                 : in std_logic_vector(9 downto 0);
+            pin_x                 : in std_logic_vector(8 downto 0);
+            pin_y                 : in std_logic_vector(8 downto 0);
+            player_input          : in std_logic_vector(7 downto 0);
+            knockback_percentage  : in std_logic_vector(7 downto 0);
+            knockback_x           : in std_logic_vector(7 downto 0);
+            knockback_y           : in std_logic_vector(7 downto 0);
+            vout_x                : out std_logic_vector(9 downto 0);
+            vout_y                : out std_logic_vector(9 downto 0);
+            pout_x                : out std_logic_vector(8 downto 0);
+            pout_y                : out std_logic_vector(8 downto 0);
+            vin_x2                : in std_logic_vector(9 downto 0);
+            vin_y2                : in std_logic_vector(9 downto 0);
             pin_x2                : in std_logic_vector(8 downto 0);
             pin_y2                : in std_logic_vector(8 downto 0);
             player2_input         : in std_logic_vector(7 downto 0);
@@ -200,8 +202,8 @@ architecture structural of chip_toplevel is
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
             -- inputs from attack and input
-            controllerp1 : in std_logic_vector(7 downto 0);
-            controllerp2 : in std_logic_vector(7 downto 0);
+            controllerp1  : in std_logic_vector(7 downto 0);
+            controllerp2  : in std_logic_vector(7 downto 0);
             orientationp1 : in std_logic;
             orientationp2 : in std_logic;
             -- outputs to screen (and other components)
@@ -211,11 +213,9 @@ architecture structural of chip_toplevel is
             Hsync  : out std_logic; --! sync signals -> active low
             R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
             G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-            B_data : out std_logic_vector(3 downto 0);  --! RGB data to screen
-
-
+            B_data : out std_logic_vector(3 downto 0); --! RGB data to screen
             -- game states
-            game : in std_logic;
+            game    : in std_logic;
             p1_wins : in std_logic;
             p2_wins : in std_logic
         );
@@ -223,32 +223,20 @@ architecture structural of chip_toplevel is
 
     component game_state_fsm is
         port (
-            clk    : in std_logic;
-            reset  : in std_logic;
-
-
+            clk   : in std_logic;
+            reset : in std_logic;
             -- controller input signal, player 1 controls start menu! (see top level)
             controller_in1 : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
-				controller_in2 : in std_logic_vector(7 downto 0);
-
-
+            controller_in2 : in std_logic_vector(7 downto 0);
             --killcounters
             killcountp1 : in std_logic_vector(3 downto 0);
             killcountp2 : in std_logic_vector(3 downto 0);
-
-
             -- reset to freeze the game at the start of the game
             reset_game : out std_logic;
-
-
-
-
             -- game states
-            game : out std_logic;
+            game    : out std_logic;
             p1_wins : out std_logic;
             p2_wins : out std_logic
-
-
         );
     end component;
 
@@ -294,6 +282,16 @@ architecture structural of chip_toplevel is
         );
     end component;
 
+    component t_8bregs_perframe is
+        port (
+            clk     : in std_logic;
+            reset   : in std_logic;
+            vcount  : in std_logic_vector(9 downto 0);
+            vec_in  : in std_logic_vector(7 downto 0);
+            vec_out : out std_logic_vector(7 downto 0)
+        );
+    end component;
+
     component t_4bregs is
         port (
             clk     : in std_logic;
@@ -333,7 +331,7 @@ begin
         data_in9b2  => char1velyin,
         data_in9b3  => char2velxin,
         data_in9b4  => char2velyin,
-		  data_out9b1 => char1velx,
+        data_out9b1 => char1velx,
         data_out9b2 => char1vely,
         data_out9b3 => char2velx,
         data_out9b4 => char2vely
@@ -353,34 +351,34 @@ begin
         orientationp1 => orientationp1,
         orientationp2 => orientationp2,
         Vsync         => vsyncintern,
-		vcount		  => vcountintern,
-		hcount		  => hcountintern,
+        vcount        => vcountintern,
+        hcount        => hcountintern,
         Hsync         => Hsync,
         R_data        => R_data,
         G_data        => G_data,
         B_data        => B_data,
-        game => gameintern,
-        p1_wins => p1winsintern,
-        p2_wins => p2winsintern
+        game          => gameintern,
+        p1_wins       => p1winsintern,
+        p2_wins       => p2winsintern
 
     );
-    TL02 : physics_top port map (
-		clk					 => clk,
-		reset				 => resetgameintern, --freezes the game in start/end screen
-		vcount 				 => vcountintern,
-		hcount 				 => hcountintern,
-        vin_x                => char1velx,
-        vin_y                => char1vely,
-        pin_x                => char1posx,
-        pin_y                => char1posy,
-        player_input         => inputsp1,
-        knockback_percentage => char1perctemp,
-        knockback_x          => dirx1new2,
-        knockback_y          => diry1new2,
-        vout_x               => char1velxin,
-        vout_y               => char1velyin,
-        pout_x               => char1posxin,
-        pout_y               => char1posyin,
+    TL02 : physics_top port map(
+        clk                   => clk,
+        reset                 => resetgameintern, --freezes the game in start/end screen
+        vcount                => vcountintern,
+        hcount                => hcountintern,
+        vin_x                 => char1velx,
+        vin_y                 => char1vely,
+        pin_x                 => char1posx,
+        pin_y                 => char1posy,
+        player_input          => inputsp1,
+        knockback_percentage  => char1perctemp2,
+        knockback_x           => dirx1new2,
+        knockback_y           => diry1new2,
+        vout_x                => char1velxin,
+        vout_y                => char1velyin,
+        pout_x                => char1posxin,
+        pout_y                => char1posyin,
         vin_x2                => char2velx,
         vin_y2                => char2vely,
         pin_x2                => char2posx,
@@ -395,23 +393,19 @@ begin
         pout_y2               => char2posyin
     );
 
-
-
-    TL03: game_state_fsm port map(
-        clk => clk,
-        reset => reset,
+    TL03 : game_state_fsm port map(
+        clk            => clk,
+        reset          => reset,
         controller_in1 => inputsp1,
-		  controller_in2 => inputsp2,
-        killcountp1 => char1dcin,
-        killcountp2 => char2dcin,
-        reset_game => resetgameintern,
-        game => gameintern,
-        p1_wins => p1winsintern,
-        p2_wins => p2winsintern
+        controller_in2 => inputsp2,
+        killcountp1    => char1dcin,
+        killcountp2    => char2dcin,
+        reset_game     => resetgameintern,
+        game           => gameintern,
+        p1_wins        => p1winsintern,
+        p2_wins        => p2winsintern
 
     );
-
-
     ATT1 : topattack port map(
         -- timing signals
         clk   => clk,
@@ -430,12 +424,12 @@ begin
         killcount2in  => char2dc,
         -- data output
         -- data for physics
-        directionx1out       => dirx1new1,     -- knockback direction for physics calculation
-        directiony1out       => diry1new1,     -- knockback direction for physics calculation
-        directionx2out       => dirx2new1,     -- knockback direction for physics calculation
-        directiony2out       => diry2new1,     -- knockback direction for physics calculation
-        damagepercentage1out => char1perctemp, -- percentage data for physics calculation
-        damagepercentage2out => char2perctemp, -- percentage data for physics calculation
+        directionx1out       => dirx1new1, -- knockback direction for physics calculation
+        directiony1out       => diry1new1, -- knockback direction for physics calculation
+        directionx2out       => dirx2new1, -- knockback direction for physics calculation
+        directiony2out       => diry2new1, -- knockback direction for physics calculation
+        damagepercentage1out => char1perctemp1, -- percentage data for physics calculation
+        damagepercentage2out => char2perctemp2, -- percentage data for physics calculation
         -- data for storage
         percentage1out => char1percin, -- percentage data input to memory for storage
         percentage2out => char2percin, -- percentage data input to memory for storage
@@ -452,6 +446,20 @@ begin
     -- these make sure the knockback direction is set steady forever, without
     -- these buffers the whole attack system breaks.
     --------------------------------------------------------------------------------
+    buf1 : t_8bregs_perframe port map(
+        clk     => clk,
+        reset   => reset,
+        vcount  => vcountintern,
+        vec_in  => char1perctemp1,
+        vec_out => char1perctemp2
+    );
+    buf2 : t_8bregs_perframe port map(
+        clk     => clk,
+        reset   => reset,
+        vcount  => vcountintern,
+        vec_in  => char2perctemp1,
+        vec_out => char2perctemp2
+    );
     buf3 : t_8bregs port map(
         clk     => clk,
         reset   => reset,
@@ -476,34 +484,6 @@ begin
         vec_in  => diry2new1,
         vec_out => diry2new2
     );
-
-    -- buf7 : t_4bregs port map(
-    --     clk     => clk,
-    --     reset   => vsyncintern,
-    --     vec_in  => char1dc,
-    --     vec_out => char1dc_buff
-    -- );
-
-    -- buf8 : t_4bregs port map(
-    --     clk     => clk,
-    --     reset   => vsyncintern,
-    --     vec_in  => char2dc,
-    --     vec_out => char2dc_buff
-    -- );
-
-    -- buf9 : t_4bregs port map(
-    --     clk     => clk,
-    --     reset   => vsyncintern,
-    --     vec_in  => char1dcin,
-    --     vec_out => char1dcin_buff
-    -- );
-
-    -- buf10 : t_4bregs port map(
-    --     clk     => clk,
-    --     reset   => vsyncintern,
-    --     vec_in  => char2dcin,
-    --     vec_out => char2dcin_buff
-    -- );
     --------------------------------------------------------------------------------
     TL04 : input_toplevel port map(
         clk              => clk,
@@ -519,98 +499,97 @@ begin
 
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 
-    process(switches)
+    process (switches)
     begin
-      if (switches(5) = '1') then
-        case switches(4 downto 0) is
-        -- input
-          when "00000" =>
-            test_out(7 downto 0) <= inputsp1;
-            test_out(9 downto 8) <= "00";
-          when "00001" =>
-            test_out(7 downto 0) <= inputsp2;
-            test_out(9 downto 8) <= "00";
+        if (switches(5) = '1') then
+            case switches(4 downto 0) is
+                    -- input
+                when "00000" =>
+                    test_out(7 downto 0) <= inputsp1;
+                    test_out(9 downto 8) <= "00";
+                when "00001" =>
+                    test_out(7 downto 0) <= inputsp2;
+                    test_out(9 downto 8) <= "00";
 
-        -- attack
-          -- orientation
-          when "00010" =>
-            test_out(9 downto 2) <= "00000000";
-            test_out(1) <= orientationp1;
-            test_out(0) <= orientationp2;
-          -- killcount
-          when "00011" =>
-            test_out(9 downto 8) <= "00";
-            test_out(7 downto 4) <= char1dc;
-            test_out(3 downto 0) <= char2dc;
+                    -- attack
+                    -- orientation
+                when "00010" =>
+                    test_out(9 downto 2) <= "00000000";
+                    test_out(1)          <= orientationp1;
+                    test_out(0)          <= orientationp2;
+                    -- killcount
+                when "00011" =>
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 4) <= char1dc;
+                    test_out(3 downto 0) <= char2dc;
 
-          when "00100" =>
-            test_out <= "0000000000";			 
-          when "00101" =>
+                when "00100" =>
+                    test_out <= "0000000000";
+                when "00101" =>
+                    test_out <= "0000000000";
+                when "00110" =>
+                    test_out <= "0000000000";
+                when "00111" =>
+                    test_out(9)          <= '0';
+                    test_out(8 downto 0) <= char1posx;
+                when "01000" =>
+                    test_out(9)          <= '0';
+                    test_out(8 downto 0) <= char1posy;
+                when "01001" =>
+                    test_out <= "0000000000";
+                when "01010" =>
+                    test_out <= "0000000000";
+                when "01011" =>
+                    test_out <= "0000000000";
+                when "01100" =>
+                    test_out <= "0000000000";
+                when "01101" =>
+                    test_out <= "0000000000";
+                when "01110" =>
+                    test_out <= "0000000000";
+                when "01111" =>
+                    test_out <= "0000000000";
+                when "10000" =>
+                    test_out <= "0000000000";
+                when "10001" =>
+                    test_out <= "0000000000";
+                when "10010" =>
+                    test_out <= "0000000000";
+                when "10011" =>
+                    test_out <= "0000000000";
+                when "10100" =>
+                    test_out <= "0000000000";
+                when "10101" =>
+                    test_out <= "0000000000";
+                when "10110" =>
+                    test_out <= "0000000000";
+                when "10111" =>
+                    test_out <= "0000000000";
+                when "11000" =>
+                    test_out <= "0000000000";
+                when "11001" =>
+                    test_out <= "0000000000";
+                when "11010" =>
+                    test_out <= "0000000000";
+                when "11011" =>
+                    test_out <= "0000000000";
+                when "11100" =>
+                    test_out <= "0000000000";
+                when "11101" =>
+                    test_out <= "0000000000";
+                when "11110" =>
+                    test_out <= "0000000000";
+                when "11111" =>
+                    test_out <= "0000000000";
+                when others =>
+                    test_out <= "1111111111";
+            end case;
+        else
+            --gp_outputs(11 downto 8) <= R_data;
+            --gp_outputs(7 downto 4) <= G_data;
+            --gp_outputs(3 downto 0) <= B_data;
             test_out <= "0000000000";
-          when "00110" =>
-            test_out <= "0000000000";
-          when "00111" =>
-            test_out(9) <= '0';
-            test_out(8 downto 0) <= char1posx;
-          when "01000" =>
-            test_out(9) <= '0';
-            test_out(8 downto 0) <= char1posy;
-          when "01001" =>
-            test_out <= "0000000000";
-          when "01010" =>
-            test_out <= "0000000000";
-          when "01011" =>
-            test_out <= "0000000000";
-          when "01100" =>
-            test_out <= "0000000000";
-          when "01101" =>
-            test_out <= "0000000000";
-          when "01110" =>
-            test_out <= "0000000000";
-          when "01111" =>
-            test_out <= "0000000000";
-          when "10000" =>
-            test_out <= "0000000000";
-          when "10001" =>
-            test_out <= "0000000000";
-          when "10010" =>
-            test_out <= "0000000000";
-          when "10011" =>
-            test_out <= "0000000000";
-          when "10100" =>
-            test_out <= "0000000000";
-          when "10101" =>
-            test_out <= "0000000000";
-          when "10110" =>
-            test_out <= "0000000000";
-          when "10111" =>
-            test_out <= "0000000000";
-          when "11000" =>
-            test_out <= "0000000000";
-          when "11001" =>
-            test_out <= "0000000000";
-          when "11010" =>
-            test_out <= "0000000000";
-          when "11011" =>
-            test_out <= "0000000000";
-          when "11100" =>
-            test_out <= "0000000000";
-          when "11101" =>
-            test_out <= "0000000000";
-          when "11110" =>
-            test_out <= "0000000000";
-          when "11111" =>
-            test_out <= "0000000000";
-          when others =>
-            test_out <= "1111111111";
-        end case;
-      else
-		  --gp_outputs(11 downto 8) <= R_data;
-		  --gp_outputs(7 downto 4) <= G_data;
-		  --gp_outputs(3 downto 0) <= B_data;
-        test_out <= "0000000000";
-      end if;
+        end if;
     end process;
 
 end architecture structural;
-

@@ -464,13 +464,13 @@ begin
     );
     buf5 : t_8bregs port map(
         clk     => clk,
-        reset   => vsyncintern,
+        reset   => reset,
         vec_in  => dirx2new1,
         vec_out => dirx2new2
     );
     buf6 : t_8bregs port map(
         clk     => clk,
-        reset   => vsyncintern,
+        reset   => reset,
         vec_in  => diry2new1,
         vec_out => diry2new2
     );

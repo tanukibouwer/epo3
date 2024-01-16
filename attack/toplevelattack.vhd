@@ -101,6 +101,7 @@ architecture structural of topattack is
             oldvectorY2    : in std_logic_vector (8 downto 0);
             restart1       : out std_logic;
             restart2       : out std_logic;
+            vsync          : in std_logic;
             newdeathcount1 : out std_logic_vector (3 downto 0);
             newdeathcount2 : out std_logic_vector (3 downto 0));
     end component killzonedetector;
@@ -179,6 +180,7 @@ begin
         oldvectorY2    => y2in,
         restart1       => restart1,
         restart2       => restart2,
+        vsync => vsync,
         newdeathcount1 => killcount1out,
         newdeathcount2 => killcount2out);
     PM5 : coldet port map(

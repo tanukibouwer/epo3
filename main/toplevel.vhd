@@ -310,8 +310,8 @@ begin
         resetp1 => char1death,
         resetp2 => char2death,
         -- death count and percentage
-        data_in4b1  => char1dcin_buff,
-        data_in4b2  => char2dcin_buff,
+        data_in4b1  => char1dcin,
+        data_in4b2  => char2dcin,
         data_out4b1 => char1dc,
         data_out4b2 => char2dc,
         data_inhp1  => char1percin,
@@ -400,8 +400,8 @@ begin
         clk => clk,
         reset => reset,
         controller_in => inputsp1,
-        killcountp1 => char1dc_buff,
-        killcountp2 => char2dc_buff,
+        killcountp1 => char1dcin,
+        killcountp2 => char2dcin,
         reset_game => resetgameintern,
         game => gameintern,
         p1_wins => p1winsintern,
@@ -424,8 +424,8 @@ begin
         y2in          => char2posy,
         percentage1in => char1perc,
         percentage2in => char2perc,
-        killcount1in  => char1dc_buff,
-        killcount2in  => char2dc_buff,
+        killcount1in  => char1dc,
+        killcount2in  => char2dc,
         -- data output
         -- data for physics
         directionx1out       => dirx1new1,     -- knockback direction for physics calculation
@@ -544,13 +544,11 @@ begin
           when "00100" =>
 				test_out(9 downto 8) <= "00";
 				test_out(7 downto 4) <= char1dcin;
-				test_out(3 downto 0) <= char1dc_buff;
+				test_out(3 downto 0) <= char2dcin;
           when "00101" =>
             test_out <= "0000000000";
           when "00110" =>
-            test_out(9 downto 8) <= "00";
-				test_out(7 downto 4) <= char2dcin;
-				test_out(3 downto 0) <= char2dc_buff;
+            test_out <= "0000000000";
           when "00111" =>
             test_out(9) <= '0';
             test_out(8 downto 0) <= char1posx;

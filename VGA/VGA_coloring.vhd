@@ -591,50 +591,6 @@ begin
                 elsif (uns_hcount >= ch1x1 and uns_hcount <= ch1x2) and (uns_vcount >= ch1y1 and uns_vcount <= ch1y2) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- character 1
                     -- color in hex: #41FF00
                     if (p1R = "0001" and p1G = "0001" and p1B = "0001") then
-                        -- if (ch2x1 <= ch1x2 and ch2y1 <= ch1y2) then -- then check if the players are overlapped
-                        --     if (p2R = "0001" and p2G = "0001" and p2B = "0001") then -- then check if p2 is transparant
-                        --         R_data <= "0000";
-                        --         G_data <= "1100";
-                        --         B_data <= "1111";
-                        --     else
-                        --         R_data <= p2R;
-                        --         G_data <= p2G;
-                        --         B_data <= p2B;
-                        --     end if;
-                        -- elsif (ch2x1 <= ch1x2 and ch2y2 >= ch1y1) then
-                        --     if (p2R = "0001" and p2G = "0001" and p2B = "0001") then
-                        --         R_data <= "0000";
-                        --         G_data <= "1100";
-                        --         B_data <= "1111";
-                        --     else
-                        --         R_data <= p2R;
-                        --         G_data <= p2G;
-                        --         B_data <= p2B;
-                        --     end if;
-                        -- elsif (ch2x2 >= ch1x1 and ch2y1 <= ch1y2) then
-                        --     if (p2R = "0001" and p2G = "0001" and p2B = "0001") then
-                        --         R_data <= "0000";
-                        --         G_data <= "1100";
-                        --         B_data <= "1111";
-                        --     else
-                        --         R_data <= p2R;
-                        --         G_data <= p2G;
-                        --         B_data <= p2B;
-                        --     end if;
-                        -- elsif (ch2x2 >= ch1x1 and ch2y2 >= ch1y1) then
-                        --     if (p2R = "0001" and p2G = "0001" and p2B = "0001") then
-                        --         R_data <= "0000";
-                        --         G_data <= "1100";
-                        --         B_data <= "1111";
-                        --     else
-                        --         R_data <= p2R;
-                        --         G_data <= p2G;
-                        --         B_data <= p2B;
-                        --     end if;
-                        -- end if;
-                        -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                        -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                        -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0); 
                         R_data <= "0000";
                         G_data <= "1100";
                         B_data <= "1111";
@@ -647,9 +603,6 @@ begin
                 elsif (uns_hcount >= ch2x1 and uns_hcount <= ch2x2) and (uns_vcount >= ch2y1 and uns_vcount <= ch2y2) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- character 2
                     -- color in hex: #00FFFF
                     if (p2R = "0001" and p2G ="0001" and p2B = "0001") then
-                        -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                        -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                        -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                         R_data <= "0000";
                         G_data <= "1100";
                         B_data <= "1111";        
@@ -810,9 +763,9 @@ begin
                                 end if;
                             end if;
                         else
-                            R_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p1d1bx)(11 downto 8);
-                            G_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p1d1bx)(7 downto 4);
-                            B_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p1d1bx)(3 downto 0);
+                            R_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p1d1bx) - 1)(11 downto 8);
+                            G_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p1d1bx) - 1)(7 downto 4);
+                            B_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p1d1bx) - 1)(3 downto 0);
                         end if;
                     elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --223 to 263 idem
                         if (p1d2R = "0001" and p1d2G = "0001" and p1d2B = "0001") then
@@ -990,9 +943,9 @@ begin
                                 end if;
                             end if;
                         else
-                            R_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p2d1bx)(11 downto 8);
-                            G_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p2d1bx)(7 downto 4);
-                            B_data <= trophy_sprite(to_integer(uns_vcount) - int_digsby)(to_integer(uns_hcount) - int_p2d1bx)(3 downto 0);
+                            R_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p2d1bx) - 1)(11 downto 8);
+                            G_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p2d1bx) - 1)(7 downto 4);
+                            B_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p2d1bx) - 1)(3 downto 0);
                         end if;
                     elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --703 to 743 idem
                         if (p2d2R = "0001" and p2d2G = "0001" and p2d2B = "0001") then

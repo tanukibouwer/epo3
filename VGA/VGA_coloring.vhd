@@ -4,12 +4,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! this module is made to allow the VGA module to actually draw colours to the screen
---! this is done by only allowing the module to write a color whenever the scanning is on active screen time
---! 
---! this module also requires the different x (horizontal) and y (vertical) locations of what needs to be drawn and the colours
---!
---! This module also draw the GUI of the game, including the text
+-- this module is made to allow the VGA module to actually draw colours to the screen
+-- this is done by only allowing the module to write a color whenever the scanning is on active screen time
+-- 
+-- this module also requires the different x (horizontal) and y (vertical) locations of what needs to be drawn and the colours
+--
+-- This module also draw the GUI of the game, including the text
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,10 +27,10 @@ entity coloring is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
-        char1x : in std_logic_vector(8 downto 0); --! character 1 coordinates
-        char1y : in std_logic_vector(8 downto 0); --! character 1 coordinates
-        char2x : in std_logic_vector(8 downto 0); --! character 2 coordinates
-        char2y : in std_logic_vector(8 downto 0); --! character 2 coordinates
+        char1x : in std_logic_vector(8 downto 0); -- character 1 coordinates
+        char1y : in std_logic_vector(8 downto 0); -- character 1 coordinates
+        char2x : in std_logic_vector(8 downto 0); -- character 2 coordinates
+        char2y : in std_logic_vector(8 downto 0); -- character 2 coordinates
         -- player orientation information
         orientationp1 : in std_logic;
         orientationp2 : in std_logic;
@@ -44,9 +44,9 @@ entity coloring is
         controllerp2 : in std_logic_vector(7 downto 0);
 
         -- RGB data outputs
-        R_data : out std_logic_vector(3 downto 0); --! RGB data output
-        G_data : out std_logic_vector(3 downto 0); --! RGB data output
-        B_data : out std_logic_vector(3 downto 0); --! RGB data output
+        R_data : out std_logic_vector(3 downto 0); -- RGB data output
+        G_data : out std_logic_vector(3 downto 0); -- RGB data output
+        B_data : out std_logic_vector(3 downto 0); -- RGB data output
 
         -- game states
         game : in std_logic;
@@ -536,30 +536,6 @@ begin
                     R_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(11 downto 8);
                     G_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(7 downto 4);
                     B_data <= smashpo_logo(to_integer(uns_vcount) - 150)(to_integer(uns_hcount)- 313)(3 downto 0);
-                -- elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) and (game = '0') and (p1_wins = '0' or p2_wins = '0') and (p1_wins = '1' and p2_wins = '1') then
-                --     if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
-                --         R_data <= "1001";
-                --         G_data <= "0101";
-                --         B_data <= "0101";
-                --     elsif (uns_hcount > 407 and uns_hcount <= 420) then -- 2nd vertical line
-                --         R_data <= "1100";
-                --         G_data <= "0110";
-                --         B_data <= "0110";
-                --     else
-                --         R_data <= "1110";
-                --         G_data <= "0110";
-                --         B_data <= "0110";
-                --     end if;
-                -- elsif (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) and (game = '0') and (p1_wins = '0' or p2_wins = '0') and (p1_wins = '1' and p2_wins = '1') then
-                --     if (uns_hcount > 158 and uns_hcount <= 762) then -- darker colour
-                --         R_data <= "1001";
-                --         G_data <= "0101";
-                --         B_data <= "0101";
-                --     else -- part where you see through to the sky
-                --         R_data <= "0000";
-                --         G_data <= "1100";
-                --         B_data <= "1111";
-                --     end if;
                 --------------------------------------------------------------------------------
                 -- show platforms
                 --------------------------------------------------------------------------------
@@ -648,15 +624,6 @@ begin
                             B_data <= "1111";
                         end if;
                     end if;
-                    
-                    --------------------------------------------------------------------------------
-                    -- this is the assignment for when there is a background image to be displayed
-                    -- either this or the above is commented out 
-                    -- such that the correct image shall be displayed
-                    --------------------------------------------------------------------------------
-                    -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                    -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                    -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);
 
                     --------------------------------------------------------------------------------
                     -- p1 percentage markings
@@ -668,9 +635,6 @@ begin
                         B_data <= char1_digc(to_integer(uns_vcount) - 463)(to_integer(uns_hcount) - 156)(3 downto 0);
                     elsif (uns_hcount > int_p1d1bx and uns_hcount <= int_p1d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- first digit --183 to 223 idem
                         if (p1d1R = "0001" and p1d1G = "0001" and p1d1B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -707,9 +671,6 @@ begin
                         B_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p1d1bx) - 1)(3 downto 0);
                     elsif (uns_hcount > int_p1d2bx and uns_hcount <= int_p1d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --223 to 263 idem
                         if (p1d2R = "0001" and p1d2G = "0001" and p1d2B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -742,9 +703,6 @@ begin
                         end if;
                     elsif (uns_hcount > int_p1d3bx and uns_hcount <= int_p1d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- third digit --263 to 303 idem
                         if (p1d3R = "0001" and p1d3G = "0001" and p1d3B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -785,9 +743,6 @@ begin
                         B_data <= char2_digc((to_integer(uns_vcount) - int_digsby) - 1)(to_integer(uns_hcount) - 635)(3 downto 0);
                     elsif (uns_hcount > int_p2d1bx and uns_hcount <= int_p2d1bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- first digit -- 663 to 703 idem
                         if (p2d1R = "0001" and p2d1G = "0001" and p2d1B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -825,9 +780,6 @@ begin
                         B_data <= trophy_sprite((to_integer(uns_vcount) - int_digsby) - 1)((to_integer(uns_hcount) - int_p2d1bx) - 1)(3 downto 0);
                     elsif (uns_hcount > int_p2d2bx and uns_hcount <= int_p2d2bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- second digit --703 to 743 idem
                         if (p2d2R = "0001" and p2d2G = "0001" and p2d2B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -860,9 +812,6 @@ begin
                         end if;
                     elsif (uns_hcount > int_p2d3bx and uns_hcount <= int_p2d3bx + 16) and (uns_vcount > int_digsby and uns_vcount <= int_digsby + 24) and ((game = '1') and (p1_wins = '0' and p2_wins = '0')) then -- third digit --743 to 783 idem
                         if (p2d3R = "0001" and p2d3G = "0001" and p2d3B = "0001") then
-                            -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                            -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                            -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                             if (uns_hcount > 143 and uns_hcount <= 783) and (uns_vcount > 454 and uns_vcount <= 514) then
                                 if (uns_hcount > 402 and uns_hcount <= 407) then -- 1st vertical line
                                     R_data <= "1001";
@@ -920,20 +869,10 @@ begin
                                 B_data <= "1111";
                             end if;    
                         end if;
-                        -- either colour or the background image
-                        -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                        -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                        -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);    
                     end if;
 
                 else -- global background color
-
-                    -- global background is the image (for if this fits in the chip, I surely do hope so)
-                    -- R_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(11 downto 8);
-                    -- G_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(7 downto 4);
-                    -- B_data <= ewi_top_bg(to_integer(uns_vcount) - 35)(to_integer(uns_hcount)- 144)(3 downto 0);
-
-                    -- global background is simply the sky colour for when 
+                    -- global background is simply the sky colour
                     R_data <= "0000";
                     G_data <= "1100";
                     B_data <= "1111";

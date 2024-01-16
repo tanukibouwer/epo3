@@ -82,17 +82,6 @@ architecture structural of input_toplevel is
       buttons_out_p2   : out   std_logic_vector(7 downto 0)
     );
   end component input_register;
-  
-  component input_jump is
-    port (
-      clk       : in    std_logic;
-      reset     : in    std_logic;
-
-      vsync     : in    std_logic;
-      jump_in   : in    std_logic;
-      jump_out  : out   std_logic
-    );
-  end component;
 
   signal count  : std_logic_vector(3 downto 0);
   signal count_reset  : std_logic;
@@ -104,9 +93,6 @@ architecture structural of input_toplevel is
   signal deserializer_out_p2  : std_logic_vector(7 downto 0);
 
   signal reg_write  : std_logic;
-  
-  signal jump_button_p1 : std_logic;
-  signal jump_button_p2 : std_logic;
 
 begin
   driver: input_driver port map (
@@ -155,30 +141,10 @@ begin
     write => reg_write,
 
     buttons_in_p1 => deserializer_out_p1,
-    buttons_out_p1(7 downto 3) => buttons_p1(7 downto 3),
-	 buttons_out_p1(2) => jump_button_p1,
-	 buttons_out_p1(1 downto 0) => buttons_p1(1 downto 0),
+    buttons_out_p1 => buttons_p1,
 
     buttons_in_p2 => deserializer_out_p2,
-    buttons_out_p2(7 downto 3) => buttons_p2(7 downto 3),
-	 buttons_out_p2(2) => jump_button_p2,
-	 buttons_out_p2(1 downto 0) => buttons_p2(1 downto 0)
-  );
-  
-  jump_p1: input_jump port map (
-    clk => clk,
-	 reset => reset,
-	 vsync => vsync,
-	 jump_in => jump_button_p1,
-	 jump_out => buttons_p1(2)
-  );
-  
-  jump_p2: input_jump port map (
-    clk => clk,
-	 reset => reset,
-	 vsync => vsync,
-	 jump_in => jump_button_p2,
-	 jump_out => buttons_p2(2)
+	  buttons_out_p2 => buttons_p2
   );
 
 end architecture;

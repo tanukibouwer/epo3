@@ -94,7 +94,7 @@ begin
 								new_state1 <= count1;
 							output1B <= '0';
 						  else
-							   new_count1 <= (others => '0');
+							   new_count1 <= cur_count1;
 							output1B <= '1';
 				            new_state1 <= B1;
 						  end if;
@@ -176,7 +176,7 @@ begin
 				new_state2 <= count2;
 				output2B <= '0';
 			else
-				new_count2 <= (others => '0');
+				new_count2 <= cur_count2;
 				output2B <= '1';
 				new_state2 <= B2;
 			end if;

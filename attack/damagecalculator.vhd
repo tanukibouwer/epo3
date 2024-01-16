@@ -95,10 +95,10 @@ begin
                     s9 <= s1 + to_unsigned(10, 8); 
                 elsif (s1 < to_unsigned(100, 8)) then
                     s9 <= s1 + to_unsigned(20, 8); 
-                elsif (s1 < to_unsigned(150, 8)) then
-                    s9 <= s1 + to_unsigned(50, 8); 
-                elsif (s1 < to_unsigned(200, 8)) then
-                    s9 <= s1 + to_unsigned(120, 8); 
+		elsif (s1 < to_unsigned(150, 8)) then
+                    s9 <= s1 + to_unsigned(30, 8);
+                elsif (s1 > to_unsigned(150, 8)) then
+                    s9 <= s1 + to_unsigned(250, 8);
 		else
 			s9 <= s1;
                 end if;
@@ -147,11 +147,11 @@ begin
                 if (s3 < to_unsigned(50, 8)) then
                     s10 <= s3 + to_unsigned(10, 8); 
                 elsif (s3 < to_unsigned(100, 8)) then
-                    s10 <= s3 + to_unsigned(20, 8); 
-                elsif (s3 < to_unsigned(150, 8)) then
-                    s10 <= s3 + to_unsigned(50, 8); 
-                elsif (s3 < to_unsigned(200, 8)) then
-                    s10 <= s3 + to_unsigned(120, 8); 
+                    s10 <= s3 + to_unsigned(20, 8);
+		elsif (s3 < to_unsigned(150, 8)) then
+                    s10 <= s3 + to_unsigned(30, 8); 
+                elsif (s3 > to_unsigned(150, 8)) then
+                    s10 <= s3 + to_unsigned(250, 8); 
 		else
 			s10 <= s3;
                 end if;

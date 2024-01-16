@@ -43,7 +43,7 @@ begin
             if res = '1' then
                 state1 <= neutral1;
                 state2 <= neutral2;
-		cur_count2 <= (others => '0');
+		cur_count1 <= (others => '0');
 		cur_count2 <= (others => '0');
                 --state3 <= neutral3;
                 --state4 <= neutral4;

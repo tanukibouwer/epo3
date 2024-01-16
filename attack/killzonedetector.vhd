@@ -111,8 +111,8 @@ begin
                 new_state1 <= hold1;
 
             when detection1 =>
-                s2             <= s1 + to_unsigned(1, 4);
-                newdeathcount1 <= std_logic_vector(s2);
+                -- s2             <= s1 + to_unsigned(1, 4);
+                newdeathcount1 <= std_logic_vector(unsigned(olddeathcount1) + 1);
 
                 -- newpercentage1 <= "00000001";
                 --				newvectorX1 <= oldvectorX1;
@@ -157,8 +157,8 @@ begin
                 new_state2 <= hold2;
 
             when detection2 =>
-                s4             <= s3 + to_unsigned(1, 4);
-                newdeathcount2 <= std_logic_vector(s4);
+                -- s4             <= s3 + to_unsigned(1, 4);
+                newdeathcount2 <= std_logic_vector(unsigned(olddeathcount2) + 1);
 
                 -- newpercentage2 <= "00000001";
                 --				newvectorX2 <= oldvectorX2;

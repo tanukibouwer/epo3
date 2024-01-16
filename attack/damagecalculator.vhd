@@ -120,8 +120,8 @@ begin
                 newpercentage1 <= std_logic_vector(s2);
                 percentage1    <= std_logic_vector(s9);
                 
-                if (s1 < to_unsigned(15, 8)) then
-                    s9 <= to_unsigned(15, 8);
+                if (s1 < to_unsigned(40, 8)) then
+                    s9 <= to_unsigned(40, 8);
 		else
 			s9 <= s1;
 		end if;
@@ -176,8 +176,8 @@ begin
                 percentage2    <= std_logic_vector(s10);
                 newpercentage2 <= std_logic_vector(s4);
 
-                if (s3 < to_unsigned(15, 8)) then
-                    s10 <= to_unsigned(15, 8);
+                if (s3 < to_unsigned(40, 8)) then
+                    s10 <= to_unsigned(40, 8);
 		else
 			s10 <= s3;
 		end if;

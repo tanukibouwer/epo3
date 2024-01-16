@@ -43,15 +43,15 @@ begin
             if res = '1' then
                 state1 <= neutral1;
                 state2 <= neutral2;
-		cur_count1 <= (others => '0');
-		cur_count2 <= (others => '0');
+					 cur_count1 <= (others => '0');
+					 cur_count2 <= (others => '0');
                 --state3 <= neutral3;
                 --state4 <= neutral4;
             else
                 state1 <= new_state1;
                 state2 <= new_state2;
-		cur_count1 <= new_count1;
-		cur_count2 <= new_count2;
+					 cur_count1 <= new_count1;
+					 cur_count2 <= new_count2;
                 --state3 <= new_state3;
                 --state4 <= new_state4;
             end if;
@@ -64,8 +64,9 @@ begin
             when neutral1 =>
                 output1A <= '0';
                 output1B <= '0';
-		new_count1 <= (others => '0');
-                if (input1(4 downto 4) = "1") and (input1(5 downto 5) = "0") then
+					 new_count1 <= (others => '0');
+                
+					 if (input1(4 downto 4) = "1") and (input1(5 downto 5) = "0") then
                     new_state1 <= holdA1;
                 elsif (input1(4 downto 4) = "0") and (input1(5 downto 5) = "1") then
                     new_state1 <= holdB1;
@@ -76,8 +77,9 @@ begin
             when holdA1 =>
                 output1A <= '0';
                 output1B <= '0';
-		new_count1 <= (others => '0');
-                if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "1") then
+					 new_count1 <= (others => '0');
+                
+					 if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "1") then
                     new_state1 <= A1;
                 elsif (input1(4 downto 4) = "0") and (input1(5 downto 5) = "0") then
                     new_state1 <= A1;
@@ -88,8 +90,9 @@ begin
             when holdB1 =>
                 output1A <= '0';
                 output1B <= '0';
-		new_count1 <= (others => '0');
-                if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "0") then
+					 new_count1 <= (others => '0');
+                
+					 if (input1(4 downto 4) = "0") and (input1(5 downto 5) = "0") then
                     --wait 500 ms; -- dit werkt sws nie met synthesis maar miss wel
                     new_state1 <= count1;
                 elsif (input1(4 downto 4) = "1") and (input1(5 downto 5) = "0") then
@@ -99,42 +102,44 @@ begin
                     new_state1 <= holdB1;
                 end if;
 
-	    when count1 =>
-		output1A <= '0';
+			  when count1 =>
+					 output1A <= '0';
                 output1B <= '0';
-		if vsync = '0' then
-			if (cur_count1 < "1111000" ) then
-				new_count1 <= cur_count1 + "0000001";
-				new_state1 <= count1;
-			else
-				new_count1 <= (others => '0');
-				new_state1 <= B1;
-			end if;
-		else
-			new_state1 <= count1;
-		end if;
+					 
+					 if vsync = '0' then
+					     if (cur_count1 < "1111000" ) then
+						      new_count1 <= cur_count1 + "0000001";
+								new_state1 <= count1;
+						  else
+							   new_count1 <= (others => '0');
+				            new_state1 <= B1;
+						  end if;
+					 else
+					     new_count1 <= cur_count1;
+						  new_state1 <= count1;
+					 end if;
 		
-
-
             when A1 =>
                 output1A   <= '1';
                 output1B   <= '0';
-		new_count1 <= (others => '0');
-				if vsync = '0' then
-					new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
-				else
-					new_state1 <= A1;
-				end if;
+					 new_count1 <= (others => '0');
+						
+					 if vsync = '0' then
+					     new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
+					 else
+						  new_state1 <= A1;
+					 end if;
 
             when B1 =>
                 output1A   <= '0';
                 output1B   <= '1';
-		new_count1 <= (others => '0');
-                if vsync = '0' then
-					new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
-				else
-					new_state1 <= B1;
-				end if;
+					 new_count1 <= (others => '0');
+                
+					 if vsync = '0' then
+					     new_state1 <= neutral1; -- gaat dit werken? of is dit te kort en moet hij met een delay ofso tijdelijk in deze state bliven want je wil ook niet dat hij oneindig blijft slaan?????
+					 else
+						  new_state1 <= B1;
+				    end if;
 
         end case;
     end process;
@@ -192,6 +197,7 @@ begin
 				new_state2 <= B2;
 			end if;
 		else
+			new_count2 <= cur_count2;
 			new_state2 <= count2;
 		end if;
 

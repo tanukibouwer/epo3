@@ -4,21 +4,6 @@ use IEEE.numeric_std.all;
 
 entity chip_toplevel is
     port (
-        -- general i/o
-        clk   : in std_logic;
-        reset : in std_logic;
-        -- input i/o
-        p1_controller    : in std_logic;
-        p2_controller    : in std_logic;
-        controller_latch : out std_logic;
-        controller_clk   : out std_logic;
-        -- directionx1out   : out std_logic_vector(7 downto 0);
-        -- graphics i/o
-        Vsync  : out std_logic;                    -- sync signals -> active low
-        Hsync  : out std_logic;                    -- sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
       -- inputs
         -- general
         clk   : in std_logic;
@@ -531,17 +516,21 @@ begin
             test_out(3 downto 0) <= char2dc;
 
           when "00100" =>
+				test_out(9 downto 8) <= "00";
+				test_out(7 downto 4) <= char1dcin;
+				test_out(3 downto 0) <= char1dc_buff;
+          when "00101" =>
+
+          when "00110" =>
+            test_out(9 downto 8) <= "00";
+				test_out(7 downto 4) <= char2dcin;
+				test_out(3 downto 0) <= char2dc_buff;
+          when "00111" =>
             test_out(9) <= '0';
             test_out(8 downto 0) <= char1posx;
-          when "00101" =>
+          when "01000" =>
             test_out(9) <= '0';
             test_out(8 downto 0) <= char1posy;
-          when "00110" =>
-            test_out <= "0000000000";
-          when "00111" =>
-            test_out <= "0000000000";
-          when "01000" =>
-            test_out <= "0000000000";
           when "01001" =>
             test_out <= "0000000000";
           when "01010" =>

@@ -21,24 +21,6 @@ entity chip_toplevel is
         Hsync  : out std_logic;                    -- sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        B_data : out std_logic_vector(3 downto 0)  -- RGB data to screen
-      -- inputs
-        -- general
-        clk   : in std_logic;
-        reset : in std_logic;
-        -- controllers
-        p1_controller    : in std_logic;
-        p2_controller    : in std_logic;
-
-        -- test switches
-        switches : in std_logic_vector(5 downto 0);
-
-      -- outputs
-        -- graphics
-        Vsync  : out std_logic;                    -- sync signals -> active low
-        Hsync  : out std_logic;                    -- sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
         B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
 
         -- test outputs
@@ -532,97 +514,6 @@ begin
     );
 
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
-
-    process(switches)
-    begin
-      if (switches(5) = '1') then
-        case switches(4 downto 0) is
-        -- input
-          when "00000" =>
-            test_out(7 downto 0) <= inputsp1;
-            test_out(9 downto 8) <= "00";
-          when "00001" =>
-            test_out(7 downto 0) <= inputsp2;
-            test_out(9 downto 8) <= "00";
-
-        -- attack
-          -- orientation
-          when "00010" =>
-            test_out(9 downto 2) <= "00000000";
-            test_out(1) <= orientationp1;
-            test_out(0) <= orientationp2;
-          -- killcount
-          when "00011" =>
-            test_out(9 downto 8) <= "00";
-            test_out(7 downto 4) <= char1dc;
-            test_out(3 downto 0) <= char2dc;
-
-          when "00100" =>
-            test_out(9) <= '0';
-            test_out(8 downto 0) <= char1posx;
-          when "00101" =>
-            test_out(9) <= '0';
-            test_out(8 downto 0) <= char1posy;
-          when "00110" =>
-            test_out <= "0000000000";
-          when "00111" =>
-            test_out <= "0000000000";
-          when "01000" =>
-            test_out <= "0000000000";
-          when "01001" =>
-            test_out <= "0000000000";
-          when "01010" =>
-            test_out <= "0000000000";
-          when "01011" =>
-            test_out <= "0000000000";
-          when "01100" =>
-            test_out <= "0000000000";
-          when "01101" =>
-            test_out <= "0000000000";
-          when "01110" =>
-            test_out <= "0000000000";
-          when "01111" =>
-            test_out <= "0000000000";
-          when "10000" =>
-            test_out <= "0000000000";
-          when "10001" =>
-            test_out <= "0000000000";
-          when "10010" =>
-            test_out <= "0000000000";
-          when "10011" =>
-            test_out <= "0000000000";
-          when "10100" =>
-            test_out <= "0000000000";
-          when "10101" =>
-            test_out <= "0000000000";
-          when "10110" =>
-            test_out <= "0000000000";
-          when "10111" =>
-            test_out <= "0000000000";
-          when "11000" =>
-            test_out <= "0000000000";
-          when "11001" =>
-            test_out <= "0000000000";
-          when "11010" =>
-            test_out <= "0000000000";
-          when "11011" =>
-            test_out <= "0000000000";
-          when "11100" =>
-            test_out <= "0000000000";
-          when "11101" =>
-            test_out <= "0000000000";
-          when "11110" =>
-            test_out <= "0000000000";
-          when "11111" =>
-            test_out <= "0000000000";
-          when others =>
-            test_out <= "1111111111";
-        end case;
-      else
-        test_out <= "0000000000";
-      end if;
-    end process;
-
 
     process(switches)
     begin

@@ -543,7 +543,7 @@ begin
 				test_out(7 downto 4) <= char1dcin;
 				test_out(3 downto 0) <= char1dc_buff;
           when "00101" =>
-
+            test_out <= "0000000000";
           when "00110" =>
             test_out(9 downto 8) <= "00";
 				test_out(7 downto 4) <= char2dcin;

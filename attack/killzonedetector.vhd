@@ -5,6 +5,7 @@ use IEEE.numeric_std.all;
 entity killzonedetector is
     port (clk      : in std_logic;
     res            : in std_logic;
+    vsync  : in std_logic;
     olddeathcount1 : in std_logic_vector (3 downto 0);
     olddeathcount2 : in std_logic_vector (3 downto 0);
     --olddeathcount3  : in  std_logic_vector (3 downto 0);
@@ -97,7 +98,7 @@ begin
         end if;
     end process;
 
-    lbl1 : process (state1, olddeathcount1, oldvectorX1, oldvectorY1, s2, s1)
+    lbl1 : process (vsync)
     begin
         case state1 is
             when neutral1 =>
@@ -143,7 +144,7 @@ begin
         end case;
     end process;
 
-    lbl2 : process (state2, olddeathcount2, oldvectorX2, oldvectorY2, s4, s3)
+    lbl2 : process (vsync)
     begin
         case state2 is
             when neutral2 =>

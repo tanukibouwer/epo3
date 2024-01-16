@@ -89,7 +89,7 @@ begin
 					 output1A <= '0';
 					 output1B <= '1';
 					 if vsync = '0' then
-					     if (cur_count1 < "0111100" ) then -- 1111000 for 120 0111100 for 60
+					     if (cur_count1 < "0000011" ) then -- 1111000 for 120 0111100 for 60
 						      new_count1 <= cur_count1 + "0000001";
 								new_state1 <= count1;
 							
@@ -172,7 +172,7 @@ begin
 		output2A <= '0';
 		output2B <= '1';
 		if vsync = '0' then
-			if (cur_count2 < "0111100" ) then -- 1111000 for 120 0111100 for 60
+			if (cur_count2 < "0000011" ) then -- 1111000 for 120 0111100 for 60
 				new_count2 <= cur_count2 + "0000001";
 				new_state2 <= count2;
 				

@@ -74,12 +74,17 @@ architecture structural of chip_toplevel is
     signal char2percin   : std_logic_vector(7 downto 0); -- inputs into memory, from attack
     signal char1perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
     signal char2perctemp : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char1dc       : std_logic_vector(3 downto 0); -- output from memory, into attack
-    signal char2dc       : std_logic_vector(3 downto 0); -- output from memory, into attack
+    signal char1dc       : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
+    signal char2dc       : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
     signal char1dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
     signal char2dcin     : std_logic_vector(3 downto 0); -- inputs into memory, from attack
     signal char1death    : std_logic;                    -- inputs into memory, from attack
     signal char2death    : std_logic;                    -- inputs into memory, from attack
+
+    signal char1dc_buff       : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
+    signal char2dc_buff       : std_logic_vector(3 downto 0); -- output from 4breg1, into tlfsm and att
+    signal char1dcin_buff      : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
+    signal char2dcin_buff      : std_logic_vector(3 downto 0); -- output from 4breg2, into mem
 
     -- synchronised controller vectors
     signal inputsp1 : std_logic_vector(7 downto 0); -- inputs from input, into physics and graphics and attack
@@ -267,6 +272,15 @@ architecture structural of chip_toplevel is
             vec_out : out std_logic_vector(7 downto 0)
         );
     end component;
+
+    component t_4bregs is
+        port (
+            clk     : in std_logic;
+            reset   : in std_logic;
+            vec_in  : in std_logic_vector(3 downto 0);
+            vec_out : out std_logic_vector(3 downto 0)
+        );
+    end component;
 begin
 
     TL00 : memory port map(
@@ -276,8 +290,8 @@ begin
         resetp1 => char1death,
         resetp2 => char2death,
         -- death count and percentage
-        data_in4b1  => char1dcin,
-        data_in4b2  => char2dcin,
+        data_in4b1  => char1dcin_buff,
+        data_in4b2  => char2dcin_buff,
         data_out4b1 => char1dc,
         data_out4b2 => char2dc,
         data_inhp1  => char1percin,
@@ -365,8 +379,8 @@ begin
         clk => clk,
         reset => reset,
         controller_in => inputsp1,
-        killcountp1 => char1dc,
-        killcountp2 => char2dc,
+        killcountp1 => char1dc_buff,
+        killcountp2 => char2dc_buff,
         reset_game => resetgameintern,
         game => gameintern,
         p1_wins => p1winsintern,
@@ -389,8 +403,8 @@ begin
         y2in          => char2posy,
         percentage1in => char1perc,
         percentage2in => char2perc,
-        killcount1in  => char1dc,
-        killcount2in  => char2dc,
+        killcount1in  => char1dc_buff,
+        killcount2in  => char2dc_buff,
         -- data output
         -- data for physics
         directionx1out       => dirx1new1,     -- knockback direction for physics calculation
@@ -438,6 +452,34 @@ begin
         reset   => vsyncintern,
         vec_in  => diry2new1,
         vec_out => diry2new2
+    );
+
+    buf7 : t_4bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => char1dc,
+        vec_out => char1dc_buff
+    );
+
+    buf8 : t_4bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => char2dc,
+        vec_out => char2dc_buff
+    );
+
+    buf7 : t_4bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => char1dcin,
+        vec_out => char1dcin_buff
+    );
+
+    buf8 : t_4bregs port map(
+        clk     => clk,
+        reset   => vsyncintern,
+        vec_in  => char2dcin,
+        vec_out => char2dcin_buff
     );
     --------------------------------------------------------------------------------
     TL04 : input_toplevel port map(

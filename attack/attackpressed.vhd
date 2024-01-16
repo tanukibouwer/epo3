@@ -43,11 +43,15 @@ begin
             if res = '1' then
                 state1 <= neutral1;
                 state2 <= neutral2;
+		cur_count2 <= (others => '0');
+		cur_count2 <= (others => '0');
                 --state3 <= neutral3;
                 --state4 <= neutral4;
             else
                 state1 <= new_state1;
                 state2 <= new_state2;
+		cur_count1 <= new_count1;
+		cur_count2 <= new_count2;
                 --state3 <= new_state3;
                 --state4 <= new_state4;
             end if;
@@ -101,6 +105,7 @@ begin
 				new_state1 <= count1;
 			else
 				cur_count1 <= (others => '0');
+				new_count1 <= (others => '0');
 				new_state1 <= B1;
 			end if;
 		else
@@ -177,6 +182,7 @@ begin
 				new_state2 <= count2;
 			else
 				cur_count2 <= (others => '0');
+				new_count2 <= (others => '0');
 				new_state2 <= B2;
 			end if;
 		else

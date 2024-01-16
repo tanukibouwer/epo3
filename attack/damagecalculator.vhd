@@ -7,40 +7,14 @@ entity damagecalculator is
         clk          : in std_logic;
         res          : in std_logic;
         collision1A2 : in std_logic;
-        --collision1A3 : in std_logic;
-        --collision1A4 : in std_logic;
         collision2A1 : in std_logic;
-        --collision2A3 : in std_logic;
-        --collision2A4 : in std_logic;
-        --collision3A1 : in std_logic;
-        --collision3A2 : in std_logic;
-        --collision3A4 : in std_logic;
-        --collision4A1 : in std_logic;
-        --collision4A2 : in std_logic;
-        --collision4A3 : in std_logic;
         collision1B2 : in std_logic;
-        --collision1B3 : in std_logic;
-        --collision1B4 : in std_logic;
         collision2B1 : in std_logic;
-        --collision2B3 : in std_logic;
-        --collision2B4 : in std_logic;
-        --collision3B1 : in std_logic;
-        --collision3B2 : in std_logic;
-        --collision3B4 : in std_logic;
-        --collision4B1 : in std_logic;
-        --collision4B2 : in std_logic;
-        --collision4B3 : in std_logic;
         oldpercentage1 : in std_logic_vector (7 downto 0);
         oldpercentage2 : in std_logic_vector (7 downto 0);
-        --oldpercentage3  : in  std_logic_vector (7 downto 0);
-        --oldpercentage4  : in  std_logic_vector (7 downto 0);
         percentage1 : out std_logic_vector (7 downto 0);
         percentage2 : out std_logic_vector (7 downto 0);
-        --percentage3  : out  std_logic_vector (7 downto 0);
-        --percentage4  : out  std_logic_vector (7 downto 0);
         newpercentage1 : out std_logic_vector (7 downto 0);
-        --newpercentage3  : out  std_logic_vector (7 downto 0);
-        --newpercentage4  : out  std_logic_vector (7 downto 0);
         newpercentage2 : out std_logic_vector (7 downto 0));
 end entity damagecalculator;
 
@@ -55,27 +29,12 @@ architecture behavioural of damagecalculator is
     );
     signal state2, new_state2 : c2_state;
 
-    --type c3_state is (neutral3, damageA3
-    --, damageB3
-    --); 
-    --signal state3, new_state3: c3_state;
-
-    --type c4_state is (neutral4, damageA4
-    --, damageB4
-    --); 
-    --signal state4, new_state4: c4_state;
-
     signal s1, s2, s3, s4 : unsigned(7 downto 0);
 
-    --signal s5, s6, s7, s8: unsigned(7 downto 0);
-
     signal s9, s10 : unsigned(7 downto 0);
-    --signal s11, s12: unsigned(7 downto 0);
 begin
-    s1 <= unsigned(oldpercentage1); -- kan ik deze voor zowel de A als B attack gebruiken of overlapt dat waardoor er problemen ontstaan
-    s3 <= unsigned(oldpercentage2); -- kan ik deze voor zowel de A als B attack gebruiken of overlapt dat waardoor er problemen ontstaan
-    --s5 <= unsigned(oldpercentage3); -- kan ik deze voor zowel de A als B attack gebruiken of overlapt dat waardoor er problemen ontstaan
-    --s7 <= unsigned(oldpercentage4); -- kan ik deze voor zowel de A als B attack gebruiken of overlapt dat waardoor er problemen ontstaan
+    s1 <= unsigned(oldpercentage1); 
+    s3 <= unsigned(oldpercentage2); 
 
     lbl0 : process (clk)
     begin
@@ -83,13 +42,9 @@ begin
             if res = '1' then
                 state1 <= neutral1;
                 state2 <= neutral2;
-                --state3 <= neutral3;
-                --state4 <= neutral4;
             else
                 state1 <= new_state1;
                 state2 <= new_state2;
-                --state3 <= new_state3;
-                --state4 <= new_state4;
             end if;
         end if;
     end process;
@@ -115,8 +70,8 @@ begin
                 end if;
 
                 
-            when damageA1 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
-                s2          <= s1 + to_unsigned(5, 8); --adding the value 5 to the old percentage to get the new percentage
+            when damageA1 => 
+                s2          <= s1 + to_unsigned(5, 8); 
                 newpercentage1 <= std_logic_vector(s2);
                 percentage1    <= std_logic_vector(s9);
                 
@@ -126,28 +81,28 @@ begin
 			s9 <= s1;
 		end if;
                 
-                new_state1 <= neutral1; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
+                new_state1 <= neutral1; 
             	
 		
 
-	    when damageB1 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
-                s2             <= s1 + to_unsigned(10, 8); --adding the value 10 to the old percentage to get the new percentage -- deze waarde willen we wss nog wel aanpassen afhankelijk van hoe op deze move is of hoe moeilijk deze move is
+	    when damageB1 => 
+                s2             <= s1 + to_unsigned(10, 8); --adding the value 10 to the old percentage to get the new percentage 
                 newpercentage1 <= std_logic_vector(s2);
                 percentage1    <= std_logic_vector(s9);
 
 
                 if (s1 < to_unsigned(50, 8)) then
-                    s9 <= s1 + to_unsigned(10, 8); -- moet dit miss anders?
+                    s9 <= s1 + to_unsigned(10, 8); 
                 elsif (s1 < to_unsigned(100, 8)) then
-                    s9 <= s1 + to_unsigned(20, 8); -- moet dit miss anders?
+                    s9 <= s1 + to_unsigned(20, 8); 
                 elsif (s1 < to_unsigned(150, 8)) then
-                    s9 <= s1 + to_unsigned(50, 8); -- moet dit miss anders?
+                    s9 <= s1 + to_unsigned(50, 8); 
                 elsif (s1 < to_unsigned(200, 8)) then
-                    s9 <= s1 + to_unsigned(120, 8); -- moet dit miss anders?
+                    s9 <= s1 + to_unsigned(120, 8); 
 		else
 			s9 <= s1;
                 end if;
-                new_state1 <= neutral1; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
+                new_state1 <= neutral1; 
 
         end case;
     end process;
@@ -171,7 +126,7 @@ begin
                 else
                     new_state2 <= neutral2;
                 end if;
-            when damageA2 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
+            when damageA2 => 
                 s4             <= s3 + to_unsigned(5, 8); --adding the value 5 to the old percentage to get the new percentage
                 percentage2    <= std_logic_vector(s10);
                 newpercentage2 <= std_logic_vector(s4);
@@ -182,67 +137,26 @@ begin
 			s10 <= s3;
 		end if;
 
-                new_state2     <= neutral2; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-            when damageB2 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
-                s4             <= s3 + to_unsigned(10, 8); --adding the value 10 to the old percentage to get the new percentage -- deze waarde willen we wss nog wel aanpassen afhankelijk van hoe op deze move is of hoe moeilijk deze move is
+                new_state2     <= neutral2; 
+            when damageB2 => 
+                s4             <= s3 + to_unsigned(10, 8); --adding the value 10 to the old percentage to get the new percentage
                 newpercentage2 <= std_logic_vector(s4);
                 percentage2    <= std_logic_vector(s10);
 
 
                 if (s3 < to_unsigned(50, 8)) then
-                    s10 <= s3 + to_unsigned(10, 8); -- moet dit miss anders?
+                    s10 <= s3 + to_unsigned(10, 8); 
                 elsif (s3 < to_unsigned(100, 8)) then
-                    s10 <= s3 + to_unsigned(20, 8); -- moet dit miss anders?
+                    s10 <= s3 + to_unsigned(20, 8); 
                 elsif (s3 < to_unsigned(150, 8)) then
-                    s10 <= s3 + to_unsigned(50, 8); -- moet dit miss anders?
+                    s10 <= s3 + to_unsigned(50, 8); 
                 elsif (s3 < to_unsigned(200, 8)) then
-                    s10 <= s3 + to_unsigned(120, 8); -- moet dit miss anders?
+                    s10 <= s3 + to_unsigned(120, 8); 
 		else
 			s10 <= s3;
                 end if;
                 
-                new_state2 <= neutral2; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
+                new_state2 <= neutral2; 
         end case;
     end process;
-
-    --lbl3: process(state3, collision1A3)
-    --begin
-    --case state1 is
-    --when neutral3 =>
-    --newpercentage3 <= oldpercentage3;
-    --percentage3 <= "00000000";
-    --if (collision1A3 = '1') then
-    --new_state3 <= damageA3;
-    --else
-    --new_state3 <= neutral3;
-    --end if;
-    --when damageA3 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
-    --s6 <= s5 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
-    --percentage3 <= oldpercentage3;
-    --new_state3 <= neutral3; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-    --end case;
-    --end process;
-
-    --lbl4: process(state4, collision1A4)
-    --begin
-    --case state4 is
-    --when neutral4 =>
-    --newpercentage4 <= oldpercentage4;
-    --percentage4 <= "00000000";
-    --if (collision1A4 = '1') then
-    --new_state4 <= damageA4;
-    --else
-    --new_state4 <= neutral4;
-    --end if;
-    --when damageA4 => -- wat als twee spelers teglijk damage doen op ��n speler dan moeten meer states toegevoegd worden waarin de speler de cumulatieve damage krijgt (alleen als er meerdere spelers in het spel erbij komen)
-    --s8 <= s7 + to_unsigned(5,8); --adding the value 5 to the old percentage to get the new percentage
-    --percentage4 <= oldpercentage4;
-    --new_state4 <= neutral4; -- met meerdere spelers niet gelijk uit deze state gooien maar kijken of iemand anders damage doet
-    --end case;
-    --end process;
-
-    --newpercentage3 <= std_logic_vector(s6);
-    --newpercentage4 <= std_logic_vector(s8);
-    --percentage3 <= std_logic_vector(s11);
-    --percentage4 <= std_logic_vector(s12);
 end architecture behavioural;

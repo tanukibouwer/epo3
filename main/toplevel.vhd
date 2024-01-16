@@ -400,8 +400,8 @@ begin
         clk => clk,
         reset => reset,
         controller_in => inputsp1,
-        killcountp1 => char1dcin,
-        killcountp2 => char2dcin,
+        killcountp1 => char1dc,
+        killcountp2 => char2dc,
         reset_game => resetgameintern,
         game => gameintern,
         p1_wins => p1winsintern,
@@ -539,11 +539,11 @@ begin
           when "00011" =>
             test_out(9 downto 8) <= "00";
             test_out(7 downto 4) <= char1dc;
-            test_out(3 downto 0) <= char2dc;
+            test_out(3 downto 0) <= char1dcin;
 
           when "00100" =>
 				test_out(9 downto 8) <= "00";
-				test_out(7 downto 4) <= char1dcin;
+				test_out(7 downto 4) <= char2dc;
 				test_out(3 downto 0) <= char2dcin;
           when "00101" =>
             test_out <= "0000000000";

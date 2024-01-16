@@ -28,8 +28,8 @@ architecture behavioural of attackp is
     type c2_state is (neutral2, holdA2, holdB2, A2, B2, count2);
     signal state2, new_state2 : c2_state;
 
-	signal cur_count1, new_count1 : unsigned(2 downto 0);
-	signal cur_count2, new_count2 : unsigned(2 downto 0);
+	signal cur_count1, new_count1 : unsigned(6 downto 0);
+	signal cur_count2, new_count2 : unsigned(6 downto 0);
 
     --type c3_state is (neutral3, holdA3, holdB3, A3, B3); 
     --signal state3, new_state3: c3_state;
@@ -54,7 +54,7 @@ begin
         end if;
     end process;
 
-    lbl1 : process (state1, input1, vsync, cur_count1) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
+    lbl1 : process (state1, input1, vsync, cur_count1, new_count1) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
     begin
         case state1 is
             when neutral1 =>
@@ -96,7 +96,7 @@ begin
 		output1A <= '0';
                 output1B <= '0';
 		if vsync = '0' then
-			if (cur_count1 < "011" ) then
+			if (cur_count1 < "1111000" ) then
 				new_count1 <= cur_count1 + 1;
 				new_state1 <= count1;
 			else
@@ -130,7 +130,7 @@ begin
         end case;
     end process;
 
-    lbl2 : process (state2, input2, vsync, cur_count2) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
+    lbl2 : process (state2, input2, vsync, cur_count2, new_count2) -- voor de B attack nog een soort delay toevoegen -- misschien als het hier niet lukt met wait dat het in hitboxcollision kan omdat die niet met processes werken, dus wnnr ze het binnkrijgen eerst wachten en dan pas hitbox checken
     begin
         case state2 is
             when neutral2 =>
@@ -172,7 +172,7 @@ begin
 		output2A <= '0';
                 output2B <= '0';
 		if vsync = '0' then
-			if (cur_count2 < "011" ) then
+			if (cur_count2 < "1111000" ) then
 				new_count2 <= cur_count2 + 1;
 				new_state2 <= count2;
 			else

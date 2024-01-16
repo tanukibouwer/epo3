@@ -4,16 +4,19 @@ use IEEE.numeric_std.all;
 
 entity chip_toplevel is
     port (
-        -- general i/o
+      -- inputs
+        -- general
         clk   : in std_logic;
         reset : in std_logic;
-        -- input i/o
+        -- controllers
         p1_controller    : in std_logic;
         p2_controller    : in std_logic;
-        controller_latch : out std_logic;
-        controller_clk   : out std_logic;
-        -- directionx1out   : out std_logic_vector(7 downto 0);
-        -- graphics i/o
+
+        -- test switches
+        switches : in std_logic_vector(5 downto 0);
+
+      -- outputs
+        -- graphics
         Vsync  : out std_logic;                    -- sync signals -> active low
         Hsync  : out std_logic;                    -- sync signals -> active low
         R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
@@ -168,12 +171,8 @@ architecture structural of chip_toplevel is
         );
     end component;
 
-    component physics_top is
+    component physics_system is
         port (
-			clk					 : in std_logic;
-			reset				 : in std_logic;
-			vcount 				 : in std_logic_vector(9 downto 0);
-			hcount 				 : in std_logic_vector(9 downto 0);
             vin_x                : in std_logic_vector(9 downto 0);
             vin_y                : in std_logic_vector(9 downto 0);
             pin_x                : in std_logic_vector(8 downto 0);
@@ -185,20 +184,8 @@ architecture structural of chip_toplevel is
             vout_x               : out std_logic_vector(9 downto 0);
             vout_y               : out std_logic_vector(9 downto 0);
             pout_x               : out std_logic_vector(8 downto 0);
-            pout_y               : out std_logic_vector(8 downto 0);
-			vin_x2               : in std_logic_vector(9 downto 0);
-            vin_y2               : in std_logic_vector(9 downto 0);
-            pin_x2                : in std_logic_vector(8 downto 0);
-            pin_y2                : in std_logic_vector(8 downto 0);
-            player2_input         : in std_logic_vector(7 downto 0);
-            knockback_percentage2 : in std_logic_vector(7 downto 0);
-            knockback_x2          : in std_logic_vector(7 downto 0);
-            knockback_y2          : in std_logic_vector(7 downto 0);
-            vout_x2               : out std_logic_vector(9 downto 0);
-            vout_y2               : out std_logic_vector(9 downto 0);
-            pout_x2               : out std_logic_vector(8 downto 0);
-            pout_y2               : out std_logic_vector(8 downto 0));
-    end component physics_top;
+            pout_y               : out std_logic_vector(8 downto 0));
+    end component physics_system;
 
     component graphics_card is
         port (
@@ -225,6 +212,7 @@ architecture structural of chip_toplevel is
             G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
             B_data : out std_logic_vector(3 downto 0);  --! RGB data to screen
 
+
             -- game states
             game : in std_logic;
             p1_wins : in std_logic;
@@ -237,21 +225,27 @@ architecture structural of chip_toplevel is
             clk    : in std_logic;
             reset  : in std_logic;
 
+
             -- controller input signal, player 1 controls start menu! (see top level)
             controller_in : in std_logic_vector(7 downto 0); -- bit 0 = left, bit 1 = right, bit 2 = up, bit 3 = down, bit 4 = A, bit 5 = B, bit 6 = Start, bit 7 = Select
+
 
             --killcounters
             killcountp1 : in std_logic_vector(3 downto 0);
             killcountp2 : in std_logic_vector(3 downto 0);
 
+
             -- reset to freeze the game at the start of the game
             reset_game : out std_logic;
+
+
 
 
             -- game states
             game : out std_logic;
             p1_wins : out std_logic;
             p2_wins : out std_logic
+
 
         );
     end component;
@@ -368,7 +362,7 @@ begin
         p2_wins => p2winsintern
 
     );
-    TL02 : physics_top port map(
+    TL02 : physics_system port map (
 		clk					 => clk,
 		reset				 => resetgameintern, --freezes the game in start/end screen
 		vcount 				 => vcountintern,
@@ -384,20 +378,22 @@ begin
         vout_x               => char1velxin,
         vout_y               => char1velyin,
         pout_x               => char1posxin,
-        pout_y               => char1posyin,
-        vin_x2                => char2velx,
-        vin_y2                => char2vely,
-        pin_x2                => char2posx,
-        pin_y2                => char2posy,
-        player2_input         => inputsp2,
-        knockback_percentage2 => char2perctemp,
-        knockback_x2          => dirx2new2,
-        knockback_y2          => diry2new2,
-        vout_x2               => char2velxin,
-        vout_y2               => char2velyin,
-        pout_x2               => char2posxin,
-        pout_y2               => char2posyin
-    );
+        pout_y               => char1posyin);
+
+	TL03 : physics_system port map (
+        vin_x                => char2velx,
+        vin_y                => char2vely,
+        pin_x                => char2posx,
+        pin_y                => char2posy,
+        player_input         => inputsp2,
+        knockback_percentage => char2perctemp,
+        knockback_x          => dirx2new2,
+        knockback_y          => diry2new2,
+        vout_x               => char2velxin,
+        vout_y               => char2velyin,
+        pout_x               => char2posxin,
+        pout_y               => char2posyin);
+
 
 
     TL03: game_state_fsm port map(
@@ -611,4 +607,100 @@ begin
       end if;
     end process;
 
+
+    process(switches)
+    begin
+      if (switches(5) = '1') then
+        case switches(4 downto 0) is
+        -- input
+          when "00000" =>
+            test_out(7 downto 0) <= inputsp1;
+            test_out(9 downto 8) <= "00";
+          when "00001" =>
+            test_out(7 downto 0) <= inputsp2;
+            test_out(9 downto 8) <= "00";
+
+        -- attack
+          -- orientation
+          when "00010" =>
+            test_out(9 downto 2) <= "00000000";
+            test_out(1) <= orientationp1;
+            test_out(0) <= orientationp2;
+          -- killcount
+          when "00011" =>
+            test_out(9 downto 8) <= "00";
+            test_out(7 downto 4) <= char1dc;
+            test_out(3 downto 0) <= char2dc;
+
+          when "00100" =>
+				test_out(9 downto 8) <= "00";
+				test_out(7 downto 4) <= char1dcin;
+				test_out(3 downto 0) <= char1dc_buff;
+          when "00101" =>
+
+          when "00110" =>
+            test_out(9 downto 8) <= "00";
+				test_out(7 downto 4) <= char2dcin;
+				test_out(3 downto 0) <= char2dc_buff;
+          when "00111" =>
+            test_out(9) <= '0';
+            test_out(8 downto 0) <= char1posx;
+          when "01000" =>
+            test_out(9) <= '0';
+            test_out(8 downto 0) <= char1posy;
+          when "01001" =>
+            test_out <= "0000000000";
+          when "01010" =>
+            test_out <= "0000000000";
+          when "01011" =>
+            test_out <= "0000000000";
+          when "01100" =>
+            test_out <= "0000000000";
+          when "01101" =>
+            test_out <= "0000000000";
+          when "01110" =>
+            test_out <= "0000000000";
+          when "01111" =>
+            test_out <= "0000000000";
+          when "10000" =>
+            test_out <= "0000000000";
+          when "10001" =>
+            test_out <= "0000000000";
+          when "10010" =>
+            test_out <= "0000000000";
+          when "10011" =>
+            test_out <= "0000000000";
+          when "10100" =>
+            test_out <= "0000000000";
+          when "10101" =>
+            test_out <= "0000000000";
+          when "10110" =>
+            test_out <= "0000000000";
+          when "10111" =>
+            test_out <= "0000000000";
+          when "11000" =>
+            test_out <= "0000000000";
+          when "11001" =>
+            test_out <= "0000000000";
+          when "11010" =>
+            test_out <= "0000000000";
+          when "11011" =>
+            test_out <= "0000000000";
+          when "11100" =>
+            test_out <= "0000000000";
+          when "11101" =>
+            test_out <= "0000000000";
+          when "11110" =>
+            test_out <= "0000000000";
+          when "11111" =>
+            test_out <= "0000000000";
+          when others =>
+            test_out <= "1111111111";
+        end case;
+      else
+        test_out <= "0000000000";
+      end if;
+    end process;
+
 end architecture structural;
+

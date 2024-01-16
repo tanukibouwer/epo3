@@ -1,1 +1,0 @@
-../../VGA/VGA_char_sprites.vhd

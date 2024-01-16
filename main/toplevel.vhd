@@ -384,7 +384,7 @@ begin
         pin_x2                => char2posx,
         pin_y2                => char2posy,
         player2_input         => inputsp2,
-        knockback_percentage2 => char2perctemp,
+        knockback_percentage2 => char2perctemp2,
         knockback_x2          => dirx2new2,
         knockback_y2          => diry2new2,
         vout_x2               => char2velxin,
@@ -429,7 +429,7 @@ begin
         directionx2out       => dirx2new1, -- knockback direction for physics calculation
         directiony2out       => diry2new1, -- knockback direction for physics calculation
         damagepercentage1out => char1perctemp1, -- percentage data for physics calculation
-        damagepercentage2out => char2perctemp2, -- percentage data for physics calculation
+        damagepercentage2out => char2perctemp1, -- percentage data for physics calculation
         -- data for storage
         percentage1out => char1percin, -- percentage data input to memory for storage
         percentage2out => char2percin, -- percentage data input to memory for storage

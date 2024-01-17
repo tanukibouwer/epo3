@@ -5,7 +5,6 @@ use IEEE.numeric_std.all;
 entity killzonedetector is
     port (clk      : in std_logic;
     res            : in std_logic;
-    vsync  : in std_logic;
     olddeathcount1 : in std_logic_vector (3 downto 0);
     olddeathcount2 : in std_logic_vector (3 downto 0);
 

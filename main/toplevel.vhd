@@ -137,8 +137,6 @@ architecture structural of chip_toplevel is
             y2in                 : in std_logic_vector(8 downto 0);
             percentage1in        : in std_logic_vector(7 downto 0);
             percentage2in        : in std_logic_vector(7 downto 0);
-            killcount1in         : in std_logic_vector(3 downto 0);
-            killcount2in         : in std_logic_vector(3 downto 0);
             directionx1out       : out std_logic_vector(7 downto 0);
             directiony1out       : out std_logic_vector(7 downto 0);
             directionx2out       : out std_logic_vector(7 downto 0);
@@ -408,8 +406,6 @@ begin
         y2in          => char2posy,
         percentage1in => char1perc,
         percentage2in => char2perc,
-        killcount1in  => char1dc,
-        killcount2in  => char2dc,
         -- data output
         -- data for physics
         directionx1out       => dirx1new1, -- knockback direction for physics calculation

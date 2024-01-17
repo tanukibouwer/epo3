@@ -6,9 +6,6 @@ entity killzonedetector is
     port (clk      : in std_logic;
     res            : in std_logic;
 
-    oldpercentage1 : in std_logic_vector (7 downto 0);
-    oldpercentage2 : in std_logic_vector (7 downto 0);
-
     oldvectorX1 : in std_logic_vector (8 downto 0);
     oldvectorY1 : in std_logic_vector (8 downto 0);
     oldvectorX2 : in std_logic_vector (8 downto 0);

@@ -566,7 +566,7 @@ begin
             gp_outputs(11 downto 8) <= R_data;
             gp_outputs(7 downto 4) <= G_data;
             gp_outputs(3 downto 0) <= B_data;
-            --test_out <= "0000000000";
+            test_out <= "0000000000";
         end if;
     end process;
 

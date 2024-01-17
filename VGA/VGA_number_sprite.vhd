@@ -18,7 +18,6 @@ use IEEE.numeric_std.all;
 
 entity number_sprite is
     port (
-        reset  : in std_logic;
         -- which number to display
         number : in std_logic_vector(3 downto 0); -- 9 (max is 1001 in binary)
         -- data to go through the array

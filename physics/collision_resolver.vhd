@@ -38,7 +38,6 @@ constant floor_y_down : unsigned (8 downto 0) := to_unsigned(276, 9); -- 288 - p
 begin
 resolver : process (vin_y, pin_x, pin_y, input_down) is
 variable player_left_x : unsigned(8 downto 0) := to_unsigned(0, 9);
-variable player_up_y : unsigned(8 downto 0) := to_unsigned(0, 9);
 variable player_right_x : unsigned(8 downto 0) := to_unsigned(0, 9);
 variable player_down_y : unsigned(8 downto 0) := to_unsigned(0, 9);
 variable going_down : std_logic := '0';
@@ -46,7 +45,6 @@ begin
 
 player_left_x := unsigned(pin_x) - player_half_size_x;
 player_right_x := unsigned(pin_x) + player_half_size_x;
-player_up_y := unsigned(pin_y) - player_half_size_y;
 player_down_y := unsigned(pin_y) + player_half_size_y;
 
 if signed(vin_y) > to_signed(0, 9) then

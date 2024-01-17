@@ -9,7 +9,7 @@ entity chip_toplevel is
         clk   : in std_logic;
         reset : in std_logic;
 
-		-- controller data inputs
+        -- controller data inputs
         p1_controller : in std_logic;
         p2_controller : in std_logic;
 
@@ -22,7 +22,7 @@ entity chip_toplevel is
         Hsync  : out std_logic; -- sync signals -> active low
 
         -- general purpose outputs, used either for graphics during normal use,
-		    -- or for test leds when testing mode is enabled
+        -- or for test leds when testing mode is enabled
         gp_outputs : out std_logic_vector(11 downto 0);
 
         -- controller drive signals
@@ -103,8 +103,8 @@ architecture structural of chip_toplevel is
     signal readyphysicsin  : std_logic;
     signal readyphysicsout : std_logic;
 
-	 signal test_out : std_logic_vector(9 downto 0);
-	 signal R_data : std_logic_vector(3 downto 0); -- RGB data to screen
+    signal test_out : std_logic_vector(9 downto 0);
+    signal R_data : std_logic_vector(3 downto 0); -- RGB data to screen
     signal G_data : std_logic_vector(3 downto 0); -- RGB data to screen
     signal B_data : std_logic_vector(3 downto 0); -- RGB data to scree
 
@@ -476,13 +476,13 @@ begin
         orientationp1, orientationp2, char1dc, char2dc,
         dirx1new2, diry1new2, dirx2new2, diry2new2, char1perc, char2perc,
         char1posx, char1posy, char2posx, char2posy,
-	      char1velx, char1vely, char2velx, char2vely,
+        char1velx, char1vely, char2velx, char2vely,
         resetgameintern, gameintern, p1winsintern, p2winsintern
     )
     begin
         if (switches(5) = '1') then
-		      gp_outputs(9 downto 0) <= test_out;
-				gp_outputs(11 downto 10) <= "00";
+            gp_outputs(9 downto 0) <= test_out;
+            gp_outputs(11 downto 10) <= "00";
 
             case switches(4 downto 0) is
             -- input
@@ -506,27 +506,27 @@ begin
                     test_out(3 downto 0) <= char2dc;
                 -- direction
                 when "00100" =>
-					     test_out(9 downto 8) <= "00";
+                    test_out(9 downto 8) <= "00";
                     test_out(7 downto 0) <= dirx1new2;
                 when "00101" =>
-					     test_out(9 downto 8) <= "00";
+                    test_out(9 downto 8) <= "00";
                     test_out(7 downto 0) <= diry1new2;
                 when "00110" =>
-					     test_out(9 downto 8) <= "00";
+                    test_out(9 downto 8) <= "00";
                     test_out(7 downto 0) <= dirx2new2;
                 when "00111" =>
-					     test_out(9 downto 8) <= "00";
+                    test_out(9 downto 8) <= "00";
                     test_out(7 downto 0) <= diry2new2;
-					 -- percentage
+                -- percentage
                 when "01000" =>
                     test_out(9 downto 8) <= "00";
-					     test_out(7 downto 0) <= char1perc;
+                    test_out(7 downto 0) <= char1perc;
                 when "01001" =>
                     test_out(9 downto 8) <= "00";
-					     test_out(7 downto 0) <= char2perc;
+                    test_out(7 downto 0) <= char2perc;
 
-				    -- physics
-				        -- position
+            -- physics
+                -- position
                 when "01010" =>
                     test_out(9)          <= '0';
                     test_out(8 downto 0) <= char1posx;
@@ -539,7 +539,7 @@ begin
                 when "01101" =>
                     test_out(9)          <= '0';
                     test_out(8 downto 0) <= char2posy;
-					      -- velocity
+                -- velocity
                 when "01110" =>
                     test_out(9 downto 0) <= char1velx;
                 when "01111" =>
@@ -548,9 +548,9 @@ begin
                     test_out(9 downto 0) <= char2velx;
                 when "10001" =>
                     test_out(9 downto 0) <= char2vely;
-				    -- game state
+            -- game state
                 when "10010" =>
-					          test_out(9 downto 4) <= "000000";
+                    test_out(9 downto 4) <= "000000";
                     test_out(3) <= resetgameintern;
                     test_out(2) <= gameintern;
                     test_out(1) <= p1winsintern;

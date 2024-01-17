@@ -1,4 +1,4 @@
-configuration graphics_card_cfg of graphics_card is
+configuration graphics_card_cfg of VDC is
     for structural
         for all : screen_scan
             use configuration work.screen_scan_cfg;

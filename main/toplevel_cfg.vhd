@@ -6,7 +6,7 @@ configuration toplevel_cfg of chip_toplevel is
         end for;
         for all : physics_top use configuration work.physics_top_cfg;
         end for;
-        for all : graphics_card use configuration work.graphics_card_cfg;
+        for all : VDC use configuration work.graphics_card_cfg;
         end for;
         for all : memory use configuration work.memory_structural_cfg;
         end for;

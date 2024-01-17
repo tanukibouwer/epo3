@@ -1,4 +1,4 @@
---module: graphics_card
+--module: VDC
 --version: 2.0
 --author: Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-entity graphics_card is
+entity VDC is
     port (
         clk   : in std_logic;
         reset : in std_logic;
@@ -48,9 +48,9 @@ entity graphics_card is
         p1_wins : in std_logic;
         p2_wins : in std_logic
     );
-end entity graphics_card;
+end entity VDC;
 
-architecture structural of graphics_card is
+architecture structural of VDC is
 
     component screen_scan is
         port (

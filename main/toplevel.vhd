@@ -190,7 +190,7 @@ architecture structural of chip_toplevel is
             pout_y2               : out std_logic_vector(8 downto 0));
     end component physics_top;
 
-    component graphics_card is
+    component VDC is
         port (
             clk   : in std_logic;
             reset : in std_logic;
@@ -337,7 +337,7 @@ begin
         data_out9b4 => char2vely
 
     );
-    TL01 : graphics_card port map(
+    TL01 : VDC port map(
         clk           => clk,
         reset         => reset,
         char1_x       => char1posx,

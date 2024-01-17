@@ -85,10 +85,8 @@ architecture structural of chip_toplevel is
     signal char2perc      : std_logic_vector(7 downto 0); -- output from memory, into attack and graphics
     signal char1percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
     signal char2percin    : std_logic_vector(7 downto 0); -- inputs into memory, from attack
-    signal char1perctemp1 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char1perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char2perctemp1 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
-    signal char2perctemp2 : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char1perctemp  : std_logic_vector(7 downto 0); -- inputs into physics, from attack
+    signal char2perctemp  : std_logic_vector(7 downto 0); -- inputs into physics, from attack
     signal char1dc        : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
     signal char2dc        : std_logic_vector(3 downto 0); -- output from memory, into 4breg1
     signal char1dcin      : std_logic_vector(3 downto 0); -- inputs into memory, from attack
@@ -282,16 +280,6 @@ architecture structural of chip_toplevel is
         );
     end component;
 
-    component t_8bregs_perframe is
-        port (
-            clk     : in std_logic;
-            reset   : in std_logic;
-            vcount  : in std_logic_vector(9 downto 0);
-            vec_in  : in std_logic_vector(7 downto 0);
-            vec_out : out std_logic_vector(7 downto 0)
-        );
-    end component;
-
     component t_4bregs is
         port (
             clk     : in std_logic;
@@ -372,7 +360,7 @@ begin
         pin_x                 => char1posx,
         pin_y                 => char1posy,
         player_input          => inputsp1,
-        knockback_percentage  => char1perctemp2,
+        knockback_percentage  => char1perctemp,
         knockback_x           => dirx1new2,
         knockback_y           => diry1new2,
         vout_x                => char1velxin,
@@ -384,7 +372,7 @@ begin
         pin_x2                => char2posx,
         pin_y2                => char2posy,
         player2_input         => inputsp2,
-        knockback_percentage2 => char2perctemp2,
+        knockback_percentage2 => char2perctemp,
         knockback_x2          => dirx2new2,
         knockback_y2          => diry2new2,
         vout_x2               => char2velxin,
@@ -428,8 +416,8 @@ begin
         directiony1out       => diry1new1, -- knockback direction for physics calculation
         directionx2out       => dirx2new1, -- knockback direction for physics calculation
         directiony2out       => diry2new1, -- knockback direction for physics calculation
-        damagepercentage1out => char1perctemp1, -- percentage data for physics calculation
-        damagepercentage2out => char2perctemp1, -- percentage data for physics calculation
+        damagepercentage1out => char1perctemp, -- percentage data for physics calculation
+        damagepercentage2out => char2perctemp, -- percentage data for physics calculation
         -- data for storage
         percentage1out => char1percin, -- percentage data input to memory for storage
         percentage2out => char2percin, -- percentage data input to memory for storage
@@ -446,20 +434,6 @@ begin
     -- these make sure the knockback direction is set steady forever, without
     -- these buffers the whole attack system breaks.
     --------------------------------------------------------------------------------
-    buf1 : t_8bregs_perframe port map(
-        clk     => clk,
-        reset   => reset,
-        vcount  => vcountintern,
-        vec_in  => char1perctemp1,
-        vec_out => char1perctemp2
-    );
-    buf2 : t_8bregs_perframe port map(
-        clk     => clk,
-        reset   => reset,
-        vcount  => vcountintern,
-        vec_in  => char2perctemp1,
-        vec_out => char2perctemp2
-    );
     buf3 : t_8bregs port map(
         clk     => clk,
         reset   => reset,

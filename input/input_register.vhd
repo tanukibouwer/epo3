@@ -27,8 +27,23 @@ begin
         buttons_p1 <= "00000000";
         buttons_p2 <= "00000000";
       elsif (write = '1') then
-        buttons_p1 <= buttons_in_p1;
-        buttons_p2 <= buttons_in_p2;
+        buttons_p1(7) <= buttons_in_p1(5);
+        buttons_p1(6) <= buttons_in_p1(4);
+        buttons_p1(5) <= buttons_in_p1(6);
+        buttons_p1(4) <= buttons_in_p1(7);
+        buttons_p1(3) <= buttons_in_p1(2);
+        buttons_p1(2) <= buttons_in_p1(3);
+        buttons_p1(1) <= buttons_in_p1(0);
+        buttons_p1(0) <= buttons_in_p1(1);
+
+        buttons_p2(7) <= buttons_in_p2(5);
+        buttons_p2(6) <= buttons_in_p2(4);
+        buttons_p2(5) <= buttons_in_p2(6);
+        buttons_p2(4) <= buttons_in_p2(7);
+        buttons_p2(3) <= buttons_in_p2(2);
+        buttons_p2(2) <= buttons_in_p2(3);
+        buttons_p2(1) <= buttons_in_p2(0);
+        buttons_p2(0) <= buttons_in_p2(1);
       end if;
     end if;
   end process;

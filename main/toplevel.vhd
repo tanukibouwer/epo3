@@ -19,15 +19,15 @@ entity chip_toplevel is
         -- graphics
         Vsync  : out std_logic; -- sync signals -> active low
         Hsync  : out std_logic; -- sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        --R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        --G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        --B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
 
         -- test outputs
-        test_out : out std_logic_vector(9 downto 0);
+        --test_out : out std_logic_vector(9 downto 0);
 
         -- uncomment this and comment rgb and test_out for the chip
-        --gp_outputs : out std_logic_vector(11 downto 0);
+        gp_outputs : out std_logic_vector(11 downto 0);
 
         -- controllers
         controller_latch : out std_logic;
@@ -106,6 +106,11 @@ architecture structural of chip_toplevel is
     -- dummy signal that should be linked to the counter through an fsm or something like that
     signal readyphysicsin  : std_logic;
     signal readyphysicsout : std_logic;
+	 
+	 signal test_out : std_logic_vector(9 downto 0);
+	 signal R_data : std_logic_vector(3 downto 0); -- RGB data to screen
+    signal G_data : std_logic_vector(3 downto 0); -- RGB data to screen
+    signal B_data : std_logic_vector(3 downto 0); -- RGB data to scree
 
     component input_toplevel is
         port (
@@ -472,6 +477,9 @@ begin
     process (switches)
     begin
         if (switches(5) = '1') then
+		      gp_outputs(9 downto 0) <= test_out;
+				gp_outputs(11 downto 10) <= "00";
+				
             case switches(4 downto 0) is
                     -- input
                 when "00000" =>
@@ -555,10 +563,10 @@ begin
                     test_out <= "1111111111";
             end case;
         else
-            --gp_outputs(11 downto 8) <= R_data;
-            --gp_outputs(7 downto 4) <= G_data;
-            --gp_outputs(3 downto 0) <= B_data;
-            test_out <= "0000000000";
+            gp_outputs(11 downto 8) <= R_data;
+            gp_outputs(7 downto 4) <= G_data;
+            gp_outputs(3 downto 0) <= B_data;
+            --test_out <= "0000000000";
         end if;
     end process;
 

@@ -10,6 +10,8 @@ architecture behaviour of damagecalculator_tb is
            res : in  std_logic;
    	collision1A2 : in std_logic;
    	collision2A1 : in std_logic;
+	collision1B2 : in std_logic;
+        collision2B1 : in std_logic;
    	oldpercentage1  : in  std_logic_vector (7 downto 0);
    	oldpercentage2  : in  std_logic_vector (7 downto 0);
    	percentage1  : out  std_logic_vector (7 downto 0);
@@ -21,6 +23,8 @@ architecture behaviour of damagecalculator_tb is
    signal res : std_logic;
    signal collision1A2 : std_logic;
    signal collision2A1 : std_logic;
+   signal collision1B2 : std_logic;
+   signal collision2B1 : std_logic;
    signal oldpercentage1  : std_logic_vector (7 downto 0);
    signal oldpercentage2  : std_logic_vector (7 downto 0);
    signal percentage1  : std_logic_vector (7 downto 0);
@@ -28,14 +32,18 @@ architecture behaviour of damagecalculator_tb is
    signal newpercentage1  : std_logic_vector (7 downto 0);
    signal newpercentage2  : std_logic_vector (7 downto 0);
 begin
-   test: damagecalculator port map (clk, res, collision1A2, collision2A1, oldpercentage1, oldpercentage2, percentage1, percentage2, newpercentage1, newpercentage2);
+   test: damagecalculator port map (clk, res, collision1A2, collision2A1, collision1B2, collision2B1, oldpercentage1, oldpercentage2, percentage1, percentage2, newpercentage1, newpercentage2);
    clk <= '0' after 0 ns,
           '1' after 10 ns when clk /= '1' else '0' after 10 ns;
    res <= '0' after 0 ns, '1' after 200 ns;
 
    collision1A2 <= '0' after 0 ns, '1' after 50 ns;
 
-   collision2A1 <= '0' after 0 ns, '1' after 50 ns;
+   collision2A1 <= '0' after 0 ns;
+
+   collision1B2 <= '0' after 0 ns, '1' after 55 ns;
+
+   collision2B1 <= '0' after 0 ns, '1' after 50 ns;
 
    oldpercentage1(0) <= '0' after 0 ns, '0' after 100 ns;
    oldpercentage1(1) <= '0' after 0 ns, '0' after 100 ns;

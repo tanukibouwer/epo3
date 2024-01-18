@@ -4,32 +4,28 @@ use IEEE.numeric_std.all;
 
 entity chip_toplevel is
     port (
-        -- inputs
+    -- inputs
         -- general
         clk   : in std_logic;
         reset : in std_logic;
-        -- controllers
+
+        -- controller data inputs
         p1_controller : in std_logic;
         p2_controller : in std_logic;
 
         -- test switches
         switches : in std_logic_vector(5 downto 0);
 
-        -- outputs
+    -- outputs
         -- graphics
         Vsync  : out std_logic; -- sync signals -> active low
         Hsync  : out std_logic; -- sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
-        B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
 
-        -- test outputs
-        test_out : out std_logic_vector(9 downto 0);
+        -- general purpose outputs, used either for graphics during normal use,
+        -- or for test leds when testing mode is enabled
+        gp_outputs : out std_logic_vector(11 downto 0);
 
-        -- uncomment this and comment rgb and test_out for the chip
-        --gp_outputs : out std_logic_vector(11 downto 0);
-
-        -- controllers
+        -- controller drive signals
         controller_latch : out std_logic;
         controller_clk   : out std_logic
     );
@@ -107,6 +103,11 @@ architecture structural of chip_toplevel is
     signal readyphysicsin  : std_logic;
     signal readyphysicsout : std_logic;
 
+    signal test_out : std_logic_vector(9 downto 0);
+    signal R_data : std_logic_vector(3 downto 0); -- RGB data to screen
+    signal G_data : std_logic_vector(3 downto 0); -- RGB data to screen
+    signal B_data : std_logic_vector(3 downto 0); -- RGB data to scree
+
     component input_toplevel is
         port (
             clk   : in std_logic;
@@ -137,8 +138,6 @@ architecture structural of chip_toplevel is
             y2in                 : in std_logic_vector(8 downto 0);
             percentage1in        : in std_logic_vector(7 downto 0);
             percentage2in        : in std_logic_vector(7 downto 0);
-            killcount1in         : in std_logic_vector(3 downto 0);
-            killcount2in         : in std_logic_vector(3 downto 0);
             directionx1out       : out std_logic_vector(7 downto 0);
             directiony1out       : out std_logic_vector(7 downto 0);
             directionx2out       : out std_logic_vector(7 downto 0);
@@ -408,8 +407,6 @@ begin
         y2in          => char2posy,
         percentage1in => char1perc,
         percentage2in => char2perc,
-        killcount1in  => char1dc,
-        killcount2in  => char2dc,
         -- data output
         -- data for physics
         directionx1out       => dirx1new1, -- knockback direction for physics calculation
@@ -473,11 +470,22 @@ begin
 
     Vsync <= vsyncintern; -- this is the only way I know to have an output signal also work as an internal one
 
-    process (switches)
+    process (
+        switches, test_out, R_data, G_data, B_data,
+        inputsp1, inputsp2,
+        orientationp1, orientationp2, char1dc, char2dc,
+        dirx1new2, diry1new2, dirx2new2, diry2new2, char1perc, char2perc,
+        char1posx, char1posy, char2posx, char2posy,
+        char1velx, char1vely, char2velx, char2vely,
+        resetgameintern, gameintern, p1winsintern, p2winsintern
+    )
     begin
         if (switches(5) = '1') then
+            gp_outputs(9 downto 0) <= test_out;
+            gp_outputs(11 downto 10) <= "00";
+
             case switches(4 downto 0) is
-                    -- input
+            -- input
                 when "00000" =>
                     test_out(7 downto 0) <= inputsp1;
                     test_out(9 downto 8) <= "00";
@@ -485,50 +493,68 @@ begin
                     test_out(7 downto 0) <= inputsp2;
                     test_out(9 downto 8) <= "00";
 
-                    -- attack
-                    -- orientation
+            -- attack
+                -- orientation
                 when "00010" =>
                     test_out(9 downto 2) <= "00000000";
                     test_out(1)          <= orientationp1;
                     test_out(0)          <= orientationp2;
-                    -- killcount
+                -- killcount
                 when "00011" =>
                     test_out(9 downto 8) <= "00";
                     test_out(7 downto 4) <= char1dc;
                     test_out(3 downto 0) <= char2dc;
-
+                -- direction
                 when "00100" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= dirx1new2;
                 when "00101" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= diry1new2;
                 when "00110" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= dirx2new2;
                 when "00111" =>
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= diry2new2;
+                -- percentage
+                when "01000" =>
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= char1perc;
+                when "01001" =>
+                    test_out(9 downto 8) <= "00";
+                    test_out(7 downto 0) <= char2perc;
+
+            -- physics
+                -- position
+                when "01010" =>
                     test_out(9)          <= '0';
                     test_out(8 downto 0) <= char1posx;
-                when "01000" =>
+                when "01011" =>
                     test_out(9)          <= '0';
                     test_out(8 downto 0) <= char1posy;
-                when "01001" =>
-                    test_out <= "0000000000";
-                when "01010" =>
-                    test_out <= "0000000000";
-                when "01011" =>
-                    test_out <= "0000000000";
                 when "01100" =>
-                    test_out <= "0000000000";
+                    test_out(9)          <= '0';
+                    test_out(8 downto 0) <= char2posx;
                 when "01101" =>
-                    test_out <= "0000000000";
+                    test_out(9)          <= '0';
+                    test_out(8 downto 0) <= char2posy;
+                -- velocity
                 when "01110" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 0) <= char1velx;
                 when "01111" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 0) <= char1vely;
                 when "10000" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 0) <= char2velx;
                 when "10001" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 0) <= char2vely;
+            -- game state
                 when "10010" =>
-                    test_out <= "0000000000";
+                    test_out(9 downto 4) <= "000000";
+                    test_out(3) <= resetgameintern;
+                    test_out(2) <= gameintern;
+                    test_out(1) <= p1winsintern;
+                    test_out(0) <= p2winsintern;
                 when "10011" =>
                     test_out <= "0000000000";
                 when "10100" =>
@@ -559,9 +585,9 @@ begin
                     test_out <= "1111111111";
             end case;
         else
-            --gp_outputs(11 downto 8) <= R_data;
-            --gp_outputs(7 downto 4) <= G_data;
-            --gp_outputs(3 downto 0) <= B_data;
+            gp_outputs(11 downto 8) <= R_data;
+            gp_outputs(7 downto 4) <= G_data;
+            gp_outputs(3 downto 0) <= B_data;
             test_out <= "0000000000";
         end if;
     end process;

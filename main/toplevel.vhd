@@ -112,7 +112,6 @@ architecture structural of chip_toplevel is
         port (
             clk   : in std_logic;
             reset : in std_logic;
-            vsync : in std_logic;
 
             controller_latch : out std_logic;
             controller_clk   : out std_logic;
@@ -459,7 +458,6 @@ begin
     TL04 : input_toplevel port map(
         clk              => clk,
         reset            => reset,
-        vsync            => vsyncintern,
         controller_latch => controller_latch,
         controller_clk   => controller_clk,
         data_p1          => p1_controller,

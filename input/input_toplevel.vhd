@@ -5,7 +5,6 @@ entity input_toplevel is
   port (
     clk   : in std_logic;
     reset : in std_logic;
-	 vsync : in std_logic;
 
     controller_latch    : out   std_logic;
     controller_clk      : out   std_logic;

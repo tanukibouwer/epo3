@@ -4,12 +4,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
---! 
---! This component consists of 2 subcomponents, screen_scan and coloring 
---! 
---! screen_scan to scan the screen, coloring as logic to find the color at a pixel 
---! 
+-- This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
+-- 
+-- This component consists of 2 subcomponents, screen_scan and coloring 
+-- 
+-- screen_scan to scan the screen, coloring as logic to find the color at a pixel 
+-- 
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -23,10 +23,10 @@ entity VDC is
         clk   : in std_logic;
         reset : in std_logic;
         -- inputs from memory -> relevant data to be displayed on screen
-        char1_x       : in std_logic_vector(8 downto 0); --! character 1 x-location
-        char1_y       : in std_logic_vector(8 downto 0); --! character 1 y-location
-        char2_x       : in std_logic_vector(8 downto 0); --! character 2 x-location
-        char2_y       : in std_logic_vector(8 downto 0); --! character 2 y-location
+        char1_x       : in std_logic_vector(8 downto 0); -- character 1 x-location
+        char1_y       : in std_logic_vector(8 downto 0); -- character 1 y-location
+        char2_x       : in std_logic_vector(8 downto 0); -- character 2 x-location
+        char2_y       : in std_logic_vector(8 downto 0); -- character 2 y-location
         percentage_p1 : in std_logic_vector(7 downto 0);
         percentage_p2 : in std_logic_vector(7 downto 0);
         -- inputs from attack and input
@@ -37,11 +37,11 @@ entity VDC is
         -- outputs to screen (and other components)
         hcount : out std_logic_vector(9 downto 0);
         vcount : out std_logic_vector(9 downto 0);
-        Vsync  : out std_logic; --! sync signals -> active low
-        Hsync  : out std_logic; --! sync signals -> active low
-        R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-        B_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+        Vsync  : out std_logic; -- sync signals -> active low
+        Hsync  : out std_logic; -- sync signals -> active low
+        R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+        B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
 
         -- game states
         game : in std_logic;
@@ -72,10 +72,10 @@ architecture structural of VDC is
             hcount : in std_logic_vector(9 downto 0);
             vcount : in std_logic_vector(9 downto 0);
             -- relevant data for x-y locations
-            char1x : in std_logic_vector(8 downto 0); --! character 1 coordinates
-            char1y : in std_logic_vector(8 downto 0); --! character 1 coordinates
-            char2x : in std_logic_vector(8 downto 0); --! character 2 coordinates
-            char2y : in std_logic_vector(8 downto 0); --! character 2 coordinates
+            char1x : in std_logic_vector(8 downto 0); -- character 1 coordinates
+            char1y : in std_logic_vector(8 downto 0); -- character 1 coordinates
+            char2x : in std_logic_vector(8 downto 0); -- character 2 coordinates
+            char2y : in std_logic_vector(8 downto 0); -- character 2 coordinates
             -- player orientation information
             orientationp1 : in std_logic;
             orientationp2 : in std_logic;
@@ -89,9 +89,9 @@ architecture structural of VDC is
             controllerp2 : in std_logic_vector(7 downto 0);
     
             -- RGB data outputs
-            R_data : out std_logic_vector(3 downto 0); --! RGB data output
-            G_data : out std_logic_vector(3 downto 0); --! RGB data output
-            B_data : out std_logic_vector(3 downto 0);  --! RGB data output
+            R_data : out std_logic_vector(3 downto 0); -- RGB data output
+            G_data : out std_logic_vector(3 downto 0); -- RGB data output
+            B_data : out std_logic_vector(3 downto 0);  -- RGB data output
 
              -- game states
             game : in std_logic;

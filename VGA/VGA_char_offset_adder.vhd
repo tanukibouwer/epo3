@@ -3,8 +3,8 @@
 --author: Kevin Vermaat & Parama Fawwaz
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
---! this module takes the player centerpoint data from the game loop and the memory and scales it to the right size to make sure  
---! the resolution scaling is done correctly and then shifts the locations so the characters appear on the active screen time
+-- this module takes the player centerpoint data from the game loop and the memory and scales it to the right size to make sure  
+-- the resolution scaling is done correctly and then shifts the locations so the characters appear on the active screen time
 --
 --
 --
@@ -20,14 +20,14 @@ use ieee.math_real.all;
 
 entity char_offset_adder is
     port (
-        xpos : in std_logic_vector(8 downto 0); --! character center coordinate
-        ypos : in std_logic_vector(8 downto 0); --! character center coordinate
+        xpos : in std_logic_vector(8 downto 0); -- character center coordinate
+        ypos : in std_logic_vector(8 downto 0); -- character center coordinate
         -- xsize     : in std_logic_vector(3 downto 0);
         -- ysize     : in std_logic_vector(3 downto 0);
-        xpos_scl1 : out std_logic_vector(9 downto 0); --! scaled and moved character box bounds
-        xpos_scl2 : out std_logic_vector(9 downto 0); --! scaled and moved character box bounds
-        ypos_scl1 : out std_logic_vector(9 downto 0); --! scaled and moved character box bounds
-        ypos_scl2 : out std_logic_vector(9 downto 0)  --! scaled and moved character box bounds
+        xpos_scl1 : out std_logic_vector(9 downto 0); -- scaled and moved character box bounds
+        xpos_scl2 : out std_logic_vector(9 downto 0); -- scaled and moved character box bounds
+        ypos_scl1 : out std_logic_vector(9 downto 0); -- scaled and moved character box bounds
+        ypos_scl2 : out std_logic_vector(9 downto 0)  -- scaled and moved character box bounds
     );
 end entity char_offset_adder;
 

@@ -4,24 +4,18 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! This module is the control module for the horizontal sync signal and horizontal pixel counter
---! The full horizontal vga line is described in pixels
---! screen = 0 to 639
---! front porch = 640 to 655
---! sync pulse = 656 to 751
---! back porch = 752 to 799
---! -- the above needs updating
---!
---! the inputs:
---! The device is clocked, so has clk and reset
---! count is the count out from H_pix_cnt
---!
---! the outputs:
---! The sync signal (hsync this case) is active low
---! The counter reset is active high
---!
---! NOTE:
---! this component can be asynchronous, but quartus disagrees and infers latches when the component is async
+-- This module is the control module for the horizontal sync signal and horizontal pixel counter
+--
+-- the inputs:
+-- The device is clocked, so has clk and reset
+-- count is the count out from H_pix_cnt
+--
+-- the outputs:
+-- The sync signal (hsync this case) is active low
+-- The counter reset is active high
+--
+-- NOTE:
+-- this component can be asynchronous, but quartus disagrees and infers latches when the component is async
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 

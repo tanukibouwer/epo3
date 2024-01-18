@@ -4,12 +4,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! This module is the hierarchical connection of the module that keeps track of which pixel the VGA screen is at
---! This module contains 4 components, Hsync_gen, Vsync_gen, V_line_cnt, H_pix_cnt
---! Vsync_gen and Hsync_gen are the sync signal generators and the controllers of H_pix_cnt and V_line_cnt
---! V_line_cnt keeps track of which line the screen is on, H_pix_cnt keeps track of which pixel the screen is on
---!
---!
+-- This module is the hierarchical connection of the module that keeps track of which pixel the VGA screen is at
+-- This module contains 4 components, Hsync_gen, Vsync_gen, V_line_cnt, H_pix_cnt
+-- Vsync_gen and Hsync_gen are the sync signal generators and the controllers of H_pix_cnt and V_line_cnt
+-- V_line_cnt keeps track of which line the screen is on, H_pix_cnt keeps track of which pixel the screen is on
+--
+--
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 

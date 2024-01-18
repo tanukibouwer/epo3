@@ -193,10 +193,10 @@ architecture structural of chip_toplevel is
             clk   : in std_logic;
             reset : in std_logic;
             -- inputs from memory -> relevant data to be displayed on screen
-            char1_x       : in std_logic_vector(8 downto 0); --! character 1 x-location
-            char1_y       : in std_logic_vector(8 downto 0); --! character 1 y-location
-            char2_x       : in std_logic_vector(8 downto 0); --! character 2 x-location
-            char2_y       : in std_logic_vector(8 downto 0); --! character 2 y-location
+            char1_x       : in std_logic_vector(8 downto 0); -- character 1 x-location
+            char1_y       : in std_logic_vector(8 downto 0); -- character 1 y-location
+            char2_x       : in std_logic_vector(8 downto 0); -- character 2 x-location
+            char2_y       : in std_logic_vector(8 downto 0); -- character 2 y-location
             percentage_p1 : in std_logic_vector(7 downto 0);
             percentage_p2 : in std_logic_vector(7 downto 0);
             -- inputs from attack and input
@@ -207,11 +207,11 @@ architecture structural of chip_toplevel is
             -- outputs to screen (and other components)
             hcount : out std_logic_vector(9 downto 0);
             vcount : out std_logic_vector(9 downto 0);
-            Vsync  : out std_logic; --! sync signals -> active low
-            Hsync  : out std_logic; --! sync signals -> active low
-            R_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-            G_data : out std_logic_vector(3 downto 0); --! RGB data to screen
-            B_data : out std_logic_vector(3 downto 0); --! RGB data to screen
+            Vsync  : out std_logic; -- sync signals -> active low
+            Hsync  : out std_logic; -- sync signals -> active low
+            R_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+            G_data : out std_logic_vector(3 downto 0); -- RGB data to screen
+            B_data : out std_logic_vector(3 downto 0); -- RGB data to screen
             -- game states
             game    : in std_logic;
             p1_wins : in std_logic;

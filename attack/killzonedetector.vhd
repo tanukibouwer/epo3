@@ -54,7 +54,7 @@ begin
         end if;
     end process;
 
-    lbl1 : process (clk, state1)
+    lbl1 : process (clk)
     begin
         case state1 is
             when neutral1 =>
@@ -83,7 +83,7 @@ begin
         end case;
     end process;
 
-    lbl2 : process (clk, state2)
+    lbl2 : process (state2)
     begin
         case state2 is
             when neutral2 =>

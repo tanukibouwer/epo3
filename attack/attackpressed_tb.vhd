@@ -30,9 +30,9 @@ architecture behaviour of attackp_tb is
 begin
    test: attackp port map (clk, res, vsync, input1, input2, output1A, output1B, output2A, output2B);
    clk <= '0' after 0 ns,
-          '1' after 10 ns when clk /= '1' else '0' after 10 ns;
+          '1' after 5 ns when clk /= '1' else '0' after 5 ns;
    vsync <= '0' after 0 ns,
-          '1' after 20 ns when vsync /= '1' else '0' after 20 ns;
+          '1' after 10 ns when vsync /= '1' else '0' after 10 ns;
    res <= '0' after 0 ns, '1' after 500 ns;
 
    input1(0) <= '0' after 0 ns;

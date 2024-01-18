@@ -27,6 +27,7 @@ begin
         buttons_p1 <= "00000000";
         buttons_p2 <= "00000000";
       elsif (write = '1') then
+        -- remap the buttons from NES format to Smashpo format
         buttons_p1(7) <= buttons_in_p1(5);
         buttons_p1(6) <= buttons_in_p1(4);
         buttons_p1(5) <= buttons_in_p1(6);

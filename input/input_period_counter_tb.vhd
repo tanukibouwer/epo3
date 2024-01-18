@@ -10,13 +10,13 @@ architecture behavioural of input_period_counter_tb is
       clk       : in    std_logic;
       reset     : in    std_logic;
 
-      count_out     : out   std_logic_vector(8 downto 0)
+      count_out     : out   std_logic_vector(3 downto 0)
     );
   end component input_period_counter;
 
   signal clk, reset       : std_logic;
 
-  signal count_out        : std_logic_vector(8 downto 0);
+  signal count_out        : std_logic_vector(3 downto 0);
 
 begin
   test: input_period_counter

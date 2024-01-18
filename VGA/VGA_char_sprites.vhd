@@ -4,11 +4,11 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! This module is the static ROM for the sprites regarding the character frames that can be shown on screen
---! 
---! This will be a modular component with an enable signal that will allow for the component to take over
---! coloring duties
---! 
+-- This module is the static ROM for the sprites regarding the character frames that can be shown on screen
+-- 
+-- This will be a modular component with an enable signal that will allow for the component to take over
+-- coloring duties
+-- 
 -- 
 -- Notes:
 -- for the controller inputs, take note of the following

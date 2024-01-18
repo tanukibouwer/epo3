@@ -18,8 +18,6 @@ entity topattack is
         y2in                 : in std_logic_vector (8 downto 0);  --y position of player 2
         percentage1in        : in std_logic_vector (7 downto 0);  --percentage of player 1
         percentage2in        : in std_logic_vector (7 downto 0);  --percentage of player 2
-        killcount1in         : in std_logic_vector (3 downto 0);  --killcount of player 1
-        killcount2in         : in std_logic_vector (3 downto 0);  --killcount of player 2
         directionx1out       : out std_logic_vector (7 downto 0); --x direction vector for knockback player 1
         directiony1out       : out std_logic_vector (7 downto 0); --y direction vector for knockback player 1
         directionx2out       : out std_logic_vector (7 downto 0); --x direction vector for knockback player 2
@@ -91,17 +89,12 @@ architecture structural of topattack is
         port (
             clk            : in std_logic;
             res            : in std_logic;
-            olddeathcount1 : in std_logic_vector (3 downto 0);
-            olddeathcount2 : in std_logic_vector (3 downto 0);
-            oldpercentage1 : in std_logic_vector (7 downto 0);
-            oldpercentage2 : in std_logic_vector (7 downto 0);
             oldvectorX1    : in std_logic_vector (8 downto 0);
             oldvectorY1    : in std_logic_vector (8 downto 0);
             oldvectorX2    : in std_logic_vector (8 downto 0);
             oldvectorY2    : in std_logic_vector (8 downto 0);
             restart1       : out std_logic;
             restart2       : out std_logic;
-            vsync          : in std_logic;
             newdeathcount1 : out std_logic_vector (3 downto 0);
             newdeathcount2 : out std_logic_vector (3 downto 0));
     end component killzonedetector;
@@ -170,17 +163,12 @@ begin
     PM4 : killzonedetector port map(
         clk            => clk,
         res            => res,
-        olddeathcount1 => killcount1in,
-        olddeathcount2 => killcount2in,
-        oldpercentage1 => percentage1in,
-        oldpercentage2 => percentage2in,
         oldvectorX1    => x1in,
         oldvectorY1    => y1in,
         oldvectorX2    => x2in,
         oldvectorY2    => y2in,
         restart1       => restart1,
         restart2       => restart2,
-        vsync => vsync,
         newdeathcount1 => killcount1out,
         newdeathcount2 => killcount2out);
     PM5 : coldet port map(

@@ -4,12 +4,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
---! this module is made to allow the VGA module to actually draw colours to the screen
---! this is done by only allowing the module to write a color whenever the scanning is on active screen time
---! 
---! this module also requires the different x (horizontal) and y (vertical) locations of what needs to be drawn and the colours
---!
---! This module also draw the GUI of the game, including the text
+-- this module is made to allow the VGA module to actually draw colours to the screen
+-- this is done by only allowing the module to write a color whenever the scanning is on active screen time
+-- 
+-- this module also requires the different x (horizontal) and y (vertical) locations of what needs to be drawn and the colours
+--
+-- This module also draw the GUI of the game, including the text
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -27,10 +27,10 @@ entity coloring_new is
         hcount : in std_logic_vector(9 downto 0);
         vcount : in std_logic_vector(9 downto 0);
         -- relevant data for x-y locations
-        char1x : in std_logic_vector(7 downto 0); --! character 1 coordinates
-        char1y : in std_logic_vector(7 downto 0); --! character 1 coordinates
-        char2x : in std_logic_vector(7 downto 0); --! character 2 coordinates
-        char2y : in std_logic_vector(7 downto 0); --! character 2 coordinates
+        char1x : in std_logic_vector(7 downto 0); -- character 1 coordinates
+        char1y : in std_logic_vector(7 downto 0); -- character 1 coordinates
+        char2x : in std_logic_vector(7 downto 0); -- character 2 coordinates
+        char2y : in std_logic_vector(7 downto 0); -- character 2 coordinates
         -- player orientation information
         orientationp1 : in std_logic;
         orientationp2 : in std_logic;
@@ -44,9 +44,9 @@ entity coloring_new is
         controllerp2 : in std_logic_vector(7 downto 0);
 
         -- RGB data outputs
-        R_data : out std_logic_vector(3 downto 0); --! RGB data output
-        G_data : out std_logic_vector(3 downto 0); --! RGB data output
-        B_data : out std_logic_vector(3 downto 0)  --! RGB data output
+        R_data : out std_logic_vector(3 downto 0); -- RGB data output
+        G_data : out std_logic_vector(3 downto 0); -- RGB data output
+        B_data : out std_logic_vector(3 downto 0)  -- RGB data output
 
     );
 end entity coloring_new;

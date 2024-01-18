@@ -54,7 +54,7 @@ begin
         end if;
     end process;
 
-    lbl1 : process (clk)
+    lbl1 : process (state1, deathcount1, oldvectorX1, oldvectorY1)
     begin
         case state1 is
             when neutral1 =>
@@ -83,7 +83,7 @@ begin
         end case;
     end process;
 
-    lbl2 : process (state2)
+    lbl2 : process (state2, deathcount2, oldvectorX2, oldvectorY2)
     begin
         case state2 is
             when neutral2 =>

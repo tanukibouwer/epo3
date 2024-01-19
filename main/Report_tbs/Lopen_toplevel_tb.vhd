@@ -48,8 +48,26 @@ architecture behaviour of Lopen_toplevel_tb is
            '1' after 20 ns when clk /= '1' else '0' after 20 ns;
     reset <= '1' after 0 ns,
              '0' after 80 ns;
-    p1_controller <= '1' after 0 ns, '0' after 129059 ns, '1' after 130072 ns, '0' after 140000 ns, '1' after 140900 ns;
-    p2_controller <= '1' after 0 ns;
+    -- 30 chip clock cycles for every controller output clock cycle
+    controllertest : process is
+    begin
+--		p1_controller <= '1';
+--		wait for 8400 ns;
+--		p1_controller <= '0';
+--		wait for 1200 ns;
+--		p1_controller <= '1';
+		wait until rising_edge(controller_latch);
+		p1_controller <= '1';
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		wait until rising_edge(controller_clk);
+		p1_controller <= '0';
+    end process controllertest;
+    p2_controller <= '0' after 0 ns;
 
 
  end behaviour;

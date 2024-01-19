@@ -349,10 +349,10 @@ begin
         variable int_boundy : integer;
         
     begin
-        int_hcount <= to_integer(unsigned(hcount));
-        int_vcount <= to_integer(unsigned(vcount));
-        int_xbound <= to_integer(unsigned(xbound));
-        int_ybound <= to_integer(unsigned(ybound));
+        int_hcount := to_integer(unsigned(hcount));
+        int_vcount := to_integer(unsigned(vcount));
+        int_xbound := to_integer(unsigned(xbound));
+        int_ybound := to_integer(unsigned(ybound));
         case number is
             when "0000" => -- zero
                 R_data <= zero(int_vcount - (int_boundy + 0))(int_hcount - (int_boundx + 0))(11 downto 8);

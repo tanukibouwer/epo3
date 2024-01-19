@@ -48,7 +48,7 @@ architecture behaviour of Lopen_toplevel_tb is
            '1' after 20 ns when clk /= '1' else '0' after 20 ns;
     reset <= '1' after 0 ns,
              '0' after 80 ns;
-    p1_controller <= '1' after 0 ns, '0' after 129059 ns, '1' after 130072 ns;
+    p1_controller <= '1' after 0 ns, '0' after 129059 ns, '1' after 130072 ns, '0' after 140000 ns, '1' after 140900 ns;
     p2_controller <= '1' after 0 ns;
 
 

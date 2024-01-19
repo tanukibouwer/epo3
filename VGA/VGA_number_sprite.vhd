@@ -342,7 +342,7 @@ begin
     -- int_boundx <= to_integer(unsigned(boundx));
     -- int_boundy <= to_integer(unsigned(boundy));
 
-    process (number, hcount, vcount)
+    process (number, hcount, vcount, boundx, boundy)
         variable int_hcount : integer;
         variable int_vcount : integer;
         variable int_boundx : integer;

@@ -49,7 +49,8 @@ architecture structural of Lopen_toplevel is
     signal orientationp2 : std_logic; -- output from attack, into graphics
 
     -- to tap the vsync signal for global memory timing purposes
-    signal vsyncintern  : std_logic; -- input into memory, out from graphics
+    signal vsyncintern  : std_logic;
+    signal hsyncintern  : std_logic;
     signal vcountintern : std_logic_vector(9 downto 0);
     signal hcountintern : std_logic_vector(9 downto 0);
 
@@ -214,6 +215,17 @@ architecture structural of Lopen_toplevel is
             data_out9b4 : out std_logic_vector(9 downto 0));
     end component memory;
 
+    component screen_scan is
+        port (
+            clk        : in std_logic;
+            reset      : in std_logic;
+            Hsync      : out std_logic;
+            Vsync      : out std_logic;
+            hcount_out : out std_logic_vector(9 downto 0);
+            vcount_out : out std_logic_vector(9 downto 0)
+        );
+    end component screen_scan;
+
     component t_8bregs is
         port (
             clk     : in std_logic;
@@ -271,7 +283,7 @@ begin
 
     TL02 : physics_top port map(
         clk                   => clk,
-        reset                 => resetgameintern, --freezes the game in start/end screen
+        reset                 => reset, --freezes the game in start/end screen
         vcount                => vcountintern,
         hcount                => hcountintern,
         vin_x                 => char1velx,
@@ -300,11 +312,29 @@ begin
         pout_y2               => char2posyin
     );
 
+    -- port (
+    --     clk        : in std_logic;
+    --     reset      : in std_logic;
+    --     Hsync      : out std_logic;
+    --     Vsync      : out std_logic;
+    --     hcount_out : out std_logic_vector(9 downto 0);
+    --     vcount_out : out std_logic_vector(9 downto 0)
+    -- );
+
+    TL03: screen_scan port map(
+        clk => clk,
+        reset => reset,
+        hsync => hsyncintern,
+        vsync => vsyncintern,
+        hcount_out => hcountintern,
+        vcount_out => vcountintern
+    );
+
    
     ATT1 : topattack port map(
         -- timing signals
         clk   => clk,
-        res   => resetgameintern, --freezes the game in start/end screen
+        res   => reset, --freezes the game in start/end screen
         vsync => vsyncintern,
         -- data input
         controller1   => inputsp1,

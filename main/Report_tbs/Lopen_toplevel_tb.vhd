@@ -2,6 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
+entity Lopen_toplevel_tb is
+end Lopen_toplevel_tb;
+
 architecture behaviour of Lopen_toplevel_tb is
 
     component Lopen_toplevel

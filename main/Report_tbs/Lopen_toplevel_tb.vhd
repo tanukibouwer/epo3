@@ -5,6 +5,10 @@ use IEEE.numeric_std.all;
 entity Lopen_toplevel_tb is
 end Lopen_toplevel_tb;
 
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
 architecture behaviour of Lopen_toplevel_tb is
 
     component Lopen_toplevel
@@ -51,23 +55,56 @@ architecture behaviour of Lopen_toplevel_tb is
     -- 30 chip clock cycles for every controller output clock cycle
     controllertest : process is
     begin
---		p1_controller <= '1';
---		wait for 8400 ns;
---		p1_controller <= '0';
---		wait for 1200 ns;
---		p1_controller <= '1';
-		wait until rising_edge(controller_latch);
+		wait until reset = '0';
+		while unsigned(p1posx_out) < 155 loop
+			wait until rising_edge(controller_latch);
+			p1_controller <= '1';
+			p2_controller <= '1';
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			p2_controller <= '0';
+			wait until rising_edge(controller_clk);
+			p2_controller <= '1';
+			p1_controller <= '0';
+		end loop;
 		p1_controller <= '1';
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		wait until rising_edge(controller_clk);
-		p1_controller <= '0';
+		p2_controller <= '1';
+		wait for 140 ms; -- Wait for player 1 to reach ground.
+		-- Player 1 hits player 2.
+		for i in 1 to 5000 loop
+			wait until rising_edge(controller_latch);
+			p1_controller <= '0';
+			wait until rising_edge(controller_clk);
+			p1_controller <= '1';
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+		end loop;
+		p1_controller <= '1';
+		p2_controller <= '1';
+		wait for 500 ms;
+		-- Move Player 1 to killzone
+		while unsigned(p1posx_out) > 70 loop
+			wait until rising_edge(controller_latch);
+			p1_controller <= '1';
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			wait until rising_edge(controller_clk);
+			p1_controller <= '0';
+		end loop;	
+		p1_controller <= '1';
     end process controllertest;
-    p2_controller <= '0' after 0 ns;
 
 
  end behaviour;

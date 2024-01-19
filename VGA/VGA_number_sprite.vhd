@@ -1,13 +1,11 @@
 --module: number_sprite
---version: a2.0.7
+--version: 2.1
 --author: Parama Fawwaz & Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
 -- This module is the static ROM for the sprites regarding the numbers that can be shown on screen
 -- 
--- This will be a modular component with an enable signal that will allow for the component to take over
--- coloring duties
 -- 
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
@@ -34,10 +32,6 @@ entity number_sprite is
 end number_sprite;
 
 architecture behavioural of number_sprite is
-
-    -- integer values for the counts
-    -- signal int_hcount, int_vcount : integer;
-    -- signal int_boundx, int_boundy : integer;
 
     -- declare the array for the colours
     subtype color_val is std_logic_vector(11 downto 0); -- R(11,10,9,8) G(7,6,5,4) B(3,2,1,0)
@@ -337,10 +331,6 @@ architecture behavioural of number_sprite is
     
     
 begin
-    -- int_hcount <= to_integer(unsigned(hcount));
-    -- int_vcount <= to_integer(unsigned(vcount));
-    -- int_boundx <= to_integer(unsigned(boundx));
-    -- int_boundy <= to_integer(unsigned(boundy));
 
     process (number, hcount, vcount, boundx, boundy)
         variable int_hcount : integer;

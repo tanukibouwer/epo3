@@ -4,7 +4,7 @@
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
--- This module is the RTL description of the full VGA graphics card of the EPO3 chip - Super Smash Bros. 
+-- This module is the RTL description of the full VDC of the EPO3 chip - Super Smash Bros. 
 -- 
 -- This component consists of 2 subcomponents, screen_scan and coloring 
 -- 
@@ -110,7 +110,7 @@ begin
         clk => clk, reset => reset, Hsync => Hsync, Vsync => Vsync, vcount_out => vcount_int, hcount_out => hcount_int
     );
 
-    --gib color to pixel
+    --give color to pixel
     CLR1 : coloring port map(
         clk => clk, reset => reset,
         hcount => hcount_int, vcount => vcount_int,

@@ -1,19 +1,11 @@
 --module: char_sprite
---version: 1
+--version: 2
 --author: Parama Fawwaz & Kevin Vermaat
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 --MODULE DESCRIPTION
 -- This module is the static ROM for the sprites regarding the character frames that can be shown on screen
 -- 
--- This will be a modular component with an enable signal that will allow for the component to take over
--- coloring duties
--- 
--- 
--- Notes:
--- for the controller inputs, take note of the following
--- bit 3 is down, bit 2 is jump, bit 1 is right, bit 0 is left
--- others are as of now not required
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -65,15 +57,9 @@ architecture behavioural of char_sprites is
     end component;
 
     -- control signals for the animation fsm
-    -- signal an_on  : std_logic;
-    -- signal frame  : std_logic;
     signal sprite : std_logic_vector(1 downto 0);
 
-    -- integer values for the counts
-    -- signal int_hcount, int_vcount : integer;
-    -- signal int_boundx, int_boundy : integer;
-
-    -- declare the array for the colours --> copy from number_sprite.vhd basically, but different sprites --> for now sprite left and right is the same for now
+    -- declare the array for the colours
     constant sprite_x_length : integer := 31;
     constant sprite_y_length : integer := 47;
     subtype color_val is std_logic_vector(11 downto 0); -- R(11,10,9,8) G(7,6,5,4) B(3,2,1,0)
@@ -488,10 +474,6 @@ architecture behavioural of char_sprites is
         (("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("011101010100"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111"),("000011001111")) 
     ); 
 begin
-    -- int_hcount <= to_integer(unsigned(hcount));
-    -- int_vcount <= to_integer(unsigned(vcount));
-    -- int_boundx <= to_integer(unsigned(boundx));
-    -- int_boundy <= to_integer(unsigned(boundy));
 
     frame_control : char_animation_fsm port map(
         clk           => clk,
@@ -513,10 +495,6 @@ begin
         int_boundx := to_integer(unsigned(boundx));
         int_boundy := to_integer(unsigned(boundy));
 
-        -- choose which "animation" to play dependent on the input
-        -- R_data <= jump_crouch_R(int_vcount - (int_boundy))(int_hcount - (int_boundx))(11 downto 8);
-        -- G_data <= jump_crouch_R(int_vcount - (int_boundy))(int_hcount - (int_boundx))(7 downto 4);
-        -- B_data <= jump_crouch_R(int_vcount - (int_boundy))(int_hcount - (int_boundx))(3 downto 0);
         case sprite is
             when "00" => -- show idle sprite
                 if orientation = '1' then -- show the sprite how it is drawn

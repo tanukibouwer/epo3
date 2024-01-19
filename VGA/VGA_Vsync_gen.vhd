@@ -14,8 +14,6 @@
 -- The sync signal (vsync this case) is active low
 -- The counter reset is active high
 --
--- NOTE:
--- this component can be asynchronous, but quartus disagrees and infers latches when the component is async
 --------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------
 

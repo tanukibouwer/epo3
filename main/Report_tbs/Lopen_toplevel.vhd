@@ -2,8 +2,6 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity Lopen_toplevel_tb is
-end Lopen_toplevel_tb;
     
 entity Lopen_toplevel is
     port (

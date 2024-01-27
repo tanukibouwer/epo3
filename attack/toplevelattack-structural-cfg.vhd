@@ -8,5 +8,7 @@ configuration toplevelattack_structural_cfg of topattack is
 			end for;
 		for all: coldet use configuration work.coldet_behaviour_cfg;
 			end for;
+		for all: orientation use configuration work.orientation_behavioural_cfg;
+			end for;
 	end for;
 end configuration toplevelattack_structural_cfg;

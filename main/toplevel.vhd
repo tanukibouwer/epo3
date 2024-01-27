@@ -18,8 +18,8 @@ entity chip_toplevel is
 
     -- outputs
         -- graphics
-        Vsync  : out std_logic; -- sync signals -> active low
         Hsync  : out std_logic; -- sync signals -> active low
+        Vsync  : out std_logic; -- sync signals -> active low
 
         -- general purpose outputs, used either for graphics during normal use,
         -- or for test leds when testing mode is enabled

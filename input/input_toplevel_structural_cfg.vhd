@@ -8,5 +8,7 @@ end for;
 end for;
 		for all: input_register use configuration work.input_register_behavioural_cfg;
 end for;
+		for all: input_period_counter use configuration work.input_period_counter_behavioural_cfg;
+end for;
 	end for;
 end configuration input_toplevel_structural_cfg;

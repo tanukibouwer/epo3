@@ -277,15 +277,6 @@ architecture structural of chip_toplevel is
             vec_out : out std_logic_vector(7 downto 0)
         );
     end component;
-
-    component t_4bregs is
-        port (
-            clk     : in std_logic;
-            reset   : in std_logic;
-            vec_in  : in std_logic_vector(3 downto 0);
-            vec_out : out std_logic_vector(3 downto 0)
-        );
-    end component;
 begin
 
     TL00 : memory port map(
